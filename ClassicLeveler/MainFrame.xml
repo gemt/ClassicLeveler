@@ -1,0 +1,50 @@
+<Ui xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.blizzard.com/wow/ui/">
+	<Script file="MainFrame.lua" />
+	<Frame name="MainFrame" parent="UIParent" toplevel="true"
+	 movable="true" resizable="true" enableMouseClicks="true" 
+	 enableMouseMotion="true" dontSavePosition="true">
+		<Size>
+			<AbsDimension x="443" y="154" />
+		</Size>
+		<Anchors>
+			<Anchor point="TOPLEFT">
+				<Offset x="816" y="-165" />
+			</Anchor>
+		</Anchors>
+		<Backdrop bgFile="Interface\DialogFrame\UI-DialogBox-Background" edgeFile="Interface\DialogFrame\UI-DialogBox-Border" tile="true">
+			<BackgroundInsets>
+				<AbsInset left="11" right="12" top="12" bottom="11" />
+			</BackgroundInsets>
+			<TileSize>
+				<AbsValue val="32" />
+			</TileSize>
+			<EdgeSize>
+				<AbsValue val="32" />
+			</EdgeSize>
+		</Backdrop>
+		<Frames>
+			<Button inherits="UIPanelButtonTemplate" text="Train">
+				<Size x="75" y="23" />
+				<Anchors>
+					<Anchor point="TOPLEFT" x="22" y="-24" />
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						Button1_OnClick()
+					</OnClick>
+				</Scripts>
+			</Button>
+		</Frames>
+		<Scripts>
+			<OnLoad>
+				MainFrame_OnLoad();
+			</OnLoad>
+			<OnEvent>
+				MainFrame_OnEvent(event);
+			</OnEvent>
+			<OnUpdate>
+				MainFrame_OnUpdate();
+			</OnUpdate>
+		</Scripts>
+	</Frame>
+</Ui>

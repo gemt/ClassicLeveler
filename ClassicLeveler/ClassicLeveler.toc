@@ -1,0 +1,12 @@
+## Interface: 80100
+## Title: ClassicLeveler
+## Version: 1.0
+## Author: Gemt
+
+embeds.xml
+
+ClassicLeveler.lua
+MainFrame.lua
+MainFrame.xml
+talent.xml
+talent.lua

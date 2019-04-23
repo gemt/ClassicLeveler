@@ -1,0 +1,49 @@
+<Ui xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.blizzard.com/wow/ui/">
+	<Script file="talent.lua" />
+	<Frame name="talent" parent="UIParent" toplevel="true" hidden="true">
+		<Size>
+			<AbsDimension x="175" y="70" />
+		</Size>
+		<Anchors>
+			<Anchor point="TOPLEFT">
+				<Offset x="374" y="-279" />
+			</Anchor>
+		</Anchors>
+		<Backdrop bgFile="Interface\DialogFrame\UI-DialogBox-Background" edgeFile="Interface\DialogFrame\UI-DialogBox-Border" tile="true">
+			<BackgroundInsets>
+				<AbsInset left="11" right="12" top="12" bottom="11" />
+			</BackgroundInsets>
+			<TileSize>
+				<AbsValue val="32" />
+			</TileSize>
+			<EdgeSize>
+				<AbsValue val="32" />
+			</EdgeSize>
+		</Backdrop>
+		<Frames>
+			<Button name="TPButton" inherits="UIPanelButtonTemplate" text="Put TP">
+				<Size x="115" y="45" />
+				<Anchors>
+					<Anchor point="CENTER" x="0" y="0" />
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						TPButton_OnClick()
+					</OnClick>
+				</Scripts>
+			</Button>
+			<Button name="CloseBtn" inherits="UIPanelButtonTemplate" text="X" >
+				<Size x="26" y="23" />
+				<Anchors>
+					<Anchor point="TOPRIGHT" x="0" y="0" />
+				</Anchors>
+				<Backdrop bgFile="UIPanelCloseButton" />
+				<Scripts>
+					<OnClick>
+						CloseBtn_OnClick()
+					</OnClick>
+				</Scripts>
+			</Button>
+		</Frames>
+	</Frame>
+</Ui>
