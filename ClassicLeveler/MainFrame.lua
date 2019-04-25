@@ -1,27 +1,48 @@
 -- Author      : Gemt
 -- Create Date : 4/23/2019 6:02:28 PM
 
+
+
+
 function MainFrame_OnLoad()
-	MainFrame:SetMovable(true)
-	MainFrame:EnableMouse(true)
 	MainFrame:RegisterForDrag("LeftButton");
+
 	MainFrame:RegisterEvent("PLAYER_LEVEL_UP")
+	MainFrame:RegisterEvent("QUEST_COMPLETE")
+	MainFrame:RegisterEvent("QUEST_PROGRESS")
+
+	MainFrame:SetPoint("TOPLEFT", nil, "TOPLEFT", 250, -50)
+	MainFrame:SetBackdrop( {
+			bgFile = "Interface\\DialogFrame\\UI-DialogBox-Background", 
+			edgeFile = "Interface\\DialogFrame\\UI-DialogBox-Border", 
+			tile = true, 
+			tileSize = 32, 
+			edgeSize = 32, 
+			insets = { left = 11, right = 12, top = 12, bottom = 11 }
+		} );
+	MainFrame:SetBackdropColor(.01, .01, .01, .91)
+
+	message("loaded")
 end
 
+-- CompleteQuest() "continue" button
 function MainFrame_OnEvent(event)
+	_print(event)
 	if event == "PLAYER_LEVEL_UP" then
 		OnLevelup(event);
+	elseif event == "QUEST_COMPLETE" then
+		ChooseQuestItem();
+	elseif event == "QUEST_PROGRESS" then
+		TalkToQuestNpc();
 	end
 end
 
 function OnLevelup(lvl)
-	if lvl >
+	if lvl < 10 then return end
+
 	talent:Show();
 end
 
-function MainFrame_OnUpdate(lvl)
-	
-end
 function Button1_OnClick()
 		--self:Print("Setting binds")
 		-- https://wowwiki.fandom.com/wiki/BindingID
@@ -60,3 +81,23 @@ function Button1_OnClick()
 		SetBinding("ALT-CTRL-3","MULTIACTIONBAR2BUTTON10")
 		--self:Print("Finished Setting Binds")
 end
+
+function TalkToQuestNpc()
+	CompleteQuest()
+end
+
+function ChooseQuestItem()
+	_print("Quest: "..GetTitleText()..", Choices: "..GetNumQuestChoices());
+	rewardIndex = CLQuestRewardChoices[GetTitleText()];
+	_print("Choosing Item:"..rewardIndex)
+	if rewardIndex ~= nil then
+		_print(GetTitleText())
+		_print(pickReward);
+		GetQuestReward(rewardIndex);
+	end
+end
+
+
+CLQuestRewardChoices = {
+	["WANTED: Murkdeep!"] = 2,
+}
