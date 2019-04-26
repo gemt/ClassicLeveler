@@ -25,7 +25,7 @@ function QRPFrame_OnEvent(event, arg1)
 	_print("QuestPicker Event: "..event)
 	if event == "QUEST_COMPLETE" then -- when the quest complete dialogue is shown at an npc
 		QRPF_QuestComplete();
-	elseif event == "GOSSIP_SHOW" then -- after opening dialogue with an npc. Also after clicking cancel, and being sent back to initial gossip screen
+	elseif event == "GOSSIP_SHOW" or event == "QUEST_GREETING" then -- after opening dialogue with an npc. Also after clicking cancel, and being sent back to initial gossip screen
 		QRPF_GossipShow();
 	elseif event == "QUEST_DETAIL" then -- after selecting an unaccepted quest on an npc
 		QRPF_QuestDetail();
@@ -75,14 +75,16 @@ end
 -- after selecting an active quest on an npc
 function QRPF_QuestProgress()
 	if IsShiftKeyDown() then return end
+	-- DeclineQuest/CompleteQuest triggers GOSSIP_CLOSED, even if gossip isent actually closed, 
+	-- at least in 1.12 client. So in order to not reset QRPF_GossipIndex, we set QRPF_DeclineQuestGossipClose
+	-- which is checked by QRPF_GossipClose(), and when it's 1, QRPF_GossipIndex is not reset to 1
 	if IsQuestCompletable() == 1 then -- TODO: might return true/false on BFA
 		CompleteQuest() -- emulates clicking continue
+		QRPF_DeclineQuestGossipClose = 1
 	else
 		_print(GetTitleText().." Not yet completed")
 		QRPF_GossipIndex = QRPF_GossipIndex + 1
 		DeclineQuest() -- emulates clicking cancel button, taking us back to main gossip menu if there is one
-		-- DeclineQuest triggers GOSSIP_CLOSED on DeclineQuest(), even if gossip isent actually close, 
-		-- at least in 1.12 client.
 		QRPF_DeclineQuestGossipClose = 1
 	end
 end
