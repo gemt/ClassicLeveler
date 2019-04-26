@@ -7,6 +7,8 @@ Project("{E6E1D386-69D8-4755-9E61-0950293915FC}") = "ClassicLeveler", "ClassicLe
 EndProject
 Project("{E6E1D386-69D8-4755-9E61-0950293915FC}") = "ClassicLeveler_TalentPicker", "ClassicLeveler_TalentPicker\ClassicLeveler_TalentPicker.wowproj", "{A9CF6684-847E-4242-879E-CB56D7B0F8A4}"
 EndProject
+Project("{E6E1D386-69D8-4755-9E61-0950293915FC}") = "ClassicLeveler_QuestRewardPicker", "ClassicLeveler_QuestRewardPicker\ClassicLeveler_QuestRewardPicker.wowproj", "{295CA872-CAE2-409A-98E6-2943F04FA7C8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Default|Any CPU = Default|Any CPU
@@ -16,6 +18,8 @@ Global
 		{04EE878F-54B8-427E-A5AA-4DD148C7B437}.Default|Any CPU.Build.0 = Default|Any CPU
 		{A9CF6684-847E-4242-879E-CB56D7B0F8A4}.Default|Any CPU.ActiveCfg = Default|Any CPU
 		{A9CF6684-847E-4242-879E-CB56D7B0F8A4}.Default|Any CPU.Build.0 = Default|Any CPU
+		{295CA872-CAE2-409A-98E6-2943F04FA7C8}.Default|Any CPU.ActiveCfg = Default|Any CPU
+		{295CA872-CAE2-409A-98E6-2943F04FA7C8}.Default|Any CPU.Build.0 = Default|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

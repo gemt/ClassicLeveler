@@ -4,6 +4,7 @@
 function Frame1_OnLoad()
 	Frame1:RegisterForDrag("LeftButton");
 	Frame1:RegisterEvent("PLAYER_LEVEL_UP")
+	Frame1:Hide();
 end
 
 function Frame1_OnEvent(event)
