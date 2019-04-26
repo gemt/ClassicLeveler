@@ -3,7 +3,6 @@
 
 function TPButton_OnClick()
 	local tab,idx = getTpIdx();
-	_print(tab..idx)
 	LearnTalent(tab, idx);
 	talent:Hide();
 end

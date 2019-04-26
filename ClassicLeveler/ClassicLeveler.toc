@@ -10,3 +10,4 @@ MainFrame.lua
 MainFrame.xml
 talent.xml
 talent.lua
+Astrolabe.lua

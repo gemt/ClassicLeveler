@@ -10,7 +10,7 @@ function MainFrame_OnLoad()
 	MainFrame:RegisterEvent("PLAYER_LEVEL_UP")
 	MainFrame:RegisterEvent("QUEST_COMPLETE")
 	MainFrame:RegisterEvent("QUEST_PROGRESS")
-
+	
 	MainFrame:SetPoint("TOPLEFT", nil, "TOPLEFT", 250, -50)
 	MainFrame:SetBackdrop( {
 			bgFile = "Interface\\DialogFrame\\UI-DialogBox-Background", 
@@ -25,11 +25,15 @@ function MainFrame_OnLoad()
 	message("loaded")
 end
 
+function MainFrame_OnUpdate()
+
+end
+
 -- CompleteQuest() "continue" button
 function MainFrame_OnEvent(event)
 	_print(event)
 	if event == "PLAYER_LEVEL_UP" then
-		OnLevelup(event);
+		OnLevelup(arg1);
 	elseif event == "QUEST_COMPLETE" then
 		ChooseQuestItem();
 	elseif event == "QUEST_PROGRESS" then
@@ -38,6 +42,7 @@ function MainFrame_OnEvent(event)
 end
 
 function OnLevelup(lvl)
+	_print("reached lvl "..lvl)
 	if lvl < 10 then return end
 
 	talent:Show();
@@ -88,16 +93,30 @@ end
 
 function ChooseQuestItem()
 	_print("Quest: "..GetTitleText()..", Choices: "..GetNumQuestChoices());
-	rewardIndex = CLQuestRewardChoices[GetTitleText()];
-	_print("Choosing Item:"..rewardIndex)
-	if rewardIndex ~= nil then
+	reward = CLQuestRewardChoices[GetTitleText()];
+	_print("Choosing Item:"..reward)
+	if reward ~= nil then
 		_print(GetTitleText())
 		_print(pickReward);
-		GetQuestReward(rewardIndex);
+		GetQuestReward(reward.Index);
+		if reward.Use == 1 then
+			EquipItem() -- how?
+		end
 	end
 end
 
+function EquipItem()
+
+end
 
 CLQuestRewardChoices = {
-	["WANTED: Murkdeep!"] = 2,
+	["WANTED: Murkdeep!"] = {Index=2,Use=1}
 }
+
+CLQuests = {
+[1] = {
+	Quest="The Balance of Nature",
+	x = 10329,
+	y = 826
+}
+};
