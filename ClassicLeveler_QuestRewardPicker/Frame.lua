@@ -8,6 +8,8 @@ function QRPFrame_OnLoad()
 	QRPFrame:RegisterEvent("QUEST_PROGRESS")
 	QRPFrame:RegisterEvent("QUEST_GREETING")
     QRPFrame:RegisterEvent("GOSSIP_SHOW")
+	QRPFrame:RegisterEvent("GOSSIP_CLOSED")
+	QRPFrame:RegisterEvent("GOSSIP_CONFIRM_CANCEL")
     QRPFrame:RegisterEvent("QUEST_ACCEPTED")
 	QRPFrame:RegisterEvent("QUEST_ACCEPT_CONFIRM")
 	QRPFrame:RegisterEvent("QUEST_QUERY_COMPLETE")
@@ -29,14 +31,30 @@ function QRPFrame_OnEvent(event, arg1)
 		QRPF_QuestDetail();
 	elseif event == "QUEST_PROGRESS" then -- after selecting an active quest on an npc
 		QRPF_QuestProgress();
+	elseif event == "GOSSIP_CLOSED" then
+		QRPF_GossipClose()
 	end
 
 end
 
+local QRPF_GossipIndex = 1
+local QRPF_DeclineQuestGossipClose = 0
+-- after closing dialogue with an npc
+function QRPF_GossipClose()
+	if QRPF_DeclineQuestGossipClose == 1 then
+		QRPF_DeclineQuestGossipClose = 0
+		return
+	end
+
+	QRPF_GossipIndex = 1
+	_print("QRPF_GossipIndex: "..QRPF_GossipIndex)
+end
 
 -- after opening dialogue with an npc
 function QRPF_GossipShow()
 	if IsShiftKeyDown() then return end
+	_print("SelectGossipActiveQuest("..QRPF_GossipIndex..")")
+	SelectGossipActiveQuest(QRPF_GossipIndex)
 	--SelectGossipActiveQuest(index) - Selects an active quest.
 	--SelectGossipAvailableQuest(index) - Selects an available quest.
 end
@@ -57,10 +75,15 @@ end
 -- after selecting an active quest on an npc
 function QRPF_QuestProgress()
 	if IsShiftKeyDown() then return end
-	if IsQuestCompletable() == 1 then
+	if IsQuestCompletable() == 1 then -- TODO: might return true/false on BFA
 		CompleteQuest() -- emulates clicking continue
 	else
 		_print(GetTitleText().." Not yet completed")
+		QRPF_GossipIndex = QRPF_GossipIndex + 1
+		DeclineQuest() -- emulates clicking cancel button, taking us back to main gossip menu if there is one
+		-- DeclineQuest triggers GOSSIP_CLOSED on DeclineQuest(), even if gossip isent actually close, 
+		-- at least in 1.12 client.
+		QRPF_DeclineQuestGossipClose = 1
 	end
 end
 
