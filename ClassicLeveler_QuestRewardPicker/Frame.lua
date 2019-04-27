@@ -179,6 +179,7 @@ end
 function ProcessGossipNumActiveQuest(...)
 	local numArgPerQuest = 2
 	if version ~= "1.12.1" then
+		_print(1/"") -- "assert", need to test this
 		numArgPerQuest = 4
 	end
 	return table.getn(arg)/numArgPerQuest
@@ -187,6 +188,7 @@ end
 function ProcessGossipNumAvailableQuest(...)
 	local numArgPerQuest = 2
 	if version ~= "1.12.1" then
+		_print(1/"") -- "assert", need to test this
 		numArgPerQuest = 5
 	end
 	return table.getn(arg)/numArgPerQuest
@@ -195,14 +197,40 @@ end
 -- after selecting an unaccepted quest on an npc
 function QRPF_QuestDetail()
 	if IsShiftKeyDown() then return end
-	
-	if CLQuestAcceptQuest[GetTitleText()] == nil then 
-		_print(GetTitleText().." Not in auto-accept list.")
-		return;
+	local quest = GetQuestToAccept()
+	if quest ~= nil then
+		_print("AutoAccepting "..GetTitleText())
+		AcceptQuest();
+	else
+		_print("Not AutoAccepting "..GetTitleText())
 	end
+end
 
-	_print("AutoAccepting "..GetTitleText())
-	AcceptQuest();
+function GetQuestToAccept()
+	local title = GetTitleText()
+	_print(title.." - Searching for autoaccept")
+	local quests = CLQuestRewardChoices[title]
+	
+	if quests == nil then 
+		_print(title.." Not in auto-accept list.")
+		return nil;
+	end
+	
+	for i = 1, getn(quests) do
+		local quest = quests[i]
+		if quest.Objective == nil then
+			return quest;
+		else
+			local objective = GetObjectiveText()
+			if string.find(objective, quest.Objective) then
+				_print(title.." In auto-accept list, but Objective texts does not match:")
+				_print("GetTitleText(): "..title)
+				_print("quest.Objective: "..quest.Objective)
+				
+				return quest;
+			end
+		end
+	end
 end
 
 -- after selecting an active quest on an npc
@@ -230,38 +258,46 @@ function QRPF_QuestComplete()
 	-- GetTitleText() -- trieves the title of the quest while talking to the NPC about it.
 	-- IsQuestCompletable() -- returns 1 if current npc questdialogue thing can be completed
 	local numChoices = GetNumQuestChoices();
-	_print("Autocompleting: "..GetTitleText()..", Choices: "..numChoices);
+	local title = GetTitleText()
+	_print("Autocompleting: "..title..", Choices: "..numChoices);
 	
 	if numChoices == 0 then
 		GetQuestReward()
 		return
 	end
-
-	local reward = CLQuestRewardChoices[GetTitleText()];
-	if reward ~= nil then
-		_print("Choosing Item:"..reward.Index)
-		_print(GetTitleText())
-		_print(pickReward);
-		GetQuestReward(reward.Index);
-		if reward.Use == 1 then
-			QRPF_EquipItem() -- how?
+	local quests = CLQuestRewardChoices[title]
+	for i = 1, getn(quests) do
+		local quest = quests[i]
+		
+		for i=1, numChoices do
+			local itemName = GetQuestItemInfo("choice", i);
+			if quest.Item == itemName then
+				_print("Choosing Item:"..itemName)
+				GetQuestReward(i);
+				if quest.Use == 1 then
+					QRPF_EquipItem() -- how?
+				end
+				return
+			end
 		end
-	else
-		_print("Multiple choices, none configured for autocompletion")
 	end
+	_print("Multiple choices, none configured for autocompletion")
 end
 
 function QRPF_EquipItem()
 
 end
 
+
 CLQuestRewardChoices = {
-	["The Balance of Nature"] = {Index=1,Use=1},
-	["WANTED: Murkdeep!"] = {Index=2,Use=1}
+	["The Balance of Nature"] =
+		{ {Item="Archery Training Gloves", Use=1, Objective="Kill 7 Young Nightsaber"},
+		{Index=1, Use=1, Objective="Conservator Ilthalaine needs you to kill 7 Mangy"}
+		},
+	["Etched Sigil"] = {{}},
+	["WANTED: Murkdeep!"] = {{Index=2,Use=1}}
 }
-CLQuestAcceptQuest = {
-	["Webwood Venom"] = {},
-}
+
 function _print( msg )
     if not DEFAULT_CHAT_FRAME then return end
     DEFAULT_CHAT_FRAME:AddMessage ( msg )
