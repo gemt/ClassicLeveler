@@ -69,7 +69,10 @@ SetAbandonQuest - Called before AbandonQuest.
 UI ToggleQuestLog - Opens/closes the quest log.
 ]]
 local version = GetBuildInfo();
-
+local QRPF_AvailableQuestIndex = 1
+local QRPF_ActiveQuestIndex = 1
+local QRPF_PrevGossipNpc = nil
+CLQuestRewardChoices = {}
 function QRPFrame_OnLoad()
 	QRPFrame:RegisterEvent("QUEST_COMPLETE")
 	QRPFrame:RegisterEvent("QUEST_PROGRESS")
@@ -87,6 +90,11 @@ function QRPFrame_OnLoad()
 	QRPFrame:RegisterEvent("QUEST_WATCH_UPDATE")
 	QRPFrame:RegisterEvent("UNIT_QUEST_LOG_CHANGED")
 	QRPFrame:RegisterEvent("QUEST_LOG_UPDATE")
+	QRPFrame:RegisterEvent("PLAYER_TARGET_CHANGED")
+
+
+	QRPFrame:RegisterEvent("ADDON_LOADED")
+
 end
 
 function QRPFrame_OnEvent(event, arg1)
@@ -104,13 +112,19 @@ function QRPFrame_OnEvent(event, arg1)
 	elseif event == "UNIT_QUEST_LOG_CHANGED" or event == "QUEST_LOG_UPDATE" then
 		_print("Quest log changed. Resetting available/active gossip indexes")
 		QRPF_PrevGossipNpc = nil
+		QRPF_AvailableQuestIndex = 1
+		QRPF_ActiveQuestIndex = 1
+	elseif event == "PLAYER_TARGET_CHANGED" then
+		QRPF_PrevGossipNpc = nil
+		QRPF_AvailableQuestIndex = 1
+		QRPF_ActiveQuestIndex = 1
+		_print("nilled prevgossipnpc")
+	elseif event == "ADDON_LOADED" then
+
 	end
 
 end
 
-local QRPF_AvailableQuestIndex = 1
-local QRPF_ActiveQuestIndex = 1
-local QRPF_PrevGossipNpc = nil
 
 -- after closing dialogue with an npc
 function QRPF_GossipClose()
@@ -124,11 +138,14 @@ local SelectAvailableFunc = SelectAvailableQuest --SelectGossipAvailableQuest
 
 function QRPF_GossipShow(event)
 	local gossipNpcName = UnitName("Target")
+	--_print("npcname: "..gossipNpcName)
 	if QRPF_PrevGossipNpc == nil or gossipNpcName ~= QRPF_PrevGossipNpc then
+		_print("resetting indexes")
 		QRPF_AvailableQuestIndex = 1
 		QRPF_ActiveQuestIndex = 1
 		QRPF_PrevGossipNpc = gossipNpcName
 	end
+	--_print("prevNpc: "..QRPF_PrevGossipNpc)
 	if IsShiftKeyDown() then return end
 
 	if event == "GOSSIP_SHOW" then
@@ -177,60 +194,46 @@ function QRPF_GossipShow(event)
 end
 
 function ProcessGossipNumActiveQuest(...)
-	local numArgPerQuest = 2
-	if version ~= "1.12.1" then
-		_print(1/"") -- "assert", need to test this
-		numArgPerQuest = 4
+	local arg = { GetGossipActiveQuests() };
+	if arg == nil then return 0 end
+	if version == "1.12.1" then
+		return table.getn(arg)/2
+	elseif version == "8.1.5" then
+		return table.getn(arg)/6
 	end
-	return table.getn(arg)/numArgPerQuest
 end
 
 function ProcessGossipNumAvailableQuest(...)
-	local numArgPerQuest = 2
-	if version ~= "1.12.1" then
-		_print(1/"") -- "assert", need to test this
-		numArgPerQuest = 5
+	local arg = { GetGossipAvailableQuests() };
+	if arg == nil then return 0 end
+	if version == "1.12.1" then
+		return table.getn(arg)/2
+	elseif version == "8.1.5" then
+		return table.getn(arg)/7
 	end
-	return table.getn(arg)/numArgPerQuest
+	_print(1/"") -- "assert", need to test other versions
 end
 
 -- after selecting an unaccepted quest on an npc
 function QRPF_QuestDetail()
 	if IsShiftKeyDown() then return end
-	local quest = GetQuestToAccept()
-	if quest ~= nil then
-		_print("AutoAccepting "..GetTitleText())
-		AcceptQuest();
-	else
-		_print("Not AutoAccepting "..GetTitleText())
-	end
-end
 
-function GetQuestToAccept()
 	local title = GetTitleText()
-	_print(title.." - Searching for autoaccept")
-	local quests = CLQuestRewardChoices[title]
-	
-	if quests == nil then 
-		_print(title.." Not in auto-accept list.")
-		return nil;
-	end
-	
-	for i = 1, getn(quests) do
-		local quest = quests[i]
-		if quest.Objective == nil then
-			return quest;
+	local ignoreQ = CLIgnoreQuests[title]
+	if ignoreQ ~= nil then
+		if ignoreQ.Objective == nil then 
+			_print(title.." Ignored.")
+			return
 		else
 			local objective = GetObjectiveText()
 			if string.find(objective, quest.Objective) then
-				_print(title.." In auto-accept list, but Objective texts does not match:")
-				_print("GetTitleText(): "..title)
-				_print("quest.Objective: "..quest.Objective)
-				
-				return quest;
+				_print(title.." Ignored.")
+				return
 			end
 		end
 	end
+	_print("AutoAccepting "..GetTitleText())
+	AcceptQuest();
 end
 
 -- after selecting an active quest on an npc
@@ -239,7 +242,11 @@ function QRPF_QuestProgress()
 	-- DeclineQuest/CompleteQuest triggers GOSSIP_CLOSED, even if gossip isent actually closed, 
 	-- at least in 1.12 client. So in order to not reset QRPF_GossipIndex, we set QRPF_DeclineQuestGossipClose
 	-- which is checked by QRPF_GossipClose(), and when it's 1, QRPF_GossipIndex is not reset to 1
-	if IsQuestCompletable() == 1 then -- TODO: might return true/false on BFA
+	local comparator = 1
+	if version ~= "1.12.1" then
+		comparator = true
+	end
+	if IsQuestCompletable() == comparator then -- TODO: might return true/false on BFA
 		CompleteQuest() -- emulates clicking continue
 	else
 		_print(GetTitleText().." Not yet completed")
@@ -264,21 +271,27 @@ function QRPF_QuestComplete()
 	if numChoices == 0 then
 		GetQuestReward()
 		return
+	elseif numChoices == 1 then
+		GetQuestReward(1)
+		return
 	end
-	local quests = CLQuestRewardChoices[title]
-	for i = 1, getn(quests) do
-		local quest = quests[i]
-		
-		for i=1, numChoices do
-			local itemName = GetQuestItemInfo("choice", i);
-			if quest.Item == itemName then
-				_print("Choosing Item:"..itemName)
-				GetQuestReward(i);
-				if quest.Use == 1 then
-					QRPF_EquipItem() -- how?
-				end
-				return
+	local questIndex = title.."|"..GetQuestItemInfo("choice", 1)
+	_print(questIndex)
+	local quest = CLQuestRewardChoices[questIndex]
+	if quest == nil then
+		_print("Unknown quest. No autoaccepting reward")
+		return
+	end
+	
+	for i=1, numChoices do
+		local itemName = GetQuestItemInfo("choice", i);
+		if quest.Item == itemName then
+			_print("Choosing Item:"..itemName)
+			GetQuestReward(i);
+			if quest.Use == 1 then
+				QRPF_EquipItem() -- how?
 			end
+			return
 		end
 	end
 	_print("Multiple choices, none configured for autocompletion")
@@ -289,18 +302,78 @@ function QRPF_EquipItem()
 end
 
 
-CLQuestRewardChoices = {
-	["The Balance of Nature"] =
-		{ {Item="Archery Training Gloves", Use=1, Objective="Kill 7 Young Nightsaber"},
-		{Index=1, Use=1, Objective="Conservator Ilthalaine needs you to kill 7 Mangy"}
-		},
-	["Etched Sigil"] = {{}},
-	["WANTED: Murkdeep!"] = {{Index=2,Use=1}}
-}
+function QRPF_AddonLoaded()
+	
+end
 
+CLIgnoreQuests = {
+	[""] = {Objective=""},
+}
 function _print( msg )
     if not DEFAULT_CHAT_FRAME then return end
     DEFAULT_CHAT_FRAME:AddMessage ( msg )
     ChatFrame3:AddMessage ( msg )
     ChatFrame4:AddMessage ( msg )
 end
+
+
+CLQuestRewardChoices = {
+	["Timberling Sprouts|Gardening Gloves"] = {
+		["Item"] = "Graystone Bracers",
+	},
+	["Iverron's Antidote|Sedgeweed Britches"] = {
+		["Item"] = "Barkmail Vest",
+	},
+	["Washed Ashore|Sandcomber Boots"] = {
+		["Item"] = "Dryweed Belt",
+		["Use"] = 1,
+	},
+	["Twisted Hatred|Feral Bracers"] = {
+		["Item"] = "Feral Bracers",
+		["Use"] = 1,
+	},
+	["The Enchanted Glade|Shackled Girdle"] = {
+		["Item"] = "Rain-spotted Cape",
+		["Use"] = 1,
+	},
+	["The Balance of Nature|Draped Cloak"] = {
+		["Item"] = "Blackened Leather Belt",
+		["Use"] = 1,
+	},
+	["Sathrah's Sacrifice|Lace Pants"] = {
+		["Item"] = "Cushioned Boots",
+		["Use"] = 1,
+	},
+	["Dolanaar Delivery|Darnassian Bleu"] = {
+		["Item"] = "Darnassian Bleu",
+	},
+	["Deep Ocean, Vast Sea|Welldrip Gloves"] = {
+		["Item"] = "Noosegrip Gauntlets",
+	},
+	["Webwood Egg|Woodland Shield"] = {
+		["Item"] = "Woodland Tunic",
+		["Use"] = 1,
+	},
+	["Bashal'Aran|Explorer's Vest"] = {
+		["Item"] = "Vagabond Leggings",
+		["Use"] = 1,
+	},
+	["Crown of the Earth|Ashwood Bow"] = {
+		["Item"] = "Thicket Hammer",
+	},
+	["The Balance of Nature|Archery Training Gloves"] = {
+		["Item"] = "Archery Training Gloves",
+		["Use"] = 1,
+	},
+	["Webwood Venom|Thistlewood Maul"] = {
+		["Item"] = "Thistlewood Dagger",
+		["Use"] = 1,
+	},
+	["Oakenscowl|Dirtwood Belt"] = {
+		["Item"] = "Moss-covered Gauntlets",
+	},
+	["The Woodland Protector|Canopy Leggings"] = {
+		["Item"] = "Canopy Leggings",
+		["Use"] = 1,
+	},
+}
