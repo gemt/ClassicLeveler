@@ -93,7 +93,7 @@ function QRPFrame_OnLoad()
 	QRPFrame:RegisterEvent("PLAYER_TARGET_CHANGED")
 
 
-	QRPFrame:RegisterEvent("ADDON_LOADED")
+	--QRPFrame:RegisterEvent("ADDON_LOADED")
 
 end
 

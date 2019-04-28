@@ -3,4 +3,4 @@
 ## Author: G3m7
 ## Interface: 11100
 
-Frame.xml
+Frame.lua

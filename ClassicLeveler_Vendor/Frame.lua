@@ -1,31 +1,86 @@
 -- Author      : G3m7
 -- Create Date : 4/27/2019 11:35:25 PM
 
+
 local merchantstatus = false
+local next_do_something = 0
+local IsTrainerUp = false
+local playerLevel = 1
 
-function Vendor_OnLoad()
-	Vendor:RegisterEvent("MERCHANT_SHOW")
-	Vendor:RegisterEvent("MERCHANT_CLOSED")
-end
+local ClassicLeveler_Vendor = CreateFrame("Frame")
+ClassicLeveler_Vendor:RegisterEvent("MERCHANT_SHOW")
+ClassicLeveler_Vendor:RegisterEvent("MERCHANT_CLOSED")
+ClassicLeveler_Vendor:RegisterEvent("TRAINER_SHOW")
+ClassicLeveler_Vendor:RegisterEvent("TRAINER_CLOSED")
 
-function Vendor_OnEvent(event)
+local HunterTalents = {
+	[6] = {
+		[1] = {Name="", Rank=1}
+		[2] = {Name="", Rank=1},
+	},
+	[8] = {
+
+	}
+
+}
+
+ClassicLeveler_Vendor:SetScript("OnEvent", function () 
+	_print("Vendor event: "..event)
 	if(event == "MERCHANT_SHOW") then
 		merchantstatus = true
 		GreySell = {}
 	elseif(event == "MERCHANT_CLOSED") then
 		merchantstatus = false
-end
+	elseif event=="TRAINER_SHOW" then
+		IsTrainerUp = true
+		playerLevel = UnitLevel("player")
+	elseif event == "TRAINER_CLOSED" then
+		IsTrainerUp = false
+	end
+end)
 
-function Vendor_OnUpdate()
+ClassicLeveler_Vendor:SetScript("OnUpdate", function(self, elapsed)
+	--_print("vendor")
 	local current_time = GetTime();
 	local shiftstatus = IsShiftKeyDown();
 	local ctrlstatus = IsControlKeyDown();
 	local altstatus = IsAltKeyDown();
 
-	if merchantstatus and shiftstatus and current_time > last_click and not CursorHasItem() then
-		last_click = current_time + 0.25
+	if merchantstatus and shiftstatus and current_time > next_do_something and not CursorHasItem() then
+		next_do_something = current_time + 0.10
 		GreySellRepair();
 	end
+
+	if IsTrainerUp and shiftstatus then
+		for index=1, GetNumTrainerServices() do
+			local name, rank, category, expanded = GetTrainerServiceInfo(index)
+			if name == "Beast Mastery" then
+				if ShouldTrainClassSpell(name, rank, category) then
+					BuyTrainerService(index)
+				end
+			elseif name == "Beast Training" then
+
+
+			end
+		end
+	end
+
+end)
+function ShouldTrainClassSpell(name, rank, category)
+	if category ~= "available" then
+		return 0
+	end
+	-- playerLevel
+	-- table lookup
+	
+end
+function Vendor_OnEvent(event)
+
+end
+
+
+function Vendor_OnUpdate()
+	
 end
 
 function GreySellRepair()

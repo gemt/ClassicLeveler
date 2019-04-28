@@ -14,12 +14,8 @@
     <Content Include="ClassicLeveler_Vendor.toc">
       <SubType>TableOfContents</SubType>
     </Content>
-    <Content Include="Frame.xml">
-      <SubType>Frame</SubType>
-    </Content>
     <Content Include="Frame.lua">
       <SubType>Code</SubType>
-      <DependentUpon>Frame.xml</DependentUpon>
     </Content>
   </ItemGroup>
   <Import Project="$(DevEnvDir)\Extensions\Tools\MSBuild\AddonStudio\Wow\3.0\WowAddonStudio.targets" />
