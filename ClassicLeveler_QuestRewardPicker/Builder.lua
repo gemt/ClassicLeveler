@@ -8,7 +8,7 @@ function Builder_OnLoad()
 	Builder.Title = Builder:CreateFontString(nil, "ARTWORK", "GameFontNormalSmall")
 	Builder.Title:SetPoint("TOPLEFT", Builder, "TOPLEFT", 10, -25)
 	Builder.Title:SetText("")
-	
+	asd = CreateFrame("Button")
 	Builder.CLB_ItemButtons = {}
 	Builder.CLB_ItemButtons[1] = CLQ_CreateBtn("ItemChoice1Btn", -50, 1)
 	Builder.CLB_ItemButtons[2] = CLQ_CreateBtn("ItemChoice2Btn", -80, 2)

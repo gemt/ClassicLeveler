@@ -16,6 +16,7 @@
 				<Offset x="473" y="-245" />
 			</Anchor>
 		</Anchors>
+
 		<Backdrop bgFile="Interface\DialogFrame\UI-DialogBox-Background" edgeFile="Interface\DialogFrame\UI-DialogBox-Border" tile="true">
 			<BackgroundInsets>
 				<AbsInset left="11" right="12" top="12" bottom="11" />
@@ -27,6 +28,7 @@
 				<AbsValue val="32" />
 			</EdgeSize>
 		</Backdrop>
+
 		<HitRectInsets>
 			<AbsInset left="1" right="1" top="1" bottom="1" />
 		</HitRectInsets>

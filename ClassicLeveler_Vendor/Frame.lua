@@ -15,7 +15,7 @@ ClassicLeveler_Vendor:RegisterEvent("TRAINER_CLOSED")
 
 local HunterTalents = {
 	[6] = {
-		[1] = {Name="", Rank=1}
+		[1] = {Name="", Rank=1},
 		[2] = {Name="", Rank=1},
 	},
 	[8] = {

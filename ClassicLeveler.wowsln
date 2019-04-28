@@ -11,6 +11,8 @@ Project("{E6E1D386-69D8-4755-9E61-0950293915FC}") = "ClassicLeveler_QuestRewardP
 EndProject
 Project("{E6E1D386-69D8-4755-9E61-0950293915FC}") = "ClassicLeveler_Vendor", "ClassicLeveler_Vendor\ClassicLeveler_Vendor.wowproj", "{32DA2480-5BD6-4DC9-BBB0-12268985C0AE}"
 EndProject
+Project("{E6E1D386-69D8-4755-9E61-0950293915FC}") = "ClassicLeveler_Guide", "ClassicLeveler_Guide\ClassicLeveler_Guide.wowproj", "{A9BA818B-A16E-4680-8DAC-B08CAAB09982}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Default|Any CPU = Default|Any CPU
@@ -24,6 +26,8 @@ Global
 		{295CA872-CAE2-409A-98E6-2943F04FA7C8}.Default|Any CPU.Build.0 = Default|Any CPU
 		{32DA2480-5BD6-4DC9-BBB0-12268985C0AE}.Default|Any CPU.ActiveCfg = Default|Any CPU
 		{32DA2480-5BD6-4DC9-BBB0-12268985C0AE}.Default|Any CPU.Build.0 = Default|Any CPU
+		{A9BA818B-A16E-4680-8DAC-B08CAAB09982}.Default|Any CPU.ActiveCfg = Default|Any CPU
+		{A9BA818B-A16E-4680-8DAC-B08CAAB09982}.Default|Any CPU.Build.0 = Default|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
