@@ -1,0 +1,125 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Deploy" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Default</Configuration>
+    <Name>ClassicLeveler_Guide</Name>
+    <ProjectGuid>a9ba818b-a16e-4680-8dac-b08caab09982</ProjectGuid>
+    <AssemblyName>ClassicLeveler_Guide</AssemblyName>
+    <RootNamespace>ClassicLeveler_Guide</RootNamespace>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Default' ">
+    <OutputPath>.</OutputPath>
+  </PropertyGroup>
+  <ItemGroup>
+    <Content Include="ClassicLeveler_Guide.toc">
+      <SubType>TableOfContents</SubType>
+    </Content>
+    <Content Include="Frame.xml">
+      <SubType>Frame</SubType>
+    </Content>
+    <Content Include="Frame.lua">
+      <SubType>Code</SubType>
+      <DependentUpon>Frame.xml</DependentUpon>
+    </Content>
+    <Content Include="images\dummy.tga" />
+    <Content Include="images\icon-config.tga" />
+    <Content Include="images\icon-reset.tga" />
+    <Content Include="images\npc.tga" />
+    <Content Include="images\ResizeGripRight.tga" />
+    <Content Include="images\ResizeGripRightTop.tga" />
+    <Content Include="images\statusbar\Aluminium.tga" />
+    <Content Include="images\statusbar\Armory.tga" />
+    <Content Include="images\statusbar\BantoBar.tga" />
+    <Content Include="images\statusbar\Glaze2.tga" />
+    <Content Include="images\statusbar\Gloss.tga" />
+    <Content Include="images\statusbar\Graphite.tga" />
+    <Content Include="images\statusbar\Grid.tga" />
+    <Content Include="images\statusbar\Healbot.tga" />
+    <Content Include="images\statusbar\LiteStep.tga" />
+    <Content Include="images\statusbar\Minimalist.tga" />
+    <Content Include="images\statusbar\normTex.tga" />
+    <Content Include="images\statusbar\Otravi.tga" />
+    <Content Include="images\statusbar\Outline.tga" />
+    <Content Include="images\statusbar\Perl.tga" />
+    <Content Include="images\statusbar\Round.tga" />
+    <Content Include="images\statusbar\Smooth.tga" />
+    <Content Include="images\sync.tga" />
+    <Content Include="images\UI-ChatIM-SizeGrabber-Down.tga" />
+    <Content Include="images\UI-ChatIM-SizeGrabber-Highlight.tga" />
+    <Content Include="images\UI-ChatIM-SizeGrabber-Up.tga" />
+    <Content Include="images\UI-GuildButton-MOTD-Up.tga" />
+    <Content Include="images\UI-GuildButton-PublicNote-Up.tga" />
+    <Content Include="images\UI-Listbox-Highlight2.tga" />
+    <Content Include="images\UI-Panel-CollapseButton-Down.tga" />
+    <Content Include="images\UI-Panel-CollapseButton-Up.tga" />
+    <Content Include="images\UI-Panel-ExpandButton-Down.tga" />
+    <Content Include="images\UI-Panel-ExpandButton-Up.tga" />
+    <Content Include="Textures\Borders\fer1.tga" />
+    <Content Include="Textures\Borders\fer6.tga" />
+    <Content Include="Textures\Borders\fer7.tga" />
+    <Content Include="Textures\Borders\HalBorder.tga" />
+    <Content Include="Textures\Borders\Roth.tga" />
+    <Content Include="Textures\Buttons\Button-About-Highlight.tga" />
+    <Content Include="Textures\Buttons\Button-About-Normal.tga" />
+    <Content Include="Textures\Buttons\Button-About-Pushed.tga" />
+    <Content Include="Textures\Buttons\Button-ArrowDown-Highlight.tga" />
+    <Content Include="Textures\Buttons\Button-ArrowDown-Normal.tga" />
+    <Content Include="Textures\Buttons\Button-ArrowDown-Pushed.tga" />
+    <Content Include="Textures\Buttons\Button-ArrowUp-Highlight.tga" />
+    <Content Include="Textures\Buttons\Button-ArrowUp-Normal.tga" />
+    <Content Include="Textures\Buttons\Button-ArrowUp-Pushed.tga" />
+    <Content Include="Textures\Buttons\Button-Close-Highlight.tga" />
+    <Content Include="Textures\Buttons\Button-Close-Normal.tga" />
+    <Content Include="Textures\Buttons\Button-Close-Pushed.tga" />
+    <Content Include="Textures\Buttons\Button-DDMonLeft-ArrowDown-Highlight.tga" />
+    <Content Include="Textures\Buttons\Button-DDMonLeft-ArrowDown-Normal.tga" />
+    <Content Include="Textures\Buttons\Button-DDMonLeft-ArrowDown-Pushed.tga" />
+    <Content Include="Textures\Buttons\Button-DDMonRight-ArrowDown-Highlight.tga" />
+    <Content Include="Textures\Buttons\Button-DDMonRight-ArrowDown-Normal.tga" />
+    <Content Include="Textures\Buttons\Button-DDMonRight-ArrowDown-Pushed.tga" />
+    <Content Include="Textures\Buttons\Button-Details-Highlight.tga" />
+    <Content Include="Textures\Buttons\Button-Details-Normal.tga" />
+    <Content Include="Textures\Buttons\Button-Details-Pushed.tga" />
+    <Content Include="Textures\Buttons\Button-DoubleArrowLeft-Highlight.tga" />
+    <Content Include="Textures\Buttons\Button-DoubleArrowLeft-Normal.tga" />
+    <Content Include="Textures\Buttons\Button-DoubleArrowLeft-Pushed.tga" />
+    <Content Include="Textures\Buttons\Button-DoubleArrowRight-Highlight.tga" />
+    <Content Include="Textures\Buttons\Button-DoubleArrowRight-Normal.tga" />
+    <Content Include="Textures\Buttons\Button-DoubleArrowRight-Pushed.tga" />
+    <Content Include="Textures\Buttons\Button-DUMonLeft-ArrowUp-Highlight.tga" />
+    <Content Include="Textures\Buttons\Button-DUMonLeft-ArrowUp-Normal.tga" />
+    <Content Include="Textures\Buttons\Button-DUMonLeft-ArrowUp-Pushed.tga" />
+    <Content Include="Textures\Buttons\Button-DUMonRight-ArrowUp-Highlight.tga.fgx" />
+    <Content Include="Textures\Buttons\Button-DUMonRight-ArrowUp-Normal.tga" />
+    <Content Include="Textures\Buttons\Button-DUMonRight-ArrowUp-Pushed.tga" />
+    <Content Include="Textures\Buttons\Button-Flash-Highlight.tga" />
+    <Content Include="Textures\Buttons\Button-Flash-Normal.tga" />
+    <Content Include="Textures\Buttons\Button-Flash-Pushed.tga" />
+    <Content Include="Textures\Buttons\Button-Locked-Highlight.tga" />
+    <Content Include="Textures\Buttons\Button-Locked-Normal.tga" />
+    <Content Include="Textures\Buttons\Button-Locked-Pushed.tga" />
+    <Content Include="Textures\Buttons\Button-Option-Highlight.tga" />
+    <Content Include="Textures\Buttons\Button-Option-Normal.tga" />
+    <Content Include="Textures\Buttons\Button-Option-Pushed.tga" />
+    <Content Include="Textures\Buttons\Button-Unlocked-Highlight.tga" />
+    <Content Include="Textures\Buttons\Button-Unlocked-Normal.tga" />
+    <Content Include="Textures\Buttons\Button-Unlocked-Pushed.tga" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="images" />
+    <Folder Include="images\statusbar" />
+    <Folder Include="Textures" />
+    <Folder Include="Textures\Buttons" />
+    <Folder Include="Textures\Borders" />
+  </ItemGroup>
+  <Import Project="$(DevEnvDir)\Extensions\Tools\MSBuild\AddonStudio\Wow\3.0\WowAddonStudio.targets" />
+  <!--
+  To modify your build process, add your task inside one of the targets below and uncomment it.
+  <Target Name="BeforeClean"></Target>
+  <Target Name="AfterClean"></Target>
+  <Target Name="BeforeRebuild"></Target>
+  <Target Name="AfterRebuild"></Target>
+  <Target Name="BeforeDeploy"></Target>
+  <Target Name="AfterDeploy"></Target>
+  -->
+</Project>

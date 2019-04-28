@@ -1,0 +1,57 @@
+<Ui xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.blizzard.com/wow/ui/">
+	<Script file="Frame.lua" />
+	<Frame name="Guide" parent="UIParent" toplevel="true" movable="true" resizable="true" enableMouse="true" enableMouseClicks="true" enableMouseMotion="true">
+		<Size x="400" y="300" />
+		<Anchors>
+			<Anchor point="CENTER" x="0" y="0" />
+		</Anchors>
+		<Backdrop edgeFile="Interface\AddOns\ClassicLeveler_Guide\Textures\Borders\fer6" tile="true">
+			<Color a="1" r="0.5" g="0.5" b="1" />
+		</Backdrop>
+		<Frames>
+			<Button name="parentResizeButton">
+				<Size x="16" y="16" />
+				<Anchors>
+					<Anchor point="BOTTOMRIGHT" x="0" y="0" />
+				</Anchors>
+				<Scripts>
+					<OnMouseDown>
+						--local chatFrame = self:GetParent();
+						--self:SetButtonState("PUSHED", true);
+						--SetCursor("UI-Cursor-Size");  --Hide the cursor
+
+						--self:GetHighlightTexture():Hide();
+						Guide:StartSizing("BOTTOMRIGHT");
+						Guide.IsDragging = 1
+					</OnMouseDown>
+					<OnMouseUp>
+						--self:SetButtonState("NORMAL", false);
+						--SetCursor(nil); --Show the cursor again
+
+						--self:GetHighlightTexture():Show();
+						Guide.IsDragging = 0
+						Guide:StopMovingOrSizing();
+						--FCF_SavePositionAndDimensions(self:GetParent());
+					</OnMouseUp>
+				</Scripts>
+				<NormalTexture file="Interface\AddOns\ClassicLeveler_Guide\images\UI-ChatIM-SizeGrabber-Up" />
+				<PushedTexture file="Interface\AddOns\ClassicLeveler_Guide\images\UI-ChatIM-SizeGrabber-Down" />
+				<HighlightTexture file="Interface\AddOns\ClassicLeveler_Guide\images\UI-ChatIM-SizeGrabber-Highlight" />
+			</Button>
+		</Frames>
+		<Scripts>
+			<OnLoad>
+				Guide_OnLoad();
+			</OnLoad>
+			<OnEvent>
+				Guide_OnEvent(event);
+			</OnEvent>
+			<OnDragStop>
+				Guide:StopMovingOrSizing();
+			</OnDragStop>
+			<OnDragStart>
+				Guide:StartMoving();
+			</OnDragStart>
+		</Scripts>
+	</Frame>
+</Ui>
