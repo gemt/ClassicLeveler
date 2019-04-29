@@ -16,27 +16,40 @@
 				</Anchors>
 				<Scripts>
 					<OnMouseDown>
-						--local chatFrame = self:GetParent();
-						--self:SetButtonState("PUSHED", true);
-						--SetCursor("UI-Cursor-Size");  --Hide the cursor
-
-						--self:GetHighlightTexture():Hide();
 						Guide:StartSizing("BOTTOMRIGHT");
 						Guide.IsDragging = 1
 					</OnMouseDown>
 					<OnMouseUp>
-						--self:SetButtonState("NORMAL", false);
-						--SetCursor(nil); --Show the cursor again
-
-						--self:GetHighlightTexture():Show();
 						Guide.IsDragging = 0
 						Guide:StopMovingOrSizing();
-						--FCF_SavePositionAndDimensions(self:GetParent());
 					</OnMouseUp>
 				</Scripts>
 				<NormalTexture file="Interface\AddOns\ClassicLeveler_Guide\images\UI-ChatIM-SizeGrabber-Up" />
 				<PushedTexture file="Interface\AddOns\ClassicLeveler_Guide\images\UI-ChatIM-SizeGrabber-Down" />
 				<HighlightTexture file="Interface\AddOns\ClassicLeveler_Guide\images\UI-ChatIM-SizeGrabber-Highlight" />
+			</Button>
+
+			<Button name="nextButton">
+				<Size x="32" y="22" />
+				<Scripts>
+					<OnClick>
+						Guide_NextStep()
+					</OnClick>
+				</Scripts>
+				<NormalTexture file="Interface\AddOns\ClassicLeveler_Guide\Textures\Buttons\Button-DoubleArrowRight-Normal" />
+				<PushedTexture file="Interface\AddOns\ClassicLeveler_Guide\Textures\Buttons\Button-DoubleArrowRight-Pushed" />
+				<HighlightTexture file="Interface\AddOns\ClassicLeveler_Guide\Textures\Buttons\Button-DoubleArrowRight-Highlight" />
+			</Button>
+			<Button name="prevButton" parent="Guide">
+				<Size x="32" y="22" />
+				<Scripts>
+					<OnClick>
+						Guide_PrevStep()
+					</OnClick>
+				</Scripts>
+				<NormalTexture file="Interface\AddOns\ClassicLeveler_Guide\Textures\Buttons\Button-DoubleArrowLeft-Normal" />
+				<PushedTexture file="Interface\AddOns\ClassicLeveler_Guide\Textures\Buttons\Button-DoubleArrowLeft-Pushed" />
+				<HighlightTexture file="Interface\AddOns\ClassicLeveler_Guide\Textures\Buttons\Button-DoubleArrowLeft-Highlight" />
 			</Button>
 			
 		</Frames>

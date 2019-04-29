@@ -54,6 +54,9 @@ function Guide_RegisterEvents()
 end
 
 function Guide_SetupGuide()
+	nextButton:SetPoint("BOTTOMLEFT", Guide, "BOTTOMLEFT", 32, -22)
+	prevButton:SetPoint("BOTTOMLEFT", Guide, "BOTTOMLEFT", 0, -22)
+
 	Guide:SetBackdrop({bgFile = "Interface/Tooltips/UI-Tooltip-Background", 
 					edgeFile = "Interface\AddOns\ClassicLeveler_Guide\Textures\Borders\fer1", 
 					tile = false, tileSize = 1, edgeSize = 2, 
@@ -123,6 +126,7 @@ function Guide_SetStep(step)
 
 	Guide_PrintStepInfo()
 end
+
 function Guide_OnEvent()
 	if arg2 ~= nil then 
 		GuidePrint(event..", "..arg1..", "..arg2) 
