@@ -13,20 +13,25 @@ end
 --At = AcceptTrigger
 --Ct = CompleteTrigger
 local GuideSteps = {
-	[1] =  {Text="Turn inn Flight to Auberdine. Accept Return to Nessa", At="Return to Nessa"},
-		
-	[2] =  {Text="accept washed ashore (by FP)"},
-	[3] =  {Text="accept buzzbox (second floor innkeeper)"},
-	[4] =  {Text="accept bashal'aran (where)"},
-	[5] =  {Text="do Bashal'aran quests"},
-	[6] =  {Text="trap a grizzly bear (Plagued Lands)"},
-	[7] =  {Text="grind to close to 13 on moonkins, have at least 9 eggs"},
-	[8] =  {Text="swing my furbolog camp for How big a threat"},
-	[9] = {Text="can kill striders too for strider meat (cooking quest)"},
+	{Text="Turn inn Flight to Auberdine. Accept Return to Nessa", At="Return to Nessa"},
+	{Text="Accept washed ashore (by FP)", At="Washed Ashore"},
+	{Text="Accept buzzbox (second floor innkeeper)", At="Buzzbox 827"},
+	{Text="Accept Bashal'Aran (Thundris Windweaver, north mainhouse)", At="Bashal'Aran"},
+	{Text="Accept Plagued Lands (bear quest dude)", At="Plagued Lands"},
+
+
+	{Text="do Bashal'Aran quests"},
+	{Text="trap a grizzly bear (Plagued Lands)"},
+	{Text="grind to close to 13 on moonkins, have at least 9 eggs"},
+	{Text="swing my furbolog camp for How big a threat"},
+	{Text="can kill striders too for strider meat (cooking quest)"},
 }
 
 function Guide_OnLoad()
 	Guide.CurrentStepIndex = 1
+	
+	Guide.DelayedCheckHasQuest = 0
+	Guide.DelayedCheckHasQuestStop = 0
 
 	Guide:SetScript("OnEvent", function() Guide_OnEvent()end)
 	Guide_SetupGuide()
@@ -100,22 +105,32 @@ function Guide_PrevStep()
 end
 
 function Guide_SetStep(step)
+	
+	Guide.DelayedCheckHasQuest = 0 -- if step is changed, manual or otherwise, we stop any delayed hasQuest checking
+
 	Guide.CurrentStepIndex = step
+	Guide.CurrentStep = GuideSteps[Guide.CurrentStepIndex]
+
 	for i=1,Guide.MAX_STEPS do
-		local stepOffset = -3+i
-		Guide.CurrentStep = GuideSteps[Guide.CurrentStepIndex+stepOffset]
-		if Guide.CurrentStep ~= nil then
-			Guide.StepFrames[i].Text:SetText(Guide.CurrentStep.Text)
+		local stepOffset = Guide.CurrentStepIndex-3+i
+		local s = GuideSteps[stepOffset]
+		if s ~= nil then
+			Guide.StepFrames[i].Text:SetText(s.Text)
 		else
 			Guide.StepFrames[i].Text:SetText("")
 		end
 	end
-end
 
+	Guide_PrintStepInfo()
+end
 function Guide_OnEvent()
-	GuidePrint(event)
-	if arg1 ~= nil then GuidePrint(arg1) end
-	if arg2 ~= nil then GuidePrint(arg2) end
+	if arg2 ~= nil then 
+		GuidePrint(event..", "..arg1..", "..arg2) 
+	elseif arg1 ~= nil then 
+		GuidePrint(event..", "..arg1) 
+	else
+		GuidePrint(event)
+	end
 
 
 	if event == "UNIT_QUEST_LOG_CHANGED" then
@@ -137,19 +152,34 @@ function Guide_OnEvent()
 end
 
 function Guide_UnitQuestLogChanged()
-	local step = GuideSteps[Guide.CurrentStepIndex]
-	GuidePrint("Checking step: "..step.Text.. " - HasQuest: "..CL_HasQuest(step.At))
-	if step.At ~= nil and CL_HasQuest(step.At) == 1 then
-		Guide_NextStep()
-	elseif step.Ct ~= nil and CL_HasQuest(step.Ct) == 0 then
-		Guide_NextStep()
+	-- Questlog updates quite delayed, and checking CL_HasQuest in this 
+	-- function is too early, so if currentStep has At or Ct, queue 
+	-- up a delayed check for OnUpdate
+	if Guide.CurrentStep.At ~= nil or Guide.CurrentStep.Ct ~= nil then
+		Guide.DelayedCheckHasQuest = 1
+		Guide.DelayedCheckHasQuestStop = GetTime() + 2.0 -- stop checking after 2 sec
 	end
+	
 end
 
 function Guide_OnUpdate()
 	Guide_UpdateDragging()
+	Guide_DelayedCheckHasQuest()
+end
 
+function Guide_DelayedCheckHasQuest()
+	if Guide.DelayedCheckHasQuest == 1 then
+		if Guide.CurrentStep.At ~= nil and CL_HasQuest(Guide.CurrentStep.At) == 1 then
+			Guide_NextStep()
+		elseif Guide.CurrentStep.Ct ~= nil and CL_HasQuest(Guide.CurrentStep.Ct) == 0 then
+			Guide_NextStep()
+		end
 
+		-- If we have passed DelayedCheckHasQuestStop, stop looking
+		if Guide.DelayedCheckHasQuestStop < GetTime() then
+			Guide.DelayedCheckHasQuest = 0
+		end
+	end
 end
 
 function Guide_UpdateDragging()
@@ -166,7 +196,7 @@ function Guide_UpdateDragging()
 end
 
 function Guide_PrintStepInfo()
-	local step = GuideSteps[Guide.CurrentStepIndex]
+	local step = Guide.CurrentStep--GuideSteps[Guide.CurrentStepIndex]
 	if step == nil then
 		GuidePrint("nil")
 		return
