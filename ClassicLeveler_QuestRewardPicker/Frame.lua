@@ -68,6 +68,15 @@ SelectQuestLogEntry - ?.
 SetAbandonQuest - Called before AbandonQuest.
 UI ToggleQuestLog - Opens/closes the quest log.
 ]]
+function QRP_Print(msg)
+	if not DEFAULT_CHAT_FRAME then 
+		return 
+	end
+    DEFAULT_CHAT_FRAME:AddMessage ( msg )
+    ChatFrame3:AddMessage ( msg )
+    ChatFrame4:AddMessage ( msg )
+end
+
 local version = GetBuildInfo();
 local QRPF_AvailableQuestIndex = 1
 local QRPF_ActiveQuestIndex = 1
@@ -98,7 +107,7 @@ function QRPFrame_OnLoad()
 end
 
 function QRPFrame_OnEvent(event, arg1)
-	_print("QuestPicker Event: "..event)
+	QRP_Print("QuestPicker Event: "..event)
 	if event == "QUEST_COMPLETE" then -- when the quest complete dialogue is shown at an npc
 		QRPF_QuestComplete();
 	elseif event == "GOSSIP_SHOW" or event == "QUEST_GREETING" then -- after opening dialogue with an npc. Also after clicking cancel, and being sent back to initial gossip screen
@@ -110,7 +119,7 @@ function QRPFrame_OnEvent(event, arg1)
 	elseif event == "GOSSIP_CLOSED" then
 		QRPF_GossipClose()
 	elseif event == "UNIT_QUEST_LOG_CHANGED" or event == "QUEST_LOG_UPDATE" then
-		_print("Quest log changed. Resetting available/active gossip indexes")
+		QRP_Print("Quest log changed. Resetting available/active gossip indexes")
 		QRPF_PrevGossipNpc = nil
 		QRPF_AvailableQuestIndex = 1
 		QRPF_ActiveQuestIndex = 1
@@ -118,7 +127,7 @@ function QRPFrame_OnEvent(event, arg1)
 		QRPF_PrevGossipNpc = nil
 		QRPF_AvailableQuestIndex = 1
 		QRPF_ActiveQuestIndex = 1
-		_print("nilled prevgossipnpc")
+		QRP_Print("nilled prevgossipnpc")
 	elseif event == "ADDON_LOADED" then
 
 	end
@@ -138,14 +147,14 @@ local SelectAvailableFunc = SelectAvailableQuest --SelectGossipAvailableQuest
 
 function QRPF_GossipShow(event)
 	local gossipNpcName = UnitName("Target")
-	--_print("npcname: "..gossipNpcName)
+	--QRP_Print("npcname: "..gossipNpcName)
 	if QRPF_PrevGossipNpc == nil or gossipNpcName ~= QRPF_PrevGossipNpc then
-		_print("resetting indexes")
+		QRP_Print("resetting indexes")
 		QRPF_AvailableQuestIndex = 1
 		QRPF_ActiveQuestIndex = 1
 		QRPF_PrevGossipNpc = gossipNpcName
 	end
-	--_print("prevNpc: "..QRPF_PrevGossipNpc)
+	--QRP_Print("prevNpc: "..QRPF_PrevGossipNpc)
 	if IsShiftKeyDown() then return end
 
 	if event == "GOSSIP_SHOW" then
@@ -156,8 +165,8 @@ function QRPF_GossipShow(event)
 		SelectAvailableFunc = SelectAvailableQuest
 	end
 
-	_print("QRPF_AvailableQuestIndex: "..QRPF_AvailableQuestIndex)
-	_print("QRPF_ActiveQuestIndex: "..QRPF_ActiveQuestIndex)
+	QRP_Print("QRPF_AvailableQuestIndex: "..QRPF_AvailableQuestIndex)
+	QRP_Print("QRPF_ActiveQuestIndex: "..QRPF_ActiveQuestIndex)
 	local numActive = 0;
 	local numAvail = 0;
 	if event == "GOSSIP_SHOW" then
@@ -169,15 +178,15 @@ function QRPF_GossipShow(event)
 	end
 	--local numActive = NumActiveFunc();
 	--local numAvail = NumAvailableFunc();
-	_print("Active Quests: "..numActive);
-	_print("Available Quests: "..numAvail);
+	QRP_Print("Active Quests: "..numActive);
+	QRP_Print("Available Quests: "..numAvail);
 
 	if numAvail ~= 0 and QRPF_AvailableQuestIndex <= numAvail then
-		_print("Selecting Available quest "..QRPF_AvailableQuestIndex)
+		QRP_Print("Selecting Available quest "..QRPF_AvailableQuestIndex)
 		QRPF_AvailableQuestIndex = QRPF_AvailableQuestIndex + 1;
 		SelectAvailableFunc(QRPF_AvailableQuestIndex - 1)
 	elseif numActive ~= 0 and QRPF_ActiveQuestIndex <= numActive then
-		_print("Selecting Active quest "..QRPF_ActiveQuestIndex)
+		QRP_Print("Selecting Active quest "..QRPF_ActiveQuestIndex)
 		QRPF_ActiveQuestIndex = QRPF_ActiveQuestIndex + 1;
 		SelectActiveFunc(QRPF_ActiveQuestIndex - 1)
 	end
@@ -211,7 +220,7 @@ function ProcessGossipNumAvailableQuest(...)
 	elseif version == "8.1.5" then
 		return table.getn(arg)/7
 	end
-	_print(1/"") -- "assert", need to test other versions
+	QRP_Print(1/"") -- "assert", need to test other versions
 end
 
 -- after selecting an unaccepted quest on an npc
@@ -222,17 +231,17 @@ function QRPF_QuestDetail()
 	local ignoreQ = CLIgnoreQuests[title]
 	if ignoreQ ~= nil then
 		if ignoreQ.Objective == nil then 
-			_print(title.." Ignored.")
+			QRP_Print(title.." Ignored.")
 			return
 		else
 			local objective = GetObjectiveText()
 			if string.find(objective, quest.Objective) then
-				_print(title.." Ignored.")
+				QRP_Print(title.." Ignored.")
 				return
 			end
 		end
 	end
-	_print("AutoAccepting "..GetTitleText())
+	QRP_Print("AutoAccepting "..GetTitleText())
 	AcceptQuest();
 end
 
@@ -249,7 +258,7 @@ function QRPF_QuestProgress()
 	if IsQuestCompletable() == comparator then -- TODO: might return true/false on BFA
 		CompleteQuest() -- emulates clicking continue
 	else
-		_print(GetTitleText().." Not yet completed")
+		QRP_Print(GetTitleText().." Not yet completed")
 		DeclineQuest() -- emulates clicking cancel button, taking us back to main gossip menu if there is one
 	end
 end
@@ -266,7 +275,7 @@ function QRPF_QuestComplete()
 	-- IsQuestCompletable() -- returns 1 if current npc questdialogue thing can be completed
 	local numChoices = GetNumQuestChoices();
 	local title = GetTitleText()
-	_print("Autocompleting: "..title..", Choices: "..numChoices);
+	QRP_Print("Autocompleting: "..title..", Choices: "..numChoices);
 	
 	if numChoices == 0 then
 		GetQuestReward()
@@ -276,17 +285,17 @@ function QRPF_QuestComplete()
 		return
 	end
 	local questIndex = title.."|"..GetQuestItemInfo("choice", 1)
-	_print(questIndex)
+	QRP_Print(questIndex)
 	local quest = CLQuestRewardChoices[questIndex]
 	if quest == nil then
-		_print("Unknown quest. No autoaccepting reward")
+		QRP_Print("Unknown quest. No autoaccepting reward")
 		return
 	end
 	
 	for i=1, numChoices do
 		local itemName = GetQuestItemInfo("choice", i);
 		if quest.Item == itemName then
-			_print("Choosing Item:"..itemName)
+			QRP_Print("Choosing Item:"..itemName)
 			GetQuestReward(i);
 			if quest.Use == 1 then
 				QRPF_EquipItem() -- how?
@@ -294,7 +303,7 @@ function QRPF_QuestComplete()
 			return
 		end
 	end
-	_print("Multiple choices, none configured for autocompletion")
+	QRP_Print("Multiple choices, none configured for autocompletion")
 end
 
 function QRPF_EquipItem()
@@ -306,40 +315,9 @@ function QRPF_AddonLoaded()
 	
 end
 
-function IsQuestComplete(qtitle)
-	local objectives = nil   
-	local e = GetNumQuestLogEntries()
-	for q=2, e do
-        if qtitle == GetQuestLogTitle(q) then
-			local n = GetNumQuestLeaderBoards(q)
-			for x=1, n do
-				local l = GetQuestLogLeaderBoard(x, q)    
-                if string.find(l, "%d+/%d+") ~= nil then
-					local a = string.sub(l, string.find(l, "%d+/%d+"))
-					local b = string.sub(a, string.find(a, "%d+"))
-					local c = string.sub(a, string.find(a, "%d+$"))
-                    if b ~= c then 
-						return 0 -- one objective is not complete. Return 0
-                    end                                                         
-                end
-			end
-			return 1 -- all objectives were n/n
-		end
-	end
-	_print(qtitle.." not found")
-    return nil
-end
-
 CLIgnoreQuests = {
 	[""] = {Objective=""},
 }
-function _print( msg )
-    if not DEFAULT_CHAT_FRAME then return end
-    DEFAULT_CHAT_FRAME:AddMessage ( msg )
-    ChatFrame3:AddMessage ( msg )
-    ChatFrame4:AddMessage ( msg )
-end
-
 
 CLQuestRewardChoices = {
 	["Timberling Sprouts|Gardening Gloves"] = {

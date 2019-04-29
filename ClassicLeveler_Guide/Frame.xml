@@ -38,14 +38,12 @@
 				<PushedTexture file="Interface\AddOns\ClassicLeveler_Guide\images\UI-ChatIM-SizeGrabber-Down" />
 				<HighlightTexture file="Interface\AddOns\ClassicLeveler_Guide\images\UI-ChatIM-SizeGrabber-Highlight" />
 			</Button>
+			
 		</Frames>
 		<Scripts>
 			<OnLoad>
 				Guide_OnLoad();
 			</OnLoad>
-			<OnEvent>
-				Guide_OnEvent(event);
-			</OnEvent>
 			<OnDragStop>
 				Guide:StopMovingOrSizing();
 			</OnDragStop>

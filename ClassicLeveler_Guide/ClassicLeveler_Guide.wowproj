@@ -14,12 +14,11 @@
     <Content Include="ClassicLeveler_Guide.toc">
       <SubType>TableOfContents</SubType>
     </Content>
-    <Content Include="Frame.xml">
-      <SubType>Frame</SubType>
-    </Content>
     <Content Include="Frame.lua">
       <SubType>Code</SubType>
-      <DependentUpon>Frame.xml</DependentUpon>
+    </Content>
+    <Content Include="Frame.xml">
+      <SubType>Frame</SubType>
     </Content>
     <Content Include="images\dummy.tga" />
     <Content Include="images\icon-config.tga" />

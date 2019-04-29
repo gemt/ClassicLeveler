@@ -27,7 +27,7 @@ function Builder_OnLoad()
 	Builder.CLB_Equip:SetWidth(32)
 	Builder.CLB_Equip:SetHeight(32)
 
-	_print("Builder loaded")
+	QRP_Print("Builder loaded")
 	btn:Hide();
 end
 
@@ -37,7 +37,7 @@ function CLQ_CreateBtn(name, ypos, idx)
 	btn:SetWidth(300)
 	btn:SetHeight(32)
 	btn:SetScript("OnClick", function()
-		_print(idx.." Clicked")
+		QRP_Print(idx.." Clicked")
 		GetQuestReward(idx)
 		local itm = Builder.CLB_Items[idx]
 		local equip = Builder.CLB_Equip:GetChecked()
@@ -45,7 +45,7 @@ function CLQ_CreateBtn(name, ypos, idx)
 		local mapIdx = Builder.QuestTitleText.."|"..Builder.CLB_Items[1]
 
 		local existing = CLQuestRewardChoices[mapIdx]
-		_print("Saving Quest: "..mapIdx..", Item="..itm)
+		QRP_Print("Saving Quest: "..mapIdx..", Item="..itm)
 		CLQuestRewardChoices[mapIdx] = {Item=itm, Use=equip }
 		Builder:Hide()
 	end)
