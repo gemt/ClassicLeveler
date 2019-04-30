@@ -1,4 +1,4 @@
-## Interface: 11100
+## Interface: 80100
 ## Title: ClassicLeveler
 ## Version: 1.0
 ## Author: Gemt

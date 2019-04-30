@@ -11,6 +11,9 @@
     <OutputPath>.</OutputPath>
   </PropertyGroup>
   <ItemGroup>
+    <Content Include="Arrow.lua">
+      <SubType>Code</SubType>
+    </Content>
     <Content Include="ClassicLeveler_Guide.toc">
       <SubType>TableOfContents</SubType>
     </Content>
@@ -20,6 +23,8 @@
     <Content Include="Frame.xml">
       <SubType>Frame</SubType>
     </Content>
+    <Content Include="images\Arrow.blp" />
+    <Content Include="images\Arrow.m2" />
     <Content Include="images\dummy.tga" />
     <Content Include="images\icon-config.tga" />
     <Content Include="images\icon-reset.tga" />

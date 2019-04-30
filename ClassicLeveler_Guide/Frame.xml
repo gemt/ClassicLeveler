@@ -51,7 +51,6 @@
 				<PushedTexture file="Interface\AddOns\ClassicLeveler_Guide\Textures\Buttons\Button-DoubleArrowLeft-Pushed" />
 				<HighlightTexture file="Interface\AddOns\ClassicLeveler_Guide\Textures\Buttons\Button-DoubleArrowLeft-Highlight" />
 			</Button>
-			
 		</Frames>
 		<Scripts>
 			<OnLoad>

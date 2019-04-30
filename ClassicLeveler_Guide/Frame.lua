@@ -27,6 +27,8 @@ local GuideSteps = {
 	{Text="can kill striders too for strider meat (cooking quest)"},
 }
 
+Guide_CompletedGuideSteps = {}
+
 function Guide_OnLoad()
 	Guide.CurrentStepIndex = 1
 	
@@ -62,11 +64,14 @@ function Guide_SetupGuide()
 					tile = false, tileSize = 1, edgeSize = 2, 
 					insets = { left = 0, right = 0, top = 0, bottom = 1 }});
 	Guide:SetBackdropColor(0,0,0);
-
-
-	Guide.MAX_STEPS = 7
+	Guide:SetScale(1.2)
+	Guide.CURRENT_STEP_IDX = 3
+	Guide.MAX_STEPS = 10
 	Guide.StepFrames = {}
 	Guide.StepHeight = Guide:GetHeight()/Guide.MAX_STEPS
+	Guide.UNCOMPLETE_BACKDROP = {r=0.9, g=0.9, b=0.9, a=1}
+	Guide.COMPLETED_BACKDROP = {r=0.0, g=1, b=0.0, a=1}
+	Guide.CURRENT_BACKDROP = {r=0.3, g=0.3, b=0.3, a=1}
 	local h = Guide:GetHeight()*Guide:GetEffectiveScale()
 	local fifth = h/Guide.MAX_STEPS
 	for i=1,Guide.MAX_STEPS do
@@ -90,21 +95,53 @@ function Guide_SetupGuide()
 		
 
 		Guide.StepFrames[i].Text:SetFont("Fonts\\ARIALN.ttf", 13, "OUTLINE")
-		Guide.StepFrames[i].Text:SetPoint("TOPLEFT", Guide.StepFrames[i].Bg, "TOPLEFT", 10, -10)
-		Guide.StepFrames[i].Text:SetPoint("BOTTOMRIGHT", Guide.StepFrames[i].Bg, "BOTTOMRIGHT", -10, -10)
+		Guide.StepFrames[i].Text:SetPoint("TOPLEFT", Guide.StepFrames[i].Bg, "TOPLEFT", 10, -5)
+		Guide.StepFrames[i].Text:SetPoint("BOTTOMRIGHT", Guide.StepFrames[i].Bg, "BOTTOMRIGHT", -10, -5)
 		Guide.StepFrames[i].Text:SetJustifyV("TOP");
 		Guide.StepFrames[i].Text:SetJustifyH("LEFT");
-		Guide.StepFrames[i].Bg:SetBackdropColor(0.9,0.9,0.9,1);
+		--Guide.StepFrames[i].Bg:SetBackdropColor(0.9,0.9,0.9,1);
 	end
-	Guide.StepFrames[3].Bg:SetBackdropColor(0.3, 0.3, 0.3, 1);
-
+	Guide.StepFrames[Guide.CURRENT_STEP_IDX].Bg:SetBackdropColor(0.3, 0.3, 0.3, 1);
+	Guide_UpdateColors()
 end
 
 function Guide_NextStep()
 	Guide_SetStep(Guide.CurrentStepIndex + 1)
 end
+
 function Guide_PrevStep()
 	Guide_SetStep(Guide.CurrentStepIndex - 1)
+end
+
+function Guide_CompleteStep(step)
+    Guide_CompletedGuideSteps[step] = 1
+    if Guide.CurrentStepIndex == step then
+        Guide_NextStep()
+    end
+end
+
+function Guide_HasCompletedStep(step)
+    local cs = Guide_CompletedGuideSteps[step]
+    if cs ~= nil and cs == 1 then 
+        return 1
+    else
+        return 0
+    end
+end
+
+function Guide_UpdateColors()
+	for i=1,Guide.MAX_STEPS do
+		local stepOffset = Guide.CurrentStepIndex-Guide.CURRENT_STEP_IDX+i
+		local s = GuideSteps[stepOffset]
+		local isComplete = Guide_HasCompletedStep(stepOffset)
+		if i == Guide.CURRENT_STEP_IDX then
+			Guide.StepFrames[i].Bg:SetBackdropColor(Guide.CURRENT_BACKDROP.r, Guide.CURRENT_BACKDROP.g, Guide.CURRENT_BACKDROP.b, Guide.CURRENT_BACKDROP.a);
+		elseif s ~= nil and Guide_HasCompletedStep(stepOffset) == 1 then
+			Guide.StepFrames[i].Bg:SetBackdropColor(Guide.COMPLETED_BACKDROP.r, Guide.COMPLETED_BACKDROP.g, Guide.COMPLETED_BACKDROP.b, Guide.COMPLETED_BACKDROP.a);
+		else
+			Guide.StepFrames[i].Bg:SetBackdropColor(Guide.UNCOMPLETE_BACKDROP.r, Guide.UNCOMPLETE_BACKDROP.g, Guide.UNCOMPLETE_BACKDROP.b, Guide.UNCOMPLETE_BACKDROP.a);
+		end
+	end
 end
 
 function Guide_SetStep(step)
@@ -115,15 +152,19 @@ function Guide_SetStep(step)
 	Guide.CurrentStep = GuideSteps[Guide.CurrentStepIndex]
 
 	for i=1,Guide.MAX_STEPS do
-		local stepOffset = Guide.CurrentStepIndex-3+i
+		local stepOffset = Guide.CurrentStepIndex-Guide.CURRENT_STEP_IDX+i
 		local s = GuideSteps[stepOffset]
+		local isComplete = Guide_HasCompletedStep(stepOffset)
 		if s ~= nil then
 			Guide.StepFrames[i].Text:SetText(s.Text)
+			if Guide_HasCompletedStep(stepOffset) == 1 then
+				Guide.StepFrames[i].Bg:SetBackdropColor(0.0,0.8,0.0,1);
+			end
 		else
 			Guide.StepFrames[i].Text:SetText("")
 		end
 	end
-
+	Guide_UpdateColors()
 	Guide_PrintStepInfo()
 end
 
@@ -158,8 +199,10 @@ end
 function Guide_UnitQuestLogChanged()
 	-- Questlog updates quite delayed, and checking CL_HasQuest in this 
 	-- function is too early, so if currentStep has At or Ct, queue 
-	-- up a delayed check for OnUpdate
+	-- up a delayed check for OnUpdate.
+	GuidePrint(1)
 	if Guide.CurrentStep.At ~= nil or Guide.CurrentStep.Ct ~= nil then
+		GuidePrint(2)
 		Guide.DelayedCheckHasQuest = 1
 		Guide.DelayedCheckHasQuestStop = GetTime() + 2.0 -- stop checking after 2 sec
 	end
@@ -174,9 +217,9 @@ end
 function Guide_DelayedCheckHasQuest()
 	if Guide.DelayedCheckHasQuest == 1 then
 		if Guide.CurrentStep.At ~= nil and CL_HasQuest(Guide.CurrentStep.At) == 1 then
-			Guide_NextStep()
+            Guide_CompleteStep(Guide.CurrentStepIndex)
 		elseif Guide.CurrentStep.Ct ~= nil and CL_HasQuest(Guide.CurrentStep.Ct) == 0 then
-			Guide_NextStep()
+			Guide_CompleteStep(Guide.CurrentStepIndex)
 		end
 
 		-- If we have passed DelayedCheckHasQuestStop, stop looking

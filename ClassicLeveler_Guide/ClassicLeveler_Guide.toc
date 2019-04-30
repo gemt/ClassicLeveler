@@ -3,4 +3,6 @@
 ## Author: G3m7
 ## Interface: 80100
 ## Dependencies: ClassicLeveler
+##SavedVariablesPerCharacter: CompletedGuideSteps
 Frame.xml
+Arrow.lua
