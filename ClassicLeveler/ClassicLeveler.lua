@@ -5,21 +5,19 @@ function CL_IsQuestComplete(qtitle)
 	for q=2, e do
         if qtitle == GetQuestLogTitle(q) then
 			local n = GetNumQuestLeaderBoards(q)
-			for x=1, n do
-				local l = GetQuestLogLeaderBoard(x, q)    
-                if string.find(l, "%d+/%d+") ~= nil then
-					local a = string.sub(l, string.find(l, "%d+/%d+"))
-					local b = string.sub(a, string.find(a, "%d+"))
-					local c = string.sub(a, string.find(a, "%d+$"))
-                    if b ~= c then 
-						return 0 -- one objective is not complete. Return 0
-                    end                                                         
-                end
+			if n == 0 then  
+				return 1 -- no objectives on quest. Think this always means it's completed right away
 			end
-			return 1 -- all objectives were n/n
+			for x=1, n do
+				local desc, type, done = GetQuestLogLeaderBoard(x, q)    
+				if done == nil then -- documentation says done is nil when it's not done
+					return 0 -- one (or more) objective is not complete. Return 0
+				end
+			end
+			return 1 -- all objectives were done
 		end
 	end
-	QRP_Print(qtitle.." not found")
+	QRP_Print("CL_IsQuestComplete: <"..qtitle.."> not found")
     return nil
 end
 
@@ -30,5 +28,6 @@ function CL_HasQuest(qtitle)
 			return 1
 		end
 	end
+	QRP_Print("CL_HasQuest: <"..qtitle.."> not found")
 	return 0
 end

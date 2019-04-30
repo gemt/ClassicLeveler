@@ -4,8 +4,6 @@
 --  concept taken from MapNotes2 (Thanks to Mery for the idea, along
 --  with the artwork.)
 ----------------------------------------------------------------------------
-local function log(msg) DEFAULT_CHAT_FRAME:AddMessage(msg) end -- alias for convenience
----------------------------------------------------------------------------------------------------
 --Lua5 doesnt support mod math via the % operator
 function Questie_Modulo(val, by)
     return val - math.floor(val/by)*by;
@@ -57,7 +55,6 @@ wayframe:SetWidth(56)
 wayframe:SetPoint("CENTER", 0, 0)
 wayframe:EnableMouse(true)
 wayframe:SetMovable(true)
-wayframe:Hide()
 -- Frame used to control the scaling of the title and friends
 local titleframe = CreateFrame("Frame", nil, wayframe)
 wayframe.title = titleframe:CreateFontString("OVERLAY", nil, "GameFontHighlightSmall")
@@ -136,7 +133,8 @@ local function OnUpdate(self, elapsed)
             status:SetText(sformat("%d yards", dist))
             local cell
             -- Showing the arrival arrow?
-            if dist <= 5 then
+            --[[
+			if dist <= 5 then
                 if not showDownArrow then
                     arrow:SetHeight(70)
                     arrow:SetWidth(53)
@@ -157,6 +155,7 @@ local function OnUpdate(self, elapsed)
                 local yend = ((row + 1) * 70) / 512
                 arrow:SetTexCoord(xstart,xend,ystart,yend)
             else
+			]]
                 if showDownArrow then
                     arrow:SetHeight(56)
                     arrow:SetWidth(42)
@@ -195,41 +194,10 @@ local function OnUpdate(self, elapsed)
                 local xend = ((column + 1) * 56) / 512
                 local yend = ((row + 1) * 42) / 512
                 arrow:SetTexCoord(xstart,xend,ystart,yend)
-            end
+            --end
         end
         arrowLastUpdate = GetTime()
     end
-end
----------------------------------------------------------------------------------------------------
-function ShowHideCrazyArrow()
-    if wayframe:IsShown() then
-        wayframe:Show()
-        if true then
-            wayframe:EnableMouse(false)
-        else
-            wayframe:EnableMouse(true)
-        end
-        -- Set the scale and alpha
-        wayframe:SetScale(1)
-        wayframe:SetAlpha(1)
-        local width = 80
-        local height = 80
-        local scale = 1
-        wayframe.title:SetWidth(width)
-        wayframe.title:SetHeight(height)
-        titleframe:SetScale(scale)
-        titleframe:SetAlpha(1)
-    else
-        wayframe:Hide()
-    end
-end
----------------------------------------------------------------------------------------------------
-function ArrowHidden()
-    isHide = true
-end
----------------------------------------------------------------------------------------------------
-function ArrowShown()
-    isHide = false
 end
 ---------------------------------------------------------------------------------------------------
 wayframe:SetScript("OnUpdate", OnUpdate)
@@ -315,8 +283,8 @@ end)
 function Arrow_GetDirectionToPoint( point )
     if not point then return end
     local x, y = GetPlayerMapPosition("player")
-	x = x*1000
-	y = y*1000
+	x = x*10000
+	y = y*10000
     local dist, xDelta, yDelta = Arrow_GetDistanceToPoint(point)
     if not xDelta or not yDelta then return end
     local dir = atan2(xDelta, -(yDelta))
@@ -328,8 +296,8 @@ function Arrow_GetDirectionToPoint( point )
 end
 function Arrow_GetDistanceToPoint( point )
     local x, y = GetPlayerMapPosition("player")
-	x = x*1000
-	y = y*1000
+	x = x*10000
+	y = y*10000
     local dist, xDelta, yDelta = Arrow_ComputeDistance(x, y, point.x, point.y)
     return dist, xDelta, yDelta
 end
@@ -340,5 +308,7 @@ function Arrow_ComputeDistance(x1, y1, x2, y2)
     local dist = sqrt(xDelta*xDelta + yDelta*yDelta);
     return dist, xDelta, yDelta;
 end
-
-SetCrazyArrow(TestPoint, title)
+function ArrowPrint()
+	GuidePrint(active_point.x..", "..active_point.y)
+end
+--SetCrazyArrow(TestPoint, title)

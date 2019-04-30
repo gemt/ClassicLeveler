@@ -6,7 +6,7 @@
 			<Anchor point="CENTER" x="0" y="0" />
 		</Anchors>
 		<Backdrop edgeFile="Interface\AddOns\ClassicLeveler_Guide\Textures\Borders\fer6" tile="true">
-			<Color a="1" r="0.5" g="0.5" b="1" />
+			<Color r="0.5" g="0.5" b="1" />
 		</Backdrop>
 		<Frames>
 			<Button name="parentResizeButton">
@@ -28,7 +28,6 @@
 				<PushedTexture file="Interface\AddOns\ClassicLeveler_Guide\images\UI-ChatIM-SizeGrabber-Down" />
 				<HighlightTexture file="Interface\AddOns\ClassicLeveler_Guide\images\UI-ChatIM-SizeGrabber-Highlight" />
 			</Button>
-
 			<Button name="nextButton">
 				<Size x="32" y="22" />
 				<Scripts>
@@ -51,6 +50,18 @@
 				<PushedTexture file="Interface\AddOns\ClassicLeveler_Guide\Textures\Buttons\Button-DoubleArrowLeft-Pushed" />
 				<HighlightTexture file="Interface\AddOns\ClassicLeveler_Guide\Textures\Buttons\Button-DoubleArrowLeft-Highlight" />
 			</Button>
+			<EditBox name="coordBox" enableMouse="true" enableMouseClicks="true" enableMouseMotion="true" enableKeyboard="true" multiLine="true" autoFocus="false">
+				<Size x="300" y="32" />
+				<Scripts>
+					<OnEditFocusGained>
+						coordBox:HighlightText(0)
+					</OnEditFocusGained>
+					<OnEscapePressed>
+						coordBox:ClearFocus()
+					</OnEscapePressed>
+				</Scripts>
+				<FontString inherits="GameFontNormal" />
+			</EditBox>
 		</Frames>
 		<Scripts>
 			<OnLoad>

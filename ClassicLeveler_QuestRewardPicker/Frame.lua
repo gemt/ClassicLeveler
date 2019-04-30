@@ -107,7 +107,7 @@ function QRPFrame_OnLoad()
 end
 
 function QRPFrame_OnEvent(event, arg1)
-	QRP_Print("QuestPicker Event: "..event)
+	--QRP_Print("QuestPicker Event: "..event)
 	if event == "QUEST_COMPLETE" then -- when the quest complete dialogue is shown at an npc
 		QRPF_QuestComplete();
 	elseif event == "GOSSIP_SHOW" or event == "QUEST_GREETING" then -- after opening dialogue with an npc. Also after clicking cancel, and being sent back to initial gossip screen
@@ -127,7 +127,6 @@ function QRPFrame_OnEvent(event, arg1)
 		QRPF_PrevGossipNpc = nil
 		QRPF_AvailableQuestIndex = 1
 		QRPF_ActiveQuestIndex = 1
-		QRP_Print("nilled prevgossipnpc")
 	elseif event == "ADDON_LOADED" then
 
 	end

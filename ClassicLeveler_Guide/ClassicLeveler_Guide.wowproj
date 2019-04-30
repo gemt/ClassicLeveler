@@ -23,6 +23,9 @@
     <Content Include="Frame.xml">
       <SubType>Frame</SubType>
     </Content>
+    <Content Include="GuideSteps.lua">
+      <SubType>Code</SubType>
+    </Content>
     <Content Include="images\Arrow.blp" />
     <Content Include="images\Arrow.m2" />
     <Content Include="images\dummy.tga" />

@@ -4,5 +4,7 @@
 ## Interface: 80100
 ## Dependencies: ClassicLeveler
 ##SavedVariablesPerCharacter: CompletedGuideSteps
-Frame.xml
+
+GuideSteps.lua
 Arrow.lua
+Frame.xml

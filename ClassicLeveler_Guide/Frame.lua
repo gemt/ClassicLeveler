@@ -10,23 +10,6 @@ function GuidePrint( msg )
     ChatFrame4:AddMessage ( msg )
 end
 
---At = AcceptTrigger
---Ct = CompleteTrigger
-local GuideSteps = {
-	{Text="Turn inn Flight to Auberdine. Accept Return to Nessa", At="Return to Nessa"},
-	{Text="Accept washed ashore (by FP)", At="Washed Ashore"},
-	{Text="Accept buzzbox (second floor innkeeper)", At="Buzzbox 827"},
-	{Text="Accept Bashal'Aran (Thundris Windweaver, north mainhouse)", At="Bashal'Aran"},
-	{Text="Accept Plagued Lands (bear quest dude)", At="Plagued Lands"},
-
-
-	{Text="do Bashal'Aran quests"},
-	{Text="trap a grizzly bear (Plagued Lands)"},
-	{Text="grind to close to 13 on moonkins, have at least 9 eggs"},
-	{Text="swing my furbolog camp for How big a threat"},
-	{Text="can kill striders too for strider meat (cooking quest)"},
-}
-
 Guide_CompletedGuideSteps = {}
 
 function Guide_OnLoad()
@@ -58,6 +41,8 @@ end
 function Guide_SetupGuide()
 	nextButton:SetPoint("BOTTOMLEFT", Guide, "BOTTOMLEFT", 32, -22)
 	prevButton:SetPoint("BOTTOMLEFT", Guide, "BOTTOMLEFT", 0, -22)
+	
+	coordBox:SetPoint("BOTTOMLEFT", Guide, "BOTTOMLEFT", 68, -32)
 
 	Guide:SetBackdrop({bgFile = "Interface/Tooltips/UI-Tooltip-Background", 
 					edgeFile = "Interface\AddOns\ClassicLeveler_Guide\Textures\Borders\fer1", 
@@ -132,7 +117,7 @@ end
 function Guide_UpdateColors()
 	for i=1,Guide.MAX_STEPS do
 		local stepOffset = Guide.CurrentStepIndex-Guide.CURRENT_STEP_IDX+i
-		local s = GuideSteps[stepOffset]
+		local s = CL_GuideSteps[stepOffset]
 		local isComplete = Guide_HasCompletedStep(stepOffset)
 		if i == Guide.CURRENT_STEP_IDX then
 			Guide.StepFrames[i].Bg:SetBackdropColor(Guide.CURRENT_BACKDROP.r, Guide.CURRENT_BACKDROP.g, Guide.CURRENT_BACKDROP.b, Guide.CURRENT_BACKDROP.a);
@@ -149,11 +134,14 @@ function Guide_SetStep(step)
 	Guide.DelayedCheckHasQuest = 0 -- if step is changed, manual or otherwise, we stop any delayed hasQuest checking
 
 	Guide.CurrentStepIndex = step
-	Guide.CurrentStep = GuideSteps[Guide.CurrentStepIndex]
+	Guide.CurrentStep = CL_GuideSteps[Guide.CurrentStepIndex]
+	if Guide.CurrentStep.point ~= nil then
+		SetCrazyArrow(Guide.CurrentStep.point, Guide.CurrentStep.Text)
+	end
 
 	for i=1,Guide.MAX_STEPS do
 		local stepOffset = Guide.CurrentStepIndex-Guide.CURRENT_STEP_IDX+i
-		local s = GuideSteps[stepOffset]
+		local s = CL_GuideSteps[stepOffset]
 		local isComplete = Guide_HasCompletedStep(stepOffset)
 		if s ~= nil then
 			Guide.StepFrames[i].Text:SetText(s.Text)
@@ -176,8 +164,6 @@ function Guide_OnEvent()
 	else
 		GuidePrint(event)
 	end
-
-
 	if event == "UNIT_QUEST_LOG_CHANGED" then
 		Guide_UnitQuestLogChanged()
 	elseif event == "QUEST_COMPLETE" then
@@ -200,9 +186,9 @@ function Guide_UnitQuestLogChanged()
 	-- Questlog updates quite delayed, and checking CL_HasQuest in this 
 	-- function is too early, so if currentStep has At or Ct, queue 
 	-- up a delayed check for OnUpdate.
-	GuidePrint(1)
-	if Guide.CurrentStep.At ~= nil or Guide.CurrentStep.Ct ~= nil then
-		GuidePrint(2)
+	GuidePrint("checking queueing delayed quest check")
+	if Guide.CurrentStep.At ~= nil or Guide.CurrentStep.Ct ~= nil or Guide.CurrentStep.Dt ~= nil then
+		GuidePrint("queueing delayed quest check")
 		Guide.DelayedCheckHasQuest = 1
 		Guide.DelayedCheckHasQuestStop = GetTime() + 2.0 -- stop checking after 2 sec
 	end
@@ -210,6 +196,7 @@ function Guide_UnitQuestLogChanged()
 end
 
 function Guide_OnUpdate()
+	UpdateCoordBox()
 	Guide_UpdateDragging()
 	Guide_DelayedCheckHasQuest()
 end
@@ -218,7 +205,9 @@ function Guide_DelayedCheckHasQuest()
 	if Guide.DelayedCheckHasQuest == 1 then
 		if Guide.CurrentStep.At ~= nil and CL_HasQuest(Guide.CurrentStep.At) == 1 then
             Guide_CompleteStep(Guide.CurrentStepIndex)
-		elseif Guide.CurrentStep.Ct ~= nil and CL_HasQuest(Guide.CurrentStep.Ct) == 0 then
+		elseif Guide.CurrentStep.Ct ~= nil and CL_IsQuestComplete(Guide.CurrentStep.Ct) == 1 then
+			Guide_CompleteStep(Guide.CurrentStepIndex)
+		elseif Guide.CurrentStep.Dt ~= nil and CL_HasQuest(Guide.CurrentStep.At) == 0 then
 			Guide_CompleteStep(Guide.CurrentStepIndex)
 		end
 
@@ -254,8 +243,23 @@ function Guide_PrintStepInfo()
 		GuidePrint("AcceptQuestTrigger: "..step.At)
 	end
 	if step.Ct ~= nil then
-		GuidePrint("AcceptQuestTrigger: "..step.Ct)
+		GuidePrint("CompletedTrigger: "..step.Ct)
+	end
+	if step.Dt ~= nil then
+		GuidePrint("DeliveredTrigger: "..step.Dt)
 	end
 	
 
+end
+
+local oldX, oldY = 0,0
+function UpdateCoordBox()
+	local x, y = GetPlayerMapPosition("player")
+	x = x*10000
+	y = y*10000
+	if x ~= oldX and y ~= oldY then
+		oldX = x;
+		oldY = y
+		coordBox:SetText(", point={x="..string.format("%.0f", x)..",y="..string.format("%.0f", y).."}")
+	end
 end
