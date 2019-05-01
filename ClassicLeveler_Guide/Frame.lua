@@ -34,8 +34,9 @@ function Guide_RegisterEvents()
 	Guide:RegisterEvent("CHAT_MSG_LOOT")
 	Guide:RegisterEvent("QUEST_ACCEPTED")
 	Guide:RegisterEvent("GOSSIP_SHOW")
-
+	--Guide:RegisterAllEvents()
 	Guide:RegisterEvent("TAXIMAP_OPENED")
+	Guide:RegisterEvent("MERCHANT_SHOW")
 	
 	Guide:RegisterEvent("ZONE_CHANGED_NEW_AREA")
 	
@@ -205,15 +206,28 @@ function Guide_OnEvent()
 			GuideOnItemLooted(string.sub(arg1, 19, string.len(arg1)-1))
 		end
 	elseif event == "ZONE_CHANGED_NEW_AREA" then
-		GuidePrint(GetRealZoneText())
+		if Guide.CurrentStep.Zone ~= nil and Guide.CurrentStep.Zone == GetRealZoneText() then
+			Guide_CompleteStep(Guide.CurrentStepIndex)
+		end
 	elseif event == "GOSSIP_SHOW" then
 		if Guide.CurrentStep.Taxi ~= nil then
-			GuidePrint("has taxi dest")
-			local gossipOptions = {GetGossipOptions()} -- TODO: Make sure GetGossipOptions() returns same num of args on retail (2 in 1.12)
-			for i=1,table.getn(gossipOptions) do
-				GuidePrint(gossipOptions[(i*2)]..", "..gossipOptions[(i*2)-1]) -- TODO: "attempt to concatinate field ? (a nill value) 
-				if gossipOptions[(i*2)] == "taxi" then
-					SelectGossipOption(i)
+			SelectGossipOption(GetGossipIndex("taxi"))
+		elseif Guide.CurrentStep.SetHs ~= nil and UnitName("target") == Guide.CurrentStep.SetHs then
+			ConfirmBinder() -- TODO: in 1.12, we can call this without selecting gossip option. Test on retail
+		elseif Guide.CurrentStep.BuyItem ~= nil and UnitName("target") == Guide.CurrrentStep.BuyItem.Npc then
+			SelectGossipOption(GetGossipIndex("vendor"))
+		end
+	elseif event == "MERCHANT_SHOW" then
+		GuidePrint(Guide.CurrentStep.BuyItem.Item..", "..Guide.CurrentStep.BuyItem.Npc..", "..UnitName("target"))
+		if Guide.CurrentStep.BuyItem ~= nil 
+			and UnitName("target") == Guide.CurrentStep.BuyItem.Npc 
+			and GetItemInventoryCount(Guide.CurrentStep.BuyItem.Item) < Guide.CurrentStep.BuyItem.Count then
+			for i=1, GetMerchantNumItems() do
+				local itmName = GetMerchantItemInfo(i)
+				if itmName == Guide.CurrentStep.BuyItem.Item then
+					BuyMerchantItem(i, Guide.CurrentStep.BuyItem.Count)
+					Guide_CompleteStep(Guide.CurrentStepIndex)
+					break
 				end
 			end
 		end
@@ -234,6 +248,17 @@ function Guide_OnEvent()
 		Guide.IsDragging = 1
 		Guide_OnUpdate()
 		Guide.IsDragging = 0
+	end
+end
+
+function GetGossipIndex(type) -- binder, taxi, etc
+	local gossipOptions = {GetGossipOptions()} -- TODO: Make sure GetGossipOptions() returns same num of args on retail (2 in 1.12)
+	for i=1,table.getn(gossipOptions) do
+		GuidePrint(gossipOptions[(i*2)]..", "..gossipOptions[(i*2)-1]) -- TODO: "attempt to concatinate field ? (a nill value) 
+		if gossipOptions[(i*2)] == type then
+			return i
+			
+		end
 	end
 end
 
