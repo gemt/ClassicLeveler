@@ -4,31 +4,55 @@
 Guide_GuideSteps = {
 	{ 
 		Title="Section Title",
-		PinBoard = {{PinBoardItem},PinBoardItem}
+		PinBoard = {"pinboardItem1", "pinboardItem"}
 		Steps = {
-			{Text="Step text", [TriggerItem], [Point], [PinAdd=PinBoardItem], [PinRemove=PinBoardItem]}
+			{Text="Do Quest1, {Quest2} and Quest3", [TriggerItem], [Point], [PinAdd="pinboardItem1"], [PinRemove="pinboardItem1"]}
 		}
 	}
 }
 TriggerItem (a step can only have ONE trigger):
-	At="questname"			(Quest Accepted: system message)
-	Ct="questname"			(quest is completed in questlog)
-	Dt="questname"			(quest is delivered, no longer in questlog)
-	Lvl={lvl=1 [,xp=500]}	(goto next step when level is reached. Optionally add xp requirement as well )
-
+	At="questname"						(Quest Accepted: system message)
+	Ct="questname"						(quest is completed in questlog)
+	Dt="questname"						(quest is delivered, no longer in questlog)
+	Ht="questname"						(quest is in the questlog)
+	Lvl={lvl=1 [,xp=500]}				(goto next step when level is reached. Optionally add xp requirement as well )
+	Item={Name="itemname", Count=1}		(goto next step when inventory contains >= Count of Name
+	Proximity=5							(goto next step when distance to [Point] is <= Proximity)
+	Zone="zonename"						(goto next step when zone changed to Zone)
+	Taxi="taxidest"						(start flying to taxidest, and goto next step)
 Point:
-	{x=1,y=1}
+	Point={x=1,y=1}
 
-PinBoardItem (PinAdd and PinRemove searches pinboard for Text matches):
-	{Text="Pinboard Text"}
+Step Text:
+	You can wrap {} around quest names. When currentStep contains one or more quests wrapped in {}, the quest tracker will be updated
+	to track those quests
 ]]
+
+Guide_GuideSteps = {
+	{
+		Title="Darkshore 1-19",
+		PinBoard = {"9 Small eggs for lvling cooking", "5 Strider Meats for cooking quest"},
+		{
+			{Text="Accept washed ashore (by FP)", At="Washed Ashore", Point={x=3662,y=4559}},
+			{Text="Turn inn Flight to Auberdine. Accept Return to Nessa", At="Return to Nessa", Point={x=3677,y=4428}},
+			{Text="Accept buzzbox (second floor innkeeper)", At="Buzzbox 827", Point={x=3697,y=4413}},
+		}
+	},
+	{
+		Title="Ashenvale/Stonetalon 20-22",
+		{
+
+		}
+	}
+}
 
 CL_GuideSteps = {
 	{Text="Accept washed ashore (by FP)", At="Washed Ashore", point={x=3662,y=4559}},
 	{Text="Turn inn Flight to Auberdine. Accept Return to Nessa", At="Return to Nessa", point={x=3677,y=4428}},
+	{Text="==== RESTOCK ON Longjaw Mud Snapper ====", Item={Name="Longjaw Mud Snapper", Count=20}, point={x=3674,y=4429}},
 	{Text="Accept buzzbox (second floor innkeeper)", At="Buzzbox 827", point={x=3697,y=4413}},
-
 	{Text="Accept Bashal'Aran (Thundris Windweaver, north mainhouse)", At="Bashal'Aran", point={x=3740,y=4013}},
+	{Text="=== RESTOCK Sharp Arrow ===", Item={Name="Sharp Arrow", Count=1000}, point={x=3744,y=4051}},
 	{Text="Accept Plagued Lands (bear quest dude)", At="Plagued Lands", point={x=3884,y=4341}},
 	{Text="Accept How Big a Threat?", At="How Big a Threat?", point={x=3938,y=4348}},
 	
