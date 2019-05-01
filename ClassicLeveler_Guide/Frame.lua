@@ -194,7 +194,9 @@ function Guide_OnEvent()
 		end
 	elseif event == "CHAT_MSG_LOOT" then
 		local arg1Lower = string.lower(arg1)
-		if string.find(arg1Lower, "you receive loot: ") ~= nil then
+		if string.find(arg1Lower, "you receive loot: ") ~= nil then -- looting a mob
+			GuideOnItemLooted(string.sub(arg1, 19, string.len(arg1)-1))
+		elseif string.find(arg1Lower, "you receive item: ") ~= nil then -- buying from vendor
 			GuideOnItemLooted(string.sub(arg1, 19, string.len(arg1)-1))
 		end
 	end
@@ -210,23 +212,23 @@ end
 
 function GuideOnItemLooted(itemlink)
 	if Guide.CurrentStep.Item ~= nil then
-		if string.find(itemlink, Guide.CurrentStep.Item.ItemName) ~= nil then
-			if GetItemInventoryCount(itemlink) >= Guide.CurrentStep.Item.Count then
+		if string.find(itemlink, Guide.CurrentStep.Item.Name) ~= nil then
+		GuidePrint("the looted item was stepitem, have "..GetItemInventoryCount(Guide.CurrentStep.Item.Name).."/"..Guide.CurrentStep.Item.Count)
+			if GetItemInventoryCount(Guide.CurrentStep.Item.Name) >= Guide.CurrentStep.Item.Count then
 				Guide_CompleteStep(Guide.CurrentStepIndex)
 			end
 		end
 	end
 end
 
-function GetItemInventoryCount(itemlink)
+function GetItemInventoryCount(itemName) -- itemName, not link
 	local count = 0
 	for bag = 0,4 do
 		for slot = 1,GetContainerNumSlots(bag) do
 			local item = GetContainerItemLink(bag,slot)
-			if item ~= nil and item == itemlink then
+			if item ~= nil and string.find(item,itemName) then
 				local _,slotCount = GetContainerItemInfo(bag, slot);
 				count = slotCount + count
-				return count
 			end
 		end
 	end
