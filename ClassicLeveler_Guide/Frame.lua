@@ -195,7 +195,6 @@ function Guide_OnEvent()
 	elseif event == "CHAT_MSG_LOOT" then
 		local arg1Lower = string.lower(arg1)
 		if string.find(arg1Lower, "you receive loot: ") ~= nil then
-			GuidePrint("i do receive loot")
 			GuideOnItemLooted(string.sub(arg1, 19, string.len(arg1)-1))
 		end
 	end
@@ -210,12 +209,9 @@ function Guide_OnEvent()
 end
 
 function GuideOnItemLooted(itemlink)
-	GuidePrint(itemlink)
 	if Guide.CurrentStep.Item ~= nil then
 		if string.find(itemlink, Guide.CurrentStep.Item.ItemName) ~= nil then
-			GuidePrint("the looted item was stepitem, have "..GetItemInventoryCount(itemlink).."/"..Guide.CurrentStep.Item.Count)
 			if GetItemInventoryCount(itemlink) >= Guide.CurrentStep.Item.Count then
-				GuidePrint("had enough of item")
 				Guide_CompleteStep(Guide.CurrentStepIndex)
 			end
 		end
