@@ -34,6 +34,11 @@ function Guide_RegisterEvents()
 	Guide:RegisterEvent("CHAT_MSG_LOOT")
 	Guide:RegisterEvent("QUEST_ACCEPTED")
 	Guide:RegisterEvent("GOSSIP_SHOW")
+
+	Guide:RegisterEvent("TAXIMAP_OPENED")
+	
+	Guide:RegisterEvent("ZONE_CHANGED_NEW_AREA")
+	
 	Guide:RegisterForDrag("LeftButton");
 end
 
@@ -199,6 +204,28 @@ function Guide_OnEvent()
 		elseif string.find(arg1Lower, "you receive item: ") ~= nil then -- buying from vendor
 			GuideOnItemLooted(string.sub(arg1, 19, string.len(arg1)-1))
 		end
+	elseif event == "ZONE_CHANGED_NEW_AREA" then
+		GuidePrint(GetRealZoneText())
+	elseif event == "GOSSIP_SHOW" then
+		if Guide.CurrentStep.Taxi ~= nil then
+			GuidePrint("has taxi dest")
+			local gossipOptions = {GetGossipOptions()} -- TODO: Make sure GetGossipOptions() returns same num of args on retail (2 in 1.12)
+			for i=1,table.getn(gossipOptions) do
+				GuidePrint(gossipOptions[(i*2)]..", "..gossipOptions[(i*2)-1]) -- TODO: "attempt to concatinate field ? (a nill value) 
+				if gossipOptions[(i*2)] == "taxi" then
+					SelectGossipOption(i)
+				end
+			end
+		end
+	elseif event == "TAXIMAP_OPENED" then
+		if Guide.CurrentStep.Taxi ~= nil then
+			for i=1, NumTaxiNodes() do
+				if TaxiNodeName(i) == Guide.CurrentStep.Taxi then
+					TakeTaxiNode(i)
+					Guide_CompleteStep(Guide.CurrentStepIndex)
+				end
+			end
+		end
 	end
 
 
@@ -246,7 +273,10 @@ function Guide_UnitQuestLogChanged()
 	-- function is too early, so if currentStep has At or Ct, queue 
 	-- up a delayed check for OnUpdate.
 	GuidePrint("checking queueing delayed quest check")
-	if Guide.CurrentStep.At ~= nil or Guide.CurrentStep.Ct ~= nil or Guide.CurrentStep.Dt ~= nil then
+	if Guide.CurrentStep.At ~= nil 
+	or Guide.CurrentStep.Ct ~= nil 
+	or Guide.CurrentStep.Dt ~= nil 
+	or Guide.CurrentStep.Ht ~= nil then
 		GuidePrint("queueing delayed quest check")
 		Guide.DelayedCheckHasQuest = 1
 		Guide.DelayedCheckHasQuestStop = GetTime() + 2.0 -- stop checking after 2 sec
@@ -266,8 +296,9 @@ function Guide_DelayedCheckHasQuest()
 			Guide_CompleteStep(Guide.CurrentStepIndex)
 		elseif Guide.CurrentStep.Dt ~= nil and CL_HasQuest(Guide.CurrentStep.At) == 0 then
 			Guide_CompleteStep(Guide.CurrentStepIndex)
+		elseif Guide.CurrentStep.Ht ~= nil and CL_HasQuest(Guide.CurrentStep.At) == 1 then
+			Guide_CompleteStep(Guide.CurrentStepIndex)
 		end
-
 		-- If we have passed DelayedCheckHasQuestStop, stop looking
 		if Guide.DelayedCheckHasQuestStop < GetTime() then
 			Guide.DelayedCheckHasQuest = 0
