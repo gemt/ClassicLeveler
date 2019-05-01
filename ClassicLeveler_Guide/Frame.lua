@@ -28,11 +28,10 @@ end
 
 function Guide_RegisterEvents()
 	Guide:RegisterEvent("PLAYER_ENTERING_WORLD")
-
+	Guide:RegisterEvent("CHAT_MSG_SYSTEM")
 	Guide:RegisterEvent("QUEST_COMPLETE")
-	 
-	Guide:RegisterEvent("UNIT_QUEST_LOG_CHANGED") -- seems to be only on accept/abandon quest, or at least not on ALL status updates
-
+	Guide:RegisterEvent("UNIT_QUEST_LOG_CHANGED") 
+	Guide:RegisterEvent("CHAT_MSG_LOOT")
 	Guide:RegisterEvent("QUEST_ACCEPTED")
 	Guide:RegisterEvent("GOSSIP_SHOW")
 	Guide:RegisterForDrag("LeftButton");
@@ -84,7 +83,6 @@ function Guide_SetupGuide()
 		Guide.StepFrames[i].Text:SetPoint("BOTTOMRIGHT", Guide.StepFrames[i].Bg, "BOTTOMRIGHT", -10, -5)
 		Guide.StepFrames[i].Text:SetJustifyV("TOP");
 		Guide.StepFrames[i].Text:SetJustifyH("LEFT");
-		--Guide.StepFrames[i].Bg:SetBackdropColor(0.9,0.9,0.9,1);
 	end
 	Guide.StepFrames[Guide.CURRENT_STEP_IDX].Bg:SetBackdropColor(0.3, 0.3, 0.3, 1);
 	Guide_UpdateColors()
@@ -114,6 +112,22 @@ function Guide_HasCompletedStep(step)
     end
 end
 
+-- need something like, if you move guide forward due to a completion, start the iteration over again
+function Guide_ScanCompleteTriggers()
+	for i=1,Guide.MAX_STEPS do
+		local stepOffset = Guide.CurrentStepIndex-Guide.CURRENT_STEP_IDX+i
+		local step = CL_GuideSteps[stepOffset]
+		-- if a step is complete
+		if step.At ~= nil and CL_HasQuest(step.At) == 1 then
+			Guide_CompleteStep(stepOffset)
+		elseif step.Ct ~= nil and CL_IsQuestComplete(step.Ct) == 1 then
+			Guide_CompleteStep(stepOffset)
+		elseif step.Dt ~= nil and CL_HasQuest(step.At) == 0 then
+			Guide_CompleteStep(stepOffset)
+		end
+	end
+end
+
 function Guide_UpdateColors()
 	for i=1,Guide.MAX_STEPS do
 		local stepOffset = Guide.CurrentStepIndex-Guide.CURRENT_STEP_IDX+i
@@ -137,12 +151,13 @@ function Guide_SetStep(step)
 	Guide.CurrentStep = CL_GuideSteps[Guide.CurrentStepIndex]
 	if Guide.CurrentStep.point ~= nil then
 		SetCrazyArrow(Guide.CurrentStep.point, Guide.CurrentStep.Text)
+	else
+		SetCrazyArrow(Guide.CurrentStep.point, Guide.CurrentStep.Text)
 	end
 
 	for i=1,Guide.MAX_STEPS do
 		local stepOffset = Guide.CurrentStepIndex-Guide.CURRENT_STEP_IDX+i
 		local s = CL_GuideSteps[stepOffset]
-		local isComplete = Guide_HasCompletedStep(stepOffset)
 		if s ~= nil then
 			Guide.StepFrames[i].Text:SetText(s.Text)
 			if Guide_HasCompletedStep(stepOffset) == 1 then
@@ -164,13 +179,25 @@ function Guide_OnEvent()
 	else
 		GuidePrint(event)
 	end
+
 	if event == "UNIT_QUEST_LOG_CHANGED" then
 		Guide_UnitQuestLogChanged()
 	elseif event == "QUEST_COMPLETE" then
-
 	elseif event == "QUEST_ACCEPTED" then
+		-- dosent exist in vanilla i think
 		local questTitle = GetQuestLogTitle(arg1)
 		GuidePrint(questTitle)
+	elseif event == "CHAT_MSG_SYSTEM" then
+		local arg1Lower = string.lower(arg1)
+		if string.find(arg1Lower, "quest accepted:") ~= nil then
+			GuideOnQuestAccepted(questname)
+		end
+	elseif event == "CHAT_MSG_LOOT" then
+		local arg1Lower = string.lower(arg1)
+		if string.find(arg1Lower, "you receive loot: ") ~= nil then
+			GuidePrint("i do receive loot")
+			GuideOnItemLooted(string.sub(arg1, 19, string.len(arg1)-1))
+		end
 	end
 
 
@@ -179,6 +206,40 @@ function Guide_OnEvent()
 		Guide.IsDragging = 1
 		Guide_OnUpdate()
 		Guide.IsDragging = 0
+	end
+end
+
+function GuideOnItemLooted(itemlink)
+	GuidePrint(itemlink)
+	if Guide.CurrentStep.Item ~= nil then
+		if string.find(itemlink, Guide.CurrentStep.Item.ItemName) ~= nil then
+			GuidePrint("the looted item was stepitem, have "..GetItemInventoryCount(itemlink).."/"..Guide.CurrentStep.Item.Count)
+			if GetItemInventoryCount(itemlink) >= Guide.CurrentStep.Item.Count then
+				GuidePrint("had enough of item")
+				Guide_CompleteStep(Guide.CurrentStepIndex)
+			end
+		end
+	end
+end
+
+function GetItemInventoryCount(itemlink)
+	local count = 0
+	for bag = 0,4 do
+		for slot = 1,GetContainerNumSlots(bag) do
+			local item = GetContainerItemLink(bag,slot)
+			if item ~= nil and item == itemlink then
+				local _,slotCount = GetContainerItemInfo(bag, slot);
+				count = slotCount + count
+				return count
+			end
+		end
+	end
+	return count
+end
+
+function GuideOnQuestAccepted(questname)
+	if Guide.CurrentStep.At ~= nil and Guide.CurrentStep.At == questname then
+		Guide_CompleteStep(Guide.CurrentStepIndex)
 	end
 end
 
@@ -203,9 +264,7 @@ end
 
 function Guide_DelayedCheckHasQuest()
 	if Guide.DelayedCheckHasQuest == 1 then
-		if Guide.CurrentStep.At ~= nil and CL_HasQuest(Guide.CurrentStep.At) == 1 then
-            Guide_CompleteStep(Guide.CurrentStepIndex)
-		elseif Guide.CurrentStep.Ct ~= nil and CL_IsQuestComplete(Guide.CurrentStep.Ct) == 1 then
+		if Guide.CurrentStep.Ct ~= nil and CL_IsQuestComplete(Guide.CurrentStep.Ct) == 1 then
 			Guide_CompleteStep(Guide.CurrentStepIndex)
 		elseif Guide.CurrentStep.Dt ~= nil and CL_HasQuest(Guide.CurrentStep.At) == 0 then
 			Guide_CompleteStep(Guide.CurrentStepIndex)
