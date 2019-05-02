@@ -50,9 +50,9 @@ function Guide_SetupGuide()
 	coordBox:SetPoint("BOTTOMLEFT", Guide, "BOTTOMLEFT", 68, -32)
 
 	Guide:SetBackdrop({bgFile = "Interface/Tooltips/UI-Tooltip-Background", 
-					edgeFile = "Interface\AddOns\ClassicLeveler_Guide\Textures\Borders\fer1", 
-					tile = false, tileSize = 1, edgeSize = 2, 
-					insets = { left = 0, right = 0, top = 0, bottom = 1 }});
+		edgeFile = "Interface\AddOns\ClassicLeveler_Guide\Textures\Borders\fer1", 
+		tile = false, tileSize = 1, edgeSize = 2, 
+		insets = { left = 0, right = 0, top = 0, bottom = 1 }});
 	Guide:SetBackdropColor(0,0,0);
 	Guide:SetScale(1.2)
 	Guide.CURRENT_STEP_IDX = 3
@@ -79,9 +79,9 @@ function Guide_SetupGuide()
 		Guide.StepFrames[i].Bg:SetPoint("BOTTOM", Guide, "TOP", 0, -bottomOffset)
 
 		Guide.StepFrames[i].Bg:SetBackdrop({bgFile = "Interface/Tooltips/UI-Tooltip-Background", 
-												edgeFile = "Interface\AddOns\ClassicLeveler_Guide\Textures\Borders\fer1", 
-												tile = false, tileSize = 1, edgeSize = 2, 
-												insets = { left = 0, right = 0, top = 1, bottom = 1 }});
+			edgeFile = "Interface\AddOns\ClassicLeveler_Guide\Textures\Borders\fer1", 
+			tile = false, tileSize = 1, edgeSize = 2, 
+			insets = { left = 0, right = 0, top = 1, bottom = 1 }});
 		
 
 		Guide.StepFrames[i].Text:SetFont("Fonts\\ARIALN.ttf", 13, "OUTLINE")
@@ -193,7 +193,7 @@ function Guide_OnEvent()
 		-- dosent exist in vanilla i think
 		local questTitle = GetQuestLogTitle(arg1)
 		GuidePrint(questTitle)
-	elseif event == "CHAT_MSG_SYSTEM" then
+	elseif event == "CHAT_MSG_SYSTEM" then	
 		local arg1Lower = string.lower(arg1)
 		if string.find(arg1Lower, "quest accepted:") ~= nil then
 			GuideOnQuestAccepted(questname)
@@ -214,20 +214,25 @@ function Guide_OnEvent()
 			SelectGossipOption(GetGossipIndex("taxi"))
 		elseif Guide.CurrentStep.SetHs ~= nil and UnitName("target") == Guide.CurrentStep.SetHs then
 			ConfirmBinder() -- TODO: in 1.12, we can call this without selecting gossip option. Test on retail
-		elseif Guide.CurrentStep.BuyItem ~= nil and UnitName("target") == Guide.CurrrentStep.BuyItem.Npc then
+		elseif Guide.CurrentStep.BuyItem ~= nil and UnitName("target") == Guide.CurrentStep.BuyItem.Npc then
 			SelectGossipOption(GetGossipIndex("vendor"))
 		end
 	elseif event == "MERCHANT_SHOW" then
-		GuidePrint(Guide.CurrentStep.BuyItem.Item..", "..Guide.CurrentStep.BuyItem.Npc..", "..UnitName("target"))
-		if Guide.CurrentStep.BuyItem ~= nil 
-			and UnitName("target") == Guide.CurrentStep.BuyItem.Npc 
-			and GetItemInventoryCount(Guide.CurrentStep.BuyItem.Item) < Guide.CurrentStep.BuyItem.Count then
-			for i=1, GetMerchantNumItems() do
-				local itmName = GetMerchantItemInfo(i)
-				if itmName == Guide.CurrentStep.BuyItem.Item then
-					BuyMerchantItem(i, Guide.CurrentStep.BuyItem.Count)
-					Guide_CompleteStep(Guide.CurrentStepIndex)
-					break
+		--GuidePrint(Guide.CurrentStep.BuyItem.Item..", "..Guide.CurrentStep.BuyItem.Npc..", "..UnitName("target"))
+		if Guide.CurrentStep.BuyItem ~= nil and UnitName("target") == Guide.CurrentStep.BuyItem.Npc then
+			local invCount = GetItemInventoryCount(Guide.CurrentStep.BuyItem.Item)
+			if invCount < Guide.CurrentStep.BuyItem.Count then
+				local itemCountToBuy = Guide.CurrentStep.BuyItem.Count - invCount
+				for i=1, GetMerchantNumItems() do
+					local itmName,_,_,quantity = GetMerchantItemInfo(i)
+					if itmName == Guide.CurrentStep.BuyItem.Item then
+						-- stackable items like arrows cant be bought one by one (as in, you cant get less than 200)
+						-- but we let the itemCountToBuy/quantity round down to never buy MORE items than specified
+						itemCountToBuy = itemCountToBuy/quantity
+						BuyMerchantItem(i, itemCountToBuy)
+						Guide_CompleteStep(Guide.CurrentStepIndex)
+						break
+					end
 				end
 			end
 		end
@@ -240,15 +245,57 @@ function Guide_OnEvent()
 				end
 			end
 		end
+	elseif event == "QUEST_COMPLETE" then -- when the quest complete dialogue is shown at an npc, and you can click complete quest
+		Guide_OnQuestComplete()
 	end
-
-
 	-- "hacking" the UI in place. Without this, scaling wont look right until you have rescaled the frame...
 	if event == "PLAYER_ENTERING_WORLD" then
 		Guide.IsDragging = 1
 		Guide_OnUpdate()
 		Guide.IsDragging = 0
 	end
+end
+
+local function Guide_OnQuestComplete()
+	if IsShiftKeyDown() then return end
+
+	--GetNumQuestChoices() Gets the number of rewards for a quest that you are currently turning in successfully.
+	-- numEntries, numQuests = GetNumQuestLogEntries() num quests in log. 
+	-- GetNumQuestLogChoices() the same as above?
+	--GetQuestLogTitle(index) -- name of a quest in the questlog
+	-- GetTitleText() -- trieves the title of the quest while talking to the NPC about it.
+	-- IsQuestCompletable() -- returns 1 if current npc questdialogue thing can be completed
+	local numChoices = GetNumQuestChoices();
+	local title = GetTitleText()
+	QRP_Print("Autocompleting: "..title..", Choices: "..numChoices);
+	
+	if numChoices == 0 then
+		GetQuestReward()
+		return
+	elseif numChoices == 1 then
+		GetQuestReward(1)
+		return
+	end
+	local questIndex = title.."|"..GetQuestItemInfo("choice", 1)
+	QRP_Print(questIndex)
+	local quest = CLQuestRewardChoices[questIndex]
+	if quest == nil then
+		QRP_Print("Unknown quest. No autoaccepting reward")
+		return
+	end
+	
+	for i=1, numChoices do
+		local itemName = GetQuestItemInfo("choice", i);
+		if quest.Item == itemName then
+			QRP_Print("Choosing Item:"..itemName)
+			GetQuestReward(i);
+			if quest.Use == 1 then
+				QRPF_EquipItem() -- how?
+			end
+			return
+		end
+	end
+	QRP_Print("Multiple choices, none configured for autocompletion")
 end
 
 function GetGossipIndex(type) -- binder, taxi, etc
@@ -265,7 +312,7 @@ end
 function GuideOnItemLooted(itemlink)
 	if Guide.CurrentStep.Item ~= nil then
 		if string.find(itemlink, Guide.CurrentStep.Item.Name) ~= nil then
-		GuidePrint("the looted item was stepitem, have "..GetItemInventoryCount(Guide.CurrentStep.Item.Name).."/"..Guide.CurrentStep.Item.Count)
+			GuidePrint("the looted item was stepitem, have "..GetItemInventoryCount(Guide.CurrentStep.Item.Name).."/"..Guide.CurrentStep.Item.Count)
 			if GetItemInventoryCount(Guide.CurrentStep.Item.Name) >= Guide.CurrentStep.Item.Count then
 				Guide_CompleteStep(Guide.CurrentStepIndex)
 			end
@@ -299,13 +346,13 @@ function Guide_UnitQuestLogChanged()
 	-- up a delayed check for OnUpdate.
 	GuidePrint("checking queueing delayed quest check")
 	if Guide.CurrentStep.At ~= nil 
-	or Guide.CurrentStep.Ct ~= nil 
-	or Guide.CurrentStep.Dt ~= nil 
-	or Guide.CurrentStep.Ht ~= nil then
-		GuidePrint("queueing delayed quest check")
-		Guide.DelayedCheckHasQuest = 1
-		Guide.DelayedCheckHasQuestStop = GetTime() + 2.0 -- stop checking after 2 sec
-	end
+		or Guide.CurrentStep.Ct ~= nil 
+			or Guide.CurrentStep.Dt ~= nil 
+				or Guide.CurrentStep.Ht ~= nil then
+					GuidePrint("queueing delayed quest check")
+					Guide.DelayedCheckHasQuest = 1
+					Guide.DelayedCheckHasQuestStop = GetTime() + 2.0 -- stop checking after 2 sec
+				end
 	
 end
 
