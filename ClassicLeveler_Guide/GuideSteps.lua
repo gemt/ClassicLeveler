@@ -11,17 +11,21 @@ Guide_GuideSteps = {
 	}
 }
 TriggerItem (a step can only have ONE trigger):
-	At="questname"										(Quest Accepted: system message)
-	Ct="questname"										(quest is completed in questlog)
-	Dt="questname"										(quest is delivered, no longer in questlog)
-	Ht="questname"										(quest is in the questlog)
-	Lvl={lvl=1 [,xp=500]}								(goto next step when level is reached. Optionally add xp requirement as well )
-	Item={Name="itemname", Count=1}						(goto next step when inventory contains >= Count of Name)
-	Proximity=5											(goto next step when distance to [Point] is <= Proximity)
-	Zone="zonename"										(goto next step when zone changed to Zone)
-	Taxi="taxidest"										(start flying to taxidest and goto next step)
-	SetHs="innkeeper-name"								(set hs on innkeeper-name and goto next step)
-	BuyItem={Npc="npcName", Item="itemname", Count=1}	(buys the item from a vendor until inventory contains Count and goto next step)
+	At="questname"										quest Accepted: system message
+	Ct="questname"										quest is completed in questlog
+	Ht="questname"										quest is in the questlog
+	Dt={q="questname", [item="itemname"], [use=1]}		quest is delivered. If quest has multiple rewards to choose from, 
+													    you can optionally specify which reward to choose.
+														If use=1, the item will also be equipped after receiving it
+	Lvl={lvl=1 [,xp=500]}								goto next step when level is reached. Optionally add xp requirement as well 
+	Item={Name="itemname", Count=1}						goto next step when inventory contains >= Count of Name
+	Proximity=5											goto next step when distance to [Point] is <= Proximity
+	Zone="zonename"										goto next step when zone changed to Zone
+	Taxi="taxidest"										start flying to taxidest and goto next step
+	SetHs="innkeeper-name"								set hs on innkeeper-name and goto next step
+	BuyItem={Npc="npcName", Item="itemname", Count=1}	buys the item from a vendor until inventory contains Count and goto next step
+	
+
 Point:
 	Point={x=1,y=1}
 
