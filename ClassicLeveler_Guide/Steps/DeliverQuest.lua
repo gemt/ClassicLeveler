@@ -3,11 +3,14 @@
 -- Typically we call it after completing a quest where we have specified we wish
 -- to use the item after getting it. Not sure if it works to equip during handling of the event
 -- so maybe we need a popupframe u can click afterwards?
-function EquipItem(itemName)
+-- Another solution, if there is an event on item appearing in inventory (loot event?), is to not
+-- jump to next step on GetQuestReward(), IF we are receiving an item from the quest. Instead also
+-- handle loot event, equip item then and THEN jump to next step
+local function EquipItem(itemName)
 
 end
 
-local function Guide_ChooseQuestReward(rewardIdx)
+local function ChooseQuestReward(rewardIdx)
 	if rewardIdx == nil then
 		GetQuestReward()
 	else
@@ -24,11 +27,11 @@ end
 
 -- returns the index of a quest reward in the currently open quest complete dialogue
 -- if none is open, or the itemName is not found, returns nil
-local function GetQuestRewardIndex(itemName)
+local function GetQuestRewardIndex(guideSpecifiedItem)
 	local numChoices = GetNumQuestChoices();
 	for i=1, numChoices do
 		local itemName = GetQuestItemInfo("choice", i);
-		if quest.Item == itemName then
+		if guideSpecifiedItem == itemName then
 			return i
 		end
 	end
@@ -36,41 +39,46 @@ local function GetQuestRewardIndex(itemName)
 end
 
 
--- This function is called when you get to the Complete Quest button page, not when the quest ACTUALLY is delivered
--- though, if we call GetQuestReward() in here, we can assume the quest completes (unless inventory is full), which can 
--- be used to complete the current step
+-- This function is called when you get to the Complete Quest button page, not when the quest ACTUALLY is delivered.
+-- If we call GetQuestReward() in here, we can assume the quest completes (unless inventory is full).
+-- We can jump to next guidestep after calling GetQuestReward if we can find a reliable way to check amount of available bagspace
+-- and number of items received by the quest.
 local function OnQuestComplete()
-	
-
 	-- GetNumQuestChoices() Gets the number of rewards for a quest that you are currently turning in successfully.
-	-- numEntries, numQuests = GetNumQuestLogEntries() num quests in log. 
-	-- GetNumQuestLogChoices() the same as above?
-	-- GetQuestLogTitle(index) -- name of a quest in the questlog
-	-- GetTitleText() -- trieves the title of the quest while talking to the NPC about it.
 	-- IsQuestCompletable() -- returns 1 if current npc questdialogue thing can be completed
 	local numChoices = GetNumQuestChoices();
 	local title = GetTitleText()
-	GuidePrint("Autocompleting: "..title..", Choices: "..numChoices);
 	
-	if Guide.CurrentStep.Dt.q == title then
-		if numChoices == 0 then
-			ChooseQuestReward(nil)
-		elseif numChoices == 1 then
-			ChooseQuestReward(1)
-			return
-		elseif Guide.CurrentStep.Dt.item ~= nil then
-			local rewardIdx = GetQuestRewardIndex(Guide.CurrentStep.Dt.item)
-			if rewardIdx == nil then
-				GuidePrint("Could not find reward specified ("..Guide.CurrentStep.Dt.item.."). Not autocompleting")
-			else 
-				ChooseQuestReward(rewardIdx)
-			end
-		end
-	else
-		-- scan nearby steps to see if this is a later or earlier step?
-		GuidePrint("Unknown quest. No autoaccepting reward")
+	-- We should not end up in this function if a quest is not completable (handled in OnQuestProgress),
+	-- but just in case there are scenarios where it can happen, lets check to make sure.
+	if CLGuide_IsQuestCompletable() ~= 1 then
+		GuidePrint("Quest ("..title..") is not ready for delivery. If this is a bug, manually complete it.");
+		return
 	end
 
+	-- extra double triple control check that we're actually looking at the correct quest here
+	if string.lower(title) ~= CLGuide_CurrentStep.Dt.q then
+		GuidePrint("Selected quest ("..title..") does not match Guide quest ("..CLGuide_CurrentStep.Dt.q..")");
+		GuidePrint("This should not happen, and something is broken. Turn inn the quest manually (hold shift to disable addon)")
+		return
+	end
+
+	GuidePrint("Autocompleting: "..title..", Choices: "..numChoices);
+	
+	if numChoices == 0 then
+		ChooseQuestReward(nil)
+	elseif numChoices == 1 then
+		ChooseQuestReward(1)
+	elseif Guide.CurrentStep.Dt.item ~= nil then
+		local rewardIdx = GetQuestRewardIndex(Guide.CurrentStep.Dt.item)
+		if rewardIdx == nil then
+			GuidePrint("Could not find reward specified ("..Guide.CurrentStep.Dt.item.."). Complete the quest manually")
+		else 
+			ChooseQuestReward(rewardIdx)
+		end
+	else
+		GuidePrint("No quest reward specified in Guide, but multiple options. Complete the quest manually.")
+	end
 end
 
 local function OnQuestProgress()
@@ -109,7 +117,7 @@ local function OnQuestGreeting()
 			return
 		end
 	end
-	GuidePrint("Guide_Dt_OnQuestGreetingOrGossipShow <"..Guide.CurrentStep.Dt.q.."> not found")
+	GuidePrint("Guide_Dt_OnQuestGreetingOrGossipShow <"..CLGuide_CurrentStep.Dt.q.."> not found")
 end
 
 function CLGuide_DeliverQuest()

@@ -17,6 +17,7 @@ TriggerItem (a step can only have ONE trigger):
 	Dt={q="questname", [item="itemname"], [use=1]}		quest is delivered. If quest has multiple rewards to choose from, 
 													    you can optionally specify which reward to choose.
 														If use=1, the item will also be equipped after receiving it
+														Holding shift down while talking to a quest npc will disable this trigger.
 	Lvl={lvl=1 [,xp=500]}								goto next step when level is reached. Optionally add xp requirement as well 
 	Item={Name="itemname", Count=1}						goto next step when inventory contains >= Count of Name
 	Proximity=5											goto next step when distance to [Point] is <= Proximity

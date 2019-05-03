@@ -1,5 +1,19 @@
--- Author      : G3m7
--- Create Date : 4/28/2019 10:52:05 AM
+local GuideFrame_Options = {
+    ["Rows"] = 8,
+    ["FontSize"] = 16,
+    --This whole mess needs fixing, leave it at 0 atm
+    ["PreviousSteps"] = 0,
+    ["CurrentSection"] = "TEST",
+    ["CurrentStep"] = 1,
+    ["Locked"] = false
+
+}
+
+-- Put this anywhere you want to throw an error if the game version is not 1.12.x or 8.x
+local version = GetBuildInfo();
+version = string.sub(version,1,4)
+CLGuide_CurrentSection = CLGuide_GuideTable[GuideFrame_Options["CurrentSection"]]
+CLGuide_CurrentStep = CLGuide_GuideTable[CLGuide_CurrentSection].Steps[GuideFrame_Options["CurrentStep"]]
 
 function GuidePrint( msg )
     if not DEFAULT_CHAT_FRAME then 
@@ -10,20 +24,74 @@ function GuidePrint( msg )
     ChatFrame4:AddMessage ( msg )
 end
 
+function CLGuide_AssertOnClassic(msg)
+	if version ~= "1.12" and string.sub(version,1,1) ~= "8" then
+		GuidePrint(msg)
+		GuidePrint(1/"")
+	end
+end
+
+function CLGuide_IsQuestCompletable()
+	CLGuide_AssertOnClassic("CLGuide_IsQuestCompletable()")
+	local comparator = 1
+	if version ~= "1.12.1" then
+		comparator = true
+	end
+	if IsQuestCompletable() == comparator then
+		return 1
+	else
+		return 0
+	end
+end
+
+-- Return index of a particular gossip type (binder, taxi, etc) on an NPC. If none is found, return nil
+function CLGuide_GetGossipIndex(type) 
+	local gossipOptions = {GetGossipOptions()} -- TODO: Make sure GetGossipOptions() returns same num of args on retail (2 in 1.12)
+	for i=1,table.getn(gossipOptions) do
+		GuidePrint(gossipOptions[(i*2)]..", "..gossipOptions[(i*2)-1]) -- TODO: "attempt to concatinate field ? (a nill value) 
+		if gossipOptions[(i*2)] == type then
+			return i
+		end
+	end
+	return nil
+end
+
+function CLGuide_GetNumStrings(data)
+	if data == nil then return 0 end
+	local ret = 0
+	for i=1,getn(data) do
+		if type(data[i]) == "string" then 
+			ret = ret + 1 
+		end
+	end
+	return ret
+end
+
+function CLGuide_GetItemInventoryCount(itemName) -- itemName, not link
+	local count = 0
+	for bag = 0,4 do
+		for slot = 1,GetContainerNumSlots(bag) do
+			local item = GetContainerItemLink(bag,slot)
+			if item ~= nil and string.find(item,itemName) then
+				local _,slotCount = GetContainerItemInfo(bag, slot);
+				count = slotCount + count
+			end
+		end
+	end
+	return count
+end
+
 Guide_CompletedGuideSteps = {}
 
 function Guide_OnLoad()
-	Guide.CurrentStepIndex = 1
-	
 	Guide.DelayedCheckHasQuest = 0
 	Guide.DelayedCheckHasQuestStop = 0
 
-	Guide:SetScript("OnEvent", function() Guide_OnEvent()end)
 	Guide_SetupGuide()
 	Guide_RegisterEvents()
 	Guide:SetScript("OnUpdate", Guide_OnUpdate)
 	
-	Guide_SetStep(Guide.CurrentStepIndex)
+	CLGuide_SetStep(GuideFrame_Options["CurrentStep"])
 end
 
 
@@ -35,7 +103,7 @@ function Guide_SetupGuide()
 	coordBox:SetPoint("BOTTOMLEFT", Guide, "BOTTOMLEFT", 68, -32)
 
 	Guide:SetBackdrop({bgFile = "Interface/Tooltips/UI-Tooltip-Background", 
-		edgeFile = "Interface\AddOns\ClassicLeveler_Guide\Textures\Borders\fer1", 
+		edgeFile = "Interface\\AddOns\\ClassicLeveler_Guide\\Textures\\Borders\\fer1", 
 		tile = false, tileSize = 1, edgeSize = 2, 
 		insets = { left = 0, right = 0, top = 0, bottom = 1 }});
 	Guide:SetBackdropColor(0,0,0);
@@ -80,16 +148,16 @@ function Guide_SetupGuide()
 end
 
 function Guide_NextStep()
-	Guide_SetStep(Guide.CurrentStepIndex + 1)
+	CLGuide_SetStep(GuideFrame_Options["CurrentStep"] + 1)
 end
 
 function Guide_PrevStep()
-	Guide_SetStep(Guide.CurrentStepIndex - 1)
+	CLGuide_SetStep(GuideFrame_Options["CurrentStep"] - 1)
 end
 
 function Guide_CompleteStep(step)
     Guide_CompletedGuideSteps[step] = 1
-    if Guide.CurrentStepIndex == step then
+    if GuideFrame_Options["CurrentStep"] == step then
         Guide_NextStep()
     end
 end
@@ -105,8 +173,8 @@ end
 
 function Guide_UpdateColors()
 	for i=1,Guide.MAX_STEPS do
-		local stepOffset = Guide.CurrentStepIndex-Guide.CURRENT_STEP_IDX+i
-		local s = CL_GuideSteps[stepOffset]
+		local stepOffset = GuideFrame_Options["CurrentStep"]-Guide.CURRENT_STEP_IDX+i
+		local s = CLGuide_CurrentSection[stepOffset]
 		local isComplete = Guide_HasCompletedStep(stepOffset)
 		if i == Guide.CURRENT_STEP_IDX then
 			Guide.StepFrames[i].Bg:SetBackdropColor(Guide.CURRENT_BACKDROP.r, Guide.CURRENT_BACKDROP.g, Guide.CURRENT_BACKDROP.b, Guide.CURRENT_BACKDROP.a);
@@ -118,21 +186,33 @@ function Guide_UpdateColors()
 	end
 end
 
-function Guide_SetStep(step)
+function CLGuide_SetSection(sectionNum)
+	GuideFrame_Options["CurrentSection"] = sectionNum
+	CLGuide_CurrentSection = CLGuide_GuideTable[sectionNum]
+	CLGuide_SetStep(1)
+end
+
+function CLGuide_SetStep(step)
 	
 	Guide.DelayedCheckHasQuest = 0 -- if step is changed, manual or otherwise, we stop any delayed hasQuest checking
 
-	Guide.CurrentStepIndex = step
-	Guide.CurrentStep = CL_GuideSteps[Guide.CurrentStepIndex]
-	if Guide.CurrentStep.point ~= nil then
-		SetCrazyArrow(Guide.CurrentStep.point, Guide.CurrentStep.Text)
+	if getn(CLGuide_CurrentSection) < step then
+		Guide_SetSection(GuideFrame_Options["CurrentSection"] + 1)
+		return -- Guide_SetSection() will call CLGuide_SetStep(1)
+	end
+
+	GuideFrame_Options["CurrentStep"] = step
+
+	CLGuide_CurrentStep = CLGuide_CurrentSection[GuideFrame_Options["CurrentStep"]]
+	if CLGuide_CurrentStep.point ~= nil then
+		SetCrazyArrow(CLGuide_CurrentStep.point, CLGuide_CurrentStep.Text)
 	else
-		SetCrazyArrow(Guide.CurrentStep.point, Guide.CurrentStep.Text)
+		SetCrazyArrow(CLGuide_CurrentStep.point, CLGuide_CurrentStep.Text)
 	end
 
 	for i=1,Guide.MAX_STEPS do
-		local stepOffset = Guide.CurrentStepIndex-Guide.CURRENT_STEP_IDX+i
-		local s = CL_GuideSteps[stepOffset]
+		local stepOffset = GuideFrame_Options["CurrentStep"]-Guide.CURRENT_STEP_IDX+i
+		local s = CLGuide_CurrentSection[stepOffset]
 		if s ~= nil then
 			Guide.StepFrames[i].Text:SetText(s.Text)
 			if Guide_HasCompletedStep(stepOffset) == 1 then
@@ -146,26 +226,165 @@ function Guide_SetStep(step)
 	Guide_PrintStepInfo()
 end
 
+
+
+
+
+local EventFrame = CreateFrame("Frame", "EventFrame")
+EventFrame:RegisterEvent("PLAYER_ENTERING_WORLD")
+EventFrame:RegisterEvent("CHAT_MSG_SYSTEM")
+EventFrame:RegisterEvent("QUEST_COMPLETE")
+EventFrame:RegisterEvent("QUEST_LOG_UPDATE")
+--EventFrame:RegisterEvent("UNIT_QUEST_LOG_CHANGED") -- can we live with only QUEST_LOG_UPDATE?
+EventFrame:RegisterEvent("CHAT_MSG_LOOT")
+EventFrame:RegisterEvent("QUEST_ACCEPTED")
+EventFrame:RegisterEvent("QUEST_DETAIL")
+EventFrame:RegisterEvent("GOSSIP_SHOW")
+EventFrame:RegisterEvent("QUEST_GREETING")
+EventFrame:RegisterEvent("TAXIMAP_OPENED")
+EventFrame:RegisterEvent("MERCHANT_SHOW")
+EventFrame:RegisterEvent("ZONE_CHANGED_NEW_AREA")
+
+EventFrame:SetScript("OnEvent", CLGuide_AcceptQuest)
+EventFrame:SetScript("OnEvent", CLGuide_BuyItem)
+EventFrame:SetScript("OnEvent", CLGuide_CompleteQuest)
+EventFrame:SetScript("OnEvent", CLGuide_DeliverQuest)
+EventFrame:SetScript("OnEvent", CLGuide_HaveItem)
+EventFrame:SetScript("OnEvent", CLGuide_HaveQuest)
+EventFrame:SetScript("OnEvent", CLGuide_LevelReached)
+EventFrame:SetScript("OnEvent", CLGuide_PointReached)
+EventFrame:SetScript("OnEvent", CLGuide_SetHs)
+EventFrame:SetScript("OnEvent", CLGuide_TakeTaxi)
+EventFrame:SetScript("OnEvent", CLGuide_ZoneEntered)
+
+
 function Guide_RegisterEvents()
-	Guide:RegisterEvent("PLAYER_ENTERING_WORLD")
-	Guide:RegisterEvent("CHAT_MSG_SYSTEM")
-	Guide:RegisterEvent("QUEST_COMPLETE")
-	Guide:RegisterEvent("UNIT_QUEST_LOG_CHANGED") 
-	Guide:RegisterEvent("CHAT_MSG_LOOT")
-	Guide:RegisterEvent("QUEST_ACCEPTED")
-	Guide:RegisterEvent("QUEST_DETAIL")
-	Guide:RegisterEvent("GOSSIP_SHOW")
-	Guide:RegisterEvent("QUEST_GREETING")
-	--Guide:RegisterAllEvents()
-	Guide:RegisterEvent("TAXIMAP_OPENED")
-	Guide:RegisterEvent("MERCHANT_SHOW")
-	
-	Guide:RegisterEvent("ZONE_CHANGED_NEW_AREA")
-	
+	Guide:SetScript("OnEvent", function() Guide_OnEvent()end)
 	Guide:RegisterForDrag("LeftButton");
 end
 
 local PreviousQuestDetail = nil
+
+function CLG_ACQ()
+	local numAvail = { GetGossipAvailableQuests() }
+	local hasQuest = 0
+	if getn(numAvail) > 0 then
+		for i = 1, getn(numAvail) do
+			if string.lower(numAvail[i]) == string.lower(CLGuide_CurrentStep.At) then
+				hasQuest = 1
+				break
+			end
+		end
+	end
+
+	if hasQuest == 0 then 
+		GuidePrint("no quests")
+		return 
+	end
+
+	for i = 1, 10 do
+		SelectGossipAvailableQuest(i)
+		if string.lower(GetTitleText()) == string.lower(CLGuide_CurrentStep.At)  then
+			AcceptQuest()
+			AcceptQuest()
+		else
+			DeclineQuest()
+		end
+	end
+
+end
+function CLG_DTQ()
+	local numAvail = { GetGossipActiveQuests() }
+	local hasQuest = 0
+	if getn(numAvail) > 0 then
+		for i = 1, getn(numAvail) do
+			if string.lower(numAvail[i]) == string.lower(CLGuide_CurrentStep.Dt) then
+				hasQuest = 1
+				break
+			end
+		end
+	end
+
+	if hasQuest == 0 then 
+		GuidePrint("no quests")
+		return 
+	end
+
+	for i = 1, 10 do
+		SelectGossipAvailableQuest(i)
+		if string.lower(GetTitleText()) == string.lower(CLGuide_CurrentStep.Dt)  then
+			AcceptQuest()
+			AcceptQuest()
+		else
+			DeclineQuest()
+		end
+	end
+
+end
+
+
+
+
+-- this is a hacky, yet effective, fallback for checking quest related triggers
+-- in a delayed way. Some events seems to be received by the event before the API
+-- returns up-to-date information, in which case a delayed check in OnUpdate
+-- may be able to catch a missed change that could complete a current step.
+function CLGuide_UnitQuestLogChanged()
+	---GuidePrint("checking queueing delayed quest check")
+	if CLGuide_CurrentStep.At ~= nil 
+	or CLGuide_CurrentStep.Ct ~= nil 
+	or CLGuide_CurrentStep.Dt ~= nil 
+	or CLGuide_CurrentStep.Ht ~= nil then
+		--GuidePrint("queueing delayed quest check")
+		Guide.DelayedCheckHasQuest = 1
+		-- stop checking after 2 sec. This may be a bit long, but the idea here is
+		-- if there is huge serverlag on launch day, you may even want it higher
+		Guide.DelayedCheckHasQuestStop = GetTime() + 2.0 
+	end
+end
+-- See Guide_UnitQuestLogChanged documentation
+function CLGuide_DelayedCheckHasQuest()
+	if Guide.DelayedCheckHasQuest == 1 then
+		if CLGuide_CurrentStep.Ct ~= nil and CL_IsQuestComplete(CLGuide_CurrentStep.Ct) == 1 then
+			Guide_CompleteStep(GuideFrame_Options["CurrentStep"])
+		elseif CLGuide_CurrentStep.Dt ~= nil and CL_HasQuest(CLGuide_CurrentStep.At) == 0 then
+			Guide_CompleteStep(GuideFrame_Options["CurrentStep"])
+		elseif CLGuide_CurrentStep.Ht ~= nil and CL_HasQuest(CLGuide_CurrentStep.At) == 1 then
+			Guide_CompleteStep(GuideFrame_Options["CurrentStep"])
+		end
+		-- If we have passed DelayedCheckHasQuestStop, stop looking
+		if Guide.DelayedCheckHasQuestStop < GetTime() then
+			Guide.DelayedCheckHasQuest = 0
+		end
+	end
+end
+
+function Guide_OnUpdate()
+	UpdateCoordBox()
+	Guide_UpdateDragging()
+	CLGuide_DelayedCheckHasQuest()
+end
+
+
+local function CLG_OnGossipShow()
+	if CLGuide_CurrentStep.At ~= nil then
+		Guide_At_OnQuestGreetingOrGossipShow(SelectGossipAvailableQuest, Guide_GetGossipNumAvailQuests, Guide_GetGossipAvailableQuestName)
+	end
+end
+
+local function CLG_OnQuestGreeting()
+	if CLGuide_CurrentStep.At ~= nil then
+		Guide_At_OnQuestGreetingOrGossipShow(SelectAvailableQuest, GetNumAvailableQuests, GetAvailableTitle)
+	end
+end
+
+
+local function CLG_OnQuestDetail()
+	if Guide.CurrentQuest.At ~= nil and Guide.CurrentQuest.At == GetTitleText() then
+		AcceptQuest();
+		Guide_CompleteStep(GuideFrame_Options["CurrentStep"])
+	end
+end
 
 function Guide_OnEvent()
 	if arg2 ~= nil then 
@@ -177,60 +396,25 @@ function Guide_OnEvent()
 	end
 	
 	if event == "UNIT_QUEST_LOG_CHANGED" then
-		Guide_UnitQuestLogChanged()
+		CLGuide_UnitQuestLogChanged()
 	elseif event == "QUEST_DETAIL" then
-		-- When you are on the UI frame showing "continue" button
+		-- When you are on the UI frame showing "continue" button?
+		-- When you are on the UI frame where you can accept a new quest
 		PreviousQuestDetail = GetTitleText()
+		CLG_OnQuestDetail()
 	elseif event == "QUEST_COMPLETE" then
 		-- When you are at the UI frame showing "Complete Quest" button
-		Guide_OnQuestComplete()
+		CLG_OnQuestComplete()
 	elseif event == "QUEST_ACCEPTED" then
 		-- dosent exist in vanilla i think
 		local questTitle = GetQuestLogTitle(arg1)
 		GuidePrint(questTitle)
-	elseif event == "CHAT_MSG_SYSTEM" then	
-		-- TODO: This event is not reliable on 1.12, if you accept multiple quests in quick succession, they may not show
-		local arg1Lower = string.lower(arg1)
-		if string.find(arg1Lower, "quest accepted:") ~= nil then
-			Guide_OnQuestAccepted(arg1Lower)
-		end
-	elseif event == "CHAT_MSG_LOOT" then
-		local arg1Lower = string.lower(arg1)
-		if string.find(arg1Lower, "you receive loot: ") ~= nil then -- looting a mob
-			GuideOnItemLooted(string.sub(arg1, 19, string.len(arg1)-1))
-		elseif string.find(arg1Lower, "you receive item: ") ~= nil then -- buying from vendor
-			GuideOnItemLooted(string.sub(arg1, 19, string.len(arg1)-1))
-		end
-	elseif event == "ZONE_CHANGED_NEW_AREA" then
-		if Guide.CurrentStep.Zone ~= nil and Guide.CurrentStep.Zone == GetRealZoneText() then
-			Guide_CompleteStep(Guide.CurrentStepIndex)
-		end
 	elseif event == "GOSSIP_SHOW" then
-		if Guide.CurrentStep.Taxi ~= nil then
-			SelectGossipOption(GetGossipIndex("taxi"))
-		elseif Guide.CurrentStep.SetHs ~= nil and UnitName("target") == Guide.CurrentStep.SetHs then
-			ConfirmBinder() -- TODO: in 1.12, we can call this without selecting gossip option. Test on retail
-		elseif Guide.CurrentStep.BuyItem ~= nil and UnitName("target") == Guide.CurrentStep.BuyItem.Npc then
-			SelectGossipOption(GetGossipIndex("vendor"))
-		elseif Guide.CurrentStep.At ~= nil then
-			Guide_At_OnQuestGreetingOrGossipShow(SelectGossipAvailableQuest, Guide_GetGossipNumAvailQuests, Guide_GetGossipAvailableQuestName)
-		elseif Guide.CurrentStep.Dt ~= nil then
-			Guide_Dt_OnQuestGreetingOrGossipShow(SelectGossipActiveQuest, Guide_GetGossipNumActiveQuests, Guide_GetGossipActiveQuestName)
-		end
+		CLG_OnGossipShow()
 	elseif event == "QUEST_GREETING" then
-		if Guide.CurrentStep.Dt ~= nil then
-			Guide_Dt_OnQuestGreetingOrGossipShow(SelectActiveQuest, GetNumActiveQuests, GetActiveTitle)
-		elseif Guide.CurrentStep.At ~= nil then
-			Guide_At_OnQuestGreetingOrGossipShow(SelectAvailableQuest, GetNumAvailableQuests, GetAvailableTitle)
-		end
-	elseif event == "MERCHANT_SHOW" then
-		-- When a vendor window opens
-		Guide_OnMerchantShow()
-	elseif event == "TAXIMAP_OPENED" then
-		-- when the flightmaster map opens
-		Guide_OnTaximapOpened()
+		CLG_OnQuestGreeting()
 	end
-
+	
 	-- "hacking" the UI in place. Without this, scaling wont look right until you have rescaled the frame...
 	if event == "PLAYER_ENTERING_WORLD" then
 		Guide.IsDragging = 1
@@ -239,274 +423,6 @@ function Guide_OnEvent()
 	end
 end
 
--- handle an At trigger on quest greeting or gossip show
-local function Guide_At_OnQuestGreetingOrGossipShow(selectFunction, numAvailableFunction, getQuestNameFunction)
-	-- assuming CurrentStep.At exist here, function shouldnt be called otherwise
-	for i=1, numAvailableFunction() do
-		if getQuestNameFunction(i) == Guide.CurrentStep.At then
-			selectFunction(i)
-			return
-		end
-	end
-	GuidePrint("Guide_At_OnQuestGreetingOrGossipShow <"..Guide.CurrentStep.At.."> not found")
-end
-
--- handle a Dt trigger on quest greeting or gossip show
-local function Guide_Dt_OnQuestGreetingOrGossipShow(selectFunction, numActiveFunction, getQuestNameFunction)
-	-- assuming CurrentStep.Dt exist here, function shouldnt be called otherwise
-	for i=1, numActiveFunction() do
-		if getQuestNameFunction(i) == Guide.CurrentStep.Dt.q then
-			selectFunction(i)
-			return
-		end
-	end
-	GuidePrint("Guide_Dt_OnQuestGreetingOrGossipShow <"..Guide.CurrentStep.Dt.q.."> not found")
-end
-
-local function Guide_QuestGreetingGetQuestIndex(questname)
-
-end
-
-function Guide_GetGossipNumActiveQuests()
-	local activeQuestsInfo = { GetGossipActiveQuests() };
-	if activeQuestsInfo == nil or activeQuestsInfo == 0 then return 0 end
-	if version == "1.12.1" then
-		return table.getn(activeQuestsInfo)/2
-	elseif version == "8.1.5" then
-		return table.getn(activeQuestsInfo)/6
-	end
-	GuidePrint(1/"") -- "assert", need to test other versions
-end
-function Guide_GetGossipActiveQuestName(index)
-	local availQuestsInfo = { GetGossipAvailableQuests() };
-	if availQuestsInfo == nil or availQuestsInfo == 0 then return nil end
-	local iterSkip = 0
-	if version == "1.12.1" then
-		return availableQuestInfo[(index*2)/2]
-	elseif version == "8.1.5" then
-		return availableQuestInfo[(index*6)/6]
-	end
-	GuidePrint(1/"") -- "assert", need to test other versions
-end
-
-function Guide_GetGossipNumAvailQuests()
-	local availQuestsInfo = { GetGossipAvailableQuests() };
-	if availQuestsInfo == nil or availQuestsInfo == 0 then return 0 end
-	if version == "1.12.1" then
-		return table.getn(availQuestsInfo)/2
-	elseif version == "8.1.5" then
-		return table.getn(availQuestsInfo)/7
-	end
-	GuidePrint(1/"") -- "assert", need to test other versions
-end
-
-function Guide_GetGossipAvailableQuestName(index)
-	local availQuestsInfo = { GetGossipAvailableQuests() };
-	if availQuestsInfo == nil or availQuestsInfo == 0 then return nil end
-	local iterSkip = 0
-	if version == "1.12.1" then
-		return availableQuestInfo[(index*2)/2]
-	elseif version == "8.1.5" then
-		return availableQuestInfo[(index*7)/7]
-	end
-	GuidePrint(1/"") -- "assert", need to test other versions
-end
-
-
-
-
-local function Guide_GetGossipOrGreetingQuestIndex()
-
-end
-
-local function Guide_OnMerchantShow()
-	--GuidePrint(Guide.CurrentStep.BuyItem.Item..", "..Guide.CurrentStep.BuyItem.Npc..", "..UnitName("target"))
-	if Guide.CurrentStep.BuyItem ~= nil and UnitName("target") == Guide.CurrentStep.BuyItem.Npc then
-		local invCount = Guide_GetItemInventoryCount(Guide.CurrentStep.BuyItem.Item)
-		if invCount < Guide.CurrentStep.BuyItem.Count then
-			local itemCountToBuy = Guide.CurrentStep.BuyItem.Count - invCount
-			for i=1, GetMerchantNumItems() do
-				local itmName,_,_,quantity = GetMerchantItemInfo(i)
-				if itmName == Guide.CurrentStep.BuyItem.Item then
-					-- stackable items like arrows cant be bought one by one (as in, you cant get less than 200)
-					-- but we let the itemCountToBuy/quantity round down to never buy MORE items than specified
-					itemCountToBuy = itemCountToBuy/quantity
-					BuyMerchantItem(i, itemCountToBuy)
-					Guide_CompleteStep(Guide.CurrentStepIndex)
-					break
-				end
-			end
-		end
-	end
-end
-
-local function Guide_OnTaximapOpened()
-	if Guide.CurrentStep.Taxi ~= nil then
-		for i=1, NumTaxiNodes() do
-			if TaxiNodeName(i) == Guide.CurrentStep.Taxi then
-				TakeTaxiNode(i)
-				Guide_CompleteStep(Guide.CurrentStepIndex)
-			end
-		end
-	end
-end
-
-
-
--- This function is called when you get to the Complete Quest button page, not when the quest ACTUALLY is delivered
--- though, if we call GetQuestReward() in here, we can assume the quest completes (unless inventory is full), which can 
--- be used to complete the current step
-local function Guide_OnQuestComplete()
-	if IsShiftKeyDown() then return end -- disabling quest completion logic when holding shift down
-
-
-	--GetNumQuestChoices() Gets the number of rewards for a quest that you are currently turning in successfully.
-	-- numEntries, numQuests = GetNumQuestLogEntries() num quests in log. 
-	-- GetNumQuestLogChoices() the same as above?
-	--GetQuestLogTitle(index) -- name of a quest in the questlog
-	-- GetTitleText() -- trieves the title of the quest while talking to the NPC about it.
-	-- IsQuestCompletable() -- returns 1 if current npc questdialogue thing can be completed
-	local numChoices = GetNumQuestChoices();
-	local title = GetTitleText()
-	GuidePrint("Autocompleting: "..title..", Choices: "..numChoices);
-	
-	if Guide.CurrentStep.Dt ~= nil then
-		if Guide.CurrentStep.Dt.q == title then
-			if numChoices == 0 then
-				Guide_ChooseQuestReward(nil)
-			elseif numChoices == 1 then
-				Guide_ChooseQuestReward(1)
-				return
-			elseif Guide.CurrentStep.Dt.item ~= nil then
-				local rewardIdx = Guide_GetQuestRewardIndex(Guide.CurrentStep.Dt.item)
-				if rewardIdx == nil then
-					GuidePrint("Could not find reward specified ("..Guide.CurrentStep.Dt.item.."). Not autocompleting")
-				else 
-					Guide_ChooseQuestReward(rewardIdx)
-				end
-			end
-		else
-			-- scan nearby steps to see if this is a later or earlier step?
-			GuidePrint("Unknown quest. No autoaccepting reward")
-		end
-	end
-end
-
-function Guide_ChooseQuestReward(rewardIdx)
-	if rewardIdx == nil then
-		GetQuestReward()
-	else
-		-- todo: check that we have bagspace for the item before
-		-- completing the quest and going to next step. 
-		-- If no bagspace, show a warning?
-		GetQuestReward(rewardIdx)
-		EquipItem(Guide.CurrentStep.Dt.item)
-	end
-	
-	-- only go to next step if had bagspace and got item?
-	Guide_CompleteStep(Guide.CurrentStepIndex)
-end
-
--- TODO: We want to equip itemName when calling this function.
--- Typically we call it after completing a quest where we have specified we wish
--- to use the item after getting it. Not sure if it works to equip during handling of the event
--- so maybe we need a popupframe u can click afterwards?
-function EquipItem(itemName)
-
-end
-
--- returns the index of a quest reward in the currently open quest complete dialogue
--- if none is open, or the itemName is not found, returns nil
-function Guide_GetQuestRewardIndex(itemName)
-	local numChoices = GetNumQuestChoices();
-	for i=1, numChoices do
-		local itemName = GetQuestItemInfo("choice", i);
-		if quest.Item == itemName then
-			return i
-		end
-	end
-	return nil
-end
-
--- Return index of a particular gossip type (binder, taxi, etc) on an NPC. If none is found, return nil
-function GetGossipIndex(type) 
-	local gossipOptions = {GetGossipOptions()} -- TODO: Make sure GetGossipOptions() returns same num of args on retail (2 in 1.12)
-	for i=1,table.getn(gossipOptions) do
-		GuidePrint(gossipOptions[(i*2)]..", "..gossipOptions[(i*2)-1]) -- TODO: "attempt to concatinate field ? (a nill value) 
-		if gossipOptions[(i*2)] == type then
-			return i
-		end
-	end
-	return nil
-end
-
-function GuideOnItemLooted(itemlink) -- itemLINK, not just the name
-	if Guide.CurrentStep.Item ~= nil then
-		if string.find(itemlink, Guide.CurrentStep.Item.Name) ~= nil then
-			GuidePrint("the looted item was stepitem, have "..Guide_GetItemInventoryCount(Guide.CurrentStep.Item.Name).."/"..Guide.CurrentStep.Item.Count)
-			if Guide_GetItemInventoryCount(Guide.CurrentStep.Item.Name) >= Guide.CurrentStep.Item.Count then
-				Guide_CompleteStep(Guide.CurrentStepIndex)
-			end
-		end
-	end
-end
-
-function Guide_GetItemInventoryCount(itemName) -- itemName, not link
-	local count = 0
-	for bag = 0,4 do
-		for slot = 1,GetContainerNumSlots(bag) do
-			local item = GetContainerItemLink(bag,slot)
-			if item ~= nil and string.find(item,itemName) then
-				local _,slotCount = GetContainerItemInfo(bag, slot);
-				count = slotCount + count
-			end
-		end
-	end
-	return count
-end
-
-function Guide_OnQuestAccepted(questname) -- questname is tolower'ed in event handler
-	if Guide.CurrentStep.At ~= nil and string.lower(Guide.CurrentStep.At) == questname then
-		Guide_CompleteStep(Guide.CurrentStepIndex)
-	end
-end
-
-function Guide_UnitQuestLogChanged()
-	-- Questlog updates quite delayed, and checking CL_HasQuest in this 
-	-- function is too early, so if currentStep has At or Ct, queue 
-	-- up a delayed check for OnUpdate.
-	GuidePrint("checking queueing delayed quest check")
-	if Guide.CurrentStep.At ~= nil 
-	or Guide.CurrentStep.Ct ~= nil 
-	or Guide.CurrentStep.Dt ~= nil 
-	or Guide.CurrentStep.Ht ~= nil then
-		GuidePrint("queueing delayed quest check")
-		Guide.DelayedCheckHasQuest = 1
-		Guide.DelayedCheckHasQuestStop = GetTime() + 2.0 -- stop checking after 2 sec
-	end
-end
-
-function Guide_OnUpdate()
-	UpdateCoordBox()
-	Guide_UpdateDragging()
-	Guide_DelayedCheckHasQuest()
-end
-
-function Guide_DelayedCheckHasQuest()
-	if Guide.DelayedCheckHasQuest == 1 then
-		if Guide.CurrentStep.Ct ~= nil and CL_IsQuestComplete(Guide.CurrentStep.Ct) == 1 then
-			Guide_CompleteStep(Guide.CurrentStepIndex)
-		elseif Guide.CurrentStep.Dt ~= nil and CL_HasQuest(Guide.CurrentStep.At) == 0 then
-			Guide_CompleteStep(Guide.CurrentStepIndex)
-		elseif Guide.CurrentStep.Ht ~= nil and CL_HasQuest(Guide.CurrentStep.At) == 1 then
-			Guide_CompleteStep(Guide.CurrentStepIndex)
-		end
-		-- If we have passed DelayedCheckHasQuestStop, stop looking
-		if Guide.DelayedCheckHasQuestStop < GetTime() then
-			Guide.DelayedCheckHasQuest = 0
-		end
-	end
-end
 
 function Guide_UpdateDragging()
 	if Guide.IsDragging == 1 then
@@ -522,12 +438,12 @@ function Guide_UpdateDragging()
 end
 
 function Guide_PrintStepInfo()
-	local step = Guide.CurrentStep--GuideSteps[Guide.CurrentStepIndex]
+	local step = Guide.CurrentStep--GuideSteps[GuideFrame_Options["CurrentStep"]]
 	if step == nil then
 		GuidePrint("nil")
 		return
 	end
-	GuidePrint("Step: "..Guide.CurrentStepIndex)
+	GuidePrint("Step: "..GuideFrame_Options["CurrentStep"])
 	GuidePrint("Text: "..step.Text)
 	if step.At ~= nil then
 		GuidePrint("AcceptQuestTrigger: "..step.At)
@@ -536,7 +452,7 @@ function Guide_PrintStepInfo()
 		GuidePrint("CompletedTrigger: "..step.Ct)
 	end
 	if step.Dt ~= nil then
-		GuidePrint("DeliveredTrigger: "..step.Dt)
+		--GuidePrint("DeliveredTrigger: "..step.Dt.q)
 	end
 	
 
@@ -553,3 +469,6 @@ function UpdateCoordBox()
 		coordBox:SetText(", point={x="..string.format("%.0f", x)..",y="..string.format("%.0f", y).."}")
 	end
 end
+
+
+
