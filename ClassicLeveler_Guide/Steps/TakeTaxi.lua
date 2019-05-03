@@ -12,7 +12,6 @@ function CLGuide_TakeTaxi()
 				Guide_CompleteStep(Guide.CurrentStepIndex)
 			end
 		end
-	end
 	elseif event == "TAXIMAP_OPENED" then
 		local taxiIdx = CLGuide_GetGossipIndex("taxi")
 		if taxiIdx ~= nil then

@@ -20,7 +20,7 @@ end
 function CLGuide_HaveItem()
 	if Guide.CurrentStep.Item == nil then return end
 
-	if event == "CHAT_MSG_LOOT" and then
+	if event == "CHAT_MSG_LOOT" then
 		OnChatMsgLoot(arg1)
 	end
 end
