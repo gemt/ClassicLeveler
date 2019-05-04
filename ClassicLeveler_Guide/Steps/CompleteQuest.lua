@@ -1,3 +1,4 @@
+
 local function IsQuestComplete(qtitle)
 	local objectives = nil   
 	local e = GetNumQuestLogEntries()
@@ -16,7 +17,7 @@ local function IsQuestComplete(qtitle)
 			return 1 -- all objectives were done
 		end
 	end
-	--QRP_Print("CL_IsQuestComplete: <"..qtitle.."> not found")
+	--QRP_Print("IsQuestComplete: <"..qtitle.."> not found")
     return nil
 end
 
@@ -27,7 +28,7 @@ function CLGuide_CompleteQuest()
 	if CLGuide_CurrentStep.Ct == nil then return end
 
 	-- todo: can we check this when we receive QUEST_LOG_UPDATE, or do we need to do a delayed check?
-	if CL_IsQuestComplete(Guide.CurrentStep.Ct) == 1 then
-		Guide_CompleteStep(Guide.CurrentStepIndex)
+	if IsQuestComplete(CLGuide_CurrentStep.Ct) == 1 then
+		CLGuide_CompleteCurrentStep()
 	end
 end

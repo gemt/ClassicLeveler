@@ -12,6 +12,12 @@ local GuideFrame_Options = {
 -- Put this anywhere you want to throw an error if the game version is not 1.12.x or 8.x
 local version = GetBuildInfo();
 version = string.sub(version,1,4)
+CLGuide_CurrentStep = {}
+CLGuide_CurrentSection = {}
+
+-- TODO: Loop through this list when visiting a vendor, and sell anything in it. 
+-- Idea is the list is populated with questrewards you have specified you wish to vendor in a guidestep
+CLGuide_VendorList = {} 
 
 function GuidePrint( msg )
     if not DEFAULT_CHAT_FRAME then 
@@ -40,6 +46,25 @@ function CLGuide_IsQuestCompletable()
 	else
 		return 0
 	end
+end
+
+function CLGuide_GetNumFreeBagspace()
+	local numFreeBagspace = 0
+	for bag=0,4 do
+		local bagname = GetBagName(bag)
+		if bagname ~= nil then
+			local bagnamelower = string.lower(bagname)
+			-- ignoring soulbags and quivers
+			if string.find(bagnamelower, "quiver") == nil and string.find(bagnamelower, "soul") == nil then
+				for slot=1,16 do
+					if GetContainerItemInfo(bag, slot) == nil then
+						numFreeBagspace = numFreeBagspace + 1
+					end
+				end
+			end
+		end
+	end
+	return numFreeBagspace
 end
 
 -- Return index of a particular gossip type (binder, taxi, etc) on an NPC. If none is found, return nil
@@ -149,11 +174,15 @@ function Guide_PrevStep()
 	CLGuide_SetStep(GuideFrame_Options["CurrentStep"] - 1)
 end
 
-function Guide_CompleteStep(step)
+function CLGuide_CompleteStep(step)
     Guide_CompletedGuideSteps[step] = 1
     if GuideFrame_Options["CurrentStep"] == step then
         Guide_NextStep()
     end
+end
+
+function CLGuide_CompleteCurrentStep()
+    CLGuide_CompleteStep(GuideFrame_Options["CurrentStep"])
 end
 
 function Guide_HasCompletedStep(step)
@@ -239,19 +268,40 @@ EventFrame:RegisterEvent("QUEST_GREETING")
 EventFrame:RegisterEvent("TAXIMAP_OPENED")
 EventFrame:RegisterEvent("MERCHANT_SHOW")
 EventFrame:RegisterEvent("ZONE_CHANGED_NEW_AREA")
+EventFrame:RegisterEvent("QUEST_PROGRESS")
+EventFrame:RegisterAllEvents()
+--EventFrame:SetScript("OnEvent", CLGuide_BuyItem)
+--EventFrame:SetScript("OnEvent", CLGuide_CompleteQuest)
+--EventFrame:SetScript("OnEvent", CLGuide_DeliverQuest)
+--EventFrame:SetScript("OnEvent", CLGuide_HaveItem)
+--EventFrame:SetScript("OnEvent", CLGuide_HaveQuest)
+--EventFrame:SetScript("OnEvent", CLGuide_LevelReached)
+--EventFrame:SetScript("OnEvent", CLGuide_PointReached)
+--EventFrame:SetScript("OnEvent", CLGuide_SetHs)
+--EventFrame:SetScript("OnEvent", CLGuide_TakeTaxi)
+--EventFrame:SetScript("OnEvent", CLGuide_ZoneEntered)
+--EventFrame:SetScript("OnEvent", function() CLGuide_AcceptQuest() end)
 
-EventFrame:SetScript("OnEvent", CLGuide_AcceptQuest)
-EventFrame:SetScript("OnEvent", CLGuide_BuyItem)
-EventFrame:SetScript("OnEvent", CLGuide_CompleteQuest)
-EventFrame:SetScript("OnEvent", CLGuide_DeliverQuest)
-EventFrame:SetScript("OnEvent", CLGuide_HaveItem)
-EventFrame:SetScript("OnEvent", CLGuide_HaveQuest)
-EventFrame:SetScript("OnEvent", CLGuide_LevelReached)
-EventFrame:SetScript("OnEvent", CLGuide_PointReached)
-EventFrame:SetScript("OnEvent", CLGuide_SetHs)
-EventFrame:SetScript("OnEvent", CLGuide_TakeTaxi)
-EventFrame:SetScript("OnEvent", CLGuide_ZoneEntered)
-
+EventFrame:SetScript("OnEvent", function()
+	if arg2 ~= nil then 
+		GuidePrint("EventFrame: "..event..", "..arg1..", "..arg2) 
+	elseif arg1 ~= nil then 
+		GuidePrint("EventFrame: "..event..", "..arg1) 
+	else
+		GuidePrint("EventFrame: "..event)
+	end
+	CLGuide_AcceptQuest()
+	CLGuide_BuyItem()
+	CLGuide_CompleteQuest()
+	CLGuide_DeliverQuest()
+	CLGuide_HaveItem()
+	CLGuide_HaveQuest()
+	CLGuide_LevelReached()
+	CLGuide_PointReached()
+	CLGuide_SetHs()
+	CLGuide_TakeTaxi()
+	CLGuide_ZoneEntered()
+end)
 
 function Guide_RegisterEvents()
 	Guide:RegisterEvent("PLAYER_ENTERING_WORLD")
@@ -260,8 +310,6 @@ function Guide_RegisterEvents()
 end
 
 local PreviousQuestDetail = nil
-
-
 
 -- this is a hacky, yet effective, fallback for checking quest related triggers
 -- in a delayed way. Some events seems to be received by the event before the API
@@ -280,77 +328,10 @@ function CLGuide_UnitQuestLogChanged()
 		Guide.DelayedCheckHasQuestStop = GetTime() + 2.0 
 	end
 end
--- See Guide_UnitQuestLogChanged documentation
-function CLGuide_DelayedCheckHasQuest()
-	if Guide.DelayedCheckHasQuest == 1 then
-		if CLGuide_CurrentStep.Ct ~= nil and CL_IsQuestComplete(CLGuide_CurrentStep.Ct) == 1 then
-			Guide_CompleteStep(GuideFrame_Options["CurrentStep"])
-		elseif CLGuide_CurrentStep.Dt ~= nil and CL_HasQuest(CLGuide_CurrentStep.At) == 0 then
-			Guide_CompleteStep(GuideFrame_Options["CurrentStep"])
-		elseif CLGuide_CurrentStep.Ht ~= nil and CL_HasQuest(CLGuide_CurrentStep.At) == 1 then
-			Guide_CompleteStep(GuideFrame_Options["CurrentStep"])
-		end
-		-- If we have passed DelayedCheckHasQuestStop, stop looking
-		if Guide.DelayedCheckHasQuestStop < GetTime() then
-			Guide.DelayedCheckHasQuest = 0
-		end
-	end
-end
-
-function Guide_OnUpdate()
-	UpdateCoordBox()
-	Guide_UpdateDragging()
-	CLGuide_DelayedCheckHasQuest()
-end
-
-
-local function CLG_OnGossipShow()
-	if CLGuide_CurrentStep.At ~= nil then
-		Guide_At_OnQuestGreetingOrGossipShow(SelectGossipAvailableQuest, Guide_GetGossipNumAvailQuests, Guide_GetGossipAvailableQuestName)
-	end
-end
-
-local function CLG_OnQuestGreeting()
-	if CLGuide_CurrentStep.At ~= nil then
-		Guide_At_OnQuestGreetingOrGossipShow(SelectAvailableQuest, GetNumAvailableQuests, GetAvailableTitle)
-	end
-end
-
-
-local function CLG_OnQuestDetail()
-	if Guide.CurrentQuest.At ~= nil and Guide.CurrentQuest.At == GetTitleText() then
-		AcceptQuest();
-		Guide_CompleteStep(GuideFrame_Options["CurrentStep"])
-	end
-end
 
 function Guide_OnEvent()
-	if arg2 ~= nil then 
-		GuidePrint(event..", "..arg1..", "..arg2) 
-	elseif arg1 ~= nil then 
-		GuidePrint(event..", "..arg1) 
-	else
-		GuidePrint(event)
-	end
-	
 	if event == "UNIT_QUEST_LOG_CHANGED" then
 		CLGuide_UnitQuestLogChanged()
-	elseif event == "QUEST_DETAIL" then
-		-- When you are on the UI frame showing "continue" button?
-		-- When you are on the UI frame where you can accept a new quest
-		PreviousQuestDetail = GetTitleText()
-		CLG_OnQuestDetail()
-	elseif event == "QUEST_COMPLETE" then
-		-- When you are at the UI frame showing "Complete Quest" button
-		CLG_OnQuestComplete()
-	elseif event == "QUEST_ACCEPTED" then
-		-- dosent exist in vanilla i think
-		local questTitle = GetQuestLogTitle(arg1)
-		GuidePrint(questTitle)
-	elseif event == "GOSSIP_SHOW" then
-		CLG_OnGossipShow()
-	elseif event == "QUEST_GREETING" then
-		CLG_OnQuestGreeting()
 	end
 	
 	-- "hacking" the UI in place. Without this, scaling wont look right until you have rescaled the frame...
@@ -364,6 +345,28 @@ function Guide_OnEvent()
 	end
 end
 
+-- See Guide_UnitQuestLogChanged documentation
+function CLGuide_DelayedCheckHasQuest()
+	if Guide.DelayedCheckHasQuest == 1 then
+		if CLGuide_CurrentStep.Ct ~= nil and CL_IsQuestComplete(CLGuide_CurrentStep.Ct) == 1 then
+			CLGuide_CompleteCurrentStep()
+		elseif CLGuide_CurrentStep.Dt ~= nil and CL_HasQuest(CLGuide_CurrentStep.At) == 0 then
+			CLGuide_CompleteCurrentStep()
+		elseif CLGuide_CurrentStep.Ht ~= nil and CL_HasQuest(CLGuide_CurrentStep.At) == 1 then
+			CLGuide_CompleteCurrentStep()
+		end
+		-- If we have passed DelayedCheckHasQuestStop, stop looking
+		if Guide.DelayedCheckHasQuestStop < GetTime() then
+			Guide.DelayedCheckHasQuest = 0
+		end
+	end
+end
+
+function Guide_OnUpdate()
+	UpdateCoordBox()
+	Guide_UpdateDragging()
+	CLGuide_DelayedCheckHasQuest()
+end
 
 function Guide_UpdateDragging()
 	if Guide.IsDragging == 1 then
@@ -379,7 +382,7 @@ function Guide_UpdateDragging()
 end
 
 function Guide_PrintStepInfo()
-	local step = Guide.CurrentStep--GuideSteps[GuideFrame_Options["CurrentStep"]]
+	local step = CLGuide_CurrentStep--GuideSteps[GuideFrame_Options["CurrentStep"]]
 	if step == nil then
 		GuidePrint("nil")
 		return

@@ -10,7 +10,7 @@ local function EquipItem(itemName)
 
 end
 
-local function ChooseQuestReward(rewardIdx)
+local function ChooseQuestRewardAndGoNextStep(rewardIdx)
 	if rewardIdx == nil then
 		GetQuestReward()
 	else
@@ -18,26 +18,26 @@ local function ChooseQuestReward(rewardIdx)
 		-- completing the quest and going to next step. 
 		-- If no bagspace, show a warning?
 		GetQuestReward(rewardIdx)
-		EquipItem(Guide.CurrentStep.Dt.item)
+		EquipItem(CLGuide_CurrentStep.Dt.item)
 	end
 	
 	-- only go to next step if had bagspace and got item?
-	Guide_CompleteStep(Guide.CurrentStepIndex)
+	CLGuide_CompleteCurrentStep()
 end
 
 -- returns the index of a quest reward in the currently open quest complete dialogue
 -- if none is open, or the itemName is not found, returns nil
 local function GetQuestRewardIndex(guideSpecifiedItem)
+	local guideItemLower = string.lower(guideSpecifiedItem)
 	local numChoices = GetNumQuestChoices();
 	for i=1, numChoices do
-		local itemName = GetQuestItemInfo("choice", i);
-		if guideSpecifiedItem == itemName then
+		local itemName = string.lower(GetQuestItemInfo("choice", i))
+		if guideItemLower == itemName then
 			return i
 		end
 	end
 	return nil
 end
-
 
 -- This function is called when you get to the Complete Quest button page, not when the quest ACTUALLY is delivered.
 -- If we call GetQuestReward() in here, we can assume the quest completes (unless inventory is full).
@@ -45,19 +45,13 @@ end
 -- and number of items received by the quest.
 local function OnQuestComplete()
 	-- GetNumQuestChoices() Gets the number of rewards for a quest that you are currently turning in successfully.
-	-- IsQuestCompletable() -- returns 1 if current npc questdialogue thing can be completed
+	-- GetNumQuestLogChoices() Documented similarly to GetNumQuestChoices...
+
 	local numChoices = GetNumQuestChoices();
 	local title = GetTitleText()
 	
-	-- We should not end up in this function if a quest is not completable (handled in OnQuestProgress),
-	-- but just in case there are scenarios where it can happen, lets check to make sure.
-	if CLGuide_IsQuestCompletable() ~= 1 then
-		GuidePrint("Quest ("..title..") is not ready for delivery. If this is a bug, manually complete it.");
-		return
-	end
-
 	-- extra double triple control check that we're actually looking at the correct quest here
-	if string.lower(title) ~= CLGuide_CurrentStep.Dt.q then
+	if string.lower(title) ~= string.lower(CLGuide_CurrentStep.Dt.q) then
 		GuidePrint("Selected quest ("..title..") does not match Guide quest ("..CLGuide_CurrentStep.Dt.q..")");
 		GuidePrint("This should not happen, and something is broken. Turn inn the quest manually (hold shift to disable addon)")
 		return
@@ -65,16 +59,25 @@ local function OnQuestComplete()
 
 	GuidePrint("Autocompleting: "..title..", Choices: "..numChoices);
 	
-	if numChoices == 0 then
-		ChooseQuestReward(nil)
+	local numRewardsToGet = GetNumQuestRewards()
+	if numChoices > 1 then 
+		numRewardsToGet = numRewardsToGet + 1
+	end
+	if CLGuide_GetNumFreeBagspace() < numRewardsToGet then
+		GuidePrint("Not enough bagspace to receive all reward items. Not autocompleting");
+		return
+	end
+
+	if numChoices == nil or numChoices == 0 then
+		ChooseQuestRewardAndGoNextStep(nil)
 	elseif numChoices == 1 then
-		ChooseQuestReward(1)
-	elseif Guide.CurrentStep.Dt.item ~= nil then
-		local rewardIdx = GetQuestRewardIndex(Guide.CurrentStep.Dt.item)
+		ChooseQuestRewardAndGoNextStep(1)
+	elseif CLGuide_CurrentStep.Dt.Item ~= nil then
+		local rewardIdx = GetQuestRewardIndex(CLGuide_CurrentStep.Dt.Item)
 		if rewardIdx == nil then
-			GuidePrint("Could not find reward specified ("..Guide.CurrentStep.Dt.item.."). Complete the quest manually")
+			GuidePrint("Could not find reward specified ("..CLGuide_CurrentStep.Dt.Item.."). Complete the quest manually")
 		else 
-			ChooseQuestReward(rewardIdx)
+			ChooseQuestRewardAndGoNextStep(rewardIdx)
 		end
 	else
 		GuidePrint("No quest reward specified in Guide, but multiple options. Complete the quest manually.")
@@ -86,7 +89,7 @@ local function OnQuestProgress()
 		CompleteQuest() -- emulates clicking continue
 	else
 		GuidePrint(GetTitleText().." - Not yet completed")
-		DeclineQuest() -- emulates clicking cancel button, taking us back to main gossip menu if there is one
+		--DeclineQuest() -- emulates clicking cancel button, taking us back to main gossip menu if there is one
 	end
 end
 
@@ -101,13 +104,13 @@ local function OnGossipShow()
 	local questStep = getn(activeQuestInfo) / numActiveQuests
 	local stepQuestnameLower = string.lower(CLGuide_CurrentStep.Dt.q)
 	for i=1, numActiveQuests do
-		local questName = string.lower(activeQuestInfo[i*questStep])
+		local questName = string.lower(activeQuestInfo[i*questStep-(questStep-1)])
 		if string.lower(questName) == stepQuestnameLower then
 			SelectGossipActiveQuest(i)
 			return
 		end
 	end
-	GuidePrint("Guide_Dt_OnQuestGreetingOrGossipShow <"..Guide.CurrentStep.Dt.q.."> not found")
+	GuidePrint("DeliverQuest OnGossipShow <"..CLGuide_CurrentStep.Dt.q.."> not found")
 end
 
 local function OnQuestGreeting()
@@ -117,7 +120,7 @@ local function OnQuestGreeting()
 			return
 		end
 	end
-	GuidePrint("Guide_Dt_OnQuestGreetingOrGossipShow <"..CLGuide_CurrentStep.Dt.q.."> not found")
+	GuidePrint("DeliverQuest OnQuestGreeting <"..CLGuide_CurrentStep.Dt.q.."> not found")
 end
 
 function CLGuide_DeliverQuest()
@@ -125,6 +128,7 @@ function CLGuide_DeliverQuest()
 	if IsShiftKeyDown() then return end -- disabling quest completion logic when holding shift down
 
 	-- QUEST_FINISHED: Fired whenever the quest frame changes (Detail to Progress to Reward, etc.) or is closed.
+	-- QUEST_DETAIL: do we not need to check this here?
 
 	if event == "QUEST_GREETING" then
 		OnQuestGreeting()

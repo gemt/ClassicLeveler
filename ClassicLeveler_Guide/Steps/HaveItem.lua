@@ -1,9 +1,9 @@
 
 local function OnItemLooted(itemlink) -- itemLINK, not just the name
-	if string.find(itemlink, Guide.CurrentStep.Item.Name) ~= nil then
-		GuidePrint("the looted item was stepitem, have "..Guide_GetItemInventoryCount(Guide.CurrentStep.Item.Name).."/"..Guide.CurrentStep.Item.Count)
-		if Guide_GetItemInventoryCount(Guide.CurrentStep.Item.Name) >= Guide.CurrentStep.Item.Count then
-			Guide_CompleteStep(Guide.CurrentStepIndex)
+	if string.find(itemlink, CLGuide_CurrentStep.Item.Name) ~= nil then
+		GuidePrint("the looted item was stepitem, have "..Guide_GetItemInventoryCount(CLGuide_CurrentStep.Item.Name).."/"..CLGuide_CurrentStep.Item.Count)
+		if Guide_GetItemInventoryCount(CLGuide_CurrentStep.Item.Name) >= CLGuide_CurrentStep.Item.Count then
+			CLGuide_CompleteCurrentStep()
 		end
 	end
 end
@@ -18,7 +18,7 @@ local function OnChatMsgLoot(arg1)
 end
 
 function CLGuide_HaveItem()
-	if Guide.CurrentStep.Item == nil then return end
+	if CLGuide_CurrentStep.Item == nil then return end
 
 	if event == "CHAT_MSG_LOOT" then
 		OnChatMsgLoot(arg1)
