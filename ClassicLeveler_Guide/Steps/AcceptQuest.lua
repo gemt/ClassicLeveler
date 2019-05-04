@@ -51,6 +51,7 @@ local function OnQuestDetail()
 	end
 end
 
+
 function CLGuide_AcceptQuest()
 	if CLGuide_CurrentStep.At == nil then return end
 	if IsShiftKeyDown() then return end -- disabling quest completion logic when holding shift down

@@ -158,7 +158,7 @@ function Guide_NextStep()
 end
 
 function Guide_PrevStep()
-	CLGuide_SetStep(GuideFrame_Options["CurrentStep"] - 1)
+	CLGuide_SetStep(GuideFrame_Options["CurrentStep"] - 1, 1)
 end
 
 function CLGuide_CompleteStep(step)
@@ -202,7 +202,7 @@ function CLGuide_SetSection(sectionNum)
 	CLGuide_SetStep(1)
 end
 
-function CLGuide_SetStep(step)
+function CLGuide_SetStep(step, wasPrevStep)
 	
 	Guide.DelayedCheckHasQuest = 0 -- if step is changed, manual or otherwise, we stop any delayed hasQuest checking
 
@@ -215,6 +215,21 @@ function CLGuide_SetStep(step)
 	GuideFrame_Options["CurrentStep"] = step
 
 	CLGuide_CurrentStep = CLGuide_CurrentSection.Steps[step]
+
+    -- Handling of the Step.Dt.SkipIfUncomplete logic. If a Dt step has SkipIfUncomplete specified, and the specified quest 
+    -- is not completed, we skip this step and goto next.
+    -- wasPrevStep used so in the event the user manually clicks back in the guide, we won't auto-jump forward again
+    -- todo: prepend "(skipped)" to the step text and update step label? probably too annoying
+    if wasPrevStep == nil or wasPrevStep == 0 then
+        if CLGuide_CurrentStep.Dt and CLGuide_CurrentStep.Dt.SkipIfUncomplete and CLGuide_CurrentStep.Dt.SkipIfUncomplete == 1 then
+            if CLGuide_IsQuestComplete(CLGuide_CurrentStep.Dt.q) == 0 then
+                GuidePrint("Skipping <"..CLGuide_CurrentStep.Text.."> due to SkipIfUncomplete flag")
+                Guide_NextStep()
+                return 
+            end
+        end
+    end
+
 	if CLGuide_CurrentStep.point ~= nil then
 		SetCrazyArrow(CLGuide_CurrentStep.point, CLGuide_CurrentStep.Text)
 	else
@@ -254,6 +269,9 @@ EventFrame:RegisterEvent("TAXIMAP_OPENED")
 EventFrame:RegisterEvent("MERCHANT_SHOW")
 EventFrame:RegisterEvent("ZONE_CHANGED_NEW_AREA")
 EventFrame:RegisterEvent("QUEST_PROGRESS")
+EventFrame:RegisterEvent("TRAINER_SHOW")
+EventFrame:RegisterEvent("CONFIRM_BINDER")
+EventFrame:RegisterEvent("PLAYER_LEVEL_UP")
 
 -- See Guide_UnitQuestLogChanged documentation
 local function CLGuide_DelayedCheckHasQuest()
@@ -285,11 +303,11 @@ function CLGuide_SellItems()
                     link = GetContainerItemLink(bag, slot)
                     if link ~= nil then
                         if string.find(link, find) then
-                        local _, _, locked = GetContainerItemInfo(bag, slot)
-                        if bag and slot and not locked then	
-                            DEFAULT_CHAT_FRAME:AddMessage("Selling "..GetContainerItemLink(bag, slot))
-                            UseContainerItem(bag,slot)
-                        end
+                            local _, _, locked = GetContainerItemInfo(bag, slot)
+                            if bag and slot and not locked then	
+                                DEFAULT_CHAT_FRAME:AddMessage("Selling "..GetContainerItemLink(bag, slot))
+                                UseContainerItem(bag,slot)
+                            end
                         else
                             -- go through CLGuide_VendorList
                             for vli =1,getn(CLGuide_VendorList) do
@@ -333,8 +351,10 @@ EventFrame:SetScript("OnEvent", function()
 	end
 
 	if event == "MERCHANT_SHOW" then
-		CLGuide_SellItems()
-	end
+        CLGuide_SellItems()
+	elseif event == "PLAYER_LEVEL_UP" then
+        -- talentpoint frame popup if specified in separate table?
+    end
 
 	CLGuide_AcceptQuest()
 	CLGuide_BuyItem()
@@ -346,6 +366,7 @@ EventFrame:SetScript("OnEvent", function()
 	CLGuide_PointReached()
 	CLGuide_SetHs()
 	CLGuide_TakeTaxi()
+    CLGuide_TrainSkill()
 	CLGuide_ZoneEntered()
 end)
 

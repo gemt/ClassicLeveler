@@ -136,10 +136,29 @@ local function OnQuestGreeting()
 	GuidePrint("DeliverQuest OnQuestGreeting <"..CLGuide_CurrentStep.Dt.q.."> not found")
 end
 
+local function HaveQuestInQuestlog(qtitle)
+	local e = GetNumQuestLogEntries()
+    local qlower = string.lower(qtitle)
+	for q=1, e do
+		if string.lower(GetQuestLogTitle(q)) == qlower then 
+			return 1
+		end
+	end
+	--QRP_Print("CL_HasQuest: <"..qtitle.."> not found")
+	return 0
+end
+
 function CLGuide_DeliverQuest()
 	if CLGuide_CurrentStep.Dt == nil then return end
 	if IsShiftKeyDown() then return end
 
+    --TODO: Complete the step if you don't have the quest in questlog here, but NOT sure if this can ever cause
+    -- a race condition and make you skip a step due to quick automatic deliver+accept followup
+    if HaveQuestInQuestlog(CLGuide_CurrentStep.Dt.q) == 0 then
+        GuidePrint("DeliverQuest-step: <"..CLGuide_CurrentStep.Dt.q.."> did not exist in questlog. Completing step.")
+        CLGuide_CompleteCurrentStep()
+        return
+    end
 	-- QUEST_FINISHED: Fired whenever the quest frame changes (Detail to Progress to Reward, etc.) or is closed.
 	-- QUEST_DETAIL: do we not need to check this here?
 

@@ -9,6 +9,7 @@ function CLGuide_SetHs()
     elseif event == "CONFIRM_BINDER" then
         if UnitName("target") ~= CLGuide_CurrentStep.SetHs then return end
 	    ConfirmBinder()
+        CLGuide_CompleteCurrentStep()
     end
 
 end

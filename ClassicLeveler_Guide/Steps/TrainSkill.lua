@@ -14,11 +14,12 @@ local function OnTrainerShow()
             rank = string.lower(rank)
             if category == "available" then
                 for gidx = 1, getn(CLGuide_CurrentStep.TrainSkill) do
-                    if string.lower(CLGuide_CurrentStep.TrainSkill[gidx].n) == name 
-                    and string.lower(CLGuide_CurrentStep.TrainSkill[gidx].r) == rank then
-                        BuyTrainerService(spellIdx)
-                        table.remove(CLGuide_CurrentStep.TrainSkill, gidx)
-                        break;
+                    if string.lower(CLGuide_CurrentStep.TrainSkill[gidx].n) == name then
+                        if CLGuide_CurrentStep.TrainSkill[gidx].r == nil or string.lower(CLGuide_CurrentStep.TrainSkill[gidx].r) == rank then
+                            BuyTrainerService(spellIdx)
+                            table.remove(CLGuide_CurrentStep.TrainSkill, gidx)
+                            break;
+                        end
                     end
                 end
             end
