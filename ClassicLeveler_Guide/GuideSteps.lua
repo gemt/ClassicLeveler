@@ -21,13 +21,13 @@ TriggerItem (a step can only have ONE trigger):
 	*At="questname"										quest Accepted: system message
 	*Ct="questname"										quest is completed in questlog
 	*Ht="questname"										quest is in the questlog
-	*Dt={q="questname", [item="itemname"], [use=1],[vendor=1]}
+	*Dt={q="questname", [item="itemname"], [use=1],[vendor=1],[SkipIfUncomplete=1]}
 														quest is delivered. If quest has multiple rewards to choose from, 
 													    you can optionally specify which reward to choose.
 														(TODO) If use=1, the item will also be equipped after receiving it
 														(TODO) if vendor=1, the item will be vendored next time you visit a vendor
-														Holding shift down while talking to a quest npc will disable this trigger.
-    
+                                                        if SkipIfUncomplete=1 specified, step is skipped if the quest is not completed at this stage
+
     *Mct={"quest1","quest","quest3"...}                 All mentioned quests are complete in questlog
 
 	Lvl={lvl=1 [,xp=500]}								goto next step when level is reached. Optionally add xp requirement as well 
@@ -62,9 +62,7 @@ Step Text: (TODO)
 
 Triggers marked with * are disabled as long as SHIFT modifier is pressed
 ]]
-CLGuide_VendorList = {
-"Light Feather"
-} 
+
 CLGuide_GuideTable = {
 --[[
 	{
