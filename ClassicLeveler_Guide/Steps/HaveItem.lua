@@ -1,8 +1,9 @@
 
 local function OnItemLooted(itemlink) -- itemLINK, not just the name
 	if string.find(itemlink, CLGuide_CurrentStep.Item.Name) ~= nil then
-		GuidePrint("the looted item was stepitem, have "..Guide_GetItemInventoryCount(CLGuide_CurrentStep.Item.Name).."/"..CLGuide_CurrentStep.Item.Count)
-		if Guide_GetItemInventoryCount(CLGuide_CurrentStep.Item.Name) >= CLGuide_CurrentStep.Item.Count then
+		-- think there is a race condition when calling CLGuide_GetItemInventoryCount during CHAT_MSG_LOOT event
+		GuidePrint("the looted item was stepitem, have "..CLGuide_GetItemInventoryCount(CLGuide_CurrentStep.Item.Name).."/"..CLGuide_CurrentStep.Item.Count)
+		if CLGuide_GetItemInventoryCount(CLGuide_CurrentStep.Item.Name) >= CLGuide_CurrentStep.Item.Count then
 			CLGuide_CompleteCurrentStep()
 		end
 	end

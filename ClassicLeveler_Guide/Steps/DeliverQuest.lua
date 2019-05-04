@@ -84,6 +84,19 @@ local function OnQuestComplete()
 	end
 end
 
+local function CLGuide_IsQuestCompletable()
+	CLGuide_AssertOnClassic("CLGuide_IsQuestCompletable()")
+	local comparator = 1
+	if CLGuide_GameVersion ~= "1.12" then
+		comparator = true
+	end
+	if IsQuestCompletable() == comparator then
+		return 1
+	else
+		return 0
+	end
+end
+
 local function OnQuestProgress()
 	if CLGuide_IsQuestCompletable() == 1 then
 		CompleteQuest() -- emulates clicking continue

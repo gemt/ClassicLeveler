@@ -9,9 +9,9 @@ local GuideFrame_Options = {
 
 }
 
--- Put this anywhere you want to throw an error if the game version is not 1.12.x or 8.x
-local version = GetBuildInfo();
-version = string.sub(version,1,4)
+-- Put this anywhere you want to throw an error if the game CLGuide_GameVersion is not 1.12.x or 8.x
+CLGuide_GameVersion = GetBuildInfo();
+CLGuide_GameVersion = string.sub(CLGuide_GameVersion,1,4)
 CLGuide_CurrentStep = {}
 CLGuide_CurrentSection = {}
 
@@ -29,22 +29,9 @@ function GuidePrint( msg )
 end
 
 function CLGuide_AssertOnClassic(msg)
-	if version ~= "1.12" and string.sub(version,1,1) ~= "8" then
+	if CLGuide_GameVersion ~= "1.12" and string.sub(CLGuide_GameVersion,1,1) ~= "8" then
 		GuidePrint(msg)
 		GuidePrint(1/"")
-	end
-end
-
-function CLGuide_IsQuestCompletable()
-	CLGuide_AssertOnClassic("CLGuide_IsQuestCompletable()")
-	local comparator = 1
-	if version ~= "1.12.1" then
-		comparator = true
-	end
-	if IsQuestCompletable() == comparator then
-		return 1
-	else
-		return 0
 	end
 end
 
@@ -56,7 +43,7 @@ function CLGuide_GetNumFreeBagspace()
 			local bagnamelower = string.lower(bagname)
 			-- ignoring soulbags and quivers
 			if string.find(bagnamelower, "quiver") == nil and string.find(bagnamelower, "soul") == nil then
-				for slot=1,16 do
+				for slot=1,GetContainerNumSlots(bag)  do
 					if GetContainerItemInfo(bag, slot) == nil then
 						numFreeBagspace = numFreeBagspace + 1
 					end
@@ -269,7 +256,9 @@ EventFrame:RegisterEvent("TAXIMAP_OPENED")
 EventFrame:RegisterEvent("MERCHANT_SHOW")
 EventFrame:RegisterEvent("ZONE_CHANGED_NEW_AREA")
 EventFrame:RegisterEvent("QUEST_PROGRESS")
-EventFrame:RegisterAllEvents()
+function CLGuide_AllEvents()
+	EventFrame:RegisterAllEvents()
+end
 --EventFrame:SetScript("OnEvent", CLGuide_BuyItem)
 --EventFrame:SetScript("OnEvent", CLGuide_CompleteQuest)
 --EventFrame:SetScript("OnEvent", CLGuide_DeliverQuest)
