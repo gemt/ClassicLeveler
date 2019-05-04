@@ -239,8 +239,6 @@ end
 
 
 
-
-
 local EventFrame = CreateFrame("Frame", "EventFrame")
 EventFrame:RegisterEvent("PLAYER_ENTERING_WORLD")
 EventFrame:RegisterEvent("CHAT_MSG_SYSTEM")
@@ -259,17 +257,6 @@ EventFrame:RegisterEvent("QUEST_PROGRESS")
 function CLGuide_AllEvents()
 	EventFrame:RegisterAllEvents()
 end
---EventFrame:SetScript("OnEvent", CLGuide_BuyItem)
---EventFrame:SetScript("OnEvent", CLGuide_CompleteQuest)
---EventFrame:SetScript("OnEvent", CLGuide_DeliverQuest)
---EventFrame:SetScript("OnEvent", CLGuide_HaveItem)
---EventFrame:SetScript("OnEvent", CLGuide_HaveQuest)
---EventFrame:SetScript("OnEvent", CLGuide_LevelReached)
---EventFrame:SetScript("OnEvent", CLGuide_PointReached)
---EventFrame:SetScript("OnEvent", CLGuide_SetHs)
---EventFrame:SetScript("OnEvent", CLGuide_TakeTaxi)
---EventFrame:SetScript("OnEvent", CLGuide_ZoneEntered)
---EventFrame:SetScript("OnEvent", function() CLGuide_AcceptQuest() end)
 
 EventFrame:SetScript("OnEvent", function()
 	if arg2 ~= nil then 
