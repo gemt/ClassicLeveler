@@ -17,7 +17,7 @@ CLGuide_CurrentSection = {}
 
 -- TODO: Loop through this list when visiting a vendor, and sell anything in it. 
 -- Idea is the list is populated with questrewards you have specified you wish to vendor in a guidestep
-CLGuide_VendorList = {} 
+
 
 function GuidePrint( msg )
     if not DEFAULT_CHAT_FRAME then 
@@ -278,14 +278,22 @@ function CLGuide_SellItems()
             if bagslots and bagslots > 0 then
                 for slot=1,bagslots do
                     link = GetContainerItemLink(bag, slot)
-                    if link ~= nil and string.find(link, find) then
+                    if link ~= nil then
+                        if string.find(link, find) then
                         local _, _, locked = GetContainerItemInfo(bag, slot)
                         if bag and slot and not locked then	
                             DEFAULT_CHAT_FRAME:AddMessage("Selling "..GetContainerItemLink(bag, slot))
                             UseContainerItem(bag,slot)
                         end
-                    else
-                        -- go through CLGuide_VendorList
+                        else
+                            -- go through CLGuide_VendorList
+                            for vli =1,getn(CLGuide_VendorList) do
+                                if string.find(link, CLGuide_VendorList[vli]) ~= nil then
+                                    DEFAULT_CHAT_FRAME:AddMessage("Selling "..GetContainerItemLink(bag, slot).." (CLGuide_VendorList)")
+                                    UseContainerItem(bag,slot)
+                                end
+                            end
+                        end
                     end
                 end
             end

@@ -43,7 +43,9 @@ Step Text: (TODO)
 	You can wrap {} around quest names. When currentStep contains one or more quests wrapped in {}, the quest tracker will be updated
 	to track those quests
 ]]
-
+CLGuide_VendorList = {
+"Light Feather"
+} 
 CLGuide_GuideTable = {
 --[[
 	{
