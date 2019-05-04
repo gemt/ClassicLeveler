@@ -20,6 +20,7 @@ TriggerItem (a step can only have ONE trigger):
 														(TODO) If use=1, the item will also be equipped after receiving it
 														(TODO) if vendor=1, the item will be vendored next time you visit a vendor
 														Holding shift down while talking to a quest npc will disable this trigger.
+    Mct={"quest1","quest","quest3"...}                  All mentioned quests are complete in questlog
 
 	Lvl={lvl=1 [,xp=500]}								goto next step when level is reached. Optionally add xp requirement as well 
 	Item={Name="itemname", Count=1}						goto next step when inventory contains >= Count of Name

@@ -255,16 +255,21 @@ EventFrame:RegisterEvent("MERCHANT_SHOW")
 EventFrame:RegisterEvent("ZONE_CHANGED_NEW_AREA")
 EventFrame:RegisterEvent("QUEST_PROGRESS")
 
-EventFrame:SetScript("OnUpdate", function() 
-    if CLGuide_CurrentStep.Proximity ~= nil then
-        if CLGuide_GetDistToActivePoint() < CLGuide_CurrentStep.Proximity then
-            CLGuide_CompleteCurrentStep()
-        end
-    end
-end)
-
-function CLGuide_AllEvents()
-	EventFrame:RegisterAllEvents()
+-- See Guide_UnitQuestLogChanged documentation
+local function CLGuide_DelayedCheckHasQuest()
+	if Guide.DelayedCheckHasQuest == 1 then
+		if CLGuide_CurrentStep.Ct ~= nil and CL_IsQuestComplete(CLGuide_CurrentStep.Ct) == 1 then
+			CLGuide_CompleteCurrentStep()
+		elseif CLGuide_CurrentStep.Dt ~= nil and CL_HasQuest(CLGuide_CurrentStep.At) == 0 then
+			CLGuide_CompleteCurrentStep()
+		elseif CLGuide_CurrentStep.Ht ~= nil and CL_HasQuest(CLGuide_CurrentStep.At) == 1 then
+			CLGuide_CompleteCurrentStep()
+		end
+		-- If we have passed DelayedCheckHasQuestStop, stop looking
+		if Guide.DelayedCheckHasQuestStop < GetTime() then
+			Guide.DelayedCheckHasQuest = 0
+		end
+	end
 end
 
 function CLGuide_SellItems()
@@ -299,6 +304,19 @@ function CLGuide_SellItems()
             end
         end
     end
+end
+
+EventFrame:SetScript("OnUpdate", function() 
+    CLGuide_DelayedCheckHasQuest()
+    if CLGuide_CurrentStep.Proximity ~= nil then
+        if CLGuide_GetDistToActivePoint() < CLGuide_CurrentStep.Proximity then
+            CLGuide_CompleteCurrentStep()
+        end
+    end
+end)
+
+function CLGuide_AllEvents()
+	EventFrame:RegisterAllEvents()
 end
 
 EventFrame:SetScript("OnEvent", function()
@@ -369,27 +387,12 @@ function Guide_OnEvent()
 	end
 end
 
--- See Guide_UnitQuestLogChanged documentation
-function CLGuide_DelayedCheckHasQuest()
-	if Guide.DelayedCheckHasQuest == 1 then
-		if CLGuide_CurrentStep.Ct ~= nil and CL_IsQuestComplete(CLGuide_CurrentStep.Ct) == 1 then
-			CLGuide_CompleteCurrentStep()
-		elseif CLGuide_CurrentStep.Dt ~= nil and CL_HasQuest(CLGuide_CurrentStep.At) == 0 then
-			CLGuide_CompleteCurrentStep()
-		elseif CLGuide_CurrentStep.Ht ~= nil and CL_HasQuest(CLGuide_CurrentStep.At) == 1 then
-			CLGuide_CompleteCurrentStep()
-		end
-		-- If we have passed DelayedCheckHasQuestStop, stop looking
-		if Guide.DelayedCheckHasQuestStop < GetTime() then
-			Guide.DelayedCheckHasQuest = 0
-		end
-	end
-end
+
 
 function Guide_OnUpdate()
 	UpdateCoordBox()
 	Guide_UpdateDragging()
-	CLGuide_DelayedCheckHasQuest()
+
 end
 
 function Guide_UpdateDragging()

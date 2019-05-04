@@ -25,10 +25,20 @@ function CLGuide_CompleteQuest()
 	if event ~= "QUEST_LOG_UPDATE" then return end
 	-- is there a reason to also check UNIT_QUEST_LOG_CHANGED?
 
-	if CLGuide_CurrentStep.Ct == nil then return end
-
-	-- todo: can we check this when we receive QUEST_LOG_UPDATE, or do we need to do a delayed check?
-	if IsQuestComplete(CLGuide_CurrentStep.Ct) == 1 then
-		CLGuide_CompleteCurrentStep()
-	end
+	if CLGuide_CurrentStep.Ct ~= nil then
+    	-- todo: can we check this when we receive QUEST_LOG_UPDATE, or do we need to do a delayed check?
+    	if IsQuestComplete(CLGuide_CurrentStep.Ct) == 1 then
+    		CLGuide_CompleteCurrentStep()
+    	end
+    elseif CLGuide_CurrentStep.Mct ~= nil then
+        -- loop through all quests that must be completed and check if they are.
+        -- Return as soon as one quest is NOT completed.
+        -- If we do not return, all quests are complete, and we complete the step.
+        for i=1,getn(CLGuide_CurrentStep.Mct) do
+            if IsQuestComplete(CLGuide_CurrentStep.Mct[i]) ~= 1 then
+                return
+    	    end
+        end
+        CLGuide_CompleteCurrentStep()
+    end
 end
