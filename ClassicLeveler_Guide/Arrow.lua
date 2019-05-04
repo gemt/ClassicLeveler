@@ -97,7 +97,7 @@ y = 495
 function SetCrazyArrow(point, title)
 
     active_point = point
-    arrive_distance = 0
+    arrive_distance = 999999
     point_title = title
     if active_point and not isHide then
         wayframe.title:SetText(point_title or "Unknown waypoint")
@@ -107,13 +107,23 @@ function SetCrazyArrow(point, title)
         wayframe:Hide()
     end
 end
+function HideCrazyArrow()
+	wayframe:Hide()
+end
 ---------
-
 local status = wayframe.status
 local arrow = wayframe.arrow
 local arrowLastUpdate = 0;
 local LastPlayerPosition = {};
 local count = 0
+
+function CLGuide_GetDistToActivePoint()
+	if active_point == nil then
+		return nil
+	end
+	return arrive_distance
+end
+
 local function OnUpdate(self, elapsed)
 	if active_point == nil then
 		return
@@ -123,6 +133,7 @@ local function OnUpdate(self, elapsed)
         local dist,x,y
         if (TomTomCrazyArrow:IsVisible() ~= nil) then
             local dist,x,y = Arrow_GetDistanceToPoint(active_point)
+            arrive_distance = dist
             if not dist or IsInInstance() then
                 if not active_point.x and not active_point.y then
                     active_point = nil

@@ -254,8 +254,43 @@ EventFrame:RegisterEvent("TAXIMAP_OPENED")
 EventFrame:RegisterEvent("MERCHANT_SHOW")
 EventFrame:RegisterEvent("ZONE_CHANGED_NEW_AREA")
 EventFrame:RegisterEvent("QUEST_PROGRESS")
+
+EventFrame:SetScript("OnUpdate", function() 
+    if CLGuide_CurrentStep.Proximity ~= nil then
+        if CLGuide_GetDistToActivePoint() < CLGuide_CurrentStep.Proximity then
+            CLGuide_CompleteCurrentStep()
+        end
+    end
+end)
+
 function CLGuide_AllEvents()
 	EventFrame:RegisterAllEvents()
+end
+
+function CLGuide_SellItems()
+    local find = "ff9d9d9d"
+    local link = nil
+    local bagslots = nil
+    for bag=0,4 do
+        local bagname = GetBagName(bag)
+        if bagname ~= nil then
+            bagslots = GetContainerNumSlots(bag)
+            if bagslots and bagslots > 0 then
+                for slot=1,bagslots do
+                    link = GetContainerItemLink(bag, slot)
+                    if link ~= nil and string.find(link, find) then
+                        local _, _, locked = GetContainerItemInfo(bag, slot)
+                        if bag and slot and not locked then	
+                            DEFAULT_CHAT_FRAME:AddMessage("Selling "..GetContainerItemLink(bag, slot))
+                            UseContainerItem(bag,slot)
+                        end
+                    else
+                        -- go through CLGuide_VendorList
+                    end
+                end
+            end
+        end
+    end
 end
 
 EventFrame:SetScript("OnEvent", function()
@@ -266,6 +301,11 @@ EventFrame:SetScript("OnEvent", function()
 	else
 		GuidePrint("EventFrame: "..event)
 	end
+
+	if event == "MERCHANT_SHOW" then
+		CLGuide_SellItems()
+	end
+
 	CLGuide_AcceptQuest()
 	CLGuide_BuyItem()
 	CLGuide_CompleteQuest()
