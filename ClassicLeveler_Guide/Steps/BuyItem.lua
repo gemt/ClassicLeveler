@@ -19,7 +19,9 @@ local function OnMerchantShow()
 				break
 			end
 		end
-	end
+	else -- if we already have the amount of items required, keep going
+        CLGuide_CompleteCurrentStep()
+    end
 end
 
 function CLGuide_BuyItem() 
