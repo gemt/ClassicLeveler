@@ -27,6 +27,7 @@ end
 function CLGuide_BuyItem() 
 	if CLGuide_CurrentStep.BuyItem == nil then return end
 	if UnitName("target") ~= CLGuide_CurrentStep.BuyItem.Npc then return end
+    if IsShiftKeyDown() then return end
 
 	if event == "MERCHANT_SHOW" then
 		OnMerchantShow()

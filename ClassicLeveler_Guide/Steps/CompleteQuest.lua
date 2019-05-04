@@ -38,6 +38,7 @@ end
 
 function CLGuide_CompleteQuest()
 	if event ~= "QUEST_LOG_UPDATE" then return end
+    if IsShiftKeyDown() then return end
 	-- is there a reason to also check UNIT_QUEST_LOG_CHANGED?
 
 	if CLGuide_CurrentStep.Ct ~= nil then

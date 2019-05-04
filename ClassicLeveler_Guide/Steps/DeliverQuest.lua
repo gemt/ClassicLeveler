@@ -138,7 +138,7 @@ end
 
 function CLGuide_DeliverQuest()
 	if CLGuide_CurrentStep.Dt == nil then return end
-	if IsShiftKeyDown() then return end -- disabling quest completion logic when holding shift down
+	if IsShiftKeyDown() then return end
 
 	-- QUEST_FINISHED: Fired whenever the quest frame changes (Detail to Progress to Reward, etc.) or is closed.
 	-- QUEST_DETAIL: do we not need to check this here?
