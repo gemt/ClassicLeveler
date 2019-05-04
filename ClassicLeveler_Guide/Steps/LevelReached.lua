@@ -1,8 +1,9 @@
+
 function CLGuide_LevelReached()
-
+	if CLGuide_CurrentStep.Lvl ~= nil then
+    if UnitLevel("player") < CLGuide_CurrentStep.Lvl.lvl then return end
+    if CLGuide_CurrentStep.xp ~= nil then
+        if UnitXP("player") < CLGuide_CurrentStep.xp then return end
+    end
+    CLGuide_CompleteCurrentStep()
 end
-
---[[
-/script local e=UnitXP("player"); local m=UnitXPMax("player"); local b=m/20; local rba=floor((e/b)*10+0.5)/10; local rbb=floor((20-(e/b))*10+0.5)/10; SendChatMessage("I am "..rba.." bars into "..UnitLevel("player").." ("..rbb.." bars left)","SAY",nil);
-
-]]
