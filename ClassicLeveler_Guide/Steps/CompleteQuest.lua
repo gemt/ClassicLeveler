@@ -21,6 +21,21 @@ local function IsQuestComplete(qtitle)
     return nil
 end
 
+-- Quests like As Water Cascades (filling a vial, spawning a new item) dosent seem to 
+-- report completed on QUEST_LOG_UPDATE. 
+local nextOnUpdateTriggerCheck = GetTime()
+function CLGuide_CompleteQuestOnUpdate()
+    if CLGuide_CurrentStep.Ct == nil then return end
+
+    if nextOnUpdateTriggerCheck < GetTime() then
+        nextOnUpdateTriggerCheck = GetTime() + 1
+        if IsQuestComplete(CLGuide_CurrentStep.Ct) == 1 then
+    		CLGuide_CompleteCurrentStep()
+    	end
+    end
+
+end
+
 function CLGuide_CompleteQuest()
 	if event ~= "QUEST_LOG_UPDATE" then return end
 	-- is there a reason to also check UNIT_QUEST_LOG_CHANGED?

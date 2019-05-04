@@ -306,8 +306,12 @@ function CLGuide_SellItems()
     end
 end
 
+
 EventFrame:SetScript("OnUpdate", function() 
     CLGuide_DelayedCheckHasQuest()
+    
+    CLGuide_CompleteQuestOnUpdate()
+
     if CLGuide_CurrentStep.Proximity ~= nil then
         if CLGuide_GetDistToActivePoint() < CLGuide_CurrentStep.Proximity then
             CLGuide_CompleteCurrentStep()
@@ -351,31 +355,7 @@ function Guide_RegisterEvents()
 	Guide:RegisterForDrag("LeftButton");
 end
 
-local PreviousQuestDetail = nil
-
--- this is a hacky, yet effective, fallback for checking quest related triggers
--- in a delayed way. Some events seems to be received by the event before the API
--- returns up-to-date information, in which case a delayed check in OnUpdate
--- may be able to catch a missed change that could complete a current step.
-function CLGuide_UnitQuestLogChanged()
-	---GuidePrint("checking queueing delayed quest check")
-	if CLGuide_CurrentStep.At ~= nil 
-	or CLGuide_CurrentStep.Ct ~= nil 
-	or CLGuide_CurrentStep.Dt ~= nil 
-	or CLGuide_CurrentStep.Ht ~= nil then
-		--GuidePrint("queueing delayed quest check")
-		Guide.DelayedCheckHasQuest = 1
-		-- stop checking after 2 sec. This may be a bit long, but the idea here is
-		-- if there is huge serverlag on launch day, you may even want it higher
-		Guide.DelayedCheckHasQuestStop = GetTime() + 2.0 
-	end
-end
-
 function Guide_OnEvent()
-	if event == "UNIT_QUEST_LOG_CHANGED" then
-		CLGuide_UnitQuestLogChanged()
-	end
-	
 	-- "hacking" the UI in place. Without this, scaling wont look right until you have rescaled the frame...
 	if event == "PLAYER_ENTERING_WORLD" then
 		CLGuide_CurrentSection = CLGuide_GuideTable[GuideFrame_Options["CurrentSection"]] 
