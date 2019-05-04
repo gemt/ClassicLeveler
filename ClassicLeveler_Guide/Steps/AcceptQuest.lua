@@ -72,17 +72,16 @@ function CLGuide_AcceptQuest()
 		-- continue button screen
 		OnQuestProgress()
 	elseif event == "CHAT_MSG_SYSTEM" then
-		-- This event is not reliable on 1.12, if you accept multiple quests in quick succession, they may not show
-		-- Ideally we don't need to rely on this event to know when a quest is accepted, instead we should 
-		-- know it when we "click" the accept quest button. But this is still a decent control check 
-		local arg1Lower = string.lower(arg1)
-		if string.find(arg1Lower, "quest accepted:") ~= nil then
-			GuidePrint("test")
-			if CLGuide_CurrentStep.At ~= nil and string.lower(CLGuide_CurrentStep.At) == questname then
-				CLGuide_CompleteCurrentStep()
-			end
-		end
-	elseif event == "QUEST_ACCEPTED" then
+        -- This event is not reliable on 1.12, if you accept multiple quests in quick succession, they may not show
+        -- Ideally we don't need to rely on this event to know when a quest is accepted, instead we should 
+        -- know it when we "click" the accept quest button. But this is still a decent control check 
+        local arg1Lower = string.lower(arg1)
+        if string.find(arg1Lower, "quest accepted:") ~= nil then
+            if string.find(arg1Lower, string.lower(CLGuide_CurrentStep.At)) ~= nil then
+                CLGuide_CompleteCurrentStep()
+            end
+        end
+    elseif event == "QUEST_ACCEPTED" then
 		-- dosent exist in vanilla i think
 		GuidePrint("QUEST_ACCEPTED EXISTS!!!")
 	end
