@@ -26,6 +26,12 @@
     <Content Include="GuideSteps.lua">
       <SubType>Code</SubType>
     </Content>
+    <Content Include="Guides\11-20-Darkshore.lua">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="Guides\1-10-Teldrassil.lua">
+      <SubType>Code</SubType>
+    </Content>
     <Content Include="images\Arrow.blp" />
     <Content Include="images\Arrow.m2" />
     <Content Include="images\dummy.tga" />
@@ -61,6 +67,45 @@
     <Content Include="images\UI-Panel-CollapseButton-Up.tga" />
     <Content Include="images\UI-Panel-ExpandButton-Down.tga" />
     <Content Include="images\UI-Panel-ExpandButton-Up.tga" />
+    <Content Include="Steps\AcceptQuest.lua">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="Steps\BuyItem.lua">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="Steps\CompleteQuest.lua">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="Steps\DeliverQuest.lua">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="Steps\HaveItem.lua">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="Steps\HaveQuest.lua">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="Steps\LevelReached.lua">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="Steps\PointReached.lua">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="Steps\SetHs.lua">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="Steps\TakeTaxi.lua">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="Steps\TrainSkill.lua">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="Steps\ZoneEntered.lua">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="TalentTable.lua">
+      <SubType>Code</SubType>
+    </Content>
     <Content Include="Textures\Borders\fer1.tga" />
     <Content Include="Textures\Borders\fer6.tga" />
     <Content Include="Textures\Borders\fer7.tga" />
@@ -111,10 +156,15 @@
     <Content Include="Textures\Buttons\Button-Unlocked-Highlight.tga" />
     <Content Include="Textures\Buttons\Button-Unlocked-Normal.tga" />
     <Content Include="Textures\Buttons\Button-Unlocked-Pushed.tga" />
+    <Content Include="VendorList.lua">
+      <SubType>Code</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="images" />
     <Folder Include="images\statusbar" />
+    <Folder Include="Guides" />
+    <Folder Include="Steps" />
     <Folder Include="Textures" />
     <Folder Include="Textures\Buttons" />
     <Folder Include="Textures\Borders" />

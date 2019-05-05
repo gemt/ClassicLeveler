@@ -4,8 +4,6 @@
 ## Interface: 80100
 ##SavedVariablesPerCharacter: CompletedGuideSteps
 
-Guides\1-10-Teldrassil.lua
-Guides\11-20-Darkshore.lua
 TalentTable.lua
 VendorList.lua
 GuideSteps.lua
