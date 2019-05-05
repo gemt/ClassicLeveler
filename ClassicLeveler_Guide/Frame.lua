@@ -290,40 +290,6 @@ local function CLGuide_DelayedCheckHasQuest()
 	end
 end
 
-function CLGuide_SellItems()
-    local find = "ff9d9d9d"
-    local link = nil
-    local bagslots = nil
-    for bag=0,4 do
-        local bagname = GetBagName(bag)
-        if bagname ~= nil then
-            bagslots = GetContainerNumSlots(bag)
-            if bagslots and bagslots > 0 then
-                for slot=1,bagslots do
-                    link = GetContainerItemLink(bag, slot)
-                    if link ~= nil then
-                        if string.find(link, find) then
-                            local _, _, locked = GetContainerItemInfo(bag, slot)
-                            if bag and slot and not locked then	
-                                DEFAULT_CHAT_FRAME:AddMessage("Selling "..GetContainerItemLink(bag, slot))
-                                UseContainerItem(bag,slot)
-                            end
-                        else
-                            -- go through CLGuide_VendorList
-                            for vli =1,getn(CLGuide_VendorList) do
-                                if string.find(link, CLGuide_VendorList[vli]) ~= nil then
-                                    DEFAULT_CHAT_FRAME:AddMessage("Selling "..GetContainerItemLink(bag, slot).." (CLGuide_VendorList)")
-                                    UseContainerItem(bag,slot)
-                                end
-                            end
-                        end
-                    end
-                end
-            end
-        end
-    end
-end
-
 
 EventFrame:SetScript("OnUpdate", function() 
     CLGuide_DelayedCheckHasQuest()
@@ -351,7 +317,10 @@ EventFrame:SetScript("OnEvent", function()
 	end
 
 	if event == "MERCHANT_SHOW" then
-        CLGuide_SellItems()
+        -- AutoVendor.lua
+        -- Note: We want this to run before the Step handlers below as this will clean out bags
+        -- before we potentially want to buy new items in a step or similar
+        CLGuide_SellItems() 
 	elseif event == "PLAYER_LEVEL_UP" then
         -- talentpoint frame popup if specified in separate table?
     end

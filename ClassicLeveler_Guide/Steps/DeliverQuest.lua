@@ -10,15 +10,17 @@ local function EquipItem(itemName)
 
 end
 
+
 local function ChooseQuestRewardAndGoNextStep(rewardIdx)
 	if rewardIdx == nil then
 		GetQuestReward()
 	else
-		-- todo: check that we have bagspace for the item before
-		-- completing the quest and going to next step. 
-		-- If no bagspace, show a warning?
 		GetQuestReward(rewardIdx)
-		EquipItem(CLGuide_CurrentStep.Dt.item)
+        if CLGuide_CurrentStep.Dt.Use and CLGuide_CurrentStep.Dt.Use == 1 then
+		    EquipItem(CLGuide_CurrentStep.Dt.Item)
+        elseif CLGuide_CurrentStep.Dt.Vendor and CLGuide_CurrentStep.Dt.Vendor == 1 then
+            table.insert(CLGuide_QuestCompleteVendorCache,-1, CLGuide_CurrentStep.Dt.Item)
+        end
 	end
 	
 	-- only go to next step if had bagspace and got item?
