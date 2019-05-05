@@ -21,7 +21,7 @@ TriggerItem (a step can only have ONE trigger):
 	*At="questname"										quest Accepted: system message
 	*Ct="questname"										quest is completed in questlog
 	*Ht="questname"										quest is in the questlog
-	*Dt={q="questname", [item="itemname"], [use=1],[vendor=1],[SkipIfUncomplete=1]}
+	*Dt={q="questname", [Item="itemname"], [Use=1],[Vendor=1],[SkipIfUncomplete=1]}
 														quest is delivered. If quest has multiple rewards to choose from, 
 													    you can optionally specify which reward to choose.
 														(TODO) If use=1, the item will also be equipped after receiving it
