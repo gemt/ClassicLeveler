@@ -65,6 +65,7 @@ Triggers marked with * are disabled as long as SHIFT modifier is pressed
 
 CLGuide_GuideTable = {
 	CLGuide_Teldrassil,
+	CLGuide_DunMorogh,
 	CLGuide_Darkshore,
     {
 		Title="11-20 Darkshore",
