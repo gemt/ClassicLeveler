@@ -12,6 +12,7 @@ CLGuide_Options = {
     ["AutoVendorGreyItems"] = true,     -- not checked
     ["UseAutoVendorList"] = false,      -- not checked
     ["ShowTalentPicker"] = true,
+    ["RunSetupBinds"] = false,
 }
 
 -- Put this anywhere you want to throw an error if the game CLGuide_GameVersion is not 1.12.x or 8.x
@@ -277,6 +278,7 @@ EventFrame:RegisterEvent("QUEST_PROGRESS")
 EventFrame:RegisterEvent("TRAINER_SHOW")
 EventFrame:RegisterEvent("CONFIRM_BINDER")
 EventFrame:RegisterEvent("PLAYER_LEVEL_UP")
+EventFrame:RegisterEvent("PLAYER_ENTERING_WORLD")
 
 -- See Guide_UnitQuestLogChanged documentation
 local function CLGuide_DelayedCheckHasQuest()
@@ -326,8 +328,11 @@ EventFrame:SetScript("OnEvent", function()
         -- Note: We want this to run before the Step handlers below as this will clean out bags
         -- before we potentially want to buy new items in a step or similar
         CLGuide_SellItems() 
-	elseif event == "PLAYER_LEVEL_UP" then
-        -- talentpoint frame popup if specified in separate table?
+	elseif event == "PLAYER_ENTERING_WORLD" then
+        if CLGuide_Options["RunSetupBinds"] then
+            CLGuide_SetupBinds()
+            CLGuide_CreateMacros()
+        end
     end
 
 	CLGuide_AcceptQuest()

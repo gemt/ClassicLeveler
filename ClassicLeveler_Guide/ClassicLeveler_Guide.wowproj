@@ -35,6 +35,9 @@
     <Content Include="Guides\1-10-Teldrassil.lua">
       <SubType>Code</SubType>
     </Content>
+    <Content Include="Guides\20-22-Ashenvale.lua">
+      <SubType>Code</SubType>
+    </Content>
     <Content Include="images\Arrow.blp" />
     <Content Include="images\Arrow.m2" />
     <Content Include="images\dummy.tga" />
@@ -70,6 +73,9 @@
     <Content Include="images\UI-Panel-CollapseButton-Up.tga" />
     <Content Include="images\UI-Panel-ExpandButton-Down.tga" />
     <Content Include="images\UI-Panel-ExpandButton-Up.tga" />
+    <Content Include="SetupBinds.lua">
+      <SubType>Code</SubType>
+    </Content>
     <Content Include="SortBags.lua">
       <SubType>Code</SubType>
     </Content>
