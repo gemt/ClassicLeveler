@@ -5,6 +5,7 @@
 ##SavedVariablesPerCharacter: CompletedGuideSteps
 
 Guides\1-10-Teldrassil.lua
+Guides\1-12-Dun_Morogh.lua
 Guides\11-20-Darkshore.lua
 TalentPicker.lua
 VendorList.lua
