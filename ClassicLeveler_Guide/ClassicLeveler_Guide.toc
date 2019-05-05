@@ -6,8 +6,16 @@
 
 Guides\1-10-Teldrassil.lua
 Guides\1-12-Dun_Morogh.lua
-Guides\11-20-Darkshore.lua
-Guides\20-22-Ashenvale.lua
+Guides\11-20_Darkshore.lua
+Guides\20-22_Ashenvale.lua
+Guides\22-23_Stonetalon.lua
+Guides\23-23_Ashenvale_Redridge.lua
+Guides\23-24_Redridge.lua
+Guides\24-26_Duskwood.lua
+Guides\26-28_Wetlands.lua
+Guides\28-30_Duskwood.lua
+
+
 SetupBinds.lua
 TalentPicker.lua
 VendorList.lua

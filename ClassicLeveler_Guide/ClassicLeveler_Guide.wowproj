@@ -29,13 +29,31 @@
     <Content Include="GuideSteps.lua">
       <SubType>Code</SubType>
     </Content>
-    <Content Include="Guides\11-20-Darkshore.lua">
+    <Content Include="Guides\11-20_Darkshore.lua">
       <SubType>Code</SubType>
     </Content>
     <Content Include="Guides\1-10-Teldrassil.lua">
       <SubType>Code</SubType>
     </Content>
-    <Content Include="Guides\20-22-Ashenvale.lua">
+    <Content Include="Guides\20-22_Ashenvale.lua">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="Guides\22-23_Stonetalon.lua">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="Guides\23-24_Redridge.lua">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="Guides\23-23_Ashenvale_Redridge.lua">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="Guides\24-26_Duskwood.lua">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="Guides\26-28_Wetlands.lua">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="Guides\28-30_Duskwood.lua">
       <SubType>Code</SubType>
     </Content>
     <Content Include="images\Arrow.blp" />
