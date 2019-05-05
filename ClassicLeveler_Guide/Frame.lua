@@ -394,6 +394,8 @@ function Guide_PrintStepInfo()
 		GuidePrint("nil")
 		return
 	end
+    
+    GuidePrint("Section: "..CLGuide_CurrentSection.Title.."("..CLGuide_Options["CurrentSection"]..")")
 	GuidePrint("Step: "..CLGuide_Options["CurrentStep"])
 	GuidePrint("Text: "..step.Text)
 	if step.At ~= nil then
