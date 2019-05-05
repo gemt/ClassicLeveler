@@ -1,30 +1,21 @@
--- Author      : G3m7
--- Create Date : 4/26/2019 4:54:32 PM
-
-function Frame1_OnLoad()
-	Frame1:RegisterForDrag("LeftButton");
-	Frame1:RegisterEvent("PLAYER_LEVEL_UP")
-	Frame1:Hide();
-end
-
-function Frame1_OnEvent(event)
-	_print(event..", "..arg1)
+function TalentPickerFrame_OnEvent(event)
 	if event == "PLAYER_LEVEL_UP" and arg1 > 9 then
-		TrainButton:SetText(TalentPicker_Talents[tonumber(arg1)].Name)
-		Frame1:Show()
+        if CLGuide_Options["ShowTalentPicker"] == false then return end
+
+		TrainButton:SetText(CLGuide_TalentPicker_Talents[tonumber(arg1)].Name)
+		TalentPickerFrame:Show()
 	end
 end
 
-function Button1_OnClick()
+function TrainButtonOnClick()
 	local lvl = UnitLevel("player");
-	_print(tonumber(lvl))
-	local talent = TalentPicker_Talents[tonumber(lvl)]
-	_print("Learning "..talent.Name.." ("..talent.tab..","..talent.idx..")")
+	local talent = CLGuide_TalentPicker_Talents[tonumber(lvl)]
+	GuidePrint("Learning "..talent.Name.." ("..talent.tab..","..talent.idx..")")
 	LearnTalent(talent.tab, talent.idx);
-	Frame1:Hide();
+	TalentPickerFrame:Hide();
 end
 
-TalentPicker_Talents = {
+CLGuide_TalentPicker_Talents = {
 	[10] = {Name="Imp Aspect of Hawk", tab=1,idx=1},
 	[11] = {Name="Imp Aspect of Hawk", tab=1,idx=1},
 	[12] = {Name="Imp Aspect of Hawk", tab=1,idx=1},
@@ -95,10 +86,3 @@ TalentPicker_Talents = {
 	[59] = {Name="Mortal Shots", tab=2,idx=9},
 	[60] = {Name="Mortal Shots", tab=2,idx=9},
 }
-
-function _print( msg )
-    if not DEFAULT_CHAT_FRAME then return end
-    DEFAULT_CHAT_FRAME:AddMessage ( msg )
-    ChatFrame3:AddMessage ( msg )
-    ChatFrame4:AddMessage ( msg )
-end

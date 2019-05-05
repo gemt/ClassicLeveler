@@ -1,4 +1,5 @@
-local GuideFrame_Options = {
+-- Global so other files can access options too
+CLGuide_Options = {
     ["Rows"] = 8,
     ["FontSize"] = 16,
     --This whole mess needs fixing, leave it at 0 atm
@@ -10,6 +11,7 @@ local GuideFrame_Options = {
     ["AutoChooseQuestReward"] = false,  -- not checked
     ["AutoVendorGreyItems"] = true,     -- not checked
     ["UseAutoVendorList"] = false,      -- not checked
+    ["ShowTalentPicker"] = true,
 }
 
 -- Put this anywhere you want to throw an error if the game CLGuide_GameVersion is not 1.12.x or 8.x
@@ -121,13 +123,13 @@ function Guide_SetupGuide()
 	Guide:SetScale(1.2)
 	Guide.CURRENT_STEP_IDX = 3
 	Guide.StepFrames = {}
-	Guide.StepHeight = Guide:GetHeight()/GuideFrame_Options["Rows"]
+	Guide.StepHeight = Guide:GetHeight()/CLGuide_Options["Rows"]
 	Guide.UNCOMPLETE_BACKDROP = {r=0.9, g=0.9, b=0.9, a=1}
 	Guide.COMPLETED_BACKDROP = {r=0.0, g=1, b=0.0, a=1}
 	Guide.CURRENT_BACKDROP = {r=0.3, g=0.3, b=0.3, a=1}
 	local h = Guide:GetHeight()*Guide:GetEffectiveScale()
-	local fifth = h/GuideFrame_Options["Rows"]
-	for i=1,GuideFrame_Options["Rows"] do
+	local fifth = h/CLGuide_Options["Rows"]
+	for i=1,CLGuide_Options["Rows"] do
 		Guide.StepFrames[i] = {
 			Bg = CreateFrame("Frame"),
 			Text = Guide:CreateFontString(nil,"ARTWORK")
@@ -157,22 +159,22 @@ function Guide_SetupGuide()
 end
 
 function Guide_NextStep()
-	CLGuide_SetStep(GuideFrame_Options["CurrentStep"] + 1)
+	CLGuide_SetStep(CLGuide_Options["CurrentStep"] + 1)
 end
 
 function Guide_PrevStep()
-	CLGuide_SetStep(GuideFrame_Options["CurrentStep"] - 1, 1)
+	CLGuide_SetStep(CLGuide_Options["CurrentStep"] - 1, 1)
 end
 
 function CLGuide_CompleteStep(step)
     Guide_CompletedGuideSteps[step] = 1
-    if GuideFrame_Options["CurrentStep"] == step then
+    if CLGuide_Options["CurrentStep"] == step then
         Guide_NextStep()
     end
 end
 
 function CLGuide_CompleteCurrentStep()
-    CLGuide_CompleteStep(GuideFrame_Options["CurrentStep"])
+    CLGuide_CompleteStep(CLGuide_Options["CurrentStep"])
 end
 
 function Guide_HasCompletedStep(step)
@@ -185,8 +187,8 @@ function Guide_HasCompletedStep(step)
 end
 
 function Guide_UpdateColors()
-	for i=1,GuideFrame_Options["Rows"] do
-		local stepOffset = GuideFrame_Options["CurrentStep"]-Guide.CURRENT_STEP_IDX+i
+	for i=1,CLGuide_Options["Rows"] do
+		local stepOffset = CLGuide_Options["CurrentStep"]-Guide.CURRENT_STEP_IDX+i
 		local s = CLGuide_CurrentSection.Steps[stepOffset]
 		local isComplete = Guide_HasCompletedStep(stepOffset)
 		if i == Guide.CURRENT_STEP_IDX then
@@ -200,7 +202,7 @@ function Guide_UpdateColors()
 end
 
 function CLGuide_SetSection(sectionNum)
-	GuideFrame_Options["CurrentSection"] = sectionNum
+	CLGuide_Options["CurrentSection"] = sectionNum
 	CLGuide_CurrentSection = CLGuide_GuideTable[sectionNum]
 	CLGuide_SetStep(1)
 end
@@ -211,11 +213,11 @@ function CLGuide_SetStep(step, wasPrevStep)
 
 	if getn(CLGuide_CurrentSection.Steps) < step then
 		GuidePrint("finished current section. Going to next")
-		CLGuide_SetSection(GuideFrame_Options["CurrentSection"] + 1)
+		CLGuide_SetSection(CLGuide_Options["CurrentSection"] + 1)
 		return -- Guide_SetSection() will call CLGuide_SetStep(1)
 	end
 
-	GuideFrame_Options["CurrentStep"] = step
+	CLGuide_Options["CurrentStep"] = step
 
 	CLGuide_CurrentStep = CLGuide_CurrentSection.Steps[step]
 
@@ -239,7 +241,7 @@ function CLGuide_SetStep(step, wasPrevStep)
 		SetCrazyArrow(CLGuide_CurrentStep.point, CLGuide_CurrentStep.Text)
 	end
 
-	for i=1,GuideFrame_Options["Rows"] do
+	for i=1,CLGuide_Options["Rows"] do
 		local stepOffset = step-Guide.CURRENT_STEP_IDX+i
 		local s = CLGuide_CurrentSection.Steps[stepOffset]
 		if s ~= nil then
@@ -351,9 +353,9 @@ end
 function Guide_OnEvent()
 	-- "hacking" the UI in place. Without this, scaling wont look right until you have rescaled the frame...
 	if event == "PLAYER_ENTERING_WORLD" then
-		CLGuide_CurrentSection = CLGuide_GuideTable[GuideFrame_Options["CurrentSection"]] 
-		CLGuide_CurrentStep = CLGuide_CurrentSection.Steps[GuideFrame_Options["CurrentStep"]]
-		CLGuide_SetStep(GuideFrame_Options["CurrentStep"])
+		CLGuide_CurrentSection = CLGuide_GuideTable[CLGuide_Options["CurrentSection"]] 
+		CLGuide_CurrentStep = CLGuide_CurrentSection.Steps[CLGuide_Options["CurrentStep"]]
+		CLGuide_SetStep(CLGuide_Options["CurrentStep"])
 		Guide.IsDragging = 1
 		Guide_OnUpdate()
 		Guide.IsDragging = 0
@@ -371,8 +373,8 @@ end
 function Guide_UpdateDragging()
 	if Guide.IsDragging == 1 then
 		local h = Guide:GetHeight()*Guide:GetEffectiveScale()
-		local fifth = h/GuideFrame_Options["Rows"]
-		for i=1,GuideFrame_Options["Rows"] do
+		local fifth = h/CLGuide_Options["Rows"]
+		for i=1,CLGuide_Options["Rows"] do
 			local topOffset = (i-1)*fifth
 			local bottomOffset = i*fifth
 			Guide.StepFrames[i].Bg:SetPoint("TOP", Guide, "TOP", 0, -topOffset)
@@ -382,12 +384,12 @@ function Guide_UpdateDragging()
 end
 
 function Guide_PrintStepInfo()
-	local step = CLGuide_CurrentStep--GuideSteps[GuideFrame_Options["CurrentStep"]]
+	local step = CLGuide_CurrentStep--GuideSteps[CLGuide_Options"CurrentStep"]]
 	if step == nil then
 		GuidePrint("nil")
 		return
 	end
-	GuidePrint("Step: "..GuideFrame_Options["CurrentStep"])
+	GuidePrint("Step: "..CLGuide_Options["CurrentStep"])
 	GuidePrint("Text: "..step.Text)
 	if step.At ~= nil then
 		GuidePrint("AcceptQuestTrigger: "..step.At)

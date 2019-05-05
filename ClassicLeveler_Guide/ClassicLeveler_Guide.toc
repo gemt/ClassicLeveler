@@ -6,12 +6,14 @@
 
 Guides\1-10-Teldrassil.lua
 Guides\11-20-Darkshore.lua
-TalentTable.lua
+TalentPicker.lua
 VendorList.lua
 GuideSteps.lua
 Arrow.lua
 
+AutoVendor.lua
 Frame.xml
+TalentPickerFrame.xml
 
 Steps\AcceptQuest.lua
 Steps\BuyItem.lua

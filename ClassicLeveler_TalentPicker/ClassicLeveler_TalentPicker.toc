@@ -1,6 +1,0 @@
-## Title: ClassicLeveler_TalentPicker
-## Version: 1.0
-## Author: G3m7
-## Interface: 11100
-
-Frame.xml
