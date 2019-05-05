@@ -298,8 +298,8 @@ end
 
 EventFrame:SetScript("OnUpdate", function() 
     CLGuide_DelayedCheckHasQuest()
-    
     CLGuide_CompleteQuestOnUpdate()
+    CLGuide_TrainSkillOnUpdate()
 
     if CLGuide_CurrentStep.Proximity ~= nil then
         if CLGuide_GetDistToActivePoint() < CLGuide_CurrentStep.Proximity then

@@ -67,13 +67,7 @@ CLGuide_GuideTable = {
 	CLGuide_Teldrassil,
 	CLGuide_DunMorogh,
 	CLGuide_Darkshore,
-    {
-		Title="11-20 Darkshore",
-		Pinboard = {},
-		Steps = {
-            {Text="Accept The Tower of Althalaxx", At="The Tower of Althalaxx", point={x=2619,y=3872}},
-        }
-    }
+    CLGuide_Ashenvale
 }
 
 

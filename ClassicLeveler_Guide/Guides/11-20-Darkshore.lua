@@ -137,7 +137,7 @@ CLGuide_Darkshore = {
         -- add a vendor step in darnassus before training perhaps, if gold is tight?
 	    {Text="Train Hunter skills", 
             TrainSkill={
-                {n="Mend Pet",r="Rank 1"},
+                {n="Mend Pet",r="Rank 1", Actionbar=1},
                 {n="Arcane Shot",r="Rank 2"},
                 {n="Distracting Shot",r="Rank 1"},
                 {n="Wing Clip",r="Rank 1"},

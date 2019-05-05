@@ -7,10 +7,12 @@
 Guides\1-10-Teldrassil.lua
 Guides\1-12-Dun_Morogh.lua
 Guides\11-20-Darkshore.lua
+Guides\20-22-Ashenvale.lua
 TalentPicker.lua
 VendorList.lua
 GuideSteps.lua
 Arrow.lua
+Macro.lua
 
 AutoVendor.lua
 Frame.xml
