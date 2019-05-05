@@ -5,8 +5,11 @@ local GuideFrame_Options = {
     ["PreviousSteps"] = 0,
     ["CurrentSection"] = 1,
     ["CurrentStep"] = 1,
-    ["Locked"] = false
-
+    ["Locked"] = false,
+    ["DisableAddon"] = false,           -- not checked
+    ["AutoChooseQuestReward"] = false,  -- not checked
+    ["AutoVendorGreyItems"] = true,     -- not checked
+    ["UseAutoVendorList"] = false,      -- not checked
 }
 
 -- Put this anywhere you want to throw an error if the game CLGuide_GameVersion is not 1.12.x or 8.x
