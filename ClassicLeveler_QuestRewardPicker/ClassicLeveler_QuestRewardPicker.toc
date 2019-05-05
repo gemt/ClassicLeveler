@@ -1,8 +1,0 @@
-## Title: ClassicLeveler_QuestRewardPicker
-## Version: 1.0
-## Author: G3m7
-## Interface: 11100
-##SavedVariables: CLQuestRewardChoices
-Frame.xml
-Builder.xml
-Builder.lua

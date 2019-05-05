@@ -14,6 +14,9 @@
     <Content Include="Arrow.lua">
       <SubType>Code</SubType>
     </Content>
+    <Content Include="AutoVendor.lua">
+      <SubType>Code</SubType>
+    </Content>
     <Content Include="ClassicLeveler_Guide.toc">
       <SubType>TableOfContents</SubType>
     </Content>
@@ -67,6 +70,9 @@
     <Content Include="images\UI-Panel-CollapseButton-Up.tga" />
     <Content Include="images\UI-Panel-ExpandButton-Down.tga" />
     <Content Include="images\UI-Panel-ExpandButton-Up.tga" />
+    <Content Include="SortBags.lua">
+      <SubType>Code</SubType>
+    </Content>
     <Content Include="Steps\AcceptQuest.lua">
       <SubType>Code</SubType>
     </Content>
@@ -103,8 +109,12 @@
     <Content Include="Steps\ZoneEntered.lua">
       <SubType>Code</SubType>
     </Content>
-    <Content Include="TalentTable.lua">
+    <Content Include="TalentPickerFrame.lua">
       <SubType>Code</SubType>
+      <DependentUpon>TalentPickerFrame.xml</DependentUpon>
+    </Content>
+    <Content Include="TalentPickerFrame.xml">
+      <SubType>Frame</SubType>
     </Content>
     <Content Include="Textures\Borders\fer1.tga" />
     <Content Include="Textures\Borders\fer6.tga" />
