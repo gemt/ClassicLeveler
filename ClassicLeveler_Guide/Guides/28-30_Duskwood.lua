@@ -8,3 +8,215 @@ CLGuide_Duskwood2 = {
         {Text="Step1", At="someQuest", point={x=5869,y=4427}},
     }
 }
+
+--[[
+==== REMEMBER TO REPICK ANY ABANDONED QUESTS =====
+	look to stars
+	worgens
+	the night watch pt2
+==========================
+
+IF FORGOT TO DO THIS BEFORE WTLANDS:
+	Go south to blind mary
+	turn inn ghost hair thread
+	accept return the comb
+	return to darkshire
+	turn inn return the comb
+	accept deliver the thread
+
+
+run west
+do Worgen in the woods pt2 (12 runners)
+Run to the Yorgen farmstead (south-middle)
+turn inn sven's revenge at the pile of dirt between the houses south on the farm
+accept sven's camp
+Turn inn Eight-legged menaces at xroads
+
+do look to the stars (ogre cave)
+	
+Run to raven hill
+turn inn return to jitters
+
+complete The Night Watch (15 skeletal fiend and horror)
+
+run to sven's camp north-west
+kill missing wolves on the way
+
+turn inn the sven's camp
+accept shadowy figure
+
+kill wolves on the way to the hermit
+
+turn inn deliver the thread
+accept zombie juice
+
+GRIND TO LEVEL 28
+	24-25 skeletons ~30k xph
+	ghouls about the same
+Accept The Weathered Grave (just north of the house on top of hill) (17,29)
+
+
+16h3min
+=== heartstone to darkshire ====
+
+go pick up the item for SW quest 
+finish legend of stalvan, kite to darkshire
+
+turn stuff inn
+
+Fly to SW 
+	turn inn donation of wool if you have 60
+	turn inn A noble brew (wlock trainer), take followup
+	Turn inn the eye of paleth
+	Accept the missing diplomat from Thomas in the Cathedral
+	Train spells
+	turn inn a noble brew (first right corridor on way into keep)
+	1: Bishop DeLavey (second right corridor on way into keep)
+	2: Jorgen - Fishing at gates of SW
+	3: Elling Trias - Cheese vendor, right side just as entering SW
+Fly back to Duskwood
+	4: Watcher Backus - patrolling road north of Darkshire.
+		(this is the find the defias docket part)
+	
+=================================
+
+Turn inn Worgen in the woods pt 2
+accept worgen in the woods pt3 (vile fang and tained ones)
+Turn inn The Night Watch (15 skeletal fiend and horror)
+Accept The Night Watch (20 plague spreader)
+turn inn the shadowy figure
+accept the shadowy search continues
+turn in zombie juice
+turn inn the shadowy search continue
+accept inquire at the inn
+turn inn inquire at the inn
+accept finding the shadowy figure
+accept gather rot blossoms
+
+turn inn the weathered grave
+accept morgan ladimore
+turn inn morgan ladimore
+accept mor'ladim
+
+=== Kill skeletals north of tranquil gardens cemetary (south of darksire) =====
+	try to get 8 rot blossoms
+	if all mobs cleared and not done, do worgen in the wods just next door, then come back
+	
+=========
+
+Do Worgen in the woods pt 3 (Vile fang and tainted ones). Remember there may not be enough tainted ones, so start with those
+
+when you have 8 rot blossoms, go back to darkshire and turn inn gather rot blossoms
+turn inn worgen in the woods as well
+
+
+=== RUN WEST ===
+The missing diplomat - Find the defias docket south of raven hill (73,32, house at south-eastern corner of the farm)
+
+=== RAVEN HILL ===
+turn inn finding the shadowy figure
+accept return to sven
+
+== run to sven (nw corner) === 
+
+turn inn return to sven
+accept proving your worth
+should be done with volves now, turn inn. If not complete it and turn inn
+
+run to the hermit 
+turn inn juice delivery
+accept ghoulish effigy
+
+IN RAVEN HILL, COMPLETE:
+	Ghoulish Effigy
+	The Totem of Infliction (10 ghoul fang, 10 skeleton finger)
+	Proving your worth (15 skeletal raider, 3 skeletal healer, 3 skeletal warder)
+	Gather Rot Blossoms (drops from skeletals)
+	The night watch (20 plague spreaders)
+	
+FOCUS skeletal raiders outside the crypt and house on top of hill first. Not many easily accessible. Circle back to them after respawn
+
+turn inn ghoulish effingy when it's done (should be fast)
+accept ogre thieves
+
+run down to ogres and loot abercrombie's crate for Ogre thieves
+run back to hermit 
+
+KITE-KILL MOR'LADIM TOWARDS OGRES
+
+turn inn ogre thieves
+accept note to the mayor
+
+continue finishing raven hill quests
+
+Svens camp:
+	Turn inn Proving your worth 
+	Accept seeking wisdom
+	
+KILL MOR'LADIM NOW IF HAVE NOT DONE ALREADY
+
+CONSIDER running westfall to fly to darkshire again instead of running east
+
+run back to darkshire 
+	turn inn worgen in the woods pt3
+	turn inn the night watch ??? FIGURE OUT IF QUIVER OR 10 SLOT ???
+	Turn inn the totem of infliction
+	Turn inn Mor'Ladim
+		Accept the daugther who lived. Do some talking. End up with: 
+		A daughter's Love
+	Turn inn Note to the mayor, do that whole talking with different people
+	After doing all talking, Accept 
+		Bride of the Embalmer
+
+
+Turn inn The missing diplomat at Watcher Backus (patrol at road)		
+Go north-east to manor mistmantle
+clear camp
+loot tear of tilloa on the small farmpatch
+Kite stalvan on to the road. Get help from the patrolling watchman, use fences along road to kite easier
+Turn inn Legend of stalvan
+
+
+GRIND UNTIL 42000/44300 (95%)
+
+17h37m, 29+74% (32819/44300)
+
+=== FLY SW ===
+Cheese vendor:
+	Turn inn The missing Diplomat at cheese vendor (sw entrance, on the right)
+
+Warlock Trainer (west in mage quarter)
+	Turn inn a Noble Brew
+	Accept a noble brew pt2
+	
+Cathedral:
+	Turn inn Seeking Wisdom
+	Accept The Doomed Fleet
+	Turn inn Cleansing the eye
+
+SW Keep:
+	Turn inn a Noble Brew - Corridor to the right while running towards faction boss
+	
+Old Town (center):
+	The missing Diplomat, talk to Dashel
+	Place trap. 2 ads spawn. Tank boss and non-trapped add with pet. Nuke Dashel
+
+35169/44300
+	
+Go back to cheese vendor at SW entrance. 
+	Should now have part that leads to wetlands
+	
+	
+Questlog:
+The doomed fleet
+The missing diplomat
+
+TODO: Figure out how close to lvl 30 need to be in order to ding 30 in SW
+Train spells if 30
+
+
+=== FLY TO WETLANDS ===
+
+
+
+]]

@@ -1,7 +1,7 @@
 ## Title: ClassicLeveler_Guide
 ## Version: 1.0
 ## Author: G3m7
-## Interface: 80100
+## Interface: 30287
 ##SavedVariablesPerCharacter: CompletedGuideSteps
 
 Guides\1-10-Teldrassil.lua
@@ -17,11 +17,9 @@ Guides\28-30_Duskwood.lua
 
 
 SetupBinds.lua
-TalentPicker.lua
 VendorList.lua
 GuideSteps.lua
 Arrow.lua
-Macro.lua
 
 AutoVendor.lua
 Frame.xml

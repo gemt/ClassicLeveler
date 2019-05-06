@@ -46,7 +46,7 @@ TriggerItem (a step can only have ONE trigger):
 
 	*TrainSkill={{n="skill1",r="Rank 1"},{n="skill2",r="Rank 2"}, }           
                                                         trains the specified skills at a trainer and goto next step
-	*SellItem
+	
 
 Point:
 	Point={x=1,y=1}

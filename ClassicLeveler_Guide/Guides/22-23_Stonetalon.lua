@@ -8,3 +8,7 @@ CLGuide_Stonetalon = {
         {Text="Step1", At="someQuest", point={x=5869,y=4427}},
     }
 }
+--[[
+
+
+]]

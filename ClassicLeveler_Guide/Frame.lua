@@ -4,16 +4,22 @@ CLGuide_Options = {
     ["FontSize"] = 16,
     --This whole mess needs fixing, leave it at 0 atm
     ["PreviousSteps"] = 0,
-    ["CurrentSection"] = 1,
+    ["CurrentSection"] = 4,
     ["CurrentStep"] = 1,
     ["Locked"] = false,
-    ["DisableAddon"] = false,           -- not checked
-    ["AutoChooseQuestReward"] = false,  -- not checked
-    ["AutoVendorGreyItems"] = true,     -- not checked
-    ["UseAutoVendorList"] = false,      -- not checked
-    ["ShowTalentPicker"] = true,
-    ["RunSetupBinds"] = false,
+    ["RunSetupBinds"] = false,         
+    ["DisableAddon"] = false,           -- not implemented
+    ["AutoChooseQuestReward"] = false,  -- not implemented
+    ["AutoVendorGreyItems"] = true,     -- not implemented
+    ["UseAutoVendorList"] = false,      -- not implemented
+    ["ShowTalentPicker"] = true,        -- not implemented
+    ["EnablePoints"] = true,            -- not fully implemented 
+    ["EnableAutomaticTaxi"] = true,     -- not implemented
 }
+
+GetPlayerMapPosition = GetPlayerMapPosition or function()
+    return C_Map.GetPlayerMapPosition(C_Map.GetBestMapForUnit("player"), "player"):GetXY()
+end
 
 -- Put this anywhere you want to throw an error if the game CLGuide_GameVersion is not 1.12.x or 8.x
 CLGuide_GameVersion = GetBuildInfo();
@@ -319,7 +325,7 @@ EventFrame:SetScript("OnEvent", function()
 		GuidePrint("EventFrame: "..event..", "..arg1..", "..arg2) 
 	elseif arg1 ~= nil then 
 		GuidePrint("EventFrame: "..event..", "..arg1) 
-	else
+	elseif event ~= nil then
 		GuidePrint("EventFrame: "..event)
 	end
 
@@ -370,7 +376,9 @@ end
 
 
 function Guide_OnUpdate()
-	UpdateCoordBox()
+    if CLGuide_Options["EnablePoints"] == true then
+	    UpdateCoordBox()
+    end
 	Guide_UpdateDragging()
 
 end
