@@ -69,9 +69,6 @@ function CLGuide_AcceptQuest()
 		-- When you are on the UI frame showing "continue" button?
 		-- When you are on the UI frame where you can accept a new quest
 		OnQuestDetail()
-	elseif event == "QUEST_PROGRESS" then
-		-- continue button screen
-		OnQuestProgress()
 	elseif event == "CHAT_MSG_SYSTEM" then
         -- This event is not reliable on 1.12, if you accept multiple quests in quick succession, they may not show
         -- Ideally we don't need to rely on this event to know when a quest is accepted, instead we should 
