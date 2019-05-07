@@ -34,7 +34,7 @@ Steps\TrainSkill.lua
 Steps\ZoneEntered.lua
 
 Arrow.lua
-Frame.lua
+Utilities.lua
 
 UI\Frame.xml
 UI\GuideFrame.lua
