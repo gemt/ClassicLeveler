@@ -159,19 +159,6 @@ Probably skip running up to turn in Raene's Cleansing (825 XP), the followup WON
     }
 }
 --[[
-== === RUN TO STONETALON MOUNTAINS ====
-
-kill pridewings as you pass them
-turn in On guard in stonetalon at 60,66. Accept followup, talk to gnome
-accept a gnome's respite
-go accept super reaper 6000
-do these 2 quest
-Use the vendor at the area to empty bags
-turn inn super reaper 6000. Skip followup
-turn inn gnomes respite, accept both followups
-Run all the way north to stonetalon peak. Stop at the lake halfway north to kill pridewings and finish Pridewings of stonetalon
-
-Turn in journey to stonetalon peak. Skip followup
 
 ==== Fly or HS to astranaar ==== 
 
