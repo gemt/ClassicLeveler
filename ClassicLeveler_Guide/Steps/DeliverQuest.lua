@@ -16,10 +16,10 @@ local function ChooseQuestRewardAndGoNextStep(rewardIdx)
 		GetQuestReward()
 	else
 		GetQuestReward(rewardIdx)
-        if CLGuide_CurrentStep.Dt.Use and CLGuide_CurrentStep.Dt.Use == 1 then
-		    EquipItem(CLGuide_CurrentStep.Dt.Item)
-        elseif CLGuide_CurrentStep.Dt.Vendor and CLGuide_CurrentStep.Dt.Vendor == 1 then
-            table.insert(CLGuide_QuestCompleteVendorCache,-1, CLGuide_CurrentStep.Dt.Item)
+        if CLGuide_CurrentStepTable.Dt.Use and CLGuide_CurrentStepTable.Dt.Use == 1 then
+		    EquipItem(CLGuide_CurrentStepTable.Dt.Item)
+        elseif CLGuide_CurrentStepTable.Dt.Vendor and CLGuide_CurrentStepTable.Dt.Vendor == 1 then
+            table.insert(CLGuide_QuestCompleteVendorCache,-1, CLGuide_CurrentStepTable.Dt.Item)
         end
 	end
 	
@@ -53,8 +53,8 @@ local function OnQuestComplete()
 	local title = GetTitleText()
 	
 	-- extra double triple control check that we're actually looking at the correct quest here
-	if string.lower(title) ~= string.lower(CLGuide_CurrentStep.Dt.q) then
-		GuidePrint("Selected quest ("..title..") does not match Guide quest ("..CLGuide_CurrentStep.Dt.q..")");
+	if string.lower(title) ~= string.lower(CLGuide_CurrentStepTable.Dt.q) then
+		GuidePrint("Selected quest ("..title..") does not match Guide quest ("..CLGuide_CurrentStepTable.Dt.q..")");
 		GuidePrint("This should not happen, and something is broken. Turn inn the quest manually (hold shift to disable addon)")
 		return
 	end
@@ -74,10 +74,10 @@ local function OnQuestComplete()
 		ChooseQuestRewardAndGoNextStep(nil)
 	elseif numChoices == 1 then
 		ChooseQuestRewardAndGoNextStep(1)
-	elseif CLGuide_CurrentStep.Dt.Item ~= nil then
-		local rewardIdx = GetQuestRewardIndex(CLGuide_CurrentStep.Dt.Item)
+	elseif CLGuide_CurrentStepTable.Dt.Item ~= nil then
+		local rewardIdx = GetQuestRewardIndex(CLGuide_CurrentStepTable.Dt.Item)
 		if rewardIdx == nil then
-			GuidePrint("Could not find reward specified ("..CLGuide_CurrentStep.Dt.Item.."). Complete the quest manually")
+			GuidePrint("Could not find reward specified ("..CLGuide_CurrentStepTable.Dt.Item.."). Complete the quest manually")
 		else 
 			ChooseQuestRewardAndGoNextStep(rewardIdx)
 		end
@@ -117,7 +117,7 @@ local function OnGossipShow()
 	-- ALTERNATIVELY, GetNumGossipAvailableQuests() was added to the API at some point. Maybe we can use it in classic
 	local numActiveQuests = CLGuide_GetNumStrings(activeQuestInfo) 
 	local questStep = getn(activeQuestInfo) / numActiveQuests
-	local stepQuestnameLower = string.lower(CLGuide_CurrentStep.Dt.q)
+	local stepQuestnameLower = string.lower(CLGuide_CurrentStepTable.Dt.q)
 	for i=1, numActiveQuests do
 		local questName = string.lower(activeQuestInfo[i*questStep-(questStep-1)])
 		if string.lower(questName) == stepQuestnameLower then
@@ -125,17 +125,17 @@ local function OnGossipShow()
 			return
 		end
 	end
-	GuidePrint("DeliverQuest OnGossipShow <"..CLGuide_CurrentStep.Dt.q.."> not found")
+	GuidePrint("DeliverQuest OnGossipShow <"..CLGuide_CurrentStepTable.Dt.q.."> not found")
 end
 
 local function OnQuestGreeting()
 	for i=1, GetNumActiveQuests() do
-		if string.lower(GetActiveTitle(i)) == string.lower(CLGuide_CurrentStep.Dt.q) then
+		if string.lower(GetActiveTitle(i)) == string.lower(CLGuide_CurrentStepTable.Dt.q) then
 			SelectActiveQuest(i)
 			return
 		end
 	end
-	GuidePrint("DeliverQuest OnQuestGreeting <"..CLGuide_CurrentStep.Dt.q.."> not found")
+	GuidePrint("DeliverQuest OnQuestGreeting <"..CLGuide_CurrentStepTable.Dt.q.."> not found")
 end
 
 local function HaveQuestInQuestlog(qtitle)
@@ -151,13 +151,13 @@ local function HaveQuestInQuestlog(qtitle)
 end
 
 function CLGuide_DeliverQuest()
-	if CLGuide_CurrentStep.Dt == nil then return end
+	if CLGuide_CurrentStepTable.Dt == nil then return end
 	if IsShiftKeyDown() then return end
 
     --TODO: Complete the step if you don't have the quest in questlog here, but NOT sure if this can ever cause
     -- a race condition and make you skip a step due to quick automatic deliver+accept followup
-    if HaveQuestInQuestlog(CLGuide_CurrentStep.Dt.q) == 0 then
-        GuidePrint("DeliverQuest-step: <"..CLGuide_CurrentStep.Dt.q.."> did not exist in questlog. Completing step.")
+    if HaveQuestInQuestlog(CLGuide_CurrentStepTable.Dt.q) == 0 then
+        GuidePrint("DeliverQuest-step: <"..CLGuide_CurrentStepTable.Dt.q.."> did not exist in questlog. Completing step.")
         CLGuide_CompleteCurrentStep()
         return
     end

@@ -12,7 +12,7 @@ end
 function CLGuide_HaveQuest()
 	-- currently not sure if we need this anymore
     -- HaveQuestInQuestlog exists in DeliverQuest.lua
-    if CLGuide_CurrentStep.Ht ~= nil then
+    if CLGuide_CurrentStepTable.Ht ~= nil then
         GuidePrint("CLGuide_HaveQuest not implemented")
     end
 end

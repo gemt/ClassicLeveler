@@ -1,0 +1,153 @@
+<Ui xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.blizzard.com/wow/ui/">
+	<Script file="GuideFrame.lua" />
+	<Frame name="CLGuide_Frame" parent="UIParent" toplevel="true" movable="true" resizable="true" enableMouse="true" enableMouseClicks="true" enableMouseMotion="true">
+		<Size x="400" y="300" />
+		  <ResizeBounds>
+		      <minResize x="250" y="300"/>
+		  </ResizeBounds>
+		<Anchors>
+			<Anchor point="CENTER" />
+		</Anchors>
+		<Backdrop bgfile="Interface\BUTTONS\WHITE8X8" >
+			<Color r="0.2" g="0.2" b="0.2" a="0.8" />
+		</Backdrop>
+		<Frames>
+			<Button name="$parent_ResizeButton">
+				<Size x="16" y="16" />
+				<Anchors>
+					<Anchor point="BOTTOMRIGHT"/>
+				</Anchors>
+				<Scripts>
+					<OnMouseDown>
+						CLGuide_Frame:StartSizing("BOTTOMRIGHT")
+						CLGuide_FrameIsScaling = true
+					</OnMouseDown>
+					<OnMouseUp>
+						CLGuide_Frame:StopMovingOrSizing()
+						CLGuide_FrameIsScaling = false
+					</OnMouseUp>
+				</Scripts>
+				<NormalTexture file="Interface\AddOns\ClassicLeveler_Guide\Buttons\UI-ChatIM-SizeGrabber-Up" />
+				<PushedTexture file="Interface\AddOns\ClassicLeveler_Guide\Buttons\UI-ChatIM-SizeGrabber-Down" />
+				<HighlightTexture file="Interface\AddOns\ClassicLeveler_Guide\Buttons\UI-ChatIM-SizeGrabber-Highlight" />
+			</Button>
+			<Button name="$parent_NextButton">
+				<Anchors>
+					<Anchor point="BOTTOMLEFT" >
+						<Offset>
+					        <AbsDimension x="32" y="-30" />
+					    </Offset>
+					</Anchor>
+				</Anchors>
+				<Size x="24" y="24" />
+				<Scripts>
+					<OnClick>
+						CLGuide_NextStep()
+					</OnClick>
+				</Scripts>
+				<NormalTexture file="Interface\AddOns\ClassicLeveler_Guide\Buttons\arrowright" />
+				<NormalColor r="1" g="1" b="0" />
+				<PushedTexture file="Interface\AddOns\ClassicLeveler_Guide\Buttons\arrowright" />
+				<HighlightTexture file="Interface\AddOns\ClassicLeveler_Guide\Buttons\arrowrighthighlight" />
+			</Button>
+			<Button name="$parent_PrevButton">
+				<Size x="24" y="24" />
+				<Anchors>
+					<Anchor point="BOTTOMLEFT">
+						<Offset>
+					        <AbsDimension x="4" y="-30" />
+					    </Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						CLGuide_PrevStep()
+					</OnClick>
+				</Scripts>
+				<NormalTexture file="Interface\AddOns\ClassicLeveler_Guide\Buttons\arrowleft" />
+				<PushedTexture file="Interface\AddOns\ClassicLeveler_Guide\Buttons\arrowleft" />
+				<HighlightTexture file="Interface\AddOns\ClassicLeveler_Guide\Buttons\arrowlefthighlight" />
+			</Button>
+			<Button name="$parent_Config">
+				<Size x="24" y="24" />
+				<Anchors>
+					<Anchor point="BOTTOMRIGHT">
+						<Offset>
+					        <AbsDimension x="-4" y="-30" />
+					    </Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						CLGuide_Config()
+					</OnClick>
+				</Scripts>
+				<NormalTexture file="Interface\AddOns\ClassicLeveler_Guide\Buttons\config" />
+				<PushedTexture file="Interface\AddOns\ClassicLeveler_Guide\Buttons\config" />
+				<HighlightTexture file="Interface\AddOns\ClassicLeveler_Guide\Buttons\config" />
+			</Button>
+			<Button name="$parent_GuideList">
+			<!-- 	<Backdrop bgfile="Interface\BUTTONS\WHITE8X8" >
+					<Color r="0.2" g="0.2" b="0.2" a="0.8" />
+				</Backdrop> -->
+				<Size x="155" y="24" />
+				<NormalText inherits="DialogButtonNormalText" text="Guide Name">
+					<Color r="1" b="1" g="1" />
+				</NormalText>
+				<Anchors>
+					<Anchor point="BOTTOM">
+						<Offset>
+					        <AbsDimension x="8" y="-30" />
+					    </Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						CLGuide_GuideList()
+					</OnClick>
+				</Scripts>
+			</Button>
+			<!-- Dev frame -->
+			<EditBox name="coordBox" enableMouse="true" enableMouseClicks="true" enableMouseMotion="true" enableKeyboard="true" multiLine="true" autoFocus="false">
+				<Anchors>
+					<Anchor point="BOTTOMLEFT" >
+						<Offset>
+					        <AbsDimension x="0" y="-50" />
+					    </Offset>
+					</Anchor>
+				</Anchors>
+				<Size x="300" y="32" />
+				<Scripts>
+					<OnEditFocusGained>
+						coordBox:HighlightText(0)
+					</OnEditFocusGained>
+					<OnEscapePressed>
+						coordBox:ClearFocus()
+					</OnEscapePressed>
+				</Scripts>
+				<FontString inherits="GameFontNormal" />
+			</EditBox>
+
+		</Frames>
+		<Scripts>
+			<OnMouseDown>
+				CLGuide_Frame:StartMoving()
+			</OnMouseDown>
+			<OnMouseUp>
+				CLGuide_Frame:StopMovingOrSizing()
+			</OnMouseUp>
+			<OnDragStop>
+				CLGuide_Frame:StopMovingOrSizing()
+			</OnDragStop>
+			<OnDragStart>
+				CLGuide_Frame:StartMoving()
+			</OnDragStart>
+			<OnLoad>
+				CLGuide_Frame_OnLoad()
+			</OnLoad>
+			<OnUpdate>
+				CLGuide_Frame_OnUpdate()
+			</OnUpdate>
+		</Scripts>
+	</Frame>
+</Ui>

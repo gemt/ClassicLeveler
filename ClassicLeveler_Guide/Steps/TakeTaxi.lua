@@ -1,9 +1,9 @@
 
 function CLGuide_TakeTaxi()
-	if CLGuide_CurrentStep.Taxi == nil then return end
+	if CLGuide_CurrentStepTable.Taxi == nil then return end
 	if IsShiftKeyDown() then return end -- disabling taxi logic when holding shift down
 
-	-- todo: handle CLGuide_CurrentStep.ReqPrev. Dont wanna fly away automatically if we havent completed prevstep!
+	-- todo: handle CLGuide_CurrentStepTable.ReqPrev. Dont wanna fly away automatically if we havent completed prevstep!
 	
 	if event == "GOSSIP_SHOW" then
 		local taxiIdx = CLGuide_GetGossipIndex("taxi")
@@ -14,7 +14,7 @@ function CLGuide_TakeTaxi()
 		end
 	elseif event == "TAXIMAP_OPENED" then
 		for i=1, NumTaxiNodes() do
-			if string.lower(TaxiNodeName(i)) == string.lower(CLGuide_CurrentStep.Taxi) then
+			if string.lower(TaxiNodeName(i)) == string.lower(CLGuide_CurrentStepTable.Taxi) then
 				TakeTaxiNode(i)
 				CLGuide_CompleteCurrentStep()
 				return

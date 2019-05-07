@@ -1,0 +1,59 @@
+<Ui xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.blizzard.com/wow/ui/">
+	<Script file="GuideList.lua" />
+	<Frame name="CLGuide_GuideListFrame" parent="UIParent" toplevel="true" movable="true" enableMouse="true" enableMouseClicks="true" enableMouseMotion="true" hidden="true">
+		<Size x="250" y="400" />
+		<Anchors>
+			<Anchor point="CENTER" />
+		</Anchors>
+		<Backdrop bgfile="Interface\BUTTONS\WHITE8X8" >
+			<Color r="0.2" g="0.2" b="0.2" a="0.8" />
+		</Backdrop>
+		<Frames>
+			<Button name="$parent_CrossButton">
+				<Size x="16" y="16" />
+				<Anchors>
+					<Anchor point="TOPRIGHT"/>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						CLGuide_GuideListFrame:Hide()
+					</OnClick>
+				</Scripts>
+				<NormalTexture file="Interface\AddOns\ClassicLeveler_Guide\Buttons\cross" />
+				<PushedTexture file="Interface\AddOns\ClassicLeveler_Guide\Buttons\UI-ChatIM-SizeGrabber-Down" />
+				<HighlightTexture file="Interface\AddOns\ClassicLeveler_Guide\Buttons\crosshighlight" />
+			</Button>
+		</Frames>
+
+			<Layers> 
+			    <Layer level="ARTWORK"> 
+			      <FontString name="$parentTitle" font="Fonts\ARIALN.ttf" text="Guide List" justifyH="LEFT" justifyV="TOP">
+			        <Anchors> 
+			          <Anchor point="TOPLEFT">
+			            <Offset>
+			              <AbsDimension x="8" y="-10"/>
+			            </Offset>        
+			          </Anchor>
+			        </Anchors>
+			        <Color r="1" g="1" b="1"/>
+					<FontHeight val="24"/>
+			      </FontString>
+			    </Layer> 
+			</Layers>
+
+		<Scripts>
+			<OnMouseDown>
+				CLGuide_GuideListFrame:StartMoving()
+			</OnMouseDown>
+			<OnMouseUp>
+				CLGuide_GuideListFrame:StopMovingOrSizing()
+			</OnMouseUp>
+			<OnDragStop>
+				CLGuide_GuideListFrame:StopMovingOrSizing()
+			</OnDragStop>
+			<OnDragStart>
+				CLGuide_GuideListFrame:StartMoving()
+			</OnDragStart>
+		</Scripts>
+	</Frame>
+</Ui>

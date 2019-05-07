@@ -48,8 +48,8 @@ local function OnTrainerShow()
             name = string.lower(name)
             rank = string.lower(rank)
             if category == "available" then
-                for gidx = 1, getn(CLGuide_CurrentStep.TrainSkill) do
-                    local stepskill = CLGuide_CurrentStep.TrainSkill[gidx]
+                for gidx = 1, getn(CLGuide_CurrentStepTable.TrainSkill) do
+                    local stepskill = CLGuide_CurrentStepTable.TrainSkill[gidx]
                     if string.lower(stepskill.n) == name then
                         if stepskill.r == nil or string.lower(stepskill.r) == rank then
                             BuyTrainerService(spellIdx)
@@ -57,7 +57,7 @@ local function OnTrainerShow()
                                 -- queueing delayed placement on actionbars
                                 table.insert(CLGuide_PlaceSpellQueue, {Spell=stepskill,Time=GetTime()+2})
                             end
-                            table.remove(CLGuide_CurrentStep.TrainSkill, gidx)
+                            table.remove(CLGuide_CurrentStepTable.TrainSkill, gidx)
                             break;
                         end
                     end
@@ -68,11 +68,11 @@ local function OnTrainerShow()
     
     GuidePrint("Could not train the following spells:")
 
-    for gidx = 1, getn(CLGuide_CurrentStep.TrainSkill) do
-        if CLGuide_CurrentStep.TrainSkill[gidx].r ~= nil then
-            GuidePrint("    "..CLGuide_CurrentStep.TrainSkill[gidx].n.." ("..CLGuide_CurrentStep.TrainSkill[gidx].r..")")
+    for gidx = 1, getn(CLGuide_CurrentStepTable.TrainSkill) do
+        if CLGuide_CurrentStepTable.TrainSkill[gidx].r ~= nil then
+            GuidePrint("    "..CLGuide_CurrentStepTable.TrainSkill[gidx].n.." ("..CLGuide_CurrentStepTable.TrainSkill[gidx].r..")")
         else
-            GuidePrint("    "..CLGuide_CurrentStep.TrainSkill[gidx].n)
+            GuidePrint("    "..CLGuide_CurrentStepTable.TrainSkill[gidx].n)
         end
     end
     CLGuide_CompleteCurrentStep()
@@ -88,7 +88,7 @@ function CLGuide_TrainSkillOnUpdate()
 end
 
 function CLGuide_TrainSkill()
-    if CLGuide_CurrentStep.TrainSkill == nil then return end
+    if CLGuide_CurrentStepTable.TrainSkill == nil then return end
     if IsShiftKeyDown() then return end
 
     if event == "GOSSIP_SHOW" then

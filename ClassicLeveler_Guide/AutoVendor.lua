@@ -1,9 +1,6 @@
 -- Author      : G3m7
 -- Create Date : 5/5/2019 9:54:09 AM
 
-
-CLGuide_QuestCompleteVendorCache = {}
-
 function CLGuide_PrintQuestCompleteVendorCache()
     for i=1, getn(CLGuide_QuestCompleteVendorCache) do
         GuidePrint(CLGuide_QuestCompleteVendorCache[i])
