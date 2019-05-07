@@ -156,11 +156,13 @@ function CLGuide_DeliverQuest()
 
     --TODO: Complete the step if you don't have the quest in questlog here, but NOT sure if this can ever cause
     -- a race condition and make you skip a step due to quick automatic deliver+accept followup
-    if HaveQuestInQuestlog(CLGuide_CurrentStepTable.Dt.q) == 0 then
-        GuidePrint("DeliverQuest-step: <"..CLGuide_CurrentStepTable.Dt.q.."> did not exist in questlog. Completing step.")
-        CLGuide_CompleteCurrentStep()
-        return
-    end
+    -- ACTUALLY: "race condition" confirmed when you deliver->accept->deliver a quest of the same name in 3 consecutive steps
+    -- trying without this for a while to see how things work now
+    --if HaveQuestInQuestlog(CLGuide_CurrentStepTable.Dt.q) == 0 then
+    --    GuidePrint("DeliverQuest-step: <"..CLGuide_CurrentStepTable.Dt.q.."> did not exist in questlog. Completing step.")
+    --    CLGuide_CompleteCurrentStep()
+    --    return
+    --end
 	-- QUEST_FINISHED: Fired whenever the quest frame changes (Detail to Progress to Reward, etc.) or is closed.
 	-- QUEST_DETAIL: do we not need to check this here?
 
