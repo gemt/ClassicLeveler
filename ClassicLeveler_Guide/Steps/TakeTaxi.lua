@@ -20,5 +20,6 @@ function CLGuide_TakeTaxi()
 				return
 			end
 		end
+        GuidePrint("Taxi Destination not found: "..CLGuide_CurrentStepTable.Taxi)
 	end
 end
