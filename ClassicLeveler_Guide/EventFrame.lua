@@ -61,7 +61,7 @@ function EventFrame.OnUpdate()
     CLGuide_TrainSkillOnUpdate()
 
     if CLGuide_CurrentStepTable.Proximity ~= nil then
-        if CLGuide_GetDistToActivePoint() < CLGuide_CurrentStep.Proximity then
+        if CLGuide_GetDistToActivePoint() < CLGuide_CurrentStepTable.Proximity then
             CLGuide_CompleteCurrentStep()
         end
     end
