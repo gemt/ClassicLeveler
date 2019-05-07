@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Default</Configuration>
     <Name>ClassicLeveler_Guide</Name>
-    <ProjectGuid>a9ba818b-a16e-4680-8dac-b08caab09982</ProjectGuid>
+    <ProjectGuid>0f555e02-f97e-4099-ab99-b3b582b953da</ProjectGuid>
     <AssemblyName>ClassicLeveler_Guide</AssemblyName>
     <RootNamespace>ClassicLeveler_Guide</RootNamespace>
   </PropertyGroup>
@@ -17,22 +17,45 @@
     <Content Include="AutoVendor.lua">
       <SubType>Code</SubType>
     </Content>
+    <Content Include="Buttons\arrowleft.tga" />
+    <Content Include="Buttons\arrowlefthighlight.tga" />
+    <Content Include="Buttons\arrowright.tga" />
+    <Content Include="Buttons\arrowrighthighlight.tga" />
+    <Content Include="Buttons\config.tga" />
+    <Content Include="Buttons\cross.tga" />
+    <Content Include="Buttons\crosshighlight.tga" />
+    <Content Include="Buttons\list.tga" />
+    <Content Include="Buttons\UI-ChatIM-SizeGrabber-Down.tga" />
+    <Content Include="Buttons\UI-ChatIM-SizeGrabber-Highlight.tga" />
+    <Content Include="Buttons\UI-ChatIM-SizeGrabber-Up.tga" />
     <Content Include="ClassicLeveler_Guide.toc">
       <SubType>TableOfContents</SubType>
+    </Content>
+    <Content Include="Dev.lua">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="EventFrame.lua">
+      <SubType>Code</SubType>
     </Content>
     <Content Include="Frame.lua">
       <SubType>Code</SubType>
     </Content>
-    <Content Include="Frame.xml">
-      <SubType>Frame</SubType>
+    <Content Include="GuideFrame.lua">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="GuideList.lua">
+      <SubType>Code</SubType>
     </Content>
     <Content Include="GuideSteps.lua">
       <SubType>Code</SubType>
     </Content>
-    <Content Include="Guides\11-20_Darkshore.lua">
+    <Content Include="Guides\1-10-Teldrassil.lua">
       <SubType>Code</SubType>
     </Content>
-    <Content Include="Guides\1-10-Teldrassil.lua">
+    <Content Include="Guides\1-12-Dun_Morogh.lua">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="Guides\11-20_Darkshore.lua">
       <SubType>Code</SubType>
     </Content>
     <Content Include="Guides\20-22_Ashenvale.lua">
@@ -41,10 +64,10 @@
     <Content Include="Guides\22-23_Stonetalon.lua">
       <SubType>Code</SubType>
     </Content>
-    <Content Include="Guides\23-24_Redridge.lua">
+    <Content Include="Guides\23-23_Ashenvale_Redridge.lua">
       <SubType>Code</SubType>
     </Content>
-    <Content Include="Guides\23-23_Ashenvale_Redridge.lua">
+    <Content Include="Guides\23-24_Redridge.lua">
       <SubType>Code</SubType>
     </Content>
     <Content Include="Guides\24-26_Duskwood.lua">
@@ -56,41 +79,14 @@
     <Content Include="Guides\28-30_Duskwood.lua">
       <SubType>Code</SubType>
     </Content>
+    <Content Include="Guides\ClassicLeveler_Guide.toc">
+      <SubType>TableOfContents</SubType>
+    </Content>
+    <Content Include="Guides\GuideSteps.lua">
+      <SubType>Code</SubType>
+    </Content>
     <Content Include="images\Arrow.blp" />
     <Content Include="images\Arrow.m2" />
-    <Content Include="images\dummy.tga" />
-    <Content Include="images\icon-config.tga" />
-    <Content Include="images\icon-reset.tga" />
-    <Content Include="images\npc.tga" />
-    <Content Include="images\ResizeGripRight.tga" />
-    <Content Include="images\ResizeGripRightTop.tga" />
-    <Content Include="images\statusbar\Aluminium.tga" />
-    <Content Include="images\statusbar\Armory.tga" />
-    <Content Include="images\statusbar\BantoBar.tga" />
-    <Content Include="images\statusbar\Glaze2.tga" />
-    <Content Include="images\statusbar\Gloss.tga" />
-    <Content Include="images\statusbar\Graphite.tga" />
-    <Content Include="images\statusbar\Grid.tga" />
-    <Content Include="images\statusbar\Healbot.tga" />
-    <Content Include="images\statusbar\LiteStep.tga" />
-    <Content Include="images\statusbar\Minimalist.tga" />
-    <Content Include="images\statusbar\normTex.tga" />
-    <Content Include="images\statusbar\Otravi.tga" />
-    <Content Include="images\statusbar\Outline.tga" />
-    <Content Include="images\statusbar\Perl.tga" />
-    <Content Include="images\statusbar\Round.tga" />
-    <Content Include="images\statusbar\Smooth.tga" />
-    <Content Include="images\sync.tga" />
-    <Content Include="images\UI-ChatIM-SizeGrabber-Down.tga" />
-    <Content Include="images\UI-ChatIM-SizeGrabber-Highlight.tga" />
-    <Content Include="images\UI-ChatIM-SizeGrabber-Up.tga" />
-    <Content Include="images\UI-GuildButton-MOTD-Up.tga" />
-    <Content Include="images\UI-GuildButton-PublicNote-Up.tga" />
-    <Content Include="images\UI-Listbox-Highlight2.tga" />
-    <Content Include="images\UI-Panel-CollapseButton-Down.tga" />
-    <Content Include="images\UI-Panel-CollapseButton-Up.tga" />
-    <Content Include="images\UI-Panel-ExpandButton-Down.tga" />
-    <Content Include="images\UI-Panel-ExpandButton-Up.tga" />
     <Content Include="SetupBinds.lua">
       <SubType>Code</SubType>
     </Content>
@@ -140,68 +136,31 @@
     <Content Include="TalentPickerFrame.xml">
       <SubType>Frame</SubType>
     </Content>
-    <Content Include="Textures\Borders\fer1.tga" />
-    <Content Include="Textures\Borders\fer6.tga" />
-    <Content Include="Textures\Borders\fer7.tga" />
-    <Content Include="Textures\Borders\HalBorder.tga" />
-    <Content Include="Textures\Borders\Roth.tga" />
-    <Content Include="Textures\Buttons\Button-About-Highlight.tga" />
-    <Content Include="Textures\Buttons\Button-About-Normal.tga" />
-    <Content Include="Textures\Buttons\Button-About-Pushed.tga" />
-    <Content Include="Textures\Buttons\Button-ArrowDown-Highlight.tga" />
-    <Content Include="Textures\Buttons\Button-ArrowDown-Normal.tga" />
-    <Content Include="Textures\Buttons\Button-ArrowDown-Pushed.tga" />
-    <Content Include="Textures\Buttons\Button-ArrowUp-Highlight.tga" />
-    <Content Include="Textures\Buttons\Button-ArrowUp-Normal.tga" />
-    <Content Include="Textures\Buttons\Button-ArrowUp-Pushed.tga" />
-    <Content Include="Textures\Buttons\Button-Close-Highlight.tga" />
-    <Content Include="Textures\Buttons\Button-Close-Normal.tga" />
-    <Content Include="Textures\Buttons\Button-Close-Pushed.tga" />
-    <Content Include="Textures\Buttons\Button-DDMonLeft-ArrowDown-Highlight.tga" />
-    <Content Include="Textures\Buttons\Button-DDMonLeft-ArrowDown-Normal.tga" />
-    <Content Include="Textures\Buttons\Button-DDMonLeft-ArrowDown-Pushed.tga" />
-    <Content Include="Textures\Buttons\Button-DDMonRight-ArrowDown-Highlight.tga" />
-    <Content Include="Textures\Buttons\Button-DDMonRight-ArrowDown-Normal.tga" />
-    <Content Include="Textures\Buttons\Button-DDMonRight-ArrowDown-Pushed.tga" />
-    <Content Include="Textures\Buttons\Button-Details-Highlight.tga" />
-    <Content Include="Textures\Buttons\Button-Details-Normal.tga" />
-    <Content Include="Textures\Buttons\Button-Details-Pushed.tga" />
-    <Content Include="Textures\Buttons\Button-DoubleArrowLeft-Highlight.tga" />
-    <Content Include="Textures\Buttons\Button-DoubleArrowLeft-Normal.tga" />
-    <Content Include="Textures\Buttons\Button-DoubleArrowLeft-Pushed.tga" />
-    <Content Include="Textures\Buttons\Button-DoubleArrowRight-Highlight.tga" />
-    <Content Include="Textures\Buttons\Button-DoubleArrowRight-Normal.tga" />
-    <Content Include="Textures\Buttons\Button-DoubleArrowRight-Pushed.tga" />
-    <Content Include="Textures\Buttons\Button-DUMonLeft-ArrowUp-Highlight.tga" />
-    <Content Include="Textures\Buttons\Button-DUMonLeft-ArrowUp-Normal.tga" />
-    <Content Include="Textures\Buttons\Button-DUMonLeft-ArrowUp-Pushed.tga" />
-    <Content Include="Textures\Buttons\Button-DUMonRight-ArrowUp-Highlight.tga.fgx" />
-    <Content Include="Textures\Buttons\Button-DUMonRight-ArrowUp-Normal.tga" />
-    <Content Include="Textures\Buttons\Button-DUMonRight-ArrowUp-Pushed.tga" />
-    <Content Include="Textures\Buttons\Button-Flash-Highlight.tga" />
-    <Content Include="Textures\Buttons\Button-Flash-Normal.tga" />
-    <Content Include="Textures\Buttons\Button-Flash-Pushed.tga" />
-    <Content Include="Textures\Buttons\Button-Locked-Highlight.tga" />
-    <Content Include="Textures\Buttons\Button-Locked-Normal.tga" />
-    <Content Include="Textures\Buttons\Button-Locked-Pushed.tga" />
-    <Content Include="Textures\Buttons\Button-Option-Highlight.tga" />
-    <Content Include="Textures\Buttons\Button-Option-Normal.tga" />
-    <Content Include="Textures\Buttons\Button-Option-Pushed.tga" />
-    <Content Include="Textures\Buttons\Button-Unlocked-Highlight.tga" />
-    <Content Include="Textures\Buttons\Button-Unlocked-Normal.tga" />
-    <Content Include="Textures\Buttons\Button-Unlocked-Pushed.tga" />
+    <Content Include="UI\Frame.xml">
+      <SubType>Frame</SubType>
+    </Content>
+    <Content Include="UI\GuideFrame.lua">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="UI\GuideList.lua">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="UI\GuideList.xml">
+      <SubType>Frame</SubType>
+    </Content>
+    <Content Include="Variables.lua">
+      <SubType>Code</SubType>
+    </Content>
     <Content Include="VendorList.lua">
       <SubType>Code</SubType>
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="images" />
-    <Folder Include="images\statusbar" />
+    <Folder Include="Buttons" />
     <Folder Include="Guides" />
+    <Folder Include="images" />
+    <Folder Include="UI" />
     <Folder Include="Steps" />
-    <Folder Include="Textures" />
-    <Folder Include="Textures\Buttons" />
-    <Folder Include="Textures\Borders" />
   </ItemGroup>
   <Import Project="$(DevEnvDir)\Extensions\Tools\MSBuild\AddonStudio\Wow\3.0\WowAddonStudio.targets" />
   <!--
