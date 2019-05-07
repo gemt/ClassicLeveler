@@ -56,20 +56,3 @@ function CLGuide_GetItemInventoryCount(itemName) -- itemName, not link
 	end
 	return count
 end
-
--- See Guide_UnitQuestLogChanged documentation
-function CLGuide_DelayedCheckHasQuest()
-	if DelayedCheckHasQuest == 1 then
-		if CLGuide_CurrentStepTable.Ct ~= nil and CL_IsQuestComplete(CLGuide_CurrentStepTable.Ct) == 1 then
-			CLGuide_CompleteCurrentStep()
-		elseif CLGuide_CurrentStepTable.Dt ~= nil and CL_HasQuest(CLGuide_CurrentStepTable.At) == 0 then
-			CLGuide_CompleteCurrentStep()
-		elseif CLGuide_CurrentStepTable.Ht ~= nil and CL_HasQuest(CLGuide_CurrentStepTable.At) == 1 then
-			CLGuide_CompleteCurrentStep()
-		end
-		-- If we have passed DelayedCheckHasQuestStop, stop looking
-		if DelayedCheckHasQuestStop < GetTime() then
-			DelayedCheckHasQuest = 0
-		end
-	end
-end
