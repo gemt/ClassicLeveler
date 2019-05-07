@@ -3,7 +3,7 @@
 	<Frame name="CLGuide_Frame" parent="UIParent" toplevel="true" movable="true" resizable="true" enableMouse="true" enableMouseClicks="true" enableMouseMotion="true">
 		<Size x="400" y="300" />
 		  <ResizeBounds>
-		      <minResize x="250" y="300"/>
+		      <minResize x="250" y="50"/>
 		  </ResizeBounds>
 		<Anchors>
 			<Anchor point="CENTER" />
