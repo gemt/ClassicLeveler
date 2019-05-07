@@ -2,7 +2,6 @@
 ## Version: 1.0
 ## Author: G3m7 & Hata
 ## Interface: 80100
-## Dependencies: ClassicLeveler
 ##SavedVariablesPerCharacter: CLGuide_CurrentStep, CLGuide_CurrentSection
 
 Dev.lua
