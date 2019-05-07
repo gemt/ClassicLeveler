@@ -1,8 +1,12 @@
 ## Title: ClassicLeveler_Guide
 ## Version: 1.0
-## Author: G3m7
-## Interface: 30287
-##SavedVariablesPerCharacter: CompletedGuideSteps
+## Author: G3m7 & Hata
+## Interface: 80100
+## Dependencies: ClassicLeveler
+##SavedVariablesPerCharacter: CLGuide_CurrentStep, CLGuide_CurrentSection
+
+Dev.lua
+Variables.lua
 
 Guides\1-10-Teldrassil.lua
 Guides\1-12-Dun_Morogh.lua
@@ -14,16 +18,8 @@ Guides\23-24_Redridge.lua
 Guides\24-26_Duskwood.lua
 Guides\26-28_Wetlands.lua
 Guides\28-30_Duskwood.lua
+Guides\GuideSteps.lua
 
-
-SetupBinds.lua
-VendorList.lua
-GuideSteps.lua
-Arrow.lua
-
-AutoVendor.lua
-Frame.xml
-TalentPickerFrame.xml
 
 Steps\AcceptQuest.lua
 Steps\BuyItem.lua
@@ -37,3 +33,19 @@ Steps\SetHs.lua
 Steps\TakeTaxi.lua
 Steps\TrainSkill.lua
 Steps\ZoneEntered.lua
+
+Arrow.lua
+Frame.lua
+
+UI\Frame.xml
+UI\GuideFrame.lua
+UI\GuideList.lua
+UI\GuideList.xml
+
+
+SetupBinds.lua
+VendorList.lua
+AutoVendor.lua
+TalentPickerFrame.xml
+
+EventFrame.lua

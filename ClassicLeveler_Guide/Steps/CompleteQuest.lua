@@ -27,13 +27,13 @@ local nextOnUpdateTriggerCheck = GetTime()
 function CLGuide_CompleteQuestOnUpdate()
     if nextOnUpdateTriggerCheck < GetTime() then
         nextOnUpdateTriggerCheck = GetTime() + 1
-        if CLGuide_CurrentStep.Ct ~= nil then 
-            if CLGuide_IsQuestComplete(CLGuide_CurrentStep.Ct) == 1 then
+        if CLGuide_CurrentStepTable.Ct ~= nil then 
+            if CLGuide_IsQuestComplete(CLGuide_CurrentStepTable.Ct) == 1 then
     		    CLGuide_CompleteCurrentStep()
     	    end
-        elseif CLGuide_CurrentStep.Mct ~= nil then
-            for i=1,getn(CLGuide_CurrentStep.Mct) do
-                if CLGuide_IsQuestComplete(CLGuide_CurrentStep.Mct[i]) ~= 1 then
+        elseif CLGuide_CurrentStepTable.Mct ~= nil then
+            for i=1,getn(CLGuide_CurrentStepTable.Mct) do
+                if CLGuide_IsQuestComplete(CLGuide_CurrentStepTable.Mct[i]) ~= 1 then
                     return
     	        end
             end
@@ -49,17 +49,17 @@ function CLGuide_CompleteQuest()
     -- There is a race condition here. Quest objectives may not return complete on query
     -- during QUEST_LOG_UPDATE after looting the last item
     -- May need a delayed ccheck
-	if CLGuide_CurrentStep.Ct ~= nil then
+	if CLGuide_CurrentStepTable.Ct ~= nil then
     	-- todo: can we check this when we receive QUEST_LOG_UPDATE, or do we need to do a delayed check?
-    	if CLGuide_IsQuestComplete(CLGuide_CurrentStep.Ct) == 1 then
+    	if CLGuide_IsQuestComplete(CLGuide_CurrentStepTable.Ct) == 1 then
     		CLGuide_CompleteCurrentStep()
     	end
-    elseif CLGuide_CurrentStep.Mct ~= nil then
+    elseif CLGuide_CurrentStepTable.Mct ~= nil then
         -- loop through all quests that must be completed and check if they are.
         -- Return as soon as one quest is NOT completed.
         -- If we do not return, all quests are complete, and we complete the step.
-        for i=1,getn(CLGuide_CurrentStep.Mct) do
-            if CLGuide_IsQuestComplete(CLGuide_CurrentStep.Mct[i]) ~= 1 then
+        for i=1,getn(CLGuide_CurrentStepTable.Mct) do
+            if CLGuide_IsQuestComplete(CLGuide_CurrentStepTable.Mct[i]) ~= 1 then
                 return
     	    end
         end

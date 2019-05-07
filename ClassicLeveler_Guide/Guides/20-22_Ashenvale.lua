@@ -41,17 +41,87 @@ CLGuide_Ashenvale = {
         
         {Text="Deliver The Absent Minded Prospector", Dt={q="The Absent Minded Prospector"}, point={x=3745,y=4186}},
         {Text="Accept The Absent Minded Prospector", At="The Absent Minded Prospector", point={x=3745,y=4186}},
+        
+        {Text="=== RESTOCK Sharp Arrow ===", BuyItem={Npc="Dalmond", Item="Sharp Arrow", Count=1200}, point={x=3744,y=4051}},
         {Text="Deliver Escape Through Force (new belt)", Dt={q="Escape Through Force"}, point={x=3937,y=4348}},
+
         {Text="Accept Trek To Ashenvale from mob that comes running into the house", At="Trek to Ashenvale"},
 
+        ]]
         
-        -- ca 1min20s
         {Text="Fly to Rut'Theran Village", Taxi="Rut'Theran Village, Teldrassil", point={x=3634,y=4558}},
         
-        -- ===== START SETTING UP BANK CHAR NOW WHILE FLYING ======
-        
-        {Text="Enter Darnassus", Zone="Darnassus", point={x=5599,y=8966}},
-        
+        {Text="Deliver The Absent Minded Prospector", Dt={q="The Absent Minded Prospector", Item="Windfelt Gloves", Use=1}, point={x=3745,y=4186}},
+
+
+
+        {Text="Accept Elemental Bracers", At="Elemental Bracers", point={x=4979,y=6721}},
+
+--[[        
+	
+Turn inn Therylune's Escape
+Run to Astranaar
+get FP
+accept:
+	The zoram Strand
+	On guard in stonetalon
+	Joruney to stonetalon peak
+	Raene's Cleansing
+	Culling the threat
+turn inn:
+	orendil's cure - wait for RP and accept Elune's Tear
+
+=== Set heartstone in Astranaar === 
+
+fly to auberdine
+===== START SETTING UP BANK CHAR NOW ======
+turn inn all quests in 
+	when turning inn at grizzly quest place, a mob comes running that gives Trek To AShenvale. Accept this
+BUY MORE FISH FOOD IF OUT
+fly to darnassus, learn spells (remember beast spells)
+train staffs 
+BUY LVL 20 BOW AT VENDOR - Bow merchant, south of warriors terrace, third house on the left, heavy recurve bow
+remember to turn inn the quest outside temple of the moon and accept followup
+
+
+=== Heart back to astranaar === 
+
+
+go to lake falathim to the west and do Raene's cleansing
+go to the zoram strand
+get and do the ancient statuette
+deliver and do followup (Ruuzel) (RP, need to wait to pick) out at the isle to northwest
+finish wrathtail head farm at isle and while walking back and fourth for these quests
+deliver ruuzel
+make sure you're close enough to 21 to ding from quest deliveries (need to be 21 to tame 21 bear after)
+run back to astranaar. Maybe heartstone if ready?
+
+Turn inn:
+	The zoram strand, accept Pridewings of stonetalon
+	Raene's Cleansing, accept An Aggressive Defense and Raene's cleansing pt3
+
+8h 40min, lvl 21+15%
+=== Stable pet ===
+tame an ashenvale bear, lvl 21 or 22 REMEMBER ENOUGH FOOD. Potentially from Auberdine (fish)
+Loot Elune's Tear
+Kill Dal Bloodclaw for Culling the threat
+make sure claw rank 3 is learned from the bear
+run back to astranaar, abandon pet and take old pet out again
+Turn inn both quests
+Accept The ruins of stardust
+run south and do the ruins of stardust
+Run east to Silverwind Refuge
+Accept and do Elemental Bracers. Skip followup
+
+Complete An aggressive defense
+Probably skip running up to turn in Raene's Cleansing (825 XP), the followup WONT be done so its just a detour
+	The run up and down from the road takes 3 minutes + killing 2 mobs. Maybe not so bad after all?
+	
+	
+    ]]
+
+
+
         {Text="Train Hunter skills", 
             TrainSkill={
                 {n="Aspect of the Hawk",r="Rank 2", Actionbar=49},
@@ -78,84 +148,6 @@ CLGuide_Ashenvale = {
                 -- resistances?? what am i going to be grinding most of to 30? shadow in duskwood? 
             }, point={x=4284,y=1006}
         },
-        
-        {Text="Use Aspect of Cheetah, Buy Heavy Recurve Bow from Bow Merchant (south of warriors terrace, third house left)", 
-            BuyItem={Npc="Landria", Item="Heavy Recurve Bow", Count=1}, point={x=6326,y=6620}, PinAdd="Can train staves again now if forgot earlier"},
-
-        {Text="=== RESTOCK Sharp Arrow ===", BuyItem={Npc="Landria", Item="Sharp Arrow", Count=1200}, point={x=6326,y=6620}},
-
-        {Text="Deliver The Absent Minded Prospector", Dt={q="The Absent Minded Prospector", Item="Windfelt Gloves", Use=1}, point={x=3127,y=8444}},
-        {Text="Accept The Absent Minded Prospector", At="The Absent Minded Prospector", point={x=3127,y=8444}},
-
-        {Text="Heartstone to Astranaar", Zone="Ashenvale", UseItem="Hearthstone"},
-
-        {Text="Deliver Trek to Ashenvale", Dt={q="Trek to Ashenvale"}, point={x=3662,y=4958}},
-
-        {Text="Deliver Raene's Cleansing", Dt={q="Raene's Cleansing"}, point={x=2031,y=4235}},
-        {Text="Accept Raene's Cleansing", At="Raene's Cleansing", point={x=2031,y=4235}},
-        {Text="Complete Raene's Cleansing (Grind murlocs until Glowing Gem drops)", Ct="Raene's Cleansing"},
-
-        {Text="Accept The Ancient Statuette", At="The Ancient Statuette", point={x=1479,y=3129}},
-        {Text="Loot Ancient Statuette", Ct="The Ancient Statuette", point={x=1419,y=2064}, PinAdd="Need 20 Wrathtail Heads here. Casters are squishy"},
-        {Text="Deliver The Ancient Statuette", Dt={q="The Ancient Statuette"}, point={x=1479,y=3129}},
-        {Text="Accept Ruuzel (May need to wait for RP)", At="Ruuzel", point={x=1479,y=3129}, PinAdd="Need lvl 21 after Zoram, so grind extra if needed"},
-
-        {Text="Kill Ruuzel. Careful with pulls. Priests heal, Myrmidons are tanky", Ct="Ruuzel", point={x=783,y=1377}},
-        {Text="Deliver Ruuzel. Make sure to finish 20 Wrathtail Heads on way back", Dt={q="Ruuzel"}, point={x=1479,y=3129}},
-        {Text="Reminder again, finish The Zoram Strand (Wrathtail Heads)", Ct="The Zoram Strand"},
-        {Text="Make sure to be lvl 21 before going back to Astranaar", Lvl={lvl=21, xp=1000}},
-        
-        {Text="Run to Astranaar. Use the new robe. Can Heartstone if available", Proximity=40, point={x=3379,y=4802}},
-        {Text="Deliver The Zoram Strand", Dt={q="The Zoram Strand"}, point={x=3467,y=4883}},
-        {Text="Accept Pridewings of Stonetalon", At="Pridewings of Stonetalon", point={x=3467,y=4883}},
-
-        {Text="Deliver Raene's Cleansing", Dt={q="Raene's Cleansing"}, point={x=3663,y=4958}},
-        {Text="Accept Raene's Cleansing", At="Raene's Cleansing", point={x=3663,y=4958}},
-        {Text="Accept An Aggressive Defense", At="An Aggressive Defense", point={x=3663,y=4958}},
-        -- 8h 40min, lvl 21+15%
-        
-        {Text="Stable pet", Proximity=10, point={x=3651,y=5036}},
-        {Text="Make sure to have Elune's Tear (followup from Orendil's Cure)", Proximity=15, point={x=3733,y=5182}},
-
-        {Text="Tame an Ashenvale Bear lvl 21-22", Proximity=50, point={x=4422,y=5498}},
-
-        {Text="Run north towards Iris Lake", Proximity=50, point={x=4342,y=4585}},
-        {Text="Complete Elune's Tear (white thing on ground on the isle)", Ct="Elune's Tear", point={x=4623,y=4592}},
-        
-        {Text="Grind to Dal Bloodclaw. Make sure new Claw is learned", Ct="Culling the Threat", point={x=3773,y=3473}},
-        
-        {Text="Run back to Astranaar, deliver Culling the Threat", Dt={q="Culling the Threat"}, point={x=3662,y=4958}},
-        
-        {Text="Abandon bear, get pet back from stable master", Proximity=10, point={x=3649,y=5034}},
-        {Text="Deliver Elune's Tear", Dt={q="Elune's Tear"}, point={x=3734,y=5180}},
-        {Text="Accept The Ruins of Stardust (few sec of RP)", At="The Ruins of Stardust", point={x=3734,y=5180}},
-        {Text="Complete The Ruins of Stardust (careful with pulls)", Ct="The Ruins of Stardust", point={x=3434,y=6484}},
-
-        ]]
-        {Text="Run east and Accept Elemental Bracers", At="Elemental Bracers", point={x=4981,y=6722}},
-        {Text="Loot 5 Intact Elemental Bracer in the lake", Item={Name="Intact Elemental Bracer", Count=5}},
-        {Text="Use Divining Scroll to complete Elemental Bracer", Ct="Elemental Bracers", UseItem="Divining Scroll"},
-        {Text="Deliver Elemental Bracers (skip followup)", Dt={q="Elemental Bracers"}, point={x=4981,y=6722}},
-        
-        {Text="Complete An Aggressive Defense to the north", Ct="An Aggressive Defense", point={x=5069,y=6122}},
-
-        {Text="Deliver Raene's Cleansing to the north (skip followup)", Dt={q="Raene's Cleansing"}, point={x=5354,y=4621}},
-
-        {Text="Run into Stonetalon Mountains", Proximity=50, point={x=4301,y=7139}},
---[[        
-
-Run east to Silverwind Refuge
-Accept and do Elemental Bracers. Skip followup
-
-Complete An aggressive defense
-Probably skip running up to turn in Raene's Cleansing (825 XP), the followup WONT be done so its just a detour
-	The run up and down from the road takes 3 minutes + killing 2 mobs. Maybe not so bad after all?
-	
-	
-    ]]
-
-
-
     }
 }
 --[[

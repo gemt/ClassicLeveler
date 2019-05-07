@@ -13,7 +13,7 @@ local function OnGossipShow()
 	GuidePrint("NumAvail: "..numAvailableQuest)
 	local questStep = getn(availableQuestInfo) / numAvailableQuest
 	GuidePrint("questStep: "..questStep)
-	local stepQuestnameLower = string.lower(CLGuide_CurrentStep.At)
+	local stepQuestnameLower = string.lower(CLGuide_CurrentStepTable.At)
 	GuidePrint("stepQuestnameLower: "..stepQuestnameLower)
 	for i=1, numAvailableQuest do
 		local questName = string.lower(availableQuestInfo[i*questStep-(questStep-1)])
@@ -23,17 +23,17 @@ local function OnGossipShow()
 			return
 		end
 	end
-	GuidePrint("AcceptQuest OnGossipShow <"..CLGuide_CurrentStep.At.."> not found")
+	GuidePrint("AcceptQuest OnGossipShow <"..CLGuide_CurrentStepTable.At.."> not found")
 end
 
 local function OnQuestGreeting()
 	for i=1, GetNumAvailableQuests() do
-		if string.lower(GetAvailableTitle(i)) == string.lower(CLGuide_CurrentStep.At) then
+		if string.lower(GetAvailableTitle(i)) == string.lower(CLGuide_CurrentStepTable.At) then
 			SelectAvailableQuest(i)
 			return
 		end
 	end
-	GuidePrint("AcceptQuest OnGossipShow <"..CLGuide_CurrentStep.At.."> not found")
+	GuidePrint("AcceptQuest OnGossipShow <"..CLGuide_CurrentStepTable.At.."> not found")
 end
 
 local function IsQuestlogFull()
@@ -43,7 +43,7 @@ local function IsQuestlogFull()
 end
 
 local function OnQuestDetail()
-	if string.lower(CLGuide_CurrentStep.At) == string.lower(GetTitleText()) then
+	if string.lower(CLGuide_CurrentStepTable.At) == string.lower(GetTitleText()) then
 		AcceptQuest();
 		CLGuide_CompleteCurrentStep()
 	else
@@ -53,7 +53,7 @@ end
 
 
 function CLGuide_AcceptQuest()
-	if CLGuide_CurrentStep.At == nil then return end
+	if CLGuide_CurrentStepTable.At == nil then return end
 	if IsShiftKeyDown() then return end -- disabling quest completion logic when holding shift down
 	GuidePrint("At: "..event)
 	if IsQuestlogFull() == 1 then
@@ -69,13 +69,16 @@ function CLGuide_AcceptQuest()
 		-- When you are on the UI frame showing "continue" button?
 		-- When you are on the UI frame where you can accept a new quest
 		OnQuestDetail()
+	elseif event == "QUEST_PROGRESS" then
+		-- continue button screen
+		OnQuestProgress()
 	elseif event == "CHAT_MSG_SYSTEM" then
         -- This event is not reliable on 1.12, if you accept multiple quests in quick succession, they may not show
         -- Ideally we don't need to rely on this event to know when a quest is accepted, instead we should 
         -- know it when we "click" the accept quest button. But this is still a decent control check 
         local arg1Lower = string.lower(arg1)
         if string.find(arg1Lower, "quest accepted:") ~= nil then
-            if string.find(arg1Lower, string.lower(CLGuide_CurrentStep.At)) ~= nil then
+            if string.find(arg1Lower, string.lower(CLGuide_CurrentStepTable.At)) ~= nil then
                 CLGuide_CompleteCurrentStep()
             end
         end

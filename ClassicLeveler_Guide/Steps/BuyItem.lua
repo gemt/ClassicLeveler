@@ -1,12 +1,12 @@
 
 local function OnMerchantShow()
-	--GuidePrint(CLGuide_CurrentStep.BuyItem.Item..", "..CLGuide_CurrentStep.BuyItem.Npc..", "..UnitName("target"))
-	local invCount = CLGuide_GetItemInventoryCount(CLGuide_CurrentStep.BuyItem.Item)
-	if invCount < CLGuide_CurrentStep.BuyItem.Count then
-		local itemCountToBuy = CLGuide_CurrentStep.BuyItem.Count - invCount
+	--GuidePrint(CLGuide_CurrentStepTable.BuyItem.Item..", "..CLGuide_CurrentStepTable.BuyItem.Npc..", "..UnitName("target"))
+	local invCount = CLGuide_GetItemInventoryCount(CLGuide_CurrentStepTable.BuyItem.Item)
+	if invCount < CLGuide_CurrentStepTable.BuyItem.Count then
+		local itemCountToBuy = CLGuide_CurrentStepTable.BuyItem.Count - invCount
 		for i=1, GetMerchantNumItems() do
 			local itmName,_,price,quantity = GetMerchantItemInfo(i)
-			if itmName == CLGuide_CurrentStep.BuyItem.Item then
+			if itmName == CLGuide_CurrentStepTable.BuyItem.Item then
 				-- stackable items like arrows cant be bought one by one (as in, you cant get less than 200)
 				-- but we let the itemCountToBuy/quantity round down to never buy MORE items than specified
 				itemCountToBuy = itemCountToBuy/quantity
@@ -25,8 +25,8 @@ local function OnMerchantShow()
 end
 
 function CLGuide_BuyItem() 
-	if CLGuide_CurrentStep.BuyItem == nil then return end
-	if UnitName("target") ~= CLGuide_CurrentStep.BuyItem.Npc then return end
+	if CLGuide_CurrentStepTable.BuyItem == nil then return end
+	if UnitName("target") ~= CLGuide_CurrentStepTable.BuyItem.Npc then return end
     if IsShiftKeyDown() then return end
 
 	if event == "MERCHANT_SHOW" then
