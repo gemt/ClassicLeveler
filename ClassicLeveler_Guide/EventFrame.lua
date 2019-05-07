@@ -1,20 +1,38 @@
 
-local EventFrame = CreateFrame("Frame", "EventFrame")
+local EventFrame = CreateFrame("Frame")
 
-	EventFrame:RegisterEvent("PLAYER_ENTERING_WORLD")
-	EventFrame:RegisterEvent("CHAT_MSG_SYSTEM")
-	EventFrame:RegisterEvent("QUEST_COMPLETE")
-	EventFrame:RegisterEvent("UNIT_QUEST_LOG_CHANGED") 
-	EventFrame:RegisterEvent("CHAT_MSG_LOOT")
-	EventFrame:RegisterEvent("QUEST_ACCEPTED")
-	EventFrame:RegisterEvent("GOSSIP_SHOW")
-	EventFrame:RegisterEvent("TAXIMAP_OPENED")
-	EventFrame:RegisterEvent("MERCHANT_SHOW")
-	EventFrame:RegisterEvent("ZONE_CHANGED_NEW_AREA") 
-	EventFrame:RegisterEvent("PLAYER_XP_UPDATE")
-	
+EventFrame:RegisterEvent("PLAYER_ENTERING_WORLD")
+EventFrame:RegisterEvent("CHAT_MSG_SYSTEM")
+EventFrame:RegisterEvent("QUEST_COMPLETE")
+EventFrame:RegisterEvent("QUEST_LOG_UPDATE")
+--EventFrame:RegisterEvent("UNIT_QUEST_LOG_CHANGED") -- can we live with only QUEST_LOG_UPDATE?
+EventFrame:RegisterEvent("CHAT_MSG_LOOT")
+EventFrame:RegisterEvent("QUEST_ACCEPTED")
+EventFrame:RegisterEvent("QUEST_DETAIL")
+EventFrame:RegisterEvent("GOSSIP_SHOW")
+EventFrame:RegisterEvent("QUEST_GREETING")
+EventFrame:RegisterEvent("TAXIMAP_OPENED")
+EventFrame:RegisterEvent("MERCHANT_SHOW")
+EventFrame:RegisterEvent("ZONE_CHANGED_NEW_AREA")
+EventFrame:RegisterEvent("QUEST_PROGRESS")
+EventFrame:RegisterEvent("TRAINER_SHOW")
+EventFrame:RegisterEvent("CONFIRM_BINDER")
+EventFrame:RegisterEvent("PLAYER_LEVEL_UP")
+EventFrame:RegisterEvent("PLAYER_ENTERING_WORLD")
+
+-- TODO: Remove for release, this is for debugging purposes
+function CLGuide_RegisterAllEvents()
+    EventFrame:RegisterAllEvents()    
+end
+
 function EventFrame.OnEvent()
-
+    if arg2 ~= nil then 
+		GuidePrint("EventFrame: "..event..", "..arg1..", "..arg2) 
+	elseif arg1 ~= nil then 
+		GuidePrint("EventFrame: "..event..", "..arg1) 
+	elseif event ~= nil then
+		GuidePrint("EventFrame: "..event)
+	end
 	if event == "PLAYER_ENTERING_WORLD" then
 		--Hacky fix for Frame Scaling
 		Guide_FrameIsScaling = true
