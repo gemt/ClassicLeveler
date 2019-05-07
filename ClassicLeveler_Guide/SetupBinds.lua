@@ -1,3 +1,6 @@
+-- UI scale
+
+
 function CLGuide_SetupBinds()
     SetActionBarToggles(1,1,1,1,1)
     SHOW_MULTI_ACTIONBAR_1=1

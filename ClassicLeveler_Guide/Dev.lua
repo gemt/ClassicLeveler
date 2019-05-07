@@ -1,6 +1,18 @@
 --=========
 --DEV STUFF
 --=========
+-- Put this anywhere you want to throw an error if the game CLGuide_GameVersion is not 1.12.x or 8.x
+CLGuide_GameVersion = GetBuildInfo();
+CLGuide_GameVersion = string.sub(CLGuide_GameVersion,1,4)
+CLGuide_CurrentStep = {}
+CLGuide_CurrentSection = {}
+function CLGuide_AssertOnClassic(msg)
+	if CLGuide_GameVersion ~= "1.12" and string.sub(CLGuide_GameVersion,1,1) ~= "8" then
+		GuidePrint(msg)
+		GuidePrint(1/"")
+	end
+end
+
 function CLGuide_PrintStepInfo()
     local step = CLGuide_Options.CurrentStep--GuideSteps[Guide.CurrentStepIndex]
     if step == nil then
@@ -64,3 +76,4 @@ function UpdateCoordBox()
         coordBox:SetText(", point={x="..string.format("%.0f", x)..",y="..string.format("%.0f", y).."}")
     end
 end
+
