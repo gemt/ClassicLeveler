@@ -57,26 +57,6 @@ function CLGuide_GetItemInventoryCount(itemName) -- itemName, not link
 	return count
 end
 
-function CLGuide_CompleteStep(step)
-    --Guide_CompletedGuideSteps[step] = 1
-    if CLGuide_Options["CurrentStep"] == step then
-        CLGuide_NextStep()
-    end
-end
-
-function CLGuide_CompleteCurrentStep()
-    CLGuide_CompleteStep(CLGuide_Options["CurrentStep"])
-end
-
-function Guide_HasCompletedStep(step)
-    local cs = Guide_CompletedGuideSteps[step]
-    if cs ~= nil and cs == 1 then 
-        return 1
-    else
-        return 0
-    end
-end
-
 -- See Guide_UnitQuestLogChanged documentation
 function CLGuide_DelayedCheckHasQuest()
 	if DelayedCheckHasQuest == 1 then

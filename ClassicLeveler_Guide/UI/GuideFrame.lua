@@ -7,6 +7,13 @@ function CLGuide_Frame_OnLoad()
 	CLGuide_SetStep(CLGuide_CurrentStep)
 end
 
+-- Called by all Triggers when a step completes automatically
+-- Kept seperate from CLGuide_NextStep() in case we wish to 
+-- handle automatic NextStep different from clicked NextStep
+function CLGuide_CompleteCurrentStep()
+    CLGuide_NextStep()
+end
+
 --These are run OnClick on Next / Previous Step Buttons
 function CLGuide_NextStep()
 	if CLGuide_CurrentStep == getn(CLGuide_CurrentSectionTable.Steps) then 
