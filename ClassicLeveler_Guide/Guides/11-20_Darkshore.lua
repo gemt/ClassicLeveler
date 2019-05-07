@@ -212,7 +212,7 @@ CLGuide_Darkshore = {
 
         {Text="Complete A Lost Master and Buzzbox 323 around Master's Glaive", Mct={"A Lost Master", "Buzzbox 323"}, point={x=3419,y=8951}, PinRemove="Kill highlvl moonstalkers for A Lost Master and Buzzbox 323"},
             
-        {Text="Turn inn Return to Onu", Dt={q="Return to Onu"}, point={x=4357,y=7629}},
+        {Text="Turn inn Return to Onu", Dt={q="Return to Onu"}, point={x=4357,y=7629}, PinAdd="Delete Phial of Scrying"},
         {Text="WAIT FOR RP, then accept Mathystra Relics", At="Mathystra Relics", point={x=4357,y=7629}},
 
         -- Uncertain if we can HS here, or if we need to save it for trip to the north.

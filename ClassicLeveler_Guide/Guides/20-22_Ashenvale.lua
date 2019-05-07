@@ -58,8 +58,10 @@ CLGuide_Ashenvale = {
                 {n="Aspect of the Cheetah", Actionbar=51},
                 {n="Mend Pet",r="Rank 2", Actionbar=62},
                 {n="Dual Wield"},
+                {n="Serpent Sting",r="Rank 3", Actionbar=1},
                 {n="Multi-Shot",r="Rank 1", Actionbar=4},
                 {n="Arcane Shot",r="Rank 3", Actionbar=3},
+                {n="Distracting Shot",r="Rank 1", Actionbar=8},
                 {n="Immolation Trap",r="Rank 1", Actionbar=65},
                 {n="Raptor Strike",r="Rank 3", Actionbar=2},
                 {n="Raptor Strike",r="Rank 3", Actionbar=2},
@@ -75,6 +77,12 @@ CLGuide_Ashenvale = {
                 {n="Great Stamina",r="Rank 2"},
                 {n="Natural Armor",r="Rank 3"},
                 {n="Growl",r="Rank 3"},
+                
+                {n="Fire Resistance",r="Rank 1"},
+                {n="Frost Resistance",r="Rank 1"},
+                {n="Nature Resistance",r="Rank 1"},
+                {n="Shadow Resistance",r="Rank 1"},
+
                 -- resistances?? what am i going to be grinding most of to 30? shadow in duskwood? 
             }, point={x=4284,y=1006}
         },
@@ -144,13 +152,8 @@ CLGuide_Ashenvale = {
         {Text="Run into Stonetalon Mountains", Proximity=50, point={x=4301,y=7139}},
 --[[        
 
-Run east to Silverwind Refuge
-Accept and do Elemental Bracers. Skip followup
-
-Complete An aggressive defense
 Probably skip running up to turn in Raene's Cleansing (825 XP), the followup WONT be done so its just a detour
 	The run up and down from the road takes 3 minutes + killing 2 mobs. Maybe not so bad after all?
-	
 	
     ]]
 
@@ -159,68 +162,6 @@ Probably skip running up to turn in Raene's Cleansing (825 XP), the followup WON
     }
 }
 --[[
-
-==== Fly or HS to astranaar ==== 
-
-Turn in:
-	the ruins of stardust (skip followup)
-	An aggressive defense
-	Pridewings whatever
-
-===== Fly to Auberdine ======
-===== Boat to wetlands ======
-
-Get FP
-Check Neal ALlen (enter keep, left 2 times) for Bronze tubes
-
-see if u can get the crocolisk queston n-w side of harbor
-Take Murloc quest on pier
-Turn inn the absent minded prospector at the inn. Skip followup for now
-Accep the greenwarden outside the inn
-
-kill murlocs (keep fins, or something rather, for redridge)
-run to engineering hut (26,25) check for bronze tube. Also check Wenna Silkbeard down in bunker for Saber Leggings
-run to the greenwarden
-accept daily delivery on the way
-Turn inn the greenwarden
-accept tramping paws
-do tramping paws
-continue running to IF
-
-Acccept Stormpike order when entering loch modan
-accept stonegear's search from patrol in thelsamar
-take FP
-
-keep running to IF
-stop by kharanos to turn inn stonegear's search
-
-==== IF ======
-
-Get FP
-Train weaponskills (by BG masters, house towards AH)
-
-If have 60 wool cloth, turnin donation next
-Turn inn The powers below in forlorn cavern
-Turn in An Old Colleague (Tinker Town) - NOTE: IF possible to get 4 minor mana pot and 2 elixir of minor fortitude, do that followup
-Gearcutter Cogspinner for Bronze Tube
-
-These quests probably wont work on classic (seasonal)
-	find Courier Hammerfall (patroll anti-clockwise?) around entire outer circle. Accept The reason for the season (CHECK BETA ON THIS ONE; IS SEASONAL)
-	Turnin The reason for the season (if found) innermost in hall of explorers 
-	Deliver followup to king
-
-
-====== TAKE TRAM TO SW ======
-check Billibub Cogspinner for Bronze Tube 
-turn inn stormpiek orders outside tram
-TRAIN HUNTER SKILLS (just south of tram entrance)
-Go to the mage quarter and turn inn A scroll for mauren. Skip followup i think
-Train weapons (across AH)
-Get FP
-
-Run to redridge mountains
-accept quest A watchful eye (tower of azora in elwynn)
-
 
 Redridge:
 pick Encroaching Gnolls on road to city

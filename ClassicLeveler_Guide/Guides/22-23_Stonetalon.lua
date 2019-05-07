@@ -36,5 +36,6 @@ CLGuide_Stonetalon = {
         {Text="Turn inn The Ruins of Stardust (skip followup)", Dt={q="The Ruins of Stardust"}, point={x=3734,y=5180}},
 
         {Text="Fly to Auberdine", Taxi="Auberdine, Darkshore", point={x=3440,y=4798}},
+        {Text="RESTOCK On Longjaw Mud Snapper (then boat)", BuyItem={Npc="Laird", Item="Longjaw Mud Snapper", Count=20}, point={x=3674,y=4429}},
     }
 }
