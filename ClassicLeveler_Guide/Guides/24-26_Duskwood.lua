@@ -5,155 +5,213 @@ CLGuide_Duskwood1 = {
     Title="24-26 Duskwood",
     Pinboard = {},
     Steps = {
-        {Text="Step1", At="someQuest", point={x=5869,y=4427}},
+        -- Antonio Perelli, salesman on road to Darkshire sells Wolf Bracers (35s) and 3 lesser healing potion
+        -- Kzixx, goblin on road, sells 3 healing potion and 3 lesser mana potion
+
+
+        {Text="Accept The Legend of Stalvan (Madame Eva in town)", At="The Legend of Stalvan", point={x=7581,y=4531}},
+        {Text="Accept The Totem of Infliction", At="The Totem of Infliction", point={x=7581,y=4531}},
+
+        {Text="If you dont have Bronze tube yet check Herble Baubbletump", 
+            BuyItem={Npc="Herble Baubbletump", Item="Bronze Tube", Count=1}, point={x=7801,y=4835}},
+
+        {Text="If you have Bronze Tube: Accept Look to The Stars", At="Look to The Stars", point={x=7980,y=4800}},
+        {Text="If you have Bronze Tube: Deliver Look to The Stars", Dt={q="Look to The Stars"}, point={x=7980,y=4800}},
+        {Text="If you have Bronze Tube: Accept Look to The Stars pt2", At="Look to The Stars", point={x=7980,y=4800}},
+
+        {Text="Accept Worgen in the Woods", At="Worgen in the Woods", point={x=7556,y=4804}},
+
+        {Text="Accept Raven Hill", At="Raven Hill", point={x=7532,y=4869}},
+        {Text="Accept The Hermit", At="The Hermit", point={x=7532,y=4869}},
+        {Text="Accept Deliveries to Sven", At="Deliveries to Sven", point={x=7532,y=4869}},
+        {Text="Accept The Night Watch", At="The Night Watch", point={x=7360,y=4686}},
+
+        {Text="Deliver The Legend of Stalvan", Dt={q="The Legend of Stalvan"}, point={x=7253,y=4685}},
+        {Text="Accept The Legend of Stalvan (Maybe RP?)", At="The Legend of Stalvan", point={x=7253,y=4685}},
+
+        {Text="Put HS in Darkshire", SetHs="Innkeeper Trelayne", point={x=7387,y=4441}},
+
+        {Text="Accept Seasoned Wolf Kabobs", At="Seasoned Wolf Kabobs", point={x=7379,y=4332}},
+
+        {Text="If Bronze Tube: Deliver at Blind Mary", Dt={q="Look to The Stars"}, point={x=8197,y=5910}},
+        {Text="If Bronze Tube: Accept followup", At="Look to The Stars", point={x=8197,y=5910}},
+
+
+        {Text="Kill Insane Ghoul (if look to the stars) and complete The Night Watch. Dont need to finish Skeletal Fingers",
+            Mct={"Look To The Stars", "The Night Watch"}, point={x=8022,y=7095}},
+
+        -- worgen in the woods now or later?
+        
+        {Text="Down to road, west then Worgen in the woods, Shadow Weavers", Ct="Worgen in the Woods", point={x=6260,y=7170}},
+
+        {Text="Accept Eight-Legged Menaces at xroads (can kill wolves on way, not required)", At="Eight-Legged Menaces", point={x=4513,y=6702}},
+
+        {Text="Deliver Raven Hill", Dt={q="Raven Hill"}, point={x=1834,y=5626}},
+        {Text="Accept Jitters' Growling Gut", At="Jitters' Growling Gut", point={x=1834,y=5626}},
+
+        {Text="Deliver Deliveries to Sven. Kill Pygmy Venom Spiders on the way (dont need complete)", 
+            Dt={q="Deliveries to Sven"}, point={x=778,y=3406}, PinAdd="Make sure to get 6 Gooey Spider Legs from spiders"},
+
+        {Text="Accept Sven's Revenge", At="Sven's Revenge", point={x=778,y=3406}},
+
+        {Text="Accept Wolves at Our Heels", At="Wolves at Our Heels", point={x=771,y=3321}},
+
+        {Text="Deliver The Hermit. Kill wolves/Pygmy Venom Spiders on the way", Dt={q="The Hermit"}, point={x=2811,y=3147}},
+        {Text="Accept Supplies from Darkshire", At="Supplies from Darkshire", point={x=2811,y=3147}},
+
+        {Text="Kill wolves back again toward Sentinel Hill.", Zone="Westfall", point={x=614,y=4060}},
+
+        {Text="Get FP in Sentinel Hill.", Proximity=20, point={x=5656,y=5264}},
+        {Text="Accept The Defias Brotherhood at tower.", At="The Defias Brotherhood", point={x=5630,y=4759}},
+        
+        -- TODO: How many arrows do i need to get to 25 at this point? Maybe already and dont buy any?
+        {Text="Restock on lvl 10 arrows if not 25. Vendor. Dont accept quest",
+            BuyItem={Npc="Quartermaster Lewis", Item="Sharp Arrow", Count=1}, point={x=5693,y=4720}},
+
+        {Text="Deliver The Legend of Stalvan. If need bronze tube, look in NW corner in house for Box", 
+            Dt={q="The Legend of Stalvan"}, point={x=4152,y=6673}},
+        {Text="Accept The Legend of Stalvan. If need bronze tube, look in NW corner in house for Box", 
+            At="The Legend of Stalvan", point={x=4152,y=6673}},
+
+        {Text="Heartstone to Darkshire", Zone="Duskwood", UseItem="Hearthstone"},
+        {Text="Turn Jitters' Growling Gut (inn) ", Dt={q="Jitters' Growling Gut"}, point={x=7381,y=4325}},
+        {Text="Accept Dusky Crab Cakes", At="Dusky Crab Cakes", point={x=7381,y=4325}},
+        {Text="Deliver Dusky Crab Cakes (if you had legs from earlier)", Dt={q="Dusky Crab Cakes"}, point={x=7381,y=4325}},
+        {Text="Accept Return to Jitters", At="Return to Jitters", point={x=7381,y=4325}},
+        
+        {Text="Turn The Legend of Stalvan", Dt={q="The Legend of Stalvan"}, point={x=7255,y=4685}},
+        {Text="Accept The Legend of Stalvan", At="The Legend of Stalvan", point={x=7255,y=4685}},
+
+        {Text="Turn inn The Night Watch", Dt={q="The Night Watch"}, point={x=7360,y=4692}},
+        {Text="Accept The Night Watch", At="The Night Watch", point={x=7360,y=4692}},
+
+        {Text="Turn Worgen in the Woods. Skip followup for now", Dt={q="Worgen in the Woods"}, point={x=7558,y=4791}},
+        
+        -- don't accept yet. Will have full questlog
+        --{Text="Accept Worgen in the Woods", At="Worgen in the Woods", point={x=7558,y=4791}},
+        
+        {Text="If had Bronze Tube: Turn inn Look To The Stars. Else check vendor Skip followup for now.", Dt={q="Look To The Stars"}, point={x=7980,y=4798}},
+        
+        -- don't accept yet. Will have full questlog
+        --{Text="If had Bronze Tube: Accept Look To The Stars", At="Look To The Stars", point={x=7980,y=4798}},
+
+        {Text="Discover the FP in Darkshire", Proximity=20, point={x=7749,y=4428}},
+
+        {Text="Turn Supplies from Darkshire", Dt={q="Supplies from Darkshire"}, point={x=7586,y=4528}},
+        {Text="Accept Ghost Hair Thread", At="Ghost Hair Thread", point={x=7586,y=4528}},
+
+
+        -- Don't require 25 here actually. We're not taking the 25 quest in SW yet, and 
+        -- being 25 will make more mobs in Redridge grey, so might as well avoid it.
+        --{Text="Grind Spiders/wolves along northern bank until 25, then run Goldshire",
+        --    Lvl={lvl=25}, point={x=6380,y=1650}},
+        {Text="Run to Goldshire. Kill wolves/spiders on the way", Zone="Elwynn Forest"},
+
+        {Text="Run to Goldshire, Turn inn The Price of Shoes", Dt={q="The Price of Shoes"}, point={x=4172,y=6555}},
+        {Text="Accept Return to Verner", At="Return to Verner", point={x=4172,y=6555}},
+        {Text="Turn inn The Legend of Stalvan (innkeeper)", Dt={q="The Legend of Stalvan"}, point={x=4377,y=6580}},
+        {Text="Accept The Legend of Stalvan", At="The Legend of Stalvan", point={x=4377,y=6580}},
+        {Text="Complete The Legend of Stalvan (chest second floor master bedroom)", Ct="The Legend of Stalvan", point={x=4432,y=6583}},
+
+        {Text="Run to Stormwind", Zone="Stormwind City", point={x=3249,y=4971}, PinAdd="If lvl 25, also accept Accept A Noble Brew at lock trainer while in SW"},
+
+        {Text="Turn inn The Legend of Stalvan (South of Park)", Dt={q="The Legend of Stalvan"}, point={x=2957,y=6193}},
+        {Text="Accept The Legend of Stalvan", At="The Legend of Stalvan", point={x=2957,y=6193}},
+        {Text="Deliver The Legend of Stalvan (chest next to you)", Dt={q="The Legend of Stalvan"}, point={x=2943,y=6150}},
+        {Text="Accept The Legend of Stalvan", At="The Legend of Stalvan", point={x=2943,y=6150}},
+
+        {Text="Go through trade district, outer ring toward old down, buy Stormwind Seasoning Herbs", 
+            BuyItem={Npc="Felicia Gump", Item="Stormwind Seasoning Herbs", Count=1}, point={x=6425,y=6063}},
+
+        {Text="Fly to Lakeshire", Taxi="Lakeshire, Redridge", point={x=6631,y=6228}},
+
+        {Text="Accept Blackrock Bounty", At="Blackrock Bounty", point={x=3154,y=5787}},
+        {Text="Accept Blackrock Menace", At="Blackrock Menace", point={x=3351,y=4896}},
+        {Text="Accept The Everstill Bridge", At="The Everstill Bridge", point={x=3216,y=4866}},
+        {Text="Deliver Return to Verner", Dt={q="Return to Verner"}, point={x=3098,y=4727}},
+        {Text="Accept A Baying of Gnolls (skip underbelly scales)", At="A Baying of Gnolls", point={x=3098,y=4727}},
+
+        {Text="Accept Solomon's Law (town hall)", At="Solomon's Law", point={x=2967,y=4433}},
+        
+        -- TODO: Can we put HS in lakeshire and HS back after this round, or will it not be ready in time?
+
+        {Text="Deliver The Defias Brotherhood (second floor inn) Skip followup", Dt={q="The Defias Brotherhood"},
+            point={x=2647,y=4534}, PinAdd="If not completed Bellygrub quest, be on the lookout for it"},
+
+
+        {Text="Complete A Baying of Gnolls and The Everstill Bridge (Take the west path). Can finish everstil later", 
+            Mct={"A Baying of Gnolls", "The Everstill Bridge"}, point={x=1731,y=4424}},
+        
+        {Text="Turn inn A Baying of Gnolls", Dt={q="A Baying of Gnolls"}, point={x=3098,y=4728}},
+        {Text="Accept Howling in the Hills (can turn in Everstil Bridge if done)", At="Howling in the Hills", point={x=3098,y=4728}},
+        
+        {Text="Turn inn The Everstill Bridge (if completed)", Dt={q="The Everstill Bridge", Item="Smith's Trousers", Vendor=1}, point={x=3216,y=4864}},
+
+        {Text="Accept Wanted: Lieutenant Fangore (posted outside inn)", At="Wanted: Lieutenant Fangore", point={x=2674,y=4646}},
+        {Text="Kill Yowler for Howling in the Hills, take same western path", Ct="Howling in the Hills", point={x=1731,y=4424}},
+
+        {Text="Follow road north, complete Blackrock Quests (need to go in cave)",
+            Mct={"Blackrock Bounty", "Blackrock Menace"}},
+
+        -- Glowing Shadowhide Pendant? 1400xp, tower mid of elwyn, would be when going to logging camp, not sure worth?
+        {Text="Run fast east, complete Solomon's Law and kill/loot Fangore",
+            Mct={"Wanted: Lieutenant Fangore", "Solomon's Law"}, point={x=8018,y=3706},
+            PinAdd="Can drop Glowing Shadowhide Pendant, if so keep in bags"},
+
+        {Text="Deliver A Watchful Eye to the SE on statue. Skip followup", Dt={q="A Watchful Eye"}, point={x=8430,y=4690}},
+
+        {Text="HS/Run back to Lakeshire, Turn in"},
+
+        {Text="HS/Run back to lakeshire, Deliver Solomon's Law (town hall)", Dt={q="Solomon's Law"}, point={x=2963,y=4427}},
+        {Text="Deliver Wanted: Lieutenant Fangore (town hall) (dont take messenger q)", Dt={q="Wanted: Lieutenant Fangore"}, point={x=3002,y=4447}},
+
+        {Text="Deliver Howling in the Hills", Dt={q="Howling in the Hills", Item="Ring of Iron Will", Use=1}, point={x=3098,y=4727}},
+        {Text="Deliver Blackrock Menace", Dt={q="Blackrock Menace"}, point={x=3351,y=4896}},
+        {Text="Deliver Blackrock Bounty", Dt={q="Blackrock Bounty"}, point={x=3153,y=5785}},
+
+        -- deliver Glowing Shadowhide Pendant when going logging camp
+        {Text="Run to Logging Camp east in Elwynn", Zone="Elwynn Forest", point={x=972,y=7145}},
+        {Text="Deliver The Legend of Stalvan", Dt={q="The Legend of Stalvan"}, point={x=8460,y=6935}},
+        {Text="Accept The Legend of Stalvan", At="The Legend of Stalvan", point={x=8460,y=6935}},
+        {Text="Loot Faded Journal from chest (second floor in house)", Ct="The Legend of Stalvan", point={x=8568,y=6956}},
+        {Text="Deliver The Legend of Stalvan", Dt={q="The Legend of Stalvan"}, point={x=8460,y=6935}},
+        {Text="Accept The Legend of Stalvan", At="The Legend of Stalvan", point={x=8460,y=6935}},
+
+        {Text="If you found Glowing Shadowhide Pendant, accept the Q and turnin in tower to the west", 
+            Dt={q="Theocritus Retrieval"}, point={x=6460,y=6942}},
+
+        {Text="Run towards Darkshire, Finish Seasoned Wolf Kabobs on the way", Ct="Seasoned Wolf Kabobs"},
+        
+        {Text="Deliver The Legend of Stalvan (Darkshire, innkeeper)", Dt={q="The Legend of Stalvan"}, point={x=7378,y=4449}},
+        {Text="Accept The Legend of Stalvan", At="The Legend of Stalvan", point={x=7378,y=4449}},
+
+        -- Set HS again if moved it to lakeshire!
+
+        {Text="Turn inn Seasoned Wolf Kabobs (chef)", Dt={q="Seasoned Wolf Kabobs"}, point={x=7387,y=4348}},
+
+        {Text="Deliver The Legend of Stalvan (outside inn)", Dt={q="The Legend of Stalvan"}, point={x=7359,y=4690}},
+        {Text="Accept The Legend of Stalvan", At="The Legend of Stalvan", point={x=7359,y=4690}},
+
+        {Text="Deliver The Legend of Stalvan (Townhall)", Dt={q="The Legend of Stalvan"}, point={x=7260,y=4685}},
+        {Text="Accept The Legend of Stalvan", At="The Legend of Stalvan", point={x=7260,y=4685}},
+
+        {Text="Deliver The Legend of Stalvan (outside inn)", Dt={q="The Legend of Stalvan"}, point={x=7359,y=4690}},
+        {Text="Accept The Legend of Stalvan", At="The Legend of Stalvan", point={x=7359,y=4690}},
+        {Text="Accept The Night Watch", At="The Night Watch", point={x=7359,y=4690}},
+
+        
+
+        {Text="Deliver Ghost Hair Thread (blind mary to the south)", Dt={q="Ghost Hair Thread"}, point={x=8198,y=5908}},
+        {Text="Accept Return the Comb", At="Return the Comb", point={x=8198,y=5908}},
+        {Text="Deliver Return the Comb", Dt={q="Return the Comb"}, point={x=7581,y=4531}},
+        {Text="Accept Deliver the Thread", At="Deliver the Thread", point={x=7581,y=4531}},
+        
+        {Text="If have A Noble Brew, fly wetlands. If not, consider picking it in SW; then wetlands?",  point={x=7749,y=4429}},
     }
 }
 
 --[[
-Run Straight to Herble Baubblethump and look for a Bronze Tube
-If no bronze tube, check every time you get to darkshire.
-
-Accept
-	The Legend of Stalvan
-	The Totem of Infliction
-	Worgen in the woods
-	Raven Hill
-	The Hermit
-	Deliveries to Sven
-	The Night Watch
-Turn Inn
-	The Legend of Stalvan
-Accept 
-	The Legend of Stalvan
-Skip
-	Crime and Punishment
-	
-===  SET Heartstone ===
-	
-Accept
-	Seasoned Wolf Kabobs
-	
-If have bronze tube
-	Accept and turn inn Look to the stars
-	
-	
-turn inn look to the stars
-accept look to the stars
-
-
-
-Complete look to the stars (Insane Ghoul)
-Complete The Night Watch (8 warriors, 6 mages)
-dont bother finishing skeletal fingers
-
-continue west to 
-do worgen in the woods
-
-continue west
-kill wolves for lean wolf flank
-Accept Eight-legged menaces at xroads
-grind wolves to raven hill
-
-Turn inn raven hill
-Accept Jitters' Growling gut
-
-
-go west
-kill spiders along the bank for. Don't need to finish
-	the totem of infliction
-	eight-legged menaces
-	
-Turn inn deliveries to sven
-Acceopt Sven's Revenge
-accept wolves at our heels
-
-kill wolves towards the hermit. Don't need to finish
-turn inn the hermit
-accept supplies from darkshire
-
-Run to sentinel Hill
-LOOK FOR DUSTHOWLERS IN WESTFALL
-take FP
-accept the defias brotherhood
-run to moonbrook and do legend of stalvan in church
-(check for box of assorted parts for bronze tube in the same house)
-
-
-===Heart to darkshire===
-
-turn inn
-	The night watch, accept next part (15/15 raven hill one)
-	legend of stalvan, accept next part
-	Jitters gowling gut (inn) accept Dusky crab cakes and turn inn (MUST HAVE KEPT THE LEGS FROM EARLIER SPIDERS). 
-	Accept return to jitters
-	Worgen in the woods  - accept pt2
-	Supplies from darkshire - accept ghost hair thread
-	Look to the stars - Accept Look to the stars p2
-	
-		== IF NOT LVL 25 NOW, GRIND TIL YOU ARE == // ignore and pick the quest later?
-		
-
-=== GRIND SPIDERS/WOLVES TO GOLDSHIRE ===
-
-Turun inn legend of stalvan, accept next part
-== LOOT THE CHEST ON SECOND FLOOR OF INN ====
-
-
-Turn inn The price of shoes
-accept return to verner
-
-
-==== RUN TO SW ===
-		
-do legend of stalvan outside the park, southern entrance
-go outer ring of trade district, towards old town, furthest east house and buy STORMWIND SEASONING HERBS
-
-==== FLY TO LAKESHIRE ====
-
-if full quest log
-	abandon look to stars
-	abandon worgens
-
-
-The defias brotherhood - go to second floor of inn and deliver. Skip followup
-turn inn return to verner
-
-Accept:
-	A baying of gnolls
-	The Everstill Bridge
-	Blackrock Meanace
-	Solomon's Law
-	Wanted: Lieutenant Fangore
-
-Turn inn a baying of gnolls
-
-Accept and do howling in the hills 
-kill yowler
-turn inn howling in the hills
-
-don't bother with message to stormwind if you see that
-
-run into elwynn to the logging camp
-turn inn legend of stalvan, accept followup, go inside house, second floor, loot chest in bedroom
-turn inn legend of stalvan 
-
-==== RUN TOWARDS DARKSHIRE ====
-kill any missing wolfes/spiders you find on the way
-
-INN
-	Turn inn legend of stalvan, accept next
-	turn inn seasoned wolf kabob
-run around town and do legend of stalvan until you're on the last part
-
-Go south to blind mary
-turn inn ghost hair thread
-accept return the comb
-return to darkshire
-turn inn return the comb
-accept deliver the thread
-
-
-
+25 ARROWS WHERE????
 
 ===== FLY TO STORMWIND =====
 buy level 25 arrows
@@ -161,7 +219,7 @@ buy level 25 arrows
 Run to warlock trainer
 Accept A Noble Brew
 
-train hunter skills?
+train hunter skills? Only if lvl 26
 
 ===== FLY TO MENETHIL ======
 ]]

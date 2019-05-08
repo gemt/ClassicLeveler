@@ -6,6 +6,7 @@ CLGuide_Wetlands = {
     Pinboard = {},
     Steps = {
         {Text="Step1", At="someQuest", point={x=5869,y=4427}},
+        -- razor arrows
     }
 }
 --[[

@@ -5,6 +5,9 @@ CLGuide_Duskwood2 = {
     Title="28-30 Duskwood",
     Pinboard = {},
     Steps = {
+        {Text="Accept Worgen in the Woods", At="Worgen in the Woods", point={x=7558,y=4791}},
+        {Text="If had Bronze Tube: Accept Look To The Stars, otherwise check vendor", At="Look To The Stars", point={x=7980,y=4798}},
+
         {Text="Step1", At="someQuest", point={x=5869,y=4427}},
     }
 }

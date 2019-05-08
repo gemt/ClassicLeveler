@@ -22,6 +22,7 @@ CLGuide_Redridge = {
             PinAdd="Look for Rare Squiddic in lake"},
         
         {Text="Complete The Lost Tools", Ct="The Lost Tools", point={x=4157,y=5460}},
+        -- not doing everstil because we get a second q at same loc there later
 
         {Text="Accept Selling Fish and Murloc Poachers. More murlocs NE on lake", Mct={"Selling Fish", "Murloc Poachers"}, point={x=4052,y=4740}},
         
@@ -33,30 +34,14 @@ CLGuide_Redridge = {
         {Text="Deliver Hilary's Necklace", Dt={q="Hilary's Necklace"}, point={x=2925,y=5363}},
 
         {Text="Run to Duskwood", Zone="Duskwood", point={x=653,y=9105}},
+    --11h13min
     }
 }
 
 --[[
+    got enough arrows here?
+    vendorlist things (at least one recipe from quest here)
 
-Redridge:
-pick Encroaching Gnolls on road to city
-Turn in Encroaching Gnolls by FP
-Get FP
-Quests to do:
-	The price of shoes
-	Hillary's Necklace (on the pier)
-	The Lost tools (from Foreman Oslow by the bridge)
-	An unwelcome Guest (bellygrub)
-	Selling Fish
-	Murloc Poachers
-
-	
-do hillary's necklace and an unwelcome guest
-turn in
-kill murlocs to finish selling fish and murloc poachers
-Loot the lost tools
-
-11h13min
-====== RUN DUSKWOOD ======
+    addd the everstil ridge here?
 
 ]]
