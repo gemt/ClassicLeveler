@@ -83,6 +83,10 @@ function CLGuide_SetStep(step)
         -- HATA: call RemovePin func where arg is CLGuide_CurrentStepTable.PinRemove, which is the text to remove
     end
 
+    if CLGuide_CurrentStepTable.UseItem ~= nil then
+        CLGuide_SetupItemButton(CLGuide_CurrentStepTable.UseItem)
+    end
+
 	Guide_PrintStepInfo()
 	CLGuide_UpdateColors()
 end

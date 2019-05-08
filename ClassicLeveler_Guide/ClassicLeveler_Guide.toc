@@ -6,6 +6,8 @@
 
 Dev.lua
 Variables.lua
+Arrow.lua
+Utilities.lua
 
 Guides\1-10-Teldrassil.lua
 Guides\1-12-Dun_Morogh.lua
@@ -32,17 +34,16 @@ Triggers\SetHs.lua
 Triggers\TakeTaxi.lua
 Triggers\TrainSkill.lua
 Triggers\ZoneEntered.lua
-Arrow.lua
-Utilities.lua
+
 
 UI\PinBoard.xml
 UI\PinBoard.lua
+UI\ItemButton.xml
+UI\ItemButton.lua
 UI\Frame.xml
 UI\GuideFrame.lua
 UI\GuideList.lua
 UI\GuideList.xml
-UI\ItemButton.xml
-UI\ItemButton.lua
 
 
 SetupBinds.lua

@@ -57,11 +57,7 @@ function CLGuide_GetItemInventoryCount(itemName) -- itemName, not link
 	return count
 end
 
------------------------------------------
--- ITEM BUTTON EXAMPLE/WIP IMPLEMENTATION
------------------------------------------
-
-local function CLGuide_GetInventoryItemInfo(itemName)
+function CLGuide_GetInventoryItemInfo(itemName)
     for bag = 0,4 do
 		for slot = 1,GetContainerNumSlots(bag) do
 			local item = GetContainerItemLink(bag,slot)
@@ -73,29 +69,3 @@ local function CLGuide_GetInventoryItemInfo(itemName)
 	end
     return nil
 end
-
-
--- Initializes the given buttton the texture of itemName 
--- Read https://wowwiki.fandom.com/wiki/API_PickupContainerItem
-function CLGuide_SetupItemButton(button, itemName)
-    local bag,slot,texture,count = CLGuide_GetInventoryItemInfo(itemName)
-    if bag == nil then
-        GuidePrint(itemName.." Not found in inventory. Unable to initialize button")        
-        return
-    end
-    button:Settexture(texture)
-    button.CountText:SetText(tostring(count)) 
-    button.bag = bag
-    button.slot = slot
-    button:Show()
-end
-
--- example/wip implementation of what happens when you click an itemButton
--- Seems on retail you can only UseContainerItem() for vendoring or equipping items.
--- It cannot be used to heartstone or (most likely) use quest items
-function CLGuide_OnItemButtonClicked(button)
-    ClearCursor() -- to make sure we dont accidentally work with some other item the player has on cursor
-    UseContainerItem(button.bag, button.slot)
-end
-
------------------------------------------
