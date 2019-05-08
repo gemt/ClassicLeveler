@@ -19,7 +19,7 @@ CLGuide_GuideTable = {
 		PinBoard = {"pinboardItem1", "pinboardItem"}
 		Steps = {
 			{
-                Text="Do Quest1, {Quest2} and Quest3", 
+                Text="Do Quest1 and Quest3", 
                 [TriggerItem], 
                 [Point], 
                 [UseItem="itemname"], 

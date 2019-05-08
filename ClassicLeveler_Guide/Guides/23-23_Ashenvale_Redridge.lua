@@ -29,7 +29,7 @@ CLGuide_Ashenvale_Redridge = {
 
 
         {Text="Accept Daily Delivery (may not be avail. due to rep)", At="Daily Delivery", point={x=4992,y=3937},
-            PinAdd="Can kill Young Crocolisks if you got the quest"},
+            PinAdd="Try to get 4x Young Crocolisk skins if you got the quest"},
         {Text="Turn inn The Greenwarden", Dt={q="The Greenwarden"}, point={x=5643,y=4042}},
         {Text="Accept Tramping Paws", At="Tramping Paws", point={x=5643,y=4042}},
         {Text="Complete Tramping Paws (SE)", Ct="Tramping Paws", point={x=6112,y=5717}},

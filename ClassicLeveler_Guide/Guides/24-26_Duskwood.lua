@@ -206,7 +206,8 @@ CLGuide_Duskwood1 = {
         {Text="Deliver Return the Comb", Dt={q="Return the Comb"}, point={x=7581,y=4531}},
         {Text="Accept Deliver the Thread", At="Deliver the Thread", point={x=7581,y=4531}},
         
-        {Text="If have A Noble Brew, fly wetlands. If not, consider picking it in SW; then wetlands?",  point={x=7749,y=4429}},
+        {Text="If have A Noble Brew, fly wetlands. If not, consider picking it in SW; then wetlands?",  point={x=7749,y=4429},
+            PinAdd="Delete remaining Sharp Arrows while flying, restocking in Menethil"},
     }
 }
 

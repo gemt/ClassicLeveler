@@ -217,6 +217,7 @@ The missing diplomat
 TODO: Figure out how close to lvl 30 need to be in order to ding 30 in SW
 Train spells if 30
 
+lvl QUIVER IN SW: https://vanillawowdb.com/?item=7371#comments
 
 === FLY TO WETLANDS ===
 

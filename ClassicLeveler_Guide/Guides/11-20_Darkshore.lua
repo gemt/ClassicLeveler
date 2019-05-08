@@ -217,7 +217,7 @@ CLGuide_Darkshore = {
 
         -- Uncertain if we can HS here, or if we need to save it for trip to the north.
         -- Is it even ready after darnassus trip earlier?
-        {Text="Heartstone to Auberdine", Proximity=20, point={x=3701,y=4412}, Useitem="Hearthstone"},
+        {Text="Heartstone to Auberdine", Proximity=20, point={x=3701,y=4412}, UseItem="Hearthstone"},
             
         {Text="==== RESTOCK On Longjaw Mud Snapper ====", BuyItem={Npc="Laird", Item="Longjaw Mud Snapper", Count=20}, point={x=3674,y=4429}},
 
