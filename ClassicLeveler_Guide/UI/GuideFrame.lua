@@ -75,6 +75,13 @@ function CLGuide_SetStep(step)
 	else
 		SetCrazyArrow(CLGuide_CurrentStepTable.point, CLGuide_CurrentStepTable.Text)
 	end
+    
+    -- check if any pins to add/remove
+    if CLGuide_CurrentStepTable.PinAdd ~= nil then
+        CLGuide_AddPin(CLGuide_CurrentStepTable.PinAdd)
+    elseif CLGuide_CurrentStepTable.PinRemove ~= nil then
+        -- HATA: call RemovePin func where arg is CLGuide_CurrentStepTable.PinRemove, which is the text to remove
+    end
 
 	Guide_PrintStepInfo()
 	CLGuide_UpdateColors()

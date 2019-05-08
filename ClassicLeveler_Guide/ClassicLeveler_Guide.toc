@@ -35,12 +35,12 @@ Triggers\ZoneEntered.lua
 Arrow.lua
 Utilities.lua
 
+UI\PinBoard.xml
+UI\PinBoard.lua
 UI\Frame.xml
 UI\GuideFrame.lua
 UI\GuideList.lua
 UI\GuideList.xml
-UI\PinBoard.xml
-UI\PinBoard.lua
 UI\ItemButton.xml
 UI\ItemButton.lua
 
