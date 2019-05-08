@@ -43,7 +43,6 @@ function EventFrame.OnEvent()
 		Guide_FrameIsScaling = false
 		EventFrame:UnregisterEvent("PLAYER_ENTERING_WORLD")
 		--Set Step Stuff
-		GuidePrint(CLGuide_GuideTable[3].Title)
 		CLGuide_CurrentSectionTable = CLGuide_GuideTable[CLGuide_CurrentSection]
 		CLGuide_SetStep(CLGuide_CurrentStep)
 		CLGuide_StepFrameSizer()
