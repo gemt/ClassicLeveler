@@ -17,7 +17,7 @@ local function ChooseQuestRewardAndGoNextStep(rewardIdx)
 	else
         if CLGuide_CurrentStepTable.Dt.Use and CLGuide_CurrentStepTable.Dt.Use == 1 then
             local _,texture = GetQuestItemInfo("choice", rewardIdx)
-            CLGuide_SetupItemButton(CLGuide_CurrentStepTable.Dt.Item, texture)
+            CLGuide_SetupItemButtonNewItem(CLGuide_CurrentStepTable.Dt.Item, texture)
         elseif CLGuide_CurrentStepTable.Dt.Vendor and CLGuide_CurrentStepTable.Dt.Vendor == 1 then
             table.insert(CLGuide_QuestCompleteVendorCache,-1, CLGuide_CurrentStepTable.Dt.Item)
         end

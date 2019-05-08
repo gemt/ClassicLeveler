@@ -84,7 +84,7 @@ function CLGuide_SetStep(step)
     end
 
     if CLGuide_CurrentStepTable.UseItem ~= nil then
-        CLGuide_SetupItemButton(CLGuide_CurrentStepTable.UseItem)
+        CLGuide_SetupItemButtonExistingItem(CLGuide_CurrentStepTable.UseItem)
     end
 
 	Guide_PrintStepInfo()
