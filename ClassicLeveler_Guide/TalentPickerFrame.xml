@@ -1,10 +1,10 @@
 <Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 	<Script file="TalentPickerFrame.lua" />
 	<Frame name="TalentPickerFrame" parent="UIParent" toplevel="true" movable="true" enableMouse="true" clampedToScreen="true">
-        <Size x="166" y="104" />
         <Anchors>
             <Anchor point="CENTER" />
         </Anchors>
+        <Size x="166" y="104" />
         <Backdrop bgFile="Interface\DialogFrame\UI-DialogBox-Background" edgeFile="Interface\DialogFrame\UI-DialogBox-Border" tile="true">
             <BackgroundInsets>
                 <AbsInset left="11" right="12" top="12" bottom="11" />

@@ -1,13 +1,13 @@
 <Ui xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.blizzard.com/wow/ui/">
 	<Script file="GuideFrame.lua" />
 	<Frame name="CLGuide_Frame" parent="UIParent" toplevel="true" movable="true" resizable="true" enableMouse="true" enableMouseClicks="true" enableMouseMotion="true">
-		<Size x="400" y="300" />
 		  <ResizeBounds>
 		      <minResize x="250" y="50"/>
 		  </ResizeBounds>
 		<Anchors>
 			<Anchor point="CENTER" />
 		</Anchors>
+		<Size x="400" y="300" />
 		<Backdrop bgfile="Interface\BUTTONS\WHITE8X8" >
 			<Color r="0.2" g="0.2" b="0.2" a="0.8" />
 		</Backdrop>

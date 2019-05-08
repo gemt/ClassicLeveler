@@ -1,0 +1,23 @@
+<Ui xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.blizzard.com/wow/ui/">
+	<Script file="ItemButton.lua" />
+	<Frame name="CLGuide_ItemButton" parent="UIParent" toplevel="true" enableMouse="true" enableMouseClicks="true" hidden="true">
+		<Anchors>
+			<Anchor point="CENTER" />
+		</Anchors>
+		<Size x="32" y="32" />
+		<Frames>
+			<Button name="$parent_Button" inherits="ActionButtonTemplate">
+				<Size x="32" y="32" />
+				<Anchors>
+					<Anchor point="CENTER"/>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						CLGuide_ItemButton_OnClick()
+					</OnClick>
+				</Scripts>
+
+			</Button>
+		</Frames>
+	</Frame>
+</Ui>
