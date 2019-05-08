@@ -7,7 +7,7 @@
 -- jump to next step on GetQuestReward(), IF we are receiving an item from the quest. Instead also
 -- handle loot event, equip item then and THEN jump to next step
 local function EquipItem(itemName)
-
+    
 end
 
 
@@ -15,12 +15,14 @@ local function ChooseQuestRewardAndGoNextStep(rewardIdx)
 	if rewardIdx == nil then
 		GetQuestReward()
 	else
-		GetQuestReward(rewardIdx)
         if CLGuide_CurrentStepTable.Dt.Use and CLGuide_CurrentStepTable.Dt.Use == 1 then
-		    EquipItem(CLGuide_CurrentStepTable.Dt.Item)
+            local _,texture = GetQuestItemInfo("choice", rewardIdx)
+            CLGuide_SetupItemButton(CLGuide_CurrentStepTable.Dt.Item, texture)
         elseif CLGuide_CurrentStepTable.Dt.Vendor and CLGuide_CurrentStepTable.Dt.Vendor == 1 then
             table.insert(CLGuide_QuestCompleteVendorCache,-1, CLGuide_CurrentStepTable.Dt.Item)
         end
+
+		GetQuestReward(rewardIdx)
 	end
 	
 	-- only go to next step if had bagspace and got item?
