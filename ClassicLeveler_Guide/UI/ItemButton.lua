@@ -25,6 +25,7 @@ function CLGuide_SetupItemButtonExistingItem(itemName)
         GuidePrint(itemName.." Not found in inventory. Unable to initialize button")        
         return
     end
+    CLGuide_ItemButton_Button.itemName = itemName
     CLGuide_ItemButton_ButtonIcon:SetTexture(texture)
     --CLGuide_ItemButton_Button.CountText:SetText(tostring(count)) 
     CLGuide_ItemButton:Show()
