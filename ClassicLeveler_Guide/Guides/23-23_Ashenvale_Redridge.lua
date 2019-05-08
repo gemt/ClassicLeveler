@@ -86,8 +86,12 @@ CLGuide_Ashenvale_Redridge = {
         },
 
         {Text="Discover FP", Proximity=50, point={x=6629,y=6215}},
+        
+        {Text="Run out of SW", Zone="Elwynn Forest", point={x=7051,y=8763}},
 
         {Text="Run out of SW to Tower of Azora. Accept A Watchful Eye (top)", At="A Watchful Eye", point={x=6522,y=6971}},
+
+        {Text="Run to Redridge", Zone="Redridge Mountains", point={x=9384,y=7221}},
     }
 }
 
