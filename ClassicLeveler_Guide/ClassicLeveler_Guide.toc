@@ -27,7 +27,6 @@ Steps\DeliverQuest.lua
 Steps\HaveItem.lua
 Steps\HaveQuest.lua
 Steps\LevelReached.lua
-Steps\PointReached.lua
 Steps\SetHs.lua
 Steps\TakeTaxi.lua
 Steps\TrainSkill.lua
