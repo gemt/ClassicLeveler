@@ -1,10 +1,10 @@
 <Ui xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.blizzard.com/wow/ui/">
 	<Script file="GuideList.lua" />
 	<Frame name="CLGuide_GuideListFrame" parent="UIParent" toplevel="true" movable="true" enableMouse="true" enableMouseClicks="true" enableMouseMotion="true" hidden="true">
-		<Size x="250" y="400" />
 		<Anchors>
 			<Anchor point="CENTER" />
 		</Anchors>
+		<Size x="250" y="400" />
 		<Backdrop bgfile="Interface\BUTTONS\WHITE8X8" >
 			<Color r="0.2" g="0.2" b="0.2" a="0.8" />
 		</Backdrop>
