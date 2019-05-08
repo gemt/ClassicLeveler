@@ -66,7 +66,8 @@ local function CLGuide_GetInventoryItemInfo(itemName)
 		for slot = 1,GetContainerNumSlots(bag) do
 			local item = GetContainerItemLink(bag,slot)
 			if item ~= nil and string.find(item,itemName) then
-				return bag, slot, texture, count = GetContainerItemInfo(bag, slot);
+				local texture, count = GetContainerItemInfo(bag, slot)
+                return bag, slot, texture, count
 			end
 		end
 	end
