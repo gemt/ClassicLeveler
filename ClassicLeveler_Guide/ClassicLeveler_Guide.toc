@@ -20,17 +20,17 @@ Guides\28-30_Duskwood.lua
 Guides\GuideSteps.lua
 
 
-Steps\AcceptQuest.lua
-Steps\BuyItem.lua
-Steps\CompleteQuest.lua
-Steps\DeliverQuest.lua
-Steps\HaveItem.lua
-Steps\HaveQuest.lua
-Steps\LevelReached.lua
-Steps\SetHs.lua
-Steps\TakeTaxi.lua
-Steps\TrainSkill.lua
-Steps\ZoneEntered.lua
+Triggers\AcceptQuest.lua
+Triggers\BuyItem.lua
+Triggers\CompleteQuest.lua
+Triggers\DeliverQuest.lua
+Triggers\HaveItem.lua
+Triggers\HaveQuest.lua
+Triggers\LevelReached.lua
+Triggers\SetHs.lua
+Triggers\TakeTaxi.lua
+Triggers\TrainSkill.lua
+Triggers\ZoneEntered.lua
 
 Arrow.lua
 Utilities.lua
