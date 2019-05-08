@@ -23,6 +23,7 @@ Guides\GuideSteps.lua
 Triggers\AcceptQuest.lua
 Triggers\BuyItem.lua
 Triggers\CompleteQuest.lua
+Triggers\DeathWarp.lua
 Triggers\DeliverQuest.lua
 Triggers\HaveItem.lua
 Triggers\HaveQuest.lua
@@ -31,7 +32,6 @@ Triggers\SetHs.lua
 Triggers\TakeTaxi.lua
 Triggers\TrainSkill.lua
 Triggers\ZoneEntered.lua
-
 Arrow.lua
 Utilities.lua
 

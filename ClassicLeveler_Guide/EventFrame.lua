@@ -19,6 +19,9 @@ EventFrame:RegisterEvent("TRAINER_SHOW")
 EventFrame:RegisterEvent("CONFIRM_BINDER")
 EventFrame:RegisterEvent("PLAYER_LEVEL_UP")
 EventFrame:RegisterEvent("PLAYER_ENTERING_WORLD")
+EventFrame:RegisterEvent("CONFIRM_XP_LOSS")
+EventFrame:RegisterEvent("PLAYER_DEAD")
+
 
 -- TODO: Remove for release, this is for debugging purposes
 function CLGuide_RegisterAllEvents()
@@ -58,17 +61,18 @@ function EventFrame.OnEvent()
         end
     end
 
-	CLGuide_AcceptQuest()
-	CLGuide_BuyItem()
-	CLGuide_CompleteQuest()
-	CLGuide_DeliverQuest()
-	CLGuide_HaveItem()
-	CLGuide_HaveQuest()
-	CLGuide_LevelReached()
-	CLGuide_SetHs()
-	CLGuide_TakeTaxi()
+    CLGuide_AcceptQuest()
+    CLGuide_BuyItem()
+    CLGuide_CompleteQuest()
+    CLGuide_DeathWarp()
+    CLGuide_DeliverQuest()
+    CLGuide_HaveItem()
+    CLGuide_HaveQuest()
+    CLGuide_LevelReached()
+    CLGuide_SetHs()
+    CLGuide_TakeTaxi()
     CLGuide_TrainSkill()
-	CLGuide_ZoneEntered()
+    CLGuide_ZoneEntered()
 end
 EventFrame:SetScript("OnEvent", EventFrame.OnEvent)
 
