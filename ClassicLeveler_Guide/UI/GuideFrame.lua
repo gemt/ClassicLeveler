@@ -165,3 +165,14 @@ function CLGuide_Frame_OnUpdate()
 	end
 	UpdateCoordBox()
 end
+
+function CLGuide_Frame_OnMouseWheel()
+    if not IsShiftKeyDown() or not IsControlKeyDown() then return end
+
+    if arg1 == 1 then   -- up
+        CLGuide_PrevStep()
+    else                -- down
+        CLGuide_NextStep()
+    end
+
+end

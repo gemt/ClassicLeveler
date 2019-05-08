@@ -133,6 +133,9 @@
 			<OnMouseDown>
 				CLGuide_Frame:StartMoving()
 			</OnMouseDown>
+            <OnMouseWheel>
+                CLGuide_Frame_OnMouseWheel()
+            </OnMouseWheel>
 			<OnMouseUp>
 				CLGuide_Frame:StopMovingOrSizing()
 			</OnMouseUp>
