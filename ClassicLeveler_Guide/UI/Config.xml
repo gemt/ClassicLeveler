@@ -1,0 +1,304 @@
+<Ui xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.blizzard.com/wow/ui/">
+	<Script file="Config.lua" />
+	<Frame name="CLGuide_ConfigFrame" parent="UIParent" toplevel="true" movable="true" enableMouse="true" enableMouseClicks="true" enableMouseMotion="true" hidden="true">
+		<Anchors>
+			<Anchor point="CENTER" />
+		</Anchors>
+		<Size x="250" y="400" />
+		<Backdrop bgfile="Interface\BUTTONS\WHITE8X8" >
+			<Color r="0.2" g="0.2" b="0.2" a="0.8" />
+		</Backdrop>
+		<Frames>
+			<Button name="$parent_CrossButton">
+				<Size x="16" y="16" />
+				<Anchors>
+					<Anchor point="TOPRIGHT">
+						<Offset>
+			              <AbsDimension x="-5" y="-5"/>
+			            </Offset>        
+			        </Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						CLGuide_ConfigFrame:Hide()
+					</OnClick>
+				</Scripts>
+				<NormalTexture file="Interface\AddOns\ClassicLeveler_Guide\Buttons\cross" />
+				<PushedTexture file="Interface\AddOns\ClassicLeveler_Guide\Buttons\UI-ChatIM-SizeGrabber-Down" />
+				<HighlightTexture file="Interface\AddOns\ClassicLeveler_Guide\Buttons\crosshighlight" />
+			</Button>
+
+			<Button name="$parent_RowsBox">
+				<Size x="16" y="16" />
+				<Anchors>
+					<Anchor point="TOPRIGHT">
+						<Offset>
+			              <AbsDimension x="-25" y="-55"/>
+			            </Offset>        
+			        </Anchor>
+				</Anchors>
+				<Layers> 
+				    <Layer level="ARTWORK"> 
+					    <FontString name="$parentText" font="Fonts\ARIALN.ttf" text="Guide Steps Shown" justifyH="LEFT" justifyV="TOP">
+					        <Anchors> 
+					          	<Anchor point="LEFT">
+					            	<Offset>
+					              		<AbsDimension x="-200" y="0"/>
+					            	</Offset>        
+					          	</Anchor>
+					        </Anchors>
+						    <Color r="1" g="1" b="1"/>
+							<FontHeight val="16"/>
+					    </FontString>
+				 	</Layer>
+				</Layers>
+				<Scripts>
+					<OnClick>
+
+					</OnClick>
+				</Scripts>
+				<NormalTexture file="Interface\AddOns\ClassicLeveler_Guide\Buttons\cross" />
+				<PushedTexture file="Interface\AddOns\ClassicLeveler_Guide\Buttons\UI-ChatIM-SizeGrabber-Down" />
+				<HighlightTexture file="Interface\AddOns\ClassicLeveler_Guide\Buttons\crosshighlight" />
+			</Button>
+
+			<Button name="$parent_FontSize">
+				<Size x="16" y="16" />
+				<Anchors>
+					<Anchor point="TOPRIGHT">
+						<Offset>
+			              <AbsDimension x="-25" y="-95"/>
+			            </Offset>        
+			        </Anchor>
+				</Anchors>
+				<Layers> 
+				    <Layer level="ARTWORK"> 
+					    <FontString name="$parentText" font="Fonts\ARIALN.ttf" text="Font Size" justifyH="LEFT" justifyV="TOP">
+					        <Anchors> 
+					          	<Anchor point="LEFT">
+					            	<Offset>
+					              		<AbsDimension x="-200" y="0"/>
+					            	</Offset>        
+					          	</Anchor>
+					        </Anchors>
+						    <Color r="1" g="1" b="1"/>
+							<FontHeight val="16"/>
+					    </FontString>
+				 	</Layer>
+				</Layers>
+				<Scripts>
+					<OnClick>
+
+					</OnClick>
+				</Scripts>
+				<NormalTexture file="Interface\AddOns\ClassicLeveler_Guide\Buttons\cross" />
+				<PushedTexture file="Interface\AddOns\ClassicLeveler_Guide\Buttons\UI-ChatIM-SizeGrabber-Down" />
+				<HighlightTexture file="Interface\AddOns\ClassicLeveler_Guide\Buttons\crosshighlight" />
+			</Button>
+
+			<Button name="$parent_PreviousSteps">
+				<Size x="16" y="16" />
+				<Anchors>
+					<Anchor point="TOPRIGHT">
+						<Offset>
+			              <AbsDimension x="-25" y="-135"/>
+			            </Offset>        
+			        </Anchor>
+				</Anchors>
+				<Layers> 
+				    <Layer level="ARTWORK"> 
+					    <FontString name="$parentText" font="Fonts\ARIALN.ttf" text="Previous Steps Shown" justifyH="LEFT" justifyV="TOP">
+					        <Anchors> 
+					          	<Anchor point="LEFT">
+					            	<Offset>
+					              		<AbsDimension x="-200" y="0"/>
+					            	</Offset>        
+					          	</Anchor>
+					        </Anchors>
+						    <Color r="1" g="1" b="1"/>
+							<FontHeight val="16"/>
+					    </FontString>
+				 	</Layer>
+				</Layers>
+				<Scripts>
+					<OnClick>
+
+					</OnClick>
+				</Scripts>
+				<NormalTexture file="Interface\AddOns\ClassicLeveler_Guide\Buttons\cross" />
+				<PushedTexture file="Interface\AddOns\ClassicLeveler_Guide\Buttons\UI-ChatIM-SizeGrabber-Down" />
+				<HighlightTexture file="Interface\AddOns\ClassicLeveler_Guide\Buttons\crosshighlight" />
+			</Button>
+
+			<Button name="$parent_AutoQuestReward">
+				<Size x="16" y="16" />
+				<Anchors>
+					<Anchor point="TOPRIGHT">
+						<Offset>
+			              <AbsDimension x="-25" y="-175"/>
+			            </Offset>        
+			        </Anchor>
+				</Anchors>
+				<Layers> 
+				    <Layer level="ARTWORK"> 
+					    <FontString name="$parentText" font="Fonts\ARIALN.ttf" text="Auto Pick Rewards" justifyH="LEFT" justifyV="TOP">
+					        <Anchors> 
+					          	<Anchor point="LEFT">
+					            	<Offset>
+					              		<AbsDimension x="-200" y="0"/>
+					            	</Offset>        
+					          	</Anchor>
+					        </Anchors>
+						    <Color r="1" g="1" b="1"/>
+							<FontHeight val="16"/>
+					    </FontString>
+				 	</Layer>
+				</Layers>
+				<Scripts>
+					<OnClick>
+
+					</OnClick>
+				</Scripts>
+				<NormalTexture file="Interface\AddOns\ClassicLeveler_Guide\Buttons\cross" />
+				<PushedTexture file="Interface\AddOns\ClassicLeveler_Guide\Buttons\UI-ChatIM-SizeGrabber-Down" />
+				<HighlightTexture file="Interface\AddOns\ClassicLeveler_Guide\Buttons\crosshighlight" />
+			</Button>
+
+			<Button name="$parent_AutoVendorGrey">
+				<Size x="16" y="16" />
+				<Anchors>
+					<Anchor point="TOPRIGHT">
+						<Offset>
+			              <AbsDimension x="-25" y="-215"/>
+			            </Offset>        
+			        </Anchor>
+				</Anchors>
+				<Layers> 
+				    <Layer level="ARTWORK"> 
+					    <FontString name="$parentText" font="Fonts\ARIALN.ttf" text="Auto Vendor Grey" justifyH="LEFT" justifyV="TOP">
+					        <Anchors> 
+					          	<Anchor point="LEFT">
+					            	<Offset>
+					              		<AbsDimension x="-200" y="0"/>
+					            	</Offset>        
+					          	</Anchor>
+					        </Anchors>
+						    <Color r="1" g="1" b="1"/>
+							<FontHeight val="16"/>
+					    </FontString>
+				 	</Layer>
+				</Layers>
+				<Scripts>
+					<OnClick>
+
+					</OnClick>
+				</Scripts>
+				<NormalTexture file="Interface\AddOns\ClassicLeveler_Guide\Buttons\cross" />
+				<PushedTexture file="Interface\AddOns\ClassicLeveler_Guide\Buttons\UI-ChatIM-SizeGrabber-Down" />
+				<HighlightTexture file="Interface\AddOns\ClassicLeveler_Guide\Buttons\crosshighlight" />
+			</Button>
+
+			<Button name="$parent_UseAutoVendorList">
+				<Size x="16" y="16" />
+				<Anchors>
+					<Anchor point="TOPRIGHT">
+						<Offset>
+			              <AbsDimension x="-25" y="-255"/>
+			            </Offset>        
+			        </Anchor>
+				</Anchors>
+				<Layers> 
+				    <Layer level="ARTWORK"> 
+					    <FontString name="$parentText" font="Fonts\ARIALN.ttf" text="Use Auto Vendor List" justifyH="LEFT" justifyV="TOP">
+					        <Anchors> 
+					          	<Anchor point="LEFT">
+					            	<Offset>
+					              		<AbsDimension x="-200" y="0"/>
+					            	</Offset>        
+					          	</Anchor>
+					        </Anchors>
+						    <Color r="1" g="1" b="1"/>
+							<FontHeight val="16"/>
+					    </FontString>
+				 	</Layer>
+				</Layers>
+				<Scripts>
+					<OnClick>
+
+					</OnClick>
+				</Scripts>
+				<NormalTexture file="Interface\AddOns\ClassicLeveler_Guide\Buttons\cross" />
+				<PushedTexture file="Interface\AddOns\ClassicLeveler_Guide\Buttons\UI-ChatIM-SizeGrabber-Down" />
+				<HighlightTexture file="Interface\AddOns\ClassicLeveler_Guide\Buttons\crosshighlight" />
+			</Button>
+
+			<Button name="$parent_AutoFly">
+				<Size x="16" y="16" />
+				<Anchors>
+					<Anchor point="TOPRIGHT">
+						<Offset>
+			              <AbsDimension x="-25" y="-295"/>
+			            </Offset>        
+			        </Anchor>
+				</Anchors>
+				<Layers> 
+				    <Layer level="ARTWORK"> 
+					    <FontString name="$parentText" font="Fonts\ARIALN.ttf" text="Automatic Flight Paths" justifyH="LEFT" justifyV="TOP">
+					        <Anchors> 
+					          	<Anchor point="LEFT">
+					            	<Offset>
+					              		<AbsDimension x="-200" y="0"/>
+					            	</Offset>        
+					          	</Anchor>
+					        </Anchors>
+						    <Color r="1" g="1" b="1"/>
+							<FontHeight val="16"/>
+					    </FontString>
+				 	</Layer>
+				</Layers>
+				<Scripts>
+					<OnClick>
+
+					</OnClick>
+				</Scripts>
+				<NormalTexture file="Interface\AddOns\ClassicLeveler_Guide\Buttons\cross" />
+				<PushedTexture file="Interface\AddOns\ClassicLeveler_Guide\Buttons\UI-ChatIM-SizeGrabber-Down" />
+				<HighlightTexture file="Interface\AddOns\ClassicLeveler_Guide\Buttons\crosshighlight" />
+			</Button>
+
+		</Frames>
+		<Layers> 
+		    <Layer level="ARTWORK"> 
+		      <FontString name="$parentTitle" font="Fonts\ARIALN.ttf" text="Config" justifyH="LEFT" justifyV="TOP">
+		        <Anchors> 
+		          <Anchor point="TOP">
+		            <Offset>
+		              <AbsDimension x="0" y="-5"/>
+		            </Offset>        
+		          </Anchor>
+		        </Anchors>
+		        <Color r="1" g="1" b="1"/>
+				<FontHeight val="24"/>
+		      </FontString>
+
+		      
+
+		    </Layer> 
+		</Layers>
+
+		<Scripts>
+			<OnMouseDown>
+				CLGuide_ConfigFrame:StartMoving()
+			</OnMouseDown>
+			<OnMouseUp>
+				CLGuide_ConfigFrame:StopMovingOrSizing()
+			</OnMouseUp>
+			<OnDragStop>
+				CLGuide_ConfigFrame:StopMovingOrSizing()
+			</OnDragStop>
+			<OnDragStart>
+				CLGuide_ConfigFrame:StartMoving()
+			</OnDragStart>
+		</Scripts>
+	</Frame>
+</Ui>

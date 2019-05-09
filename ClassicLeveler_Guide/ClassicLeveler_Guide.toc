@@ -35,12 +35,13 @@ Triggers\TakeTaxi.lua
 Triggers\TrainSkill.lua
 Triggers\ZoneEntered.lua
 
-
+UI\Config.xml
+UI\Config.lua
 UI\PinBoard.xml
 UI\PinBoard.lua
 UI\ItemButton.xml
 UI\ItemButton.lua
-UI\Frame.xml
+UI\GuideFrame.xml
 UI\GuideFrame.lua
 UI\GuideList.lua
 UI\GuideList.xml

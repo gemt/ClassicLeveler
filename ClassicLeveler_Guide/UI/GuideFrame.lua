@@ -29,17 +29,20 @@ function CLGuide_PrevStep()
 	end
 end
 
---Config Button
-function CLGuide_Config()
-	GuidePrint("Config Button")
-end
-
 function CLGuide_GuideList()
 	if CLGuide_GuideListFrame:IsVisible() then 
 		CLGuide_GuideListFrame:Hide()
 	else 
 		CLGuide_GuideListFrame:Show()
 		CreateGuideList()
+	end
+end
+
+function CLGuide_Config()
+	if CLGuide_ConfigFrame:IsVisible() then
+		CLGuide_ConfigFrame:Hide()
+	else
+		CLGuide_ConfigFrame:Show()
 	end
 end
 
