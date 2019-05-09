@@ -5,6 +5,9 @@ local useFrame = 0
 --Move this to Saved Vars
 CLGuide_PinText = {}
 
+--============================
+-- Add & Remove Pins Functions
+--============================
 function CLGuide_AddPin(text)
 	for k, v in pairs(CLGuide_PinText) do
 		if v == text then 
@@ -36,7 +39,10 @@ function CLGuide_AddPin(text)
 		CLGuide_PinBoardFrames[PinNumber].text:SetText(text)
 
 		CLGuide_PinBoardFrames[PinNumber]:SetScript("OnClick", CLGuide_PinBoardFrames.OnClick)
-
+		CLGuide_PinBoardFrames[PinNumber]:SetScript("OnMouseDown", CLGuide_PinBoardFrames.Moving)
+		CLGuide_PinBoardFrames[PinNumber]:SetScript("OnDragStart", CLGuide_PinBoardFrames.Moving)
+		CLGuide_PinBoardFrames[PinNumber]:SetScript("OnDragStop", CLGuide_PinBoardFrames.StopMoving)
+		CLGuide_PinBoardFrames[PinNumber]:SetScript("OnMouseUp", CLGuide_PinBoardFrames.StopMoving)
 		-- Set PinBoard height depending on amount of frames, this should be changed later 
 		-- to check for amount of text to change height of individual frame heights of PinBoardFrame
 		-- This would then need to check the total height of all frames to setheight instead of amount of frames
@@ -46,11 +52,6 @@ function CLGuide_AddPin(text)
 	table.insert(CLGuide_PinText, text)
 	CLGuide_PinBoard:Show()
 end
-
-function CLGuide_PinBoardFrames.OnClick()
-	CLGuide_RemovePin(this.text:GetText())
-end
-
 
 function CLGuide_RemovePin(frameText)
 	for k, v in pairs(CLGuide_PinText) do
@@ -68,4 +69,22 @@ function CLGuide_RemovePin(frameText)
 			end
 		end
 	end
+end
+
+--================
+-- Mouse Functions
+--================
+function CLGuide_PinBoardFrames.OnClick()
+	if not IsShiftKeyDown() then 
+		return 
+	end
+	CLGuide_RemovePin(this.text:GetText())
+end
+
+function CLGuide_PinBoardFrames.Moving()
+	CLGuide_PinBoard:StartMoving()
+end
+
+function CLGuide_PinBoardFrames.StopMoving()
+	CLGuide_PinBoard:StopMovingOrSizing()
 end
