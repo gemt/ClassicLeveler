@@ -1,0 +1,280 @@
+<Ui xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.blizzard.com/wow/ui/">
+	<Script file="Config.lua" />
+	<Frame name="CLGuide_ConfigFrame" parent="UIParent" toplevel="true" movable="true" enableMouse="true" enableMouseClicks="true" enableMouseMotion="true" hidden="true">
+		<Anchors>
+			<Anchor point="CENTER" />
+		</Anchors>
+		<Size x="250" y="400" />
+		<Backdrop bgfile="Interface\BUTTONS\WHITE8X8" >
+			<Color r="0.2" g="0.2" b="0.2" a="0.8" />
+		</Backdrop>
+		<Frames>
+			<EditBox  name="$parent_Rows" enableMouseClicks="true" enableKeyboard="true" letters="2" numeric="true" autoFocus="false">
+				<Size x="24" y="16" />
+				<Anchors>
+					<Anchor point="TOPRIGHT" >
+						<Offset>
+					        <AbsDimension x="-22" y="-55" />
+					    </Offset>
+					</Anchor>
+				</Anchors>
+				<Backdrop bgfile="Interface\BUTTONS\WHITE8X8" >
+					<Color r="0.5" g="0.5" b="0.5" a="0.8" />
+				</Backdrop>	
+				<FontString inherits="GameFontNormal" />
+				<Layers> 
+				    <Layer level="ARTWORK"> 
+					    <FontString name="$parentText" font="Fonts\ARIALN.ttf" text="Guide Steps Shown" justifyH="LEFT" justifyV="TOP">
+					        <Anchors> 
+					          	<Anchor point="LEFT">
+					            	<Offset>
+					              		<AbsDimension x="-194" y="0"/>
+					            	</Offset>        
+					          	</Anchor>
+					        </Anchors>
+						    <Color r="1" g="1" b="1"/>
+							<FontHeight val="16"/>
+					    </FontString>
+				 	</Layer>
+				</Layers>
+				<Scripts>
+					<OnEscapePressed>
+						CLGuide_ConfigFrame_Rows:ClearFocus()
+					</OnEscapePressed>
+					<OnEnterPressed>
+						CLGuide_ConfigFrame_Rows:ClearFocus()
+					</OnEnterPressed>
+				</Scripts>
+
+			</EditBox >
+
+			<EditBox  name="$parent_FontSize" enableMouseClicks="true" enableKeyboard="true" letters="2" numeric="true" autoFocus="false">
+				<Size x="24" y="16" />
+				<Anchors>
+					<Anchor point="TOPRIGHT" >
+						<Offset>
+					        <AbsDimension x="-22" y="-95" />
+					    </Offset>
+					</Anchor>
+				</Anchors>
+				<Backdrop bgfile="Interface\BUTTONS\WHITE8X8" >
+					<Color r="0.5" g="0.5" b="0.5" a="0.8" />
+				</Backdrop>	
+				<FontString inherits="GameFontNormal" />
+				<Layers> 
+				    <Layer level="ARTWORK"> 
+					    <FontString name="$parentText" font="Fonts\ARIALN.ttf" text="Font Size" justifyH="LEFT" justifyV="TOP">
+					        <Anchors> 
+					          	<Anchor point="LEFT">
+					            	<Offset>
+					              		<AbsDimension x="-194" y="0"/>
+					            	</Offset>        
+					          	</Anchor>
+					        </Anchors>
+						    <Color r="1" g="1" b="1"/>
+							<FontHeight val="16"/>
+					    </FontString>
+				 	</Layer>
+				</Layers>
+				<Scripts>
+					<OnEscapePressed>
+						CLGuide_ConfigFrame_FontSize:ClearFocus()
+					</OnEscapePressed>
+					<OnEnterPressed>
+						CLGuide_ConfigFrame_FontSize:ClearFocus()
+					</OnEnterPressed>
+				</Scripts>
+			</EditBox >
+
+			<EditBox  name="$parent_PreviousSteps" enableMouseClicks="true" enableKeyboard="true" letters="2" numeric="true" autoFocus="false">
+				<Size x="24" y="16" />
+				<Anchors>
+					<Anchor point="TOPRIGHT" >
+						<Offset>
+					        <AbsDimension x="-22" y="-135" />
+					    </Offset>
+					</Anchor>
+				</Anchors>
+				<Backdrop bgfile="Interface\BUTTONS\WHITE8X8" >
+					<Color r="0.5" g="0.5" b="0.5" a="0.8" />
+				</Backdrop>	
+				<FontString inherits="GameFontNormal" />
+				<Layers> 
+				    <Layer level="ARTWORK"> 
+					    <FontString name="$parentText" font="Fonts\ARIALN.ttf" text="Previous Steps Shown" justifyH="LEFT" justifyV="TOP">
+					        <Anchors> 
+					          	<Anchor point="LEFT">
+					            	<Offset>
+					              		<AbsDimension x="-194" y="0"/>
+					            	</Offset>        
+					          	</Anchor>
+					        </Anchors>
+						    <Color r="1" g="1" b="1"/>
+							<FontHeight val="16"/>
+					    </FontString>
+				 	</Layer>
+				</Layers>
+				<Scripts>
+					<OnEscapePressed>
+						CLGuide_ConfigFrame_PreviousSteps:ClearFocus()
+					</OnEscapePressed>
+					<OnEnterPressed>
+						CLGuide_ConfigFrame_PreviousSteps:ClearFocus()
+					</OnEnterPressed>
+				</Scripts>
+			</EditBox >
+
+			<CheckButton name="$parent_AutoQuestReward" inherits="OptionsCheckButtonTemplate">
+				<Size x="16" y="16" />
+				<Anchors>
+					<Anchor point="TOPRIGHT">
+						<Offset>
+			              <AbsDimension x="-25" y="-175"/>
+			            </Offset>        
+			        </Anchor>
+				</Anchors>
+				<Layers> 
+				    <Layer level="ARTWORK"> 
+					    <FontString name="$parentText" font="Fonts\ARIALN.ttf" text="Auto Pick Rewards" justifyH="LEFT" justifyV="TOP">
+					        <Anchors> 
+					          	<Anchor point="LEFT">
+					            	<Offset>
+					              		<AbsDimension x="-200" y="0"/>
+					            	</Offset>        
+					          	</Anchor>
+					        </Anchors>
+						    <Color r="1" g="1" b="1"/>
+							<FontHeight val="16"/>
+					    </FontString>
+				 	</Layer>
+				</Layers>
+			</CheckButton>
+
+			<CheckButton  name="$parent_AutoVendorGrey" inherits="OptionsCheckButtonTemplate">
+				<Size x="16" y="16" />
+				<Anchors>
+					<Anchor point="TOPRIGHT">
+						<Offset>
+			              <AbsDimension x="-25" y="-215"/>
+			            </Offset>        
+			        </Anchor>
+				</Anchors>
+				<Layers> 
+				    <Layer level="ARTWORK"> 
+					    <FontString name="$parentText" font="Fonts\ARIALN.ttf" text="Auto Vendor Grey" justifyH="LEFT" justifyV="TOP">
+					        <Anchors> 
+					          	<Anchor point="LEFT">
+					            	<Offset>
+					              		<AbsDimension x="-200" y="0"/>
+					            	</Offset>        
+					          	</Anchor>
+					        </Anchors>
+						    <Color r="1" g="1" b="1"/>
+							<FontHeight val="16"/>
+					    </FontString>
+				 	</Layer>
+				</Layers>
+			</CheckButton >
+
+			<CheckButton  name="$parent_UseAutoVendorList" inherits="OptionsCheckButtonTemplate">
+				<Size x="16" y="16" />
+				<Anchors>
+					<Anchor point="TOPRIGHT">
+						<Offset>
+			              <AbsDimension x="-25" y="-255"/>
+			            </Offset>        
+			        </Anchor>
+				</Anchors>
+				<Layers> 
+				    <Layer level="ARTWORK"> 
+					    <FontString name="$parentText" font="Fonts\ARIALN.ttf" text="Use Auto Vendor List" justifyH="LEFT" justifyV="TOP">
+					        <Anchors> 
+					          	<Anchor point="LEFT">
+					            	<Offset>
+					              		<AbsDimension x="-200" y="0"/>
+					            	</Offset>        
+					          	</Anchor>
+					        </Anchors>
+						    <Color r="1" g="1" b="1"/>
+							<FontHeight val="16"/>
+					    </FontString>
+				 	</Layer>
+				</Layers>
+			</CheckButton >
+
+			<CheckButton  name="$parent_AutoFly" inherits="OptionsCheckButtonTemplate">
+				<Size x="16" y="16" />
+				<Anchors>
+					<Anchor point="TOPRIGHT">
+						<Offset>
+			              <AbsDimension x="-25" y="-295"/>
+			            </Offset>        
+			        </Anchor>
+				</Anchors>
+				<Layers> 
+				    <Layer level="ARTWORK"> 
+					    <FontString name="$parentText" font="Fonts\ARIALN.ttf" text="Automatic Flight Paths" justifyH="LEFT" justifyV="TOP">
+					        <Anchors> 
+					          	<Anchor point="LEFT">
+					            	<Offset>
+					              		<AbsDimension x="-200" y="0"/>
+					            	</Offset>        
+					          	</Anchor>
+					        </Anchors>
+						    <Color r="1" g="1" b="1"/>
+							<FontHeight val="16"/>
+					    </FontString>
+				 	</Layer>
+				</Layers>
+			</CheckButton >
+
+			<Button name="$parentButtonClose" inherits="OptionsButtonTemplate" text="Save &amp; Reload">
+				<Anchors>
+					<Anchor point="BOTTOM">
+						<Offset x="0" y="8"/>
+					</Anchor> 
+				</Anchors>
+				<Size x="128" y="32" />
+				<Scripts>
+					<OnClick> 
+						CLGuide_Config_Save()
+					</OnClick>
+				</Scripts>
+			</Button>
+
+		</Frames>
+		<Layers> 
+		    <Layer level="ARTWORK"> 
+		      <FontString name="$parentTitle" font="Fonts\ARIALN.ttf" text="Config" justifyH="LEFT" justifyV="TOP">
+		        <Anchors> 
+		          <Anchor point="TOP">
+		            <Offset>
+		              <AbsDimension x="0" y="-5"/>
+		            </Offset>        
+		          </Anchor>
+		        </Anchors>
+		        <Color r="1" g="1" b="1"/>
+				<FontHeight val="24"/>
+		      </FontString>
+
+		      
+
+		    </Layer> 
+		</Layers>
+
+		<Scripts>
+			<OnMouseDown>
+				CLGuide_ConfigFrame:StartMoving()
+			</OnMouseDown>
+			<OnMouseUp>
+				CLGuide_ConfigFrame:StopMovingOrSizing()
+			</OnMouseUp>
+			<OnDragStop>
+				CLGuide_ConfigFrame:StopMovingOrSizing()
+			</OnDragStop>
+			<OnDragStart>
+				CLGuide_ConfigFrame:StartMoving()
+			</OnDragStart>
+		</Scripts>
+	</Frame>
+</Ui>
