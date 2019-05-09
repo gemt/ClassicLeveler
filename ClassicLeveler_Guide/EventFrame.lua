@@ -21,6 +21,8 @@ EventFrame:RegisterEvent("PLAYER_LEVEL_UP")
 EventFrame:RegisterEvent("PLAYER_ENTERING_WORLD")
 EventFrame:RegisterEvent("CONFIRM_XP_LOSS")
 EventFrame:RegisterEvent("PLAYER_DEAD")
+EventFrame:RegisterEvent("PLAYER_XP_UPDATE")
+
 
 
 -- TODO: Remove for release, this is for debugging purposes
