@@ -80,7 +80,7 @@ function CLGuide_SetStep(step)
     if CLGuide_CurrentStepTable.PinAdd ~= nil then
         CLGuide_AddPin(CLGuide_CurrentStepTable.PinAdd)
     elseif CLGuide_CurrentStepTable.PinRemove ~= nil then
-        -- HATA: call RemovePin func where arg is CLGuide_CurrentStepTable.PinRemove, which is the text to remove
+        CLGuide_RemovePin(CLGuide_CurrentStepTable.PinRemove)
     end
 
     if CLGuide_CurrentStepTable.UseItem ~= nil then
