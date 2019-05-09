@@ -5,14 +5,32 @@ CLGuide_Duskwood2 = {
     Title="28-30 Duskwood",
     Pinboard = {},
     Steps = {
-        {Text="Accept Worgen in the Woods", At="Worgen in the Woods", point={x=7558,y=4791}},
+        {Text="Accept Worgen in the Woods (pt1)", At="Worgen in the Woods", point={x=7558,y=4791}},
         {Text="If had Bronze Tube: Accept Look To The Stars, otherwise check vendor", At="Look To The Stars", point={x=7980,y=4798}},
 
-        {Text="Step1", At="someQuest", point={x=5869,y=4427}},
+        
+
+        {Text="Down to road, west then Worgen in the woods, Shadow Weavers", Ct="Worgen in the Woods", point={x=6260,y=7170}},
+        
+        
+        {Text="Turn Worgen in the Woods.", Dt={q="Worgen in the Woods"}, point={x=7558,y=4791}},
+        {Text="Accept Worgen in the Woods (pt2)", At="Worgen in the Woods", point={x=7558,y=4791}},
     }
 }
 
 --[[
+done:
+grind northern shore to abercrombie. Finish eight-lagged menaces and wolves at our heels
+deliver "deliver the thread"
+accept zombie juice
+deliver wolves at our heels at sven's camp
+completed nights watch pt2 (at raven hill 15/15)
+deliver return to jitters at raven hill
+deliver eight legged menaces
+heartstone to duskwood
+
+have moved all worgen in the woods part to this section, so keep that in mind
+
 ==== REMEMBER TO REPICK ANY ABANDONED QUESTS =====
 	look to stars
 	worgens
@@ -29,37 +47,46 @@ IF FORGOT TO DO THIS BEFORE WTLANDS:
 
 
 run west
-do Worgen in the woods pt2 (12 runners)
-Run to the Yorgen farmstead (south-middle)
-turn inn sven's revenge at the pile of dirt between the houses south on the farm
-accept sven's camp
-Turn inn Eight-legged menaces at xroads
+do Worgen in the woods pt1
 
-do look to the stars (ogre cave)
-	
-Run to raven hill
-turn inn return to jitters
+these are now already done
+    Run to the Yorgen farmstead (south-middle)
+    turn inn sven's revenge at the pile of dirt between the houses south on the farm
+    accept sven's camp
+    Turn inn Eight-legged menaces at xroads
 
-complete The Night Watch (15 skeletal fiend and horror)
+wait for one run later perhaps?
+    do look to the stars (ogre cave)
 
-run to sven's camp north-west
-kill missing wolves on the way
+done	
+    Run to raven hill
+    turn inn return to jitters
+
+done
+    complete The Night Watch (15 skeletal fiend and horror)
+    run to sven's camp north-west
+    kill missing wolves on the way
 
 turn inn the sven's camp
 accept shadowy figure
 
-kill wolves on the way to the hermit
+done
+    kill wolves on the way to the hermit
 
-turn inn deliver the thread
-accept zombie juice
+done
+    turn inn deliver the thread
+    accept zombie juice
 
 GRIND TO LEVEL 28
 	24-25 skeletons ~30k xph
 	ghouls about the same
+MAKE SURE TO FINISH "GATHER ROT BLOSSOMS"
 Accept The Weathered Grave (just north of the house on top of hill) (17,29)
 
 
 16h3min
+problem here. Unlikely that its been 1 hour already. Grind until HS is up, or what?
+could maybe do 2 parts in a row of worgen in the woods before going west
 === heartstone to darkshire ====
 
 go pick up the item for SW quest 
@@ -94,22 +121,20 @@ turn inn the shadowy search continue
 accept inquire at the inn
 turn inn inquire at the inn
 accept finding the shadowy figure
-accept gather rot blossoms
+
+deliver gather rot blossoms
+accept juice delivery
+
 
 turn inn the weathered grave
 accept morgan ladimore
 turn inn morgan ladimore
 accept mor'ladim
-
-=== Kill skeletals north of tranquil gardens cemetary (south of darksire) =====
-	try to get 8 rot blossoms
-	if all mobs cleared and not done, do worgen in the wods just next door, then come back
 	
 =========
 
 Do Worgen in the woods pt 3 (Vile fang and tainted ones). Remember there may not be enough tainted ones, so start with those
 
-when you have 8 rot blossoms, go back to darkshire and turn inn gather rot blossoms
 turn inn worgen in the woods as well
 
 

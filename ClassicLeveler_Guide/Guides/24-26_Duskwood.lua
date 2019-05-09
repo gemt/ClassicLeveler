@@ -41,8 +41,6 @@ CLGuide_Duskwood1 = {
             Mct={"Look To The Stars", "The Night Watch"}, point={x=8022,y=7095}},
 
         -- worgen in the woods now or later?
-        
-        {Text="Down to road, west then Worgen in the woods, Shadow Weavers", Ct="Worgen in the Woods", point={x=6260,y=7170}},
 
         {Text="Accept Eight-Legged Menaces at xroads (can kill wolves on way, not required)", At="Eight-Legged Menaces", point={x=4513,y=6702}},
 
@@ -85,8 +83,6 @@ CLGuide_Duskwood1 = {
         {Text="Turn inn The Night Watch", Dt={q="The Night Watch"}, point={x=7360,y=4692}},
         {Text="Accept The Night Watch", At="The Night Watch", point={x=7360,y=4692}},
 
-        {Text="Turn Worgen in the Woods. Skip followup for now", Dt={q="Worgen in the Woods"}, point={x=7558,y=4791}},
-        
         -- don't accept yet. Will have full questlog
         --{Text="Accept Worgen in the Woods", At="Worgen in the Woods", point={x=7558,y=4791}},
         
@@ -99,7 +95,11 @@ CLGuide_Duskwood1 = {
 
         {Text="Turn Supplies from Darkshire", Dt={q="Supplies from Darkshire"}, point={x=7586,y=4528}},
         {Text="Accept Ghost Hair Thread", At="Ghost Hair Thread", point={x=7586,y=4528}},
-
+        
+        z{Text="Deliver Ghost Hair Thread (blind mary to the south)", Dt={q="Ghost Hair Thread"}, point={x=8198,y=5908}},
+        {Text="Accept Return the Comb", At="Return the Comb", point={x=8198,y=5908}},
+        {Text="Deliver Return the Comb", Dt={q="Return the Comb"}, point={x=7581,y=4531}},
+        {Text="Accept Deliver the Thread", At="Deliver the Thread", point={x=7581,y=4531}},
 
         -- Don't require 25 here actually. We're not taking the 25 quest in SW yet, and 
         -- being 25 will make more mobs in Redridge grey, so might as well avoid it.
@@ -133,8 +133,8 @@ CLGuide_Duskwood1 = {
 
         {Text="Accept Solomon's Law (town hall)", At="Solomon's Law", point={x=2967,y=4433}},
         
-        -- TODO: Can we put HS in lakeshire and HS back after this round, or will it not be ready in time?
-
+        -- DONT put hs here, we want it in duskwood later
+                
         {Text="Deliver The Defias Brotherhood (second floor inn) Skip followup", Dt={q="The Defias Brotherhood"},
             point={x=2647,y=4534}, PinAdd="If not completed Bellygrub quest, be on the lookout for it"},
 
@@ -162,7 +162,7 @@ CLGuide_Duskwood1 = {
 
         {Text="HS/Run back to Lakeshire, Turn in"},
 
-        {Text="HS/Run back to lakeshire, Deliver Solomon's Law (town hall)", Dt={q="Solomon's Law"}, point={x=2963,y=4427}},
+        {Text="Run back to lakeshire, Deliver Solomon's Law (town hall)", Dt={q="Solomon's Law"}, point={x=2963,y=4427}},
         {Text="Deliver Wanted: Lieutenant Fangore (town hall) (dont take messenger q)", Dt={q="Wanted: Lieutenant Fangore"}, point={x=3002,y=4447}},
 
         {Text="Deliver Howling in the Hills", Dt={q="Howling in the Hills", Item="Ring of Iron Will", Use=1}, point={x=3098,y=4727}},
@@ -180,14 +180,36 @@ CLGuide_Duskwood1 = {
         {Text="If you found Glowing Shadowhide Pendant, accept the Q and turnin in tower to the west", 
             Dt={q="Theocritus Retrieval"}, point={x=6460,y=6942}},
 
-        {Text="Run towards Darkshire, Finish Seasoned Wolf Kabobs on the way", Ct="Seasoned Wolf Kabobs"},
+
+
+
+        -- make sure we already have night watch at this point
+        --{Text="Accept The Night Watch", At="The Night Watch", point={x=7359,y=4690}},
+
+        {Text="Grind northern shore to Abercrombie and turn inn Deliver the Thread", 
+            Dt={q="Deliver the Thread"}, point={x=2809,y=3145}, PinAdd="Complete 8legged Menaces, wolf kabobs and Wolves at our heels on the way"},
         
+        {Text="Accept Zombie Juice", At="Zombie Juice", point={x=2809,y=3145}},
+        
+        {Text="Make sure Eight-Legged Menaces and Wolf kabobs/at our heels are done", 
+            Mct={"Eight-Legged Menaces", "Seasoned Wolf Kabobs", "Wolves at Our Heels"}, point={x=771,y=3319}},
+        {Text="Turn inn Wolves at Our Heels", Dt={q="Wolves at Our Heels"}, point={x=771,y=3319}},
+
+        {Text="Complete The Night Watch at cemetary", Ct="The Night Watch", point={x=1664,y=4668}},
+        {Text="Turn inn Return to Jitters", Dt={q="Return to Jitters"}, point={x=1828,y=5652}},
+        {Text="Turn inn Eight-Legged Menaces", Dt={q="Eight-Legged Menaces"}, point={x=4509,y=6702}},
+        {Text="Turn Sven's Revenge (mound of dirt between houses at farm)", Dt={q="Sven's Revenge"}, point={x=4985,y=7771}},
+        {Text="Accept Sven's Camp", At="Sven's Camp", point={x=4985,y=7771}},
+        
+        {Text="Heartstone to Darkshire", Zone="Duskwood", UseItem="Hearthstone"},
+        
+        {Text="Turn inn Seasoned Wolf Kabobs (chef)", Dt={q="Seasoned Wolf Kabobs"}, point={x=7387,y=4348}},
+        {Text="Turn inn Zombie Juice (tavernkeep smits)", Dt={q="Zombie Juice"}, point={x=7380,y=4445}},
+        {Text="Accept Gather Rot Blossoms", At="Gather Rot Blossoms", point={x=7380,y=4445}},
+        
+
         {Text="Deliver The Legend of Stalvan (Darkshire, innkeeper)", Dt={q="The Legend of Stalvan"}, point={x=7378,y=4449}},
         {Text="Accept The Legend of Stalvan", At="The Legend of Stalvan", point={x=7378,y=4449}},
-
-        -- Set HS again if moved it to lakeshire!
-
-        {Text="Turn inn Seasoned Wolf Kabobs (chef)", Dt={q="Seasoned Wolf Kabobs"}, point={x=7387,y=4348}},
 
         {Text="Deliver The Legend of Stalvan (outside inn)", Dt={q="The Legend of Stalvan"}, point={x=7359,y=4690}},
         {Text="Accept The Legend of Stalvan", At="The Legend of Stalvan", point={x=7359,y=4690}},
@@ -197,15 +219,8 @@ CLGuide_Duskwood1 = {
 
         {Text="Deliver The Legend of Stalvan (outside inn)", Dt={q="The Legend of Stalvan"}, point={x=7359,y=4690}},
         {Text="Accept The Legend of Stalvan", At="The Legend of Stalvan", point={x=7359,y=4690}},
-        {Text="Accept The Night Watch", At="The Night Watch", point={x=7359,y=4690}},
 
-        
 
-        {Text="Deliver Ghost Hair Thread (blind mary to the south)", Dt={q="Ghost Hair Thread"}, point={x=8198,y=5908}},
-        {Text="Accept Return the Comb", At="Return the Comb", point={x=8198,y=5908}},
-        {Text="Deliver Return the Comb", Dt={q="Return the Comb"}, point={x=7581,y=4531}},
-        {Text="Accept Deliver the Thread", At="Deliver the Thread", point={x=7581,y=4531}},
-        
         {Text="If have A Noble Brew, fly wetlands. If not, consider picking it in SW; then wetlands?",  point={x=7749,y=4429},
             PinAdd="Delete remaining Sharp Arrows while flying, restocking in Menethil"},
     }
