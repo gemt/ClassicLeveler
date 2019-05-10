@@ -95,18 +95,18 @@ CLGuide_Duskwood2 = {
         
         {Text="Train Hunter skills", 
             TrainSkill={
-                {n="Aspect of the Hawk", "Rank 3", Actionbar=49},
-                {n="Mend Pet", "Rank 3", Actionbar=62},
+                {n="Aspect of the Hawk", r="Rank 3", Actionbar=49},
+                {n="Mend Pet", r="Rank 3", Actionbar=62},
                 {n="Rapid Fire", Actionbar=11},
-                {n="Arcane Shot", "Rank 4", Actionbar=3},
+                {n="Arcane Shot", r="Rank 4", Actionbar=3},
                 {n="Serpent Sting",r="Rank 4", Actionbar=1},
-                {n="Raptor Strike", "Rank 4", Actionbar=2},
+                {n="Raptor Strike", r="Rank 4", Actionbar=2},
                 {n="Immolation Trap",r="Rank 2", Actionbar=65},
             }, point={x=6153,y=1650}
         },
         {Text="Train Pet skills", 
             TrainSkill={
-                --{n="Great Stamina", "Rank 4"}, -- can we still keep training stamina?
+                {n="Great Stamina", "Rank 4"}, -- TODO: Last rank of great stamina?
                 {n="Natural Armor", "Rank 4"},
             }, point={x=6153,y=1650}
         },
@@ -124,146 +124,129 @@ CLGuide_Duskwood2 = {
         {Text="Accept The Missing Diplomat", At="The Missing Diplomat", point={x=5990,y=6414}},
         {Text="Fly to Darkshire", Taxi="Darkshire, Duskwood", point={x=6627,y=6218}},
 
-        {Text="Watcher Backus, patrolling from darkshire to north on road. Diplomat", Dt={q="The Missing Diplomat"}, point={x=5990,y=6414}},
-        {Text="Accept The Missing Diplomat", At="The Missing Diplomat", point={x=5990,y=6414}},
---[[
-Fly to SW 
-Fly back to Duskwood
-	4: Watcher Backus - patrolling road north of Darkshire.
-		(this is the find the defias docket part)
-	
-]]
+        {Text="Watcher Backus, patrolling from darkshire to north on road. Diplomat", Dt={q="The Missing Diplomat"}, point={x=7318,y=3248}},
+        {Text="Accept The Missing Diplomat", At="The Missing Diplomat", point={x=7318,y=3248}},
 
+        {Text="Complete Worgen in the Woods pt3 (track undead)", Ct="Worgen in the Woods", point={x=7256,y=6710}},
+        {Text="If not enough mobs => goto point to find more.", Ct="Worgen in the Woods", point={x=6539,y=8029}},
+
+        {Text="Turn inn Finding the Shadowy Figure at raven hill", Dt={q="Finding the Shadowy Figure"}, point={x=1835,y=5631}},
+        {Text="Accept Return to Sven", At="Return to Sven", point={x=1835,y=5631}},
+        {Text="Turn inn Return to Sven (NW corner of map)", Dt={q="Return to Sven"}, point={x=775,y=3405}},
+        {Text="Accept Proving Your Worth", At="Proving Your Worth", point={x=775,y=3405}},
         
+        {Text="Grind over to Abercrombie (kill some raiders, too few of them) and turn inn Juice Delivery", Dt={q="Juice Delivery"}, point={x=2812,y=3146}},
+        {Text="Accept Ghoulish Effigy", At="Ghoulish Effigy", point={x=2812,y=3146}},
+        
+        {Text="Complete: Ghoulish Effingy, Totem of Infliction, Proving your Worth, The Night Watch",
+            Mct={"Ghoulish Effigy", "The Totem of Infliction", "Proving Your Worth", "The Night Watch"},
+            PinAdd="Can do Mor'Ladim kite (or grp) anytime now"},
+
+        {Text="Turn inn Proving Your Worth (At Sven, NW)", Dt={q="Proving Your Worth"}, point={x=775,y=3405}},
+        {Text="Accept Seeking Wisdom", At="Seeking Wisdom", point={x=775,y=3405}},
+
+        {Text="Deliver Ghoulish Effigy (Abercrombie)", Dt={q="Ghoulish Effigy"}, point={x=2812,y=3146}},
+        {Text="Accept Ogre Thieves", At="Ogre Thieves", point={x=2812,y=3146}, PinAdd="Now is a good time to kite Mor'Ladim towards ogres"},
+        
+        {Text="Missing diplomat, loot defias locket in house on farm south of raven hill. (Skip if kiting mor'ladim)", Ct="The Missing Diplomat", point={x=2392,y=7204}},
+
+        {Text="Complete Ogre Thieves outside ogre cave (loot box)", Ct="Ogre Thieves", point={x=3344,y=7636}},
         {Text="Complete Look to the stars (Zzarc'Vul in orgre cave)", Ct="Look To The Stars", point={x=3402,y=7669}},
+
+        {Text="Missing diplomat, loot defias locket in house on farm south of raven hill. (If skipped earlier)", Ct="The Missing Diplomat", point={x=2392,y=7204}},
+
+        {Text="Turn inn Ogre Thieves (Abercrombie)", Dt={q="Ogre Thieves"}, point={x=2812,y=3146}},
+        {Text="Accept Note to the Mayor", At="Note to the Mayor", point={x=2812,y=3146}, PinAdd="Another chance to kite Mor'Ladim towards darkshire now, but not necessary"},
         
+         -- TODO: how much xp from these quests? grind so dinging 30 from them
+        {Text="Grind to 29+27000(29050 if no mor'ladim)", Lvl={lvl=29,xp=27000}},
+        
+        {Text="Heartstone to Darkshire", UseItem="Hearthstone", Proximity=100, point={x=7394,y=4453}},
+
+        {Text="Turn in The Totem of Infliction", Dt={q="The Totem of Infliction"}, point={x=7581,y=4530}},
+
+        {Text="Mor'Ladim", Dt={q="Mor'Ladim"}, point={x=7359,y=4688},
+            PinAdd="Night's Watch turnin will autoaccept normal bag (10slot), if already have, SHIFT ON TURNIN to select Quiver"},
         {Text="Accept The Daughter Who Lived", At="The Daughter Who Lived", point={x=7360,y=4689}},
+
+        {Text="Turn inn The Night Watch", Dt={q="The Night Watch", Item="Gunnysack of the Night Watch"}, point={x=7359,y=4688}},
+
+
+        {Text="Turn in Note to the Mayor (town hall)", Dt={q="Note to the Mayor"}, point={x=7193,y=4653}},
+        {Text="Accept Translate Abercrombie's Note", At="Translate Abercrombie's Note", point={x=7193,y=4653}},
+        {Text="Deliver Translate Abercrombie's Note (on way out of Town Hall)", Dt={q="Translate Abercrombie's Note"}, point={x=7264,y=4763}},
+        {Text="Accept Wait for Sirra to Finish", At="Wait for Sirra to Finish", point={x=7264,y=4763}},
+        {Text="Turn in Wait for Sirra to Finish (wait for RP)", Dt={q="Wait for Sirra to Finish"}, point={x=7264,y=4763}},
+        {Text="Accept Translation to Ello", At="Translation to Ello", point={x=7264,y=4763}},
+        {Text="Turn in Translation to Ello (back to prev. guy)", Dt={q="Translation to Ello"}, point={x=7193,y=4653}},
+        {Text="Accept Bride of the Embalmer", At="Bride of the Embalmer", point={x=7193,y=4653}},
+
+        {Text="Turn in Worgen in the Woods", Dt={q="Worgen in the Woods"}, point={x=7533,y=4796}},
+        {Text="Accept Worgen in the Woods", At="Worgen in the Woods", point={x=7533,y=4796}},
+        {Text="Turn in Worgen in the Woods", Dt={q="Worgen in the Woods", Item="Cloak of the Faith", Use=1, VendorItem="Resilient Poncho"}, point={x=7532,y=4884}},
+
+        {Text="Turn in Look To The Stars", Dt={q="Look To The Stars", Item="Zodiac Gloves", Use=1, Vendor="Windfelt Gloves"}, point={x=7982,y=4794}},
+
         {Text="Turn inn The Daughter Who Lived (patrolls inside Darkshire)", Dt={q="The Daughter Who Lived"}, point={x=7474,y=4686}},
         {Text="Accept A Daughter's Love", At="A Daughter's Love"},
+
+        {Text="Watcher Backus, patrolling from darkshire to north on road. Diplomat", Dt={q="The Missing Diplomat"}, point={x=7318,y=3248}},
+        {Text="Accept The Missing Diplomat", At="The Missing Diplomat", point={x=7318,y=3248}},
+
+        -- 17h37m, 29+74% (32819/44300)
+
+        {Text="Fly to SW", Taxi="Stormwind, Elwynn", point={x=7750,y=4428}},
+
+        {Text="Elling Trias, cheese vendor, first building on right side when entering SW (second floor)", Dt={q="The Missing Diplomat"}, point={x=5990,y=6414}},
+        {Text="Accept The Missing Diplomat", At="The Missing Diplomat", point={x=5990,y=6414}},
+
+        {Text="Buy Razor Arrows", BuyItem={Npc="Marda Weller", Item="Razor Arrow", Count=2000}, point={x=5737,y=5679}},
+        {Text="Buy Heavy Quiver", BuyItem={Npc="Marda Weller", Item="Heavy Quiver", Count=1}, point={x=5737,y=5679}},
+        
+        {Text="Accept Malin's Request (outside mage tower in mage quarter)", At="Malin's Request", point={x=3977,y=8146}},
+        {Text="Accept James Hyal (Connor Rivers in Inn next to Malin)", At="James Hyal", point={x=4061,y=9183}},
+
+        {Text="Deliver Seeking Wisdom (cathedral)", Dt={q="Seeking Wisdom"}, point={x=3910,y=2788}},
+        {Text="Accept The Doomed Fleet", At="The Doomed Fleet", point={x=3910,y=2788}},
+
+        {Text="Train Hunter skills", 
+            TrainSkill={
+                {n="Feign Death", Actionbar=70},
+                {n="Multi-Shot", r="Rank 2", Actionbar=4},
+            }, point={x=6153,y=1650}
+        },
+        {Text="Train Pet skills", 
+            TrainSkill={
+                --{n="Great Stamina", "Rank 5"}, -- TODO: First rank of great stamina that we don't train?
+                {n="Growl", r="Rank 4"},
+                {n="Natural Armor", r="Rank 5"},
+                {n="Fire Resistance", r="Rank 2"},
+                {n="Frost Resistance", r="Rank 2"},
+                {n="Nature Resistance", r="Rank 2"},
+                {n="Shadow Resistance", r="Rank 2"},
+            }, point={x=6153,y=1650}
+        },
+
+        {Text="Center of Old Town, Dashel Stonefist Diplomat (freeze trap down for addspawn, CDs and nuke Dashel)", Dt={q="The Missing Diplomat"}, point={x=7050,y=4484}},
+        {Text="Accept The Missing Diplomat", At="The Missing Diplomat", point={x=7050,y=4484}},
+        {Text="Turn inn The Missing Diplomat (same guy)", Dt={q="The Missing Diplomat"}, point={x=7050,y=4484}},
+        {Text="Accept The Missing Diplomat", At="The Missing Diplomat", point={x=7050,y=4484}},
+        {Text="Elling Trias, cheese vendor, Turn inn The Missing Diplomat", Dt={q="The Missing Diplomat"}, point={x=5990,y=6414}},
+        {Text="Accept The Missing Diplomat", At="The Missing Diplomat", point={x=5990,y=6414}},
+        
+        {Text="Fly to Wetlands", Taxi="Menethil Harbor, Wetlands", point={x=6627,y=6218}},
     }
 }
 
 --[[
-
-4: Watcher Backus - patrolling road north of Darkshire.
-	(this is the find the defias docket part)
-	
 =================================
 
-Turn inn Worgen in the woods pt 2
-accept worgen in the woods pt3 (vile fang and tained ones)
-Turn inn The Night Watch (15 skeletal fiend and horror)
-Accept The Night Watch (20 plague spreader)
-turn inn the shadowy figure
-accept the shadowy search continues
-turn in zombie juice
-turn inn the shadowy search continue
-accept inquire at the inn
-turn inn inquire at the inn
-accept finding the shadowy figure
-
-deliver gather rot blossoms
-accept juice delivery
-
-
-turn inn the weathered grave
-accept morgan ladimore
-turn inn morgan ladimore
-accept mor'ladim
-	
-=========
-
-Do Worgen in the woods pt 3 (Vile fang and tainted ones). Remember there may not be enough tainted ones, so start with those
-
-turn inn worgen in the woods as well
-
-
-=== RUN WEST ===
-The missing diplomat - Find the defias docket south of raven hill (73,32, house at south-eastern corner of the farm)
-
-=== RAVEN HILL ===
-turn inn finding the shadowy figure
-accept return to sven
-
-== run to sven (nw corner) === 
-
-turn inn return to sven
-accept proving your worth
-
-run to the hermit 
-turn inn juice delivery
-accept ghoulish effigy
-
-IN RAVEN HILL, COMPLETE:
-	Ghoulish Effigy
-	The Totem of Infliction (10 ghoul fang, 10 skeleton finger)
-	Proving your worth (15 skeletal raider, 3 skeletal healer, 3 skeletal warder)
-	Gather Rot Blossoms (drops from skeletals)
-	The night watch (20 plague spreaders)
-	
-FOCUS skeletal raiders outside the crypt and house on top of hill first. Not many easily accessible. Circle back to them after respawn
-
-turn inn ghoulish effingy when it's done (should be fast)
-accept ogre thieves
-
-run down to ogres and loot abercrombie's crate for Ogre thieves
-run back to hermit 
-
-KITE-KILL MOR'LADIM TOWARDS OGRES
-
-turn inn ogre thieves
-accept note to the mayor
-
-continue finishing raven hill quests
-
-Svens camp:
-	Turn inn Proving your worth 
-	Accept seeking wisdom
-	
-KILL MOR'LADIM NOW IF HAVE NOT DONE ALREADY
-
-CONSIDER running westfall to fly to darkshire again instead of running east
-
-run back to darkshire 
-	turn inn worgen in the woods pt3
-	turn inn the night watch ??? FIGURE OUT IF QUIVER OR 10 SLOT ???
-	Turn inn the totem of infliction
-	Turn inn Mor'Ladim
-		Accept the daugther who lived. Do some talking. End up with: 
-		A daughter's Love
-	Turn inn Note to the mayor, do that whole talking with different people
-	After doing all talking, Accept 
-		Bride of the Embalmer
-
-
-Turn inn The missing diplomat at Watcher Backus (patrol at road)		
-Go north-east to manor mistmantle
-clear camp
-loot tear of tilloa on the small farmpatch
-Kite stalvan on to the road. Get help from the patrolling watchman, use fences along road to kite easier
-Turn inn Legend of stalvan
-
-
-GRIND UNTIL 42000/44300 (95%)
-
-17h37m, 29+74% (32819/44300)
-
-=== FLY SW ===
-Cheese vendor:
-	Turn inn The missing Diplomat at cheese vendor (sw entrance, on the right)
-
-Warlock Trainer (west in mage quarter)
-	Turn inn a Noble Brew
-	Accept a noble brew pt2
 	
 Cathedral:
 	Turn inn Seeking Wisdom
 	Accept The Doomed Fleet
 	Turn inn Cleansing the eye
 
-SW Keep:
-	Turn inn a Noble Brew - Corridor to the right while running towards faction boss
-	
 Old Town (center):
 	The missing Diplomat, talk to Dashel
 	Place trap. 2 ads spawn. Tank boss and non-trapped add with pet. Nuke Dashel
