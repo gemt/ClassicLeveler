@@ -91,6 +91,7 @@ CLGuide_Wetlands = {
         {Text="Deliver In Search of The Excavation Team", Dt={q="In Search of The Excavation Team"}, point={x=1153,y=5215}},
 
         -- TODO: Do we get a better cloak (5stam) anytime soon? Would be nice to choose the mail legs for vendor instead
+        -- EDIT: upgrade comes from last part of worgen in the woods, around lvl 29
         {Text="Deliver Apprentice's Duties", Dt={q="Apprentice's Duties", Item="Resilient Poncho", Use=1}, point={x=854,y=5574}},
 
         {Text="Deliver War Banners (in the keep)", Dt={q="War Banners"}, point={x=991,y=5738}},
@@ -99,7 +100,7 @@ CLGuide_Wetlands = {
 
         {Text="Deliver The Cursed Crew", Dt={q="The Cursed Crew"}, point={x=1091,y=5964}},
         {Text="Accept Lifting the Curse", At="Lifting the Curse", point={x=1091,y=5964}},
-        {Text="Deliver The Absent Minded Prospector (2nd floor Inn) - No followup", Dt={q="The Absent Minded Prospector", Item="Skullchipper", Vendor=1}, point={x=1082,y=6041}},
+        {Text="Deliver The Absent Minded Prospector (2nd floor Inn) - No followup", Dt={q="The Absent Minded Prospector", Item="Skullchipper", Vendor="Skullchipper"}, point={x=1082,y=6041}},
         
         {Text="Buy Razor Arrows (outside)", BuyItem={Npc="Naela Trance", Item="Razor Arrow", Count=2000}, point={x=1129,y=5830}},
 
@@ -134,7 +135,7 @@ CLGuide_Wetlands = {
         {Text="Run out and around to the South-East. Pull Nek'Rosh from the hill and kite to Menethil. Care for crocs. Prep pots", Ct="Defeat Nek'rosh", point={x=5492,y=5614}},
 
         -- TODO: any chance we want to use this 2h sword instead of wendor?
-        {Text="Deliver Nek'Rosh (in the keep)", Dt={q="Defeat Nek'rosh", Item="Ancient War Sword", Vendor=1}, point={x=986,y=5749}},
+        {Text="Deliver Nek'Rosh (in the keep)", Dt={q="Defeat Nek'rosh", Item="Ancient War Sword", Vendor="Ancient War Sword"}, point={x=986,y=5749}},
         -- TOOD: any chance we got better boots already? big gold from staff reward instead
         {Text="Deliver Return the Statuette", Dt={q="Return the Statuette", Item="Mariner Boots", Use=1}, point={x=830,y=5854}},
         {Text="Deliver Digging Through the Ooze", Dt={q="Digging Through the Ooze", Use=1}, point={x=1179,y=5799}},

@@ -64,7 +64,7 @@ CLGuide_Duskwood2 = {
 
         {Text="Turn The Weathered Grave (town hall)", Dt={q="The Weathered Grave"}, point={x=7263,y=4761}},
         {Text="Accept Morgan Ladimore", At="Morgan Ladimore", point={x=7263,y=4761}},
-        {Text="Turn inn Morgan Ladimore (outside town hall)", Dt={q="Morgan Ladimore"}, point={x=7360,y=4689}},
+        {Text="Turn inn Morgan Ladimore (outside town hall)", Dt={q="Morgan Ladimore"}, point={x=7360,y=4689}, PinAdd="Can delete The Story of Morgan Ladimore (book)"},
         {Text="Accept Mor'Ladim", At="Mor'Ladim", point={x=7360,y=4689}},
         
 

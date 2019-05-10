@@ -38,7 +38,7 @@ CLGuide_Teldrassil = {
 		{Text="Turn in The Woodland Protector pt2", Dt={q="The Woodland Protector", Item="Canopy leggings", Use=1}, point={x=5782,y=4522}},
 		{Text="Turn in Webwood Venom", Dt={q="Webwood Venom", Item="Thistlewood Dagger", Use=1}, point={x=5781,y=4164}},
 		{Text="Accept Webwood Egg", At="Webwood Egg", point={x=5781,y=4164}},
-		{Text="Turn inn Iverron's Antidote", Dt={q="Iverron's Antidote", Item="Barkmail Vest", Vendor=1}, point={x=5458,y=3298}},
+		{Text="Turn inn Iverron's Antidote", Dt={q="Iverron's Antidote", Item="Barkmail Vest", Vendor="Barkmail Vest"}, point={x=5458,y=3298}},
 		{Text="Complete (loot a) Webwood Egg", Ct="Webwood Egg", point={x=5669,y=2645}},
 			
 		{Text="Suecide, GY ress in Shadowglen. Turn inn Webwood Egg", Dt={q="Webwood Egg", Item="Woodland Tunic", Use=1}, point={x=5780,y=4165}},

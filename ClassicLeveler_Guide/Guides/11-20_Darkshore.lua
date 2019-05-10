@@ -276,7 +276,7 @@ CLGuide_Darkshore = {
         {Text="=== RESTOCK Sharp Arrow ===", BuyItem={Npc="Dalmond", Item="Sharp Arrow", Count=1200}, point={x=3744,y=4051}},
         {Text="Deliver The Blackwood Corrupted", Dt={q="The Blackwood Corrupted", Item="Wildkeeper Leggings", Use=1}, point={x=3740,y=4016}},
         {Text="==== RESTOCK On Longjaw Mud Snapper ====", BuyItem={Npc="Laird", Item="Longjaw Mud Snapper", Count=20}, point={x=3674,y=4429}},
-        {Text="Deliver Fruit of the Sea (make sure have boots already)", Dt={q="Fruit of the Sea", Item="Crustacean Boots", Vendor=1}, point={x=3609,y=4493}},
+        {Text="Deliver Fruit of the Sea (make sure have boots already)", Dt={q="Fruit of the Sea", Item="Crustacean Boots", Vendor="Crustacean Boots"}, point={x=3609,y=4493}},
         {Text="Deliver Beached Sea Turtle", Dt={q="Beached Sea Turtle"}, point={x=3662,y=4560}},
 
 
@@ -286,7 +286,7 @@ CLGuide_Darkshore = {
         {Text="Do The Absent Minded Prospector", At="The Absent Minded Prospector", point={x=3574,y=8371}},
 
         {Text="Deliver Buzzbox 525", Dt={q="Buzzbox 525"}, point={x=4136,y=8053}},
-        {Text="Deliver Mathystra Relics (vendor too)", Dt={q="Mathystra Relics", Item="Woodsman Sword", Vendor=1}, point={x=4356,y=7631}},
+        {Text="Deliver Mathystra Relics (vendor too)", Dt={q="Mathystra Relics", Item="Woodsman Sword", Vendor="Woodsman Sword"}, point={x=4356,y=7631}},
 
         {Text="Accept The Sleeper Has Awakened if it's up",At="The Sleeper Has Awakened", point={x=4440,y=7643}},
             
@@ -299,7 +299,7 @@ CLGuide_Darkshore = {
 
         {Text="Grind to 19+ 17700 (3600 xp from quests)", Lvl={lvl=19,xp=17700}},
             
-        {Text="Turn inn The Sleeper Has Awakened", Dt={q="The Sleeper Has Awakened", Item="Owlsight Rifle", Vendor=1}, point={x=2728,y=3554}},
+        {Text="Turn inn The Sleeper Has Awakened", Dt={q="The Sleeper Has Awakened", Item="Owlsight Rifle", Vendor="Owlsight Rifle"}, point={x=2728,y=3554}},
         {Text="Turn inn One Shot. One Kill.", Dt={q="One Shot. One Kill."}, point={x=2659,y=3670}},
         {Text="Turn inn The Tower of Althalaxx", Dt={q="The Tower of Althalaxx"}, point={x=2619,y=3872}},
 

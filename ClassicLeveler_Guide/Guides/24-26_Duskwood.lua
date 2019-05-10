@@ -147,7 +147,7 @@ CLGuide_Duskwood1 = {
         {Text="Turn inn A Baying of Gnolls", Dt={q="A Baying of Gnolls"}, point={x=3098,y=4728}},
         {Text="Accept Howling in the Hills (can turn in Everstil Bridge if done)", At="Howling in the Hills", point={x=3098,y=4728}},
         
-        {Text="Turn inn The Everstill Bridge (if completed)", Dt={q="The Everstill Bridge", Item="Smith's Trousers", Vendor=1}, point={x=3216,y=4864}},
+        {Text="Turn inn The Everstill Bridge (if completed)", Dt={q="The Everstill Bridge", Item="Smith's Trousers", Vendor="Smith's Trousers"}, point={x=3216,y=4864}},
 
         {Text="Accept Wanted: Lieutenant Fangore (posted outside inn)", At="Wanted: Lieutenant Fangore", point={x=2674,y=4646}},
         {Text="Kill Yowler for Howling in the Hills, take same western path", Ct="Howling in the Hills", point={x=1731,y=4424}},
