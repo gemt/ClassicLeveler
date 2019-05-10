@@ -15,12 +15,40 @@ select * from lh_public.item_template where Class=7 and Subclass=3 and SellPrice
 select * from lh_public.item_template where Class=0 and Subclass=0 and SellPrice > 0 and Quality > 0; -- consumable
 
 ]]
+-- vendor murloc fins after lvl 28?
+--[[ questitems that should have been vendored?
+skullchipper
+night watch gauntlets
+ancient war sword
+woodsman sword
+dwarven fishing pole
+vagabond leggings?
+
+]]
+--gooey spider leg?
+CLGuide_BankList = {
+["Wool Cloth "] = 1,
+["Silk Cloth "] = 1,
+["Mageweave Cloth "] = 1,
+["Runecloth"] = 1,
+}
+CLGuide_MailList = {
+}
 CLGuide_VendorList = {
 -- manual additions based on shit i get 
 ["Wizbang's Special Brew"] = 1,
+--["Night Watch Gauntlets"] = 1, -- mail questreward no options
+["Eye of Paleth"] = 1, -- questreward
+["Totem of Infliction"] = 1, -- questreward
+["Consecrated Wand"] = 1, -- questreward
 
 --??
 ["Light Feather"] = 1,
+["Bouquet of Scarlet Begonias"] = 1,
+["Nightcrawlers"] = 1,
+["Fractured Elemental Bracer"] = 1,
+["Damaged Elemental Bracer"] = 1,
+["Crushed Elemental Bracer"] = 1,
 
 -- Trade goods, Trade Goods
 ["Aquamarine"] = 1,
@@ -146,7 +174,7 @@ CLGuide_VendorList = {
 ["Golden Sansam"] = 1,
 ["Golden Skeleton Key"] = 1,
 ["Goldthorn"] = 1,
-["Gooey Spider Leg"] = 1,
+-- ["Gooey Spider Leg"] = 1, darkshire quest
 ["Goretusk Liver"] = 1,
 ["Goretusk Snout"] = 1,
 ["Grave Moss"] = 1,
@@ -187,7 +215,7 @@ CLGuide_VendorList = {
 ["Large Opal"] = 1,
 ["Large Venom Sac"] = 1,
 ["Leaded Vial"] = 1,
-["Lean Wolf Flank"] = 1,
+-- ["Lean Wolf Flank"] = 1, darkshire quest
 ["Lesser Mana Oil"] = 1,
 ["Lesser Moonstone"] = 1,
 ["Lesser Wizard Oil"] = 1,
@@ -199,7 +227,7 @@ CLGuide_VendorList = {
 ["Linen Cloth"] = 1,
 ["Lion Meat"] = 1,
 ["Mageroyal"] = 1,
-["Mageweave Cloth"] = 1,
+--["Mageweave Cloth"] = 1,
 ["Malachite"] = 1,
 ["Massive Mojo"] = 1,
 ["Meaty Bat Wing"] = 1,
@@ -246,7 +274,7 @@ CLGuide_VendorList = {
 ["Rugged Leather"] = 1,
 ["Ruined Leather Scraps"] = 1,
 ["Rune Thread"] = 1,
-["Runecloth"] = 1,
+--["Runecloth"] = 1,
 ["Runed Arcanite Rod"] = 1,
 ["Runed Copper Rod"] = 1,
 ["Runed Golden Rod"] = 1,
@@ -260,7 +288,7 @@ CLGuide_VendorList = {
 ["Shadowcat Hide"] = 1,
 ["Shadowgem"] = 1,
 ["Sharp Claw"] = 1,
-["Silk Cloth"] = 1,
+--["Silk Cloth"] = 1,
 ["Silken Thread"] = 1,
 ["Silver Bar"] = 1,
 ["Silver Ore"] = 1,
@@ -329,7 +357,7 @@ CLGuide_VendorList = {
 ["Wildvine"] = 1,
 ["Wintersbite"] = 1,
 ["Wizard Oil"] = 1,
-["Wool Cloth"] = 1,
+-- ["Wool Cloth"] = 1,
 ["Yellow Dye"] = 1,
 ["Zesty Clam Meat"] = 1,
 
@@ -341,7 +369,7 @@ CLGuide_VendorList = {
 ["Copper Tube"] = 1,
 ["Copper Modulator"] = 1,
 ["Coarse Blasting Powder"] = 1,
-["Bronze Tube"] = 1,
+-- ["Bronze Tube"] = 1, Duskwood quest
 ["Whirring Bronze Gizmo"] = 1,
 ["Heavy Blasting Powder"] = 1,
 ["Bronze Framework"] = 1,
