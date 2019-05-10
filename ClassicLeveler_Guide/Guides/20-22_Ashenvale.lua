@@ -64,7 +64,6 @@ CLGuide_Ashenvale = {
                 {n="Distracting Shot",r="Rank 1", Actionbar=8},
                 {n="Immolation Trap",r="Rank 1", Actionbar=65},
                 {n="Raptor Strike",r="Rank 3", Actionbar=2},
-                {n="Raptor Strike",r="Rank 3", Actionbar=2},
                 {n="Disengage",r="Rank 1", Actionbar=10},
                 
                 {n="Track Beasts", Actionbar=47},

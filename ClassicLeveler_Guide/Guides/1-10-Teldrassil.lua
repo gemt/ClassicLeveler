@@ -1,6 +1,7 @@
 -- Author      : G3m7
 -- Create Date : 5/5/2019 9:24:30 AM
 -- TODO: Add deathwarp trigggers
+-- {Text="Suecide and ress at GY", DeathWarp=1},
 CLGuide_Teldrassil = {
 	Title="1-11 Teldrassil",
 	Pinboard = {},

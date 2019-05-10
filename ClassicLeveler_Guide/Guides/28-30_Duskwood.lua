@@ -3,110 +3,150 @@
 
 CLGuide_Duskwood2 = {
     Title="28-30 Duskwood",
-    Pinboard = {},
+    Pinboard = {"Keep an eye out for \"An Old History Book\""},
     Steps = {
+        -- should have already bought arrows in menethil
+        --[[
+        going into this section should already have:
+            gather rot blossoms
+            sven's camp
+            the totem of infliction
+            the night watch (plague spreaders)
+            the legend of stalvan (final part)
+        ]]
+        --potentially finish legend of stalvan here
+        --advantage: get ring early & less competition
+        --disadvantage: lvl 32 mob, mob could reset due to misses if unlucky
+        -- TOOD: Test kite him at 27 and 28
+        {Text="Complete A Noble Brew by looting Tear of Tiloa at Manor Mistmantle", Ct="A Noble Brew", point={x=7836,y=3595}},
+        {Text="Complete The Legend of Stalvan. Kite him towards Darkshire", Ct="The Legend of Stalvan"},
+        {Text="Deliver The Legend of Stalvan", Dt={q="The Legend of Stalvan", Item="Ring of Forlorn Spirits", Use=1}, point={x=7581,y=4530}},
+
         {Text="Accept Worgen in the Woods (pt1)", At="Worgen in the Woods", point={x=7558,y=4791}},
         {Text="If had Bronze Tube: Accept Look To The Stars, otherwise check vendor", At="Look To The Stars", point={x=7980,y=4798}},
-
         
-
-        {Text="Down to road, west then Worgen in the woods, Shadow Weavers", Ct="Worgen in the Woods", point={x=6260,y=7170}},
-        
-        
+        {Text="Complete worgen in the woods (6 shadowcasters) to the west", Ct="Worgen in the Woods", point={x=6280,y=4560}},
         {Text="Turn Worgen in the Woods.", Dt={q="Worgen in the Woods"}, point={x=7558,y=4791}},
         {Text="Accept Worgen in the Woods (pt2)", At="Worgen in the Woods", point={x=7558,y=4791}},
+        
+        {Text="Accept Look To The Stars", At="Look To The Stars", point={x=7980,y=4802}},
+
+        {Text="Complete Worgen in the Woods pt2 (runners)", Ct="Worgen in the Woods", point={x=6240,y=6990}},
+
+        -- could delay this one round, especially if still 27. Main reason to do now is if HS has long cd and we need to wait for it anyway
+        -- CORRECTION: Definitely delay. WE get another quest to go down there later (Ogre Thieves)
+        --{Text="IF lvl 28+: Complete Look to the stars (Zzarc'Vul in orgre cave)", Ct="Look To The Stars", point={x=3402,y=7669}},
+        
+        {Text="Turn Sven's Camp. (grind rot blossoms on any skeleton on the way through cemetary)", Dt={q="Sven's Camp"}, point={x=778,y=3406}},
+        {Text="Accept The Shadowy Figure.", At="The Shadowy Figure", point={x=778,y=3406}},
+
+        -- TODO: also complete the night watch (plague spreaders) and totem of infliction? or do we get a third quest for them later?
+        {Text="Complete Gather Rot Blossoms (any skeleton, west crypt raiders/healers etc)", Ct="Gather Rot Blossoms"},
+        --24-25 skeletons ~30k xph
+	    --ghouls about the same
+        {Text="Grind to lvl 28", Lvl={lvl=28}},
+
+        {Text="Accept The Weathered Grave from grave behind house on top of hill", At="The Weathered Grave", point={x=1773,y=2909}},
+        {Text="Keep grinding until heartstone is ready, then HS to Darkshire", Zone="Scarlet Raven Tavern", UseItem="Hearthstone"},
+        --16h3min
+
+        {Text="Turn inn Gather Rot Blossoms (in the inn)", Dt={q="Gather Rot Blossoms"}, point={x=7377,y=4448}},
+        {Text="Accept Juice Delivery", At="Juice Delivery", point={x=7377,y=4448}},
+        
+        {Text="Turn The Shadowy Figure (Madam Eva)", Dt={q="The Shadowy Figure"}, point={x=7581,y=4530}},
+        {Text="Accept The Shadowy Search Continues", At="The Shadowy Search Continues", point={x=7581,y=4530}},
+
+        {Text="Turn Worgen in the Woods pt2", Dt={q="Worgen in the Woods"}, point={x=7558,y=4791}},
+        {Text="Accept Worgen in the Woods pt3", At="Worgen in the Woods", point={x=7558,y=4791}},
+
+        {Text="Turn inn The Shadowy Search Continues (town hall)", Dt={q="The Shadowy Search Continues"}, point={x=7252,y=4685}},
+        {Text="Accept Inquire at the Inn", At="Inquire at the Inn", point={x=7252,y=4685}},	
+
+        {Text="Turn The Weathered Grave (town hall)", Dt={q="The Weathered Grave"}, point={x=7263,y=4761}},
+        {Text="Accept Morgan Ladimore", At="Morgan Ladimore", point={x=7263,y=4761}},
+        {Text="Turn inn Morgan Ladimore (outside town hall)", Dt={q="Morgan Ladimore"}, point={x=7360,y=4689}},
+        {Text="Accept Mor'Ladim", At="Mor'Ladim", point={x=7360,y=4689}},
+        
+
+        {Text="Turn inn Inquire at the Inn", Dt={q="Inquire at the Inn"}, point={x=7377,y=4448}},
+        {Text="Accept Finding the Shadowy Figure", At="Finding the Shadowy Figure", point={x=7377,y=4448}},
+        	
+        {Text="Buy Razor Arrows (west outside inn)", BuyItem={Npc="Avette Fellwood", Item="Razor Arrow", Count=2000}, point={x=7302,y=4448}},
+
+        {Text="Complete A Noble Brew by looting Tear of Tiloa at Manor Mistmantle", Ct="A Noble Brew", point={x=7836,y=3595}},
+        {Text="Complete The Legend of Stalvan. Kite him towards Darkshire", Ct="The Legend of Stalvan"},
+
+        {Text="Fly to SW", Taxi="Stormwind, Elwynn", point={x=7750,y=4428}},
+
+        {Text="If you found \"An Old History Book\", accept the quest", At="An Old History Book", UseItem="An Old History Book"},
+        {Text="Get cloth 60 Wool and (if have) Silk cloth from bank", PutInBank={"Silk Cloth", "Wool Cloth", "Mageweave Cloth", "Runecloth"}},
+        {Text="(if had cloth) Turn inn A Donation of Wool (second floor)", Dt={q="A Donation of Wool", SkipIfUncomplete=1}, point={x=4418,y=7379}},
+        {Text="(if had cloth) Turn inn A Donation of Silk (second floor)", Dt={q="A Donation of Silk", SkipIfUncomplete=1}, point={x=4418,y=7379}},
+        {Text="test", Dt={q="The Totem of Infliction", SkipIfUncomplete=1}, point={x=4418,y=7379}},
+        
+        {Text="Deliver A Noble Brew at lock trainer", Dt={q="A Noble Brew"}, point={x=2922,y=7399}},
+        {Text="Accept A Noble Brew pt2", At="A Noble Brew"},
+
+        {Text="Deliver Cleansing the Eye (cathedral)", Dt={q="Cleansing the Eye"}, point={x=3960,y=2721}},
+
+        {Text="Accept The Missing Diplomat from Thomas, patrolling in cathedral", At="The Missing Diplomat"},
+        
+        {Text="Accept Speaking of Fortitude (outside cathedral)", At="Speaking of Fortitude", point={x=4569,y=3841}},
+        
+        {Text="Train Hunter skills", 
+            TrainSkill={
+                {n="Aspect of the Hawk", "Rank 3", Actionbar=49},
+                {n="Mend Pet", "Rank 3", Actionbar=62},
+                {n="Rapid Fire", Actionbar=11},
+                {n="Arcane Shot", "Rank 4", Actionbar=3},
+                {n="Serpent Sting",r="Rank 4", Actionbar=1},
+                {n="Raptor Strike", "Rank 4", Actionbar=2},
+                {n="Immolation Trap",r="Rank 2", Actionbar=65},
+            }, point={x=6153,y=1650}
+        },
+        {Text="Train Pet skills", 
+            TrainSkill={
+                --{n="Great Stamina", "Rank 4"}, -- can we still keep training stamina?
+                {n="Natural Armor", "Rank 4"},
+            }, point={x=6153,y=1650}
+        },
+
+        {Text="Enter keep, first right, deliver A Noble Brew (No followup)", Dt={q="A Noble Brew"}, point={x=7522,y=3170}},
+        {Text="Back to main hallway, first left to library. Deliver An Old History Book", Dt={q="An Old History Book"}, point={x=7416,y=748}},
+        {Text="Accept Southshore (if you had old history book)", At="Southshore", point={x=7416,y=748}},
+        {Text="Speaking of Fortitude", Dt={q="Speaking of Fortitude"}, point={x=7416,y=748}},
+        {Text="Back to corridor, to king and first right for Missing Diplomat", Dt={q="The Missing Diplomat"}, point={x=7830,y=2547}},
+        {Text="Accept The Missing Diplomat", At="The Missing Diplomat", point={x=7830,y=2547}},
+        {Text="Jorgen, fishing at gates of SW, deliver Diplomat (jump from FP)", Dt={q="The Missing Diplomat"}, point={x=7312,y=7840}},
+        {Text="Accept The Missing Diplomat", At="The Missing Diplomat", point={x=7312,y=7840}},
+
+        {Text="Elling Trias, cheese vendor, first building on right side when entering SW (second floor)", Dt={q="The Missing Diplomat"}, point={x=5990,y=6414}},
+        {Text="Accept The Missing Diplomat", At="The Missing Diplomat", point={x=5990,y=6414}},
+        {Text="Fly to Darkshire", Taxi="Darkshire, Duskwood", point={x=6627,y=6218}},
+
+        {Text="Watcher Backus, patrolling from darkshire to north on road. Diplomat", Dt={q="The Missing Diplomat"}, point={x=5990,y=6414}},
+        {Text="Accept The Missing Diplomat", At="The Missing Diplomat", point={x=5990,y=6414}},
+--[[
+Fly to SW 
+Fly back to Duskwood
+	4: Watcher Backus - patrolling road north of Darkshire.
+		(this is the find the defias docket part)
+	
+]]
+
+        
+        {Text="Complete Look to the stars (Zzarc'Vul in orgre cave)", Ct="Look To The Stars", point={x=3402,y=7669}},
+        
+        {Text="Accept The Daughter Who Lived", At="The Daughter Who Lived", point={x=7360,y=4689}},
+        {Text="Turn inn The Daughter Who Lived (patrolls inside Darkshire)", Dt={q="The Daughter Who Lived"}, point={x=7474,y=4686}},
+        {Text="Accept A Daughter's Love", At="A Daughter's Love"},
     }
 }
 
 --[[
-done:
-grind northern shore to abercrombie. Finish eight-lagged menaces and wolves at our heels
-deliver "deliver the thread"
-accept zombie juice
-deliver wolves at our heels at sven's camp
-completed nights watch pt2 (at raven hill 15/15)
-deliver return to jitters at raven hill
-deliver eight legged menaces
-heartstone to duskwood
 
-have moved all worgen in the woods part to this section, so keep that in mind
-
-==== REMEMBER TO REPICK ANY ABANDONED QUESTS =====
-	look to stars
-	worgens
-	the night watch pt2
-==========================
-
-IF FORGOT TO DO THIS BEFORE WTLANDS:
-	Go south to blind mary
-	turn inn ghost hair thread
-	accept return the comb
-	return to darkshire
-	turn inn return the comb
-	accept deliver the thread
-
-
-run west
-do Worgen in the woods pt1
-
-these are now already done
-    Run to the Yorgen farmstead (south-middle)
-    turn inn sven's revenge at the pile of dirt between the houses south on the farm
-    accept sven's camp
-    Turn inn Eight-legged menaces at xroads
-
-wait for one run later perhaps?
-    do look to the stars (ogre cave)
-
-done	
-    Run to raven hill
-    turn inn return to jitters
-
-done
-    complete The Night Watch (15 skeletal fiend and horror)
-    run to sven's camp north-west
-    kill missing wolves on the way
-
-turn inn the sven's camp
-accept shadowy figure
-
-done
-    kill wolves on the way to the hermit
-
-done
-    turn inn deliver the thread
-    accept zombie juice
-
-GRIND TO LEVEL 28
-	24-25 skeletons ~30k xph
-	ghouls about the same
-MAKE SURE TO FINISH "GATHER ROT BLOSSOMS"
-Accept The Weathered Grave (just north of the house on top of hill) (17,29)
-
-
-16h3min
-problem here. Unlikely that its been 1 hour already. Grind until HS is up, or what?
-could maybe do 2 parts in a row of worgen in the woods before going west
-=== heartstone to darkshire ====
-
-go pick up the item for SW quest 
-finish legend of stalvan, kite to darkshire
-
-turn stuff inn
-
-Fly to SW 
-	turn inn donation of wool if you have 60
-	turn inn A noble brew (wlock trainer), take followup
-	Turn inn the eye of paleth
-	Accept the missing diplomat from Thomas in the Cathedral
-	Train spells
-	turn inn a noble brew (first right corridor on way into keep)
-	1: Bishop DeLavey (second right corridor on way into keep)
-	2: Jorgen - Fishing at gates of SW
-	3: Elling Trias - Cheese vendor, right side just as entering SW
-Fly back to Duskwood
-	4: Watcher Backus - patrolling road north of Darkshire.
-		(this is the find the defias docket part)
+4: Watcher Backus - patrolling road north of Darkshire.
+	(this is the find the defias docket part)
 	
 =================================
 
@@ -149,7 +189,6 @@ accept return to sven
 
 turn inn return to sven
 accept proving your worth
-should be done with volves now, turn inn. If not complete it and turn inn
 
 run to the hermit 
 turn inn juice delivery

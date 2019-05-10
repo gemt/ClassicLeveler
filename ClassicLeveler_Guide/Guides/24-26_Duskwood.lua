@@ -96,7 +96,7 @@ CLGuide_Duskwood1 = {
         {Text="Turn Supplies from Darkshire", Dt={q="Supplies from Darkshire"}, point={x=7586,y=4528}},
         {Text="Accept Ghost Hair Thread", At="Ghost Hair Thread", point={x=7586,y=4528}},
         
-        z{Text="Deliver Ghost Hair Thread (blind mary to the south)", Dt={q="Ghost Hair Thread"}, point={x=8198,y=5908}},
+        {Text="Deliver Ghost Hair Thread (blind mary to the south)", Dt={q="Ghost Hair Thread"}, point={x=8198,y=5908}},
         {Text="Accept Return the Comb", At="Return the Comb", point={x=8198,y=5908}},
         {Text="Deliver Return the Comb", Dt={q="Return the Comb"}, point={x=7581,y=4531}},
         {Text="Accept Deliver the Thread", At="Deliver the Thread", point={x=7581,y=4531}},
@@ -114,6 +114,8 @@ CLGuide_Duskwood1 = {
         {Text="Complete The Legend of Stalvan (chest second floor master bedroom)", Ct="The Legend of Stalvan", point={x=4432,y=6583}},
 
         {Text="Run to Stormwind", Zone="Stormwind City", point={x=3249,y=4971}, PinAdd="If lvl 25, also accept Accept A Noble Brew at lock trainer while in SW"},
+        
+        {Text="If lvl 25, Accept A Noble Brew at lock trainer while in SW", At="A Noble Brew", point={x=2922,y=7399}},
 
         {Text="Turn inn The Legend of Stalvan (South of Park)", Dt={q="The Legend of Stalvan"}, point={x=2957,y=6193}},
         {Text="Accept The Legend of Stalvan", At="The Legend of Stalvan", point={x=2957,y=6193}},
@@ -188,7 +190,6 @@ CLGuide_Duskwood1 = {
 
         {Text="Grind northern shore to Abercrombie and turn inn Deliver the Thread", 
             Dt={q="Deliver the Thread"}, point={x=2809,y=3145}, PinAdd="Complete 8legged Menaces, wolf kabobs and Wolves at our heels on the way"},
-        
         {Text="Accept Zombie Juice", At="Zombie Juice", point={x=2809,y=3145}},
         
         {Text="Make sure Eight-Legged Menaces and Wolf kabobs/at our heels are done", 
@@ -213,6 +214,8 @@ CLGuide_Duskwood1 = {
 
         {Text="Deliver The Legend of Stalvan (outside inn)", Dt={q="The Legend of Stalvan"}, point={x=7359,y=4690}},
         {Text="Accept The Legend of Stalvan", At="The Legend of Stalvan", point={x=7359,y=4690}},
+        {Text="Turn inn The Night Watch", Dt={q="The Night Watch"}, point={x=7360,y=4692}},
+        {Text="Accept The Night Watch (pt3)", At="The Night Watch", point={x=7360,y=4692}},
 
         {Text="Deliver The Legend of Stalvan (Townhall)", Dt={q="The Legend of Stalvan"}, point={x=7260,y=4685}},
         {Text="Accept The Legend of Stalvan", At="The Legend of Stalvan", point={x=7260,y=4685}},
@@ -223,6 +226,7 @@ CLGuide_Duskwood1 = {
 
         {Text="If have A Noble Brew, fly wetlands. If not, consider picking it in SW; then wetlands?",  point={x=7749,y=4429},
             PinAdd="Delete remaining Sharp Arrows while flying, restocking in Menethil"},
+        {Text="Accept A Noble Brew at lock trainer while in SW", At="A Noble Brew", point={x=2922,y=7399}},
     }
 }
 

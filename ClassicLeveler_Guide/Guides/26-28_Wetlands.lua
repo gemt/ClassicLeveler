@@ -138,6 +138,8 @@ CLGuide_Wetlands = {
         -- TOOD: any chance we got better boots already? big gold from staff reward instead
         {Text="Deliver Return the Statuette", Dt={q="Return the Statuette", Item="Mariner Boots", Use=1}, point={x=830,y=5854}},
         {Text="Deliver Digging Through the Ooze", Dt={q="Digging Through the Ooze", Use=1}, point={x=1179,y=5799}},
+        
+        {Text="Buy Razor Arrows (outside)", BuyItem={Npc="Naela Trance", Item="Razor Arrow", Count=2000}, point={x=1129,y=5830}},
 
         {Text="Deliver The Eye of Paleth (in the Inn, 1st floor)", Dt={q="The Eye of Paleth"}, point={x=1060,y=6057}},
         {Text="Accept Cleansing the Eye", At="Cleansing the Eye", point={x=1060,y=6057}},
