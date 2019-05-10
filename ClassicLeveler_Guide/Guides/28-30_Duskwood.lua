@@ -241,33 +241,10 @@ CLGuide_Duskwood2 = {
 --[[
 =================================
 
-	
-Cathedral:
-	Turn inn Seeking Wisdom
-	Accept The Doomed Fleet
-	Turn inn Cleansing the eye
-
-Old Town (center):
-	The missing Diplomat, talk to Dashel
-	Place trap. 2 ads spawn. Tank boss and non-trapped add with pet. Nuke Dashel
-
-35169/44300
-	
-Go back to cheese vendor at SW entrance. 
-	Should now have part that leads to wetlands
-	
-	
 Questlog:
 The doomed fleet
 The missing diplomat
-
-TODO: Figure out how close to lvl 30 need to be in order to ding 30 in SW
-Train spells if 30
-
-lvl QUIVER IN SW: https://vanillawowdb.com/?item=7371#comments
-
-=== FLY TO WETLANDS ===
-
-
+Malin's Request
+James Hyal
 
 ]]
