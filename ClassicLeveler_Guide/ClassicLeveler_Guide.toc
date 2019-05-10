@@ -23,6 +23,7 @@ Guides\GuideSteps.lua
 
 
 Triggers\AcceptQuest.lua
+Triggers\Banking.lua
 Triggers\BuyItem.lua
 Triggers\CompleteQuest.lua
 Triggers\DeathWarp.lua

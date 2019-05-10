@@ -24,6 +24,7 @@ EventFrame:RegisterEvent("PLAYER_ENTERING_WORLD")
 EventFrame:RegisterEvent("CONFIRM_XP_LOSS")
 EventFrame:RegisterEvent("PLAYER_DEAD")
 EventFrame:RegisterEvent("PLAYER_XP_UPDATE")
+EventFrame:RegisterEvent("BANKFRAME_OPENED")
 
 
 
@@ -65,6 +66,7 @@ function EventFrame.OnEvent()
     end
 
     CLGuide_AcceptQuest()
+    CLGuide_HandleBanking()
     CLGuide_BuyItem()
     CLGuide_CompleteQuest()
     CLGuide_DeathWarp()

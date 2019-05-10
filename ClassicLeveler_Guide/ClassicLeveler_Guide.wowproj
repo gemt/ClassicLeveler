@@ -37,16 +37,37 @@
     <Content Include="EventFrame.lua">
       <SubType>Code</SubType>
     </Content>
-    <Content Include="Frame.lua">
+    <Content Include="Guides\30_notes.lua">
       <SubType>Code</SubType>
     </Content>
-    <Content Include="GuideFrame.lua">
+    <Content Include="Triggers\Banking.lua">
       <SubType>Code</SubType>
     </Content>
-    <Content Include="GuideList.lua">
+    <Content Include="Triggers\DeathWarp.lua">
       <SubType>Code</SubType>
     </Content>
-    <Content Include="GuideSteps.lua">
+    <Content Include="UI\Config.lua">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="UI\Config.xml">
+      <SubType>Frame</SubType>
+    </Content>
+    <Content Include="UI\GuideFrame.xml">
+      <SubType>Frame</SubType>
+    </Content>
+    <Content Include="UI\ItemButton.lua">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="UI\ItemButton.xml">
+      <SubType>Frame</SubType>
+    </Content>
+    <Content Include="UI\PinBoard.lua">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="UI\PinBoard.xml">
+      <SubType>Frame</SubType>
+    </Content>
+    <Content Include="Utilities.lua">
       <SubType>Code</SubType>
     </Content>
     <Content Include="Guides\1-10-Teldrassil.lua">
@@ -79,9 +100,6 @@
     <Content Include="Guides\28-30_Duskwood.lua">
       <SubType>Code</SubType>
     </Content>
-    <Content Include="Guides\ClassicLeveler_Guide.toc">
-      <SubType>TableOfContents</SubType>
-    </Content>
     <Content Include="Guides\GuideSteps.lua">
       <SubType>Code</SubType>
     </Content>
@@ -90,43 +108,37 @@
     <Content Include="SetupBinds.lua">
       <SubType>Code</SubType>
     </Content>
-    <Content Include="SortBags.lua">
+    <Content Include="Triggers\AcceptQuest.lua">
       <SubType>Code</SubType>
     </Content>
-    <Content Include="Steps\AcceptQuest.lua">
+    <Content Include="Triggers\BuyItem.lua">
       <SubType>Code</SubType>
     </Content>
-    <Content Include="Steps\BuyItem.lua">
+    <Content Include="Triggers\CompleteQuest.lua">
       <SubType>Code</SubType>
     </Content>
-    <Content Include="Steps\CompleteQuest.lua">
+    <Content Include="Triggers\DeliverQuest.lua">
       <SubType>Code</SubType>
     </Content>
-    <Content Include="Steps\DeliverQuest.lua">
+    <Content Include="Triggers\HaveItem.lua">
       <SubType>Code</SubType>
     </Content>
-    <Content Include="Steps\HaveItem.lua">
+    <Content Include="Triggers\HaveQuest.lua">
       <SubType>Code</SubType>
     </Content>
-    <Content Include="Steps\HaveQuest.lua">
+    <Content Include="Triggers\LevelReached.lua">
       <SubType>Code</SubType>
     </Content>
-    <Content Include="Steps\LevelReached.lua">
+    <Content Include="Triggers\SetHs.lua">
       <SubType>Code</SubType>
     </Content>
-    <Content Include="Steps\PointReached.lua">
+    <Content Include="Triggers\TakeTaxi.lua">
       <SubType>Code</SubType>
     </Content>
-    <Content Include="Steps\SetHs.lua">
+    <Content Include="Triggers\TrainSkill.lua">
       <SubType>Code</SubType>
     </Content>
-    <Content Include="Steps\TakeTaxi.lua">
-      <SubType>Code</SubType>
-    </Content>
-    <Content Include="Steps\TrainSkill.lua">
-      <SubType>Code</SubType>
-    </Content>
-    <Content Include="Steps\ZoneEntered.lua">
+    <Content Include="Triggers\ZoneEntered.lua">
       <SubType>Code</SubType>
     </Content>
     <Content Include="TalentPickerFrame.lua">
@@ -134,9 +146,6 @@
       <DependentUpon>TalentPickerFrame.xml</DependentUpon>
     </Content>
     <Content Include="TalentPickerFrame.xml">
-      <SubType>Frame</SubType>
-    </Content>
-    <Content Include="UI\Frame.xml">
       <SubType>Frame</SubType>
     </Content>
     <Content Include="UI\GuideFrame.lua">
@@ -160,7 +169,7 @@
     <Folder Include="Guides" />
     <Folder Include="images" />
     <Folder Include="UI" />
-    <Folder Include="Steps" />
+    <Folder Include="Triggers" />
   </ItemGroup>
   <Import Project="$(DevEnvDir)\Extensions\Tools\MSBuild\AddonStudio\Wow\3.0\WowAddonStudio.targets" />
   <!--
