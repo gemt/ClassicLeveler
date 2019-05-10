@@ -24,7 +24,7 @@ end
 function CLGuide_GetGossipIndex(type) 
 	local gossipOptions = {GetGossipOptions()} -- TODO: Make sure GetGossipOptions() returns same num of args on retail (2 in 1.12)
 	for i=1,table.getn(gossipOptions) do
-		GuidePrint(gossipOptions[(i*2)]..", "..gossipOptions[(i*2)-1]) -- TODO: "attempt to concatinate field ? (a nill value) 
+		--GuidePrint(gossipOptions[(i*2)]..", "..gossipOptions[(i*2)-1]) -- TODO: "attempt to concatinate field ? (a nill value) 
 		if gossipOptions[(i*2)] == type then
 			return i
 		end
@@ -69,3 +69,5 @@ function CLGuide_GetInventoryItemInfo(itemName)
 	end
     return nil
 end
+
+
