@@ -10,7 +10,6 @@ function CLGuide_ZoneEntered()
         and event ~= "ZONE_CHANGED_INDOORS" then 
         return 
     end
-    GuidePrint("4"..GetMinimapZoneText())
     if event == "ZONE_CHANGED_NEW_AREA" and CLGuide_CurrentStepTable.Zone == GetRealZoneText() then
 		CLGuide_CompleteCurrentStep()
     elseif event == "ZONE_CHANGED" and CLGuide_CurrentStepTable.Zone == GetMinimapZoneText() then
