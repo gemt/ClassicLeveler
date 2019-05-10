@@ -7,13 +7,6 @@ function CLGuide_PrintQuestCompleteVendorCache()
     end
 end
 
--- Sell the item [itemLink] if it exists in CLguide_VendorList
-local function CLGuide_TrySellVendorListItem(bag, slot, itemName)
-    if CLGuide_VendorList[itemName] ~= nil then
-        DEFAULT_CHAT_FRAME:AddMessage("Selling "..GetContainerItemLink(bag, slot).." (CLGuide_VendorList)")
-        UseContainerItem(bag,slot)
-    end
-end
 local function GetItemnameFromLink(link)
     local x = string.find(link, "%[") +1;
     local y = string.find(link, "%]", x) -1;
@@ -34,7 +27,7 @@ local function CLGuide_TryVendorBagItem(bag, slot)
 
     -- if item is locked, it probably cant be vendored
     local _, _, locked = GetContainerItemInfo(bag, slot)
-    if locked == 1 then return end -- does it return 1/0 or true/fals on classic?
+    if locked == 1 then return end -- does it return 1/0 or true/false on classic?
 
     -- "ff9d9d9d" is the colorcode of a grey item
     local isGreyItem = (string.find(link, "ff9d9d9d") ~= nil)
@@ -43,7 +36,6 @@ local function CLGuide_TryVendorBagItem(bag, slot)
     if isGreyItem then
         DEFAULT_CHAT_FRAME:AddMessage("Selling "..GetContainerItemLink(bag, slot))
         UseContainerItem(bag,slot)
-        CLGuide_TrySellVendorListItem(bag, slot, link)
     else
         local itemName = GetItemnameFromLink(link)
         local vendorCacheIdx = IsInQuestCompleteVendorCache(itemName)
@@ -51,8 +43,9 @@ local function CLGuide_TryVendorBagItem(bag, slot)
             GuidePrint("<"..itemName.."> was in vendor cache. Vendoring")
             table.remove(CLGuide_QuestCompleteVendorCache, vendorCacheIdx)
             UseContainerItem(bag,slot)
-        else
-            CLGuide_TrySellVendorListItem(bag, slot, itemName)
+        elseif CLGuide_VendorList[itemName] ~= nil then
+            GuidePrint("<"..itemName.."> was in vendor list. Vendoring")
+            UseContainerItem(bag,slot)
         end
     end
 end
