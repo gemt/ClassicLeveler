@@ -1,31 +1,23 @@
 
--- TODO: We want to equip itemName when calling this function.
--- Typically we call it after completing a quest where we have specified we wish
--- to use the item after getting it. Not sure if it works to equip during handling of the event
--- so maybe we need a popupframe u can click afterwards?
--- Another solution, if there is an event on item appearing in inventory (loot event?), is to not
--- jump to next step on GetQuestReward(), IF we are receiving an item from the quest. Instead also
--- handle loot event, equip item then and THEN jump to next step
-local function EquipItem(itemName)
-    
-end
-
-
 local function ChooseQuestRewardAndGoNextStep(rewardIdx)
+
 	if rewardIdx == nil then
 		GetQuestReward()
 	else
         if CLGuide_CurrentStepTable.Dt.Use and CLGuide_CurrentStepTable.Dt.Use == 1 then
             local _,texture = GetQuestItemInfo("choice", rewardIdx)
             CLGuide_SetupItemButtonNewItem(CLGuide_CurrentStepTable.Dt.Item, texture)
-        elseif CLGuide_CurrentStepTable.Dt.Vendor and CLGuide_CurrentStepTable.Dt.Vendor == 1 then
-            table.insert(CLGuide_QuestCompleteVendorCache,-1, CLGuide_CurrentStepTable.Dt.Item)
         end
-
 		GetQuestReward(rewardIdx)
 	end
 	
+    -- Adding CLGuide_CurrentStepTable.Dt.VendorItem to CLGuide_QuestCompleteVendorCache list, if any is specified
+    if CLGuide_CurrentStepTable.Dt.VendorItem ~= nil then
+        table.insert(CLGuide_QuestCompleteVendorCache,-1, CLGuide_CurrentStepTable.Dt.VendorItem)
+    end
+
 	-- only go to next step if had bagspace and got item?
+    -- EDIT: sortof nvm, we now check this inside OnQuestComplete(), so it should be handled
 	CLGuide_CompleteCurrentStep()
 end
 
