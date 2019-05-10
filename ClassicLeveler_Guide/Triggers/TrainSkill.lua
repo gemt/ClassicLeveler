@@ -51,7 +51,8 @@ local function OnTrainerShow()
                 for gidx = 1, getn(CLGuide_CurrentStepTable.TrainSkill) do
                     local stepskill = CLGuide_CurrentStepTable.TrainSkill[gidx]
                     if string.lower(stepskill.n) == name then
-                        if stepskill.r == nil or string.lower(stepskill.r) == rank then
+                        --if stepskill.r == nil or string.lower(stepskill.r) == rank then
+                        if rank == nil or rank == "" or string.lower(stepskill.r) == rank then
                             BuyTrainerService(spellIdx)
                             if stepskill.Actionbar ~= nil then
                                 -- queueing delayed placement on actionbars
