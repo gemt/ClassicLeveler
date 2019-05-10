@@ -56,6 +56,14 @@ function Guide_PrintStepInfo()
 
 end
 
+-- Use this when printing warnings we wish to keep, even on launch
+function GuideWarning(msg)
+    if not DEFAULT_CHAT_FRAME then 
+        return 
+    end
+    DEFAULT_CHAT_FRAME:AddMessage("|cffff0000"..msg)
+end
+
 function GuidePrint( msg )
     if not DEFAULT_CHAT_FRAME then 
         return 
