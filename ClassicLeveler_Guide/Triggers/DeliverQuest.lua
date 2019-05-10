@@ -106,7 +106,10 @@ local function OnQuestProgress()
 		CompleteQuest() -- emulates clicking continue
 	else
 		GuidePrint(GetTitleText().." - Not yet completed")
-		--DeclineQuest() -- emulates clicking cancel button, taking us back to main gossip menu if there is one
+		if CLGuide_CurrentStepTable.Dt.SkipIfUncomplete ~= nil then
+            GuideWarning("SkipIfUncomplete flag set. Skipping step")
+            CLGuide_CompleteCurrentStep()
+        end
 	end
 end
 

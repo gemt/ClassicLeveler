@@ -49,7 +49,7 @@ function EventFrame.OnEvent()
 		EventFrame:UnregisterEvent("PLAYER_ENTERING_WORLD")
 		--Set Step Stuff
 		CLGuide_CurrentSectionTable = CLGuide_GuideTable[CLGuide_CurrentSection]
-		CLGuide_SetStep(CLGuide_CurrentStep)
+		CLGuide_SetStep(CLGuide_CurrentStep, 0)
 		CLGuide_StepFrameSizer()
 		CLGuide_Frame_GuideList:SetText(CLGuide_CurrentSectionTable.Title)
 

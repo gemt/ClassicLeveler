@@ -4,7 +4,7 @@
 function CLGuide_Frame_OnLoad()
 	CLGuide_StepFrameRows(CLGuide_Options.Rows)
 	CLGuide_CurrentSectionTable = CLGuide_GuideTable[CLGuide_CurrentSection]
-	CLGuide_SetStep(CLGuide_CurrentStep)
+	CLGuide_SetStep(CLGuide_CurrentStep, 0)
 end
 
 -- Called by all Triggers when a step completes automatically
@@ -20,12 +20,12 @@ function CLGuide_NextStep()
 		GuidePrint("Guide Finished")
 		CreateGuideList()
 	else
-		CLGuide_SetStep(CLGuide_CurrentStep + 1)
+		CLGuide_SetStep(CLGuide_CurrentStep + 1, 0)
 	end
 end
 function CLGuide_PrevStep()
 	if CLGuide_CurrentStep > 1 then 
-		CLGuide_SetStep(CLGuide_CurrentStep - 1)
+		CLGuide_SetStep(CLGuide_CurrentStep - 1, 1)
 	end
 end
 
@@ -57,11 +57,23 @@ end
 --====================
 --Guide Step Functions
 --====================
-function CLGuide_SetStep(step)
+function CLGuide_SetStep(step, wasPrevBtn)
 
 	DelayedCheckHasQuest = 0 -- if step is changed, manual or otherwise, we stop any delayed hasQuest checking
 	CLGuide_CurrentStep = step
 	CLGuide_CurrentStepTable = CLGuide_CurrentSectionTable.Steps[step]
+
+    -- Skip the step if it is a quest delivery trigger, the quest is not completed, and SkipIfUncomplete is set
+    -- need the wasPrevBtn 1/0 so that if it WAS the PreviousStep button which called this function we ignore
+    -- this logic so that it is possible to go back past the step
+    if wasPrevBtn ~= 1 and CLGuide_CurrentStepTable.Dt ~= nil and CLGuide_CurrentStepTable.Dt.SkipIfUncomplete ~= nil then
+        if CLGuide_IsQuestComplete(CLGuide_CurrentStepTable.Dt.q) == 0 then
+            GuideWarning(CLGuide_CurrentStepTable.Dt.q.." > not completed, and SkipIfUncomplete flag set. Skipping step")
+            CLGuide_NextStep()
+            return
+        end
+    end
+
 	--Set StepFrame text
 	for i = 1, CLGuide_Options.Rows do 
 		local StepOffset = step - CLGuide_Options.PreviousSteps + i - 1
@@ -72,12 +84,14 @@ function CLGuide_SetStep(step)
 			CLGuide_StepFrame[i].text:SetText("")
 		end
 	end
+
 	--Set Arrow
 	if CLGuide_CurrentStepTable.point ~= nil then
 		SetCrazyArrow(CLGuide_CurrentStepTable.point, CLGuide_CurrentStepTable.Text)
 	else
 		SetCrazyArrow(CLGuide_CurrentStepTable.point, CLGuide_CurrentStepTable.Text)
 	end
+    
     
     -- check if any pins to add/remove
     if CLGuide_CurrentStepTable.PinAdd ~= nil then
@@ -89,6 +103,7 @@ function CLGuide_SetStep(step)
     if CLGuide_CurrentStepTable.UseItem ~= nil then
         CLGuide_SetupItemButtonExistingItem(CLGuide_CurrentStepTable.UseItem)
     end
+
 
 	Guide_PrintStepInfo()
 	CLGuide_UpdateColors()
@@ -102,7 +117,7 @@ function CLGuide_SetSection(sectionNum)
             CLGuide_AddPin(CLGuide_CurrentSectionTable.Pinboard[i])
         end
     end
-	CLGuide_SetStep(1)
+	CLGuide_SetStep(1, 0)
 	CLGuide_Frame_GuideList:SetText(CLGuide_CurrentSectionTable.Title)
 end
 
