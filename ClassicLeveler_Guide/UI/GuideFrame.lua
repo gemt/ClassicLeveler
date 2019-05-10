@@ -97,6 +97,11 @@ end
 function CLGuide_SetSection(sectionNum)
 	CLGuide_CurrentSection = sectionNum
 	CLGuide_CurrentSectionTable = CLGuide_GuideTable[sectionNum]
+    if CLGuide_CurrentSectionTable.Pinboard ~= nil then
+        for i=1, getn(CLGuide_CurrentSectionTable.Pinboard) do
+            CLGuide_AddPin(CLGuide_CurrentSectionTable.Pinboard[i])
+        end
+    end
 	CLGuide_SetStep(1)
 	CLGuide_Frame_GuideList:SetText(CLGuide_CurrentSectionTable.Title)
 end
