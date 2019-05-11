@@ -141,8 +141,6 @@ CLGuide_WetlandsSouthshore = {
         {Text="Complete Northfold Manor. Can also grind here until 32 if nice", Ct="Northfold Manor", point={x=3045,y=2751}},
         {Text="Deliver Northfold Manor (Refuge Pointe)", Dt={q="Northfold Manor"}, point={x=4584,y=4756}},
 
-        {Text="Fly to Wetlands", Taxi="Menethil Harbor, Wetlands", point={x=4576,y=4611}}
-
-        {Text="-----", point={x=1082,y=6042}},
+        {Text="Fly to Wetlands", Taxi="Menethil Harbor, Wetlands", point={x=4576,y=4611}},
     }
 }
