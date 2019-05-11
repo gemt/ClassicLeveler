@@ -34,7 +34,7 @@ function CLGuide_AddPin(text)
 	    --CLGuide_PinBoardFrames[PinNumber]:SetNormalTexture("Interface/Buttons/UI-Panel-Button-Up")
 
 	    CLGuide_PinBoardFrames[PinNumber].text = CLGuide_PinBoardFrames[PinNumber]:CreateFontString(nil,"ARTWORK") 
-		CLGuide_PinBoardFrames[PinNumber].text:SetFont("Fonts\\ARIALN.ttf", CLGuide_Options.FontSize)
+		CLGuide_PinBoardFrames[PinNumber].text:SetFont("Interface\\AddOns\\ClassicLeveler_Guide\\Artwork\\Inconsolata.ttf", CLGuide_Options.FontSize)
 		CLGuide_PinBoardFrames[PinNumber].text:SetPoint("LEFT", CLGuide_PinBoardFrames[PinNumber], "LEFT", 0, 8)
 		CLGuide_PinBoardFrames[PinNumber].text:SetText(text)
 

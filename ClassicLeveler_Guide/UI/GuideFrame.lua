@@ -150,7 +150,7 @@ function CLGuide_StepFrameRows(rows)
 			CLGuide_StepFrame[i]:SetBackdropColor(0, 0, 0, 0.5)
 			--Text 
 			CLGuide_StepFrame[i].text = CLGuide_StepFrame[i]:CreateFontString(nil,"ARTWORK") 
-			CLGuide_StepFrame[i].text:SetFont("Fonts\\ARIALN.ttf", CLGuide_Options.FontSize)
+			CLGuide_StepFrame[i].text:SetFont("Interface\\AddOns\\ClassicLeveler_Guide\\Artwork\\Inconsolata.ttf", CLGuide_Options.FontSize)
 			CLGuide_StepFrame[i].text:SetPoint("TOPLEFT", CLGuide_StepFrame[i], "TOPLEFT", 10, -5)
 			CLGuide_StepFrame[i].text:SetPoint("BOTTOMRIGHT", CLGuide_StepFrame[i], "BOTTOMRIGHT", -10, -5)
 			CLGuide_StepFrame[i].text:SetJustifyV("TOP")
