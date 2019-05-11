@@ -11,9 +11,9 @@ local function ChooseQuestRewardAndGoNextStep(rewardIdx)
 		GetQuestReward(rewardIdx)
 	end
 	
-    -- Adding CLGuide_CurrentStepTable.Dt.VendorItem to CLGuide_QuestCompleteVendorCache list, if any is specified
-    if CLGuide_CurrentStepTable.Dt.VendorItem ~= nil then
-        table.insert(CLGuide_QuestCompleteVendorCache,-1, CLGuide_CurrentStepTable.Dt.VendorItem)
+    -- Adding CLGuide_CurrentStepTable.Dt.Vendor to CLGuide_QuestCompleteVendorCache list, if any is specified
+    if CLGuide_CurrentStepTable.Dt.Vendor ~= nil then
+        table.insert(CLGuide_QuestCompleteVendorCache,-1, CLGuide_CurrentStepTable.Dt.Vendor)
     end
 
 	-- only go to next step if had bagspace and got item?
