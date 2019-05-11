@@ -2,6 +2,7 @@ local CLGuide_PinBoardFrames = {}
 local EmptyPinFrames = 0
 local PinFrameAmount = 0
 local useFrame = 0
+local parentWidth = CLGuide_PinBoard:GetWidth()
 --Move this to Saved Vars
 CLGuide_PinText = {}
 
@@ -27,15 +28,20 @@ function CLGuide_AddPin(text)
 	elseif EmptyPinFrames == 0 then
 		local PinNumber = PinFrameAmount+1
 		CLGuide_PinBoardFrames[PinNumber] = CreateFrame("Button", "CLGuide_PinBoardFrames"..PinNumber, CLGuide_PinBoard)
-	    CLGuide_PinBoardFrames[PinNumber]:SetPoint("TOPLEFT", CLGuide_PinBoard, "TOPLEFT", 10, -40*(PinNumber-1))
-	    CLGuide_PinBoardFrames[PinNumber]:SetWidth(180)
+	    CLGuide_PinBoardFrames[PinNumber]:SetPoint("TOPLEFT", CLGuide_PinBoard, "TOPLEFT", 0, -40*(PinNumber-1))
+	    CLGuide_PinBoardFrames[PinNumber]:SetWidth(parentWidth)
 	    CLGuide_PinBoardFrames[PinNumber]:SetHeight(40)
 	    -- Texture Test
-	    --CLGuide_PinBoardFrames[PinNumber]:SetNormalTexture("Interface/Buttons/UI-Panel-Button-Up")
+	    CLGuide_PinBoardFrames[PinNumber]:SetBackdrop{
+				bgFile = "Interface\\BUTTONS\\WHITE8X8",
+				insets = { left = 1, right = 1, top = 1, bottom = 1	 }
+			}
+		CLGuide_PinBoardFrames[PinNumber]:SetBackdropColor(0, 0, 0, 0.5)
+
 
 	    CLGuide_PinBoardFrames[PinNumber].text = CLGuide_PinBoardFrames[PinNumber]:CreateFontString(nil,"ARTWORK") 
 		CLGuide_PinBoardFrames[PinNumber].text:SetFont("Interface\\AddOns\\ClassicLeveler_Guide\\Artwork\\Inconsolata.ttf", CLGuide_Options.FontSize)
-		CLGuide_PinBoardFrames[PinNumber].text:SetPoint("LEFT", CLGuide_PinBoardFrames[PinNumber], "LEFT", 0, 8)
+		CLGuide_PinBoardFrames[PinNumber].text:SetPoint("TOPLEFT", CLGuide_PinBoardFrames[PinNumber], "TOPLEFT", 5, -5)
 		CLGuide_PinBoardFrames[PinNumber].text:SetText(text)
 
 		CLGuide_PinBoardFrames[PinNumber]:SetScript("OnClick", CLGuide_PinBoardFrames.OnClick)
