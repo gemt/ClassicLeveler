@@ -58,14 +58,15 @@ CLGuide_Stv1 = {
             PinAdd="THOUGH ONE! Get ready with immolation trap and go full nuke on boss with all CDs"},
 
         {Text="Kill Elza and loot to complete Bride of the Embalmer", Ct="Bride of the Embalmer"},
-
-        -- TODO: Run to darkshire and turn inn Bride of the embalmer now or later???
-        -- EDIT: Has to be now. Questlog is simply too full to keep it around. + item upgradem
-        {Text="Turn inn Bride of the Embalmer", Dt={q="Bride of the Embalmer", Item="Mantle of Honor", Use=1, Vendor="Silk Mantle of Gamn"}, point={x=7193,y=4642}},
+        -- delivering bride of the embalmer after HS to BB later
 
         {Text="Run into STV", Zone="Stranglethorn Vale", 
             PinAdd="If Private Thorsen is not in Rebel Camp, he could be patrolling towards first bridge to the south. Potentially dead"},
         
+
+
+
+
         {Text="Deliver Supplies to Private Thorsen (Private Thorsen)", Dt={q="Supplies to Private Thorsen"}, point={x=3801,y=343}},
         {Text="Accept Jungle Secrets (Private Thorsen)", At="Jungle Secrets", point={x=3801,y=343}},
 
@@ -80,6 +81,8 @@ CLGuide_Stv1 = {
         {Text="Accept Krazek's Cookery (Corporal Kaleb)", At="Krazek's Cookery", point={x=3774,y=330}},
 
 
+
+        -- tiger/panther 1 + crocs
         {Text="Accept Welcome to the Jungle", At="Welcome to the Jungle", point={x=3566,y=1053}},
         {Text="Turn in Hemet Nesingwary", Dt={q="Hemet Nesingwary"}, point={x=3566,y=1081}},
         {Text="Turn in Welcome to the Jungle", Dt={q="Welcome to the Jungle"}, point={x=3566,y=1081}},
@@ -96,9 +99,37 @@ CLGuide_Stv1 = {
         {Text="Deliver Panther Mastery", Dt={q="Panther Mastery"}, point={x=3555,y=1055}},
         {Text="Accept Panther Mastery pt2", At="Panther Mastery", point={x=3555,y=1055}},
 
+
+        -- tiger/panther 2 + raptor 1 + discover isle + some basilisks
         {Text="Complete Tiger and Panther Mastery pt2, and Raptor mastery pt1", Mct={"Panther Mastery", "Tiger Mastery", "Raptor Mastery"},
             point={x=3141,y=1142}, PinAdd="Snipe the Basilisks below raptors for Singing Blue Shards & can kill some trolls for ears"},
-                
+        
+        {Text="Discover The Haunted Isle (south of ZG isle) to complete \"The Stone of the Tides\"", Ct="The Stone of the Tides", point={x=2029,y=2151}},
+
+
+
+        -- hearthstone, get crocs pt2 and isle pt2
+        {Text="Hearthstone to Booty Bay", UseItem="Hearthstone", Proximity=20, point={x=2704,y=7735}},
+        
+        {Text="Deliver Investigate the Camp (third floor)", Dt={q="Investigate the Camp"}, point={x=2694,y=7721}},
+        {Text="Deliver Krazek's Cookery", Dt={q="Krazek's Cookery"}, point={x=2694,y=7721}},
+        {Text="Accept Favor for Krazek", At="Favor for Krazek", point={x=2694,y=7721}},
+
+        {Text="Deliver The Stone of the Tides (at Baron)", Dt={q="The Stone of the Tides"}, point={x=2722,y=7687}},
+        {Text="Accept Water Elementals", At="Water Elementals", point={x=2722,y=7687}},
+
+        {Text="Deliver Supply and Demand (out of inn, to leatherwork place)", Dt={q="Supply and Demand"}, point={x=2829,y=7759}},
+        {Text="Accept Some Assembly Required", At="Some Assembly Required", point={x=2829,y=7759}},
+
+
+        -- fly darkshire, deliver bride of embalmer
+        {Text="Fly to Darkshire", Taxi="Darkshire, Duskwood", point={x=2753,y=7778}},
+        {Text="Turn inn Bride of the Embalmer", Dt={q="Bride of the Embalmer", Item="Mantle of Honor", Use=1, Vendor="Silk Mantle of Gamn"}, point={x=7193,y=4642}},
+        {Text="Run into STV, to the Rebel Camp", Zone="Stranglethorn Vale"},
+
+
+
+        -- deliver tiger/panter 2 & raptor 1, get tiger/panther 3 and raptor 2
         {Text="Deliver Raptor Mastery pt1", Dt={q="Raptor Mastery"}, point={x=3566,y=1081}, PinAdd="Remember to vendor"},
         {Text="Accept Raptor Mastery pt2", At="Raptor Mastery", point={x=3566,y=1081}},
 
@@ -108,6 +139,8 @@ CLGuide_Stv1 = {
         {Text="Deliver Panther Mastery pt2", Dt={q="Panther Mastery"}, point={x=3555,y=1055}},
         {Text="Accept Panther Mastery pt3", At="Panther Mastery", point={x=3555,y=1055}},
 
+
+        -- do kurzen 1
         {Text="Go to Kurzen => Deliver Bookie Herod (second floor of house)", Dt={q="Bookie Herod"}, point={x=4367,y=938}},
         {Text="Accept The Hidden Key", At="The Hidden Key", point={x=4367,y=938}},
 
@@ -116,22 +149,24 @@ CLGuide_Stv1 = {
         
         {Text="Complete Tiger Mastery pt2 if did not already. Many south of Kurzen", Ct="Tiger Mastery", point={x=4683,y=1457}},
 
-        {Text="Kill Foreman Cozzle at top of oil rig at venture co. people. Loot key", Item={Name="Cozzle's Key", Count=1}, point={x=4263,y=1835}},
+
+        -- oil rig/goblin stuff, panther 3, croc2, raptor 3 and tiger 3
+        {Text="Kill Foreman Cozzle at top of oil rig at venture co. people. Loot key", Item={Name="Cozzle's Key", Count=1}, point={x=4263,y=1835},
+            PinAdd="Kill Snapjaw crocs along shore around oilrig when here"},
+
         {Text="Loot Fuel Regulator Plans in little house to the south. Make sure bagspace so key is not wasted", Ct="Goblin Sponsorship", point={x=4334,y=2033}},
         {Text="Complete Hostile Takeover (Tumbled Crystal from geologists in area)", Ct="Hostile Takeover"},
-        
-        {Text="Advantageous to reach lvl 35+ before panthers/raptors coming up", Lvl={lvl=35}},
-
         {Text="Complete Panther Mastery pt3 to the south and east (stealthed mobs)", Ct="Panther Mastery", point={x=4732,y=2283}},
-
+        {Text="Complete Some Assembly Required (snapjaw crocs around water at oil rig)", Ct="Some Assembly Required"},
         {Text="Complete Raptor Mastery pt2 to the west", Ct="Raptor Mastery", point={x=3905,y=2193}},
-
         {Text="Complete Tiger Mastery pt3 north of Grom'Gol", Ct="Tiger Mastery", point={x=3153,y=1652},
-            PinAdd="If still on pt2, deliver it first, then do pt3"},
-        
-        {Text="Singing Blue Shards (below raptor pt1) on the way back to Nessingwary camp", Ct="Singing Blue Shards", point={x=3565,y=1069},
+            PinAdd="If still on pt2, deliver it first, then do pt3. Also check for Basilisks again"},
+
+        {Text="Clear out Singing Blue Shards bazilisks (below raptor pt1) on the way back to Nessingwary camp", Ct="Singing Blue Shards", point={x=3565,y=1069},
             PinAdd="Getting another pass by the basilisks later, so dont wait for respawn"},
 
+        
+        -- deliver panther/tiger 3, raptor 2 and get tiger 4
         {Text="Deliver Raptor Mastery pt2 (skip pt3 for later)", Dt={q="Raptor Mastery"}, point={x=3566,y=1081}, PinAdd="Remember to vendor"},
         
         {Text="Deliver Tiger Mastery pt3", Dt={q="Tiger Mastery"}, point={x=3562,y=1062}},
@@ -139,9 +174,9 @@ CLGuide_Stv1 = {
         
         {Text="Deliver Panther Mastery pt3 (skip pt4 for later)", Dt={q="Panther Mastery"}, point={x=3555,y=1055}},
 
-        {Text="Complete Tiger Mastery pt4 (Sin'Dall, SW)", Ct="Tiger Mastery", point={x=3222,y=1730}},
-        {Text="Deliver Tiger Mastery pt4", Dt={q="Tiger Mastery"}, point={x=3562,y=1062}},
 
+
+        -- deliver kurzen 1, get kurzen 2
         {Text="Deliver The Second Rebellion (Rebel Camp)", Dt={q="The Second Rebellion"}, point={x=3802,y=333}},
         {Text="Deliver Bad Medicine (Take shoulders if don't have Mantle of Honor)", Dt={q="Bad Medicine"}, point={x=3802,y=333}},
         {Text="Accept Special Forces", At="Special Forces", point={x=3802,y=333}},
@@ -150,17 +185,25 @@ CLGuide_Stv1 = {
         {Text="Accept Kurzen's Mystery", At="Kurzen's Mystery", point={x=3783,y=356}},
         {Text="Buy Razor Arrows in Rebel Camp", BuyItem={Npc="Corporal Bluth", Item="Razor Arrow", Count=2800}, point={x=3796,y=298}},
 
+        -- do kurzen pt2
+        {Text="Deliver The Hidden Key (in the cave)", Dt={q="The Hidden Key"}, point={x=4962,y=756}},
+        {Text="Accept The Spy Revealed!", At="The Spy Revealed!", point={x=4962,y=756}},
+        {Text="Complete Special Forces (Kurzen cave)", Ct="Special Forces", point={x=4560,y=826}},
+        
 
+        -- tiger pt4
+        {Text="Complete Tiger Mastery pt4 (Sin'Dall, SW)", Ct="Tiger Mastery", point={x=3222,y=1730}},
+        {Text="Deliver Tiger Mastery pt4", Dt={q="Tiger Mastery"}, point={x=3562,y=1062}},
+
+        -- tablets, isle pt2, troll necks, blue shards
         {Text="Get first Troll legend for Kurzen's Mystery (closest camp to Grom'Gol)", Item={Name="The First Troll Legend", Count=1}, point={x=2946,y=1913},
             PinAdd="Expecting to finish Bloodscalp Ears during Kurzen's Mystery"},
 
         {Text="Get Second Troll legend for Kurzen's Mystery (out by murlocs)", Item={Name="The Second Troll Legend", Count=1}, point={x=2483,y=2303}},
 
-        -- TODO: Uncertain about doing this at 35 as solo hunter. Beta knowledge of their damage would be useful
         {Text="(TEST IF WORTH) Encrusted Tail Fins SE of Haunted isle", Ct="Encrusted Tail Fins"},
 
-        {Text="Discover The Haunted Isle (south of ZG isle) to complete \"The Stone of the Tides\"", Ct="The Stone of the Tides", 
-            point={x=2029,y=2151}},
+        {Text="Complete Water Elementals at the isle", Ct="Water Elementals", point={x=2029,y=2151}},
         
         {Text="Get Third Troll legend for Kurzen's Mystery (out by murlocs)", Item={Name="The Third Troll Legend", Count=1}, point={x=2294,y=1198},
             PinAdd="Last chance to finish Singing Blue Shards now"},
@@ -168,12 +211,8 @@ CLGuide_Stv1 = {
         
         {Text="Complete Bloodscalp Ears here before leaving", Ct="Bloodscalp Ears"},
 
-        {Text="Deliver Kurzen's Mystery", Dt={q="Kurzen's Mystery"}, point={x=3783,y=356}},
-
-        {Text="Deliver The Hidden Key (in the cave)", Dt={q="The Hidden Key"}, point={x=4962,y=756}},
-        {Text="Accept The Spy Revealed!", At="The Spy Revealed!", point={x=4962,y=756}},
-        {Text="Complete Special Forces (Kurzen cave)", Ct="Special Forces", point={x=4560,y=826}},
         
+        -- deliver kurzen 2 + tablet
         {Text="Deliver Special Forces", Dt={q="Special Forces"}, point={x=3802,y=333}},
         {Text="Deliver The Spy Revealed!", Dt={q="The Spy Revealed!"}, point={x=3802,y=333}},
         
@@ -181,6 +220,27 @@ CLGuide_Stv1 = {
         {Text="Deliver Patrol Schedules!", Dt={q="Patrol Schedules"}, point={x=3767,y=339}},
         {Text="Accept Report to Doren", At="Report to Doren", point={x=3802,y=333}},
         {Text="Deliver Report to Doren", Dt={q="Report to Doren", Item="Junglewalker Sandals", Use=1}, point={x=3802,y=333}},
+
+        {Text="Deliver Kurzen's Mystery", Dt={q="Kurzen's Mystery"}, point={x=3783,y=356}},
+
+
+        -- HS BB, deliver remaining stuff
+        {Text="Hearthstone to Booty Bay", UseItem="Hearthstone", Proximity=20, point={x=2704,y=7735}},
+        {Text="Deliver Singing Blue Shards (next to innkeeper). Skip followup", Dt={q="Singing Blue Shards"}, point={x=2712,y=7721}},
+        {Text="Deliver Bloodscalp Ears", Dt={q="Bloodscalp Ears"}, point={x=2700,y=7713}},
+        {Text="Deliver Hostile Takeover", Dt={q="Hostile Takeover"}, point={x=2700,y=7713}},
+
+        {Text="Deliver Goblin Sponsorship", Dt={q="Goblin Sponsorship"}, point={x=2722,y=7687}},
+        {Text="Accept Goblin Sponsorship", At="Goblin Sponsorship", point={x=2722,y=7687}},
+
+        {Text="Deliver Water Elementals", Dt={q="Water Elementals"}, point={x=2722,y=7687}},
+        {Text="Accept Magical Analysis", At="Magical Analysis", point={x=2722,y=7687}},
+        
+        {Text="Deliver Some Assembly Required. Skip followup (leatherwork place)", Dt={q="Some Assembly Required"}, point={x=2829,y=7759}},
+        
+
+        -- train spells needed?
+        -- any intro quests to desolace?
         {Text="---"},
     }
 }

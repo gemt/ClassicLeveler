@@ -7,6 +7,9 @@ CLGuide_Stv2 = {
     Steps = {
         {Text="Accept Raptor Mastery pt3", At="Raptor Mastery", point={x=3566,y=1081}}, 
         {Text="Accept Panther Mastery pt4", At="Panther Mastery", point={x=3555,y=1055}},
+        -- venture company mining, by innkeeper
+        -- skullsplitter tusks
+        -- Excelsior (LW dude)
         {Text="---"},
     }
 }
