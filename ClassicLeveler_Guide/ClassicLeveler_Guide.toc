@@ -19,8 +19,8 @@ Guides\23-24_Redridge.lua
 Guides\24-26_Duskwood.lua
 Guides\26-28_Wetlands.lua
 Guides\28-30_Duskwood.lua
+Guides\30_32_Wetlands_Southshore.lua
 Guides\GuideSteps.lua
-
 
 Triggers\AcceptQuest.lua
 Triggers\Banking.lua
