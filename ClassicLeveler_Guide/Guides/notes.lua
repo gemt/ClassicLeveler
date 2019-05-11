@@ -39,6 +39,7 @@ boat to theramore
 loot book at 1kn elevator
 thalanar FP
 shimmering
+
 stv
 ratchet
 desolace (use hs 2x in desolace) (preq to SM?) (Retrieval for Mauren from SW? 26 q probably not)

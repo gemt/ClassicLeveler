@@ -9,7 +9,8 @@ CLGuide_GuideTable = {
     CLGuide_Duskwood1,
     CLGuide_Wetlands,
     CLGuide_Duskwood2,
-    CLGuide_WetlandsSouthshore
+    CLGuide_WetlandsSouthshore,
+    CLGuide_TheramoreShimmering
 }
 
 
