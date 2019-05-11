@@ -24,7 +24,7 @@
 				<FontString inherits="GameFontNormal" />
 				<Layers> 
 				    <Layer level="ARTWORK"> 
-					    <FontString name="$parentText" font="Fonts\ARIALN.ttf" text="Guide Steps Shown" justifyH="LEFT" justifyV="TOP">
+					    <FontString name="$parentText" font="Interface\AddOns\ClassicLeveler_Guide\Artwork\Inconsolata.ttf" text="Guide Steps Shown" justifyH="LEFT" justifyV="TOP">
 					        <Anchors> 
 					          	<Anchor point="LEFT">
 					            	<Offset>
@@ -63,7 +63,7 @@
 				<FontString inherits="GameFontNormal" />
 				<Layers> 
 				    <Layer level="ARTWORK"> 
-					    <FontString name="$parentText" font="Fonts\ARIALN.ttf" text="Font Size" justifyH="LEFT" justifyV="TOP">
+					    <FontString name="$parentText" font="Interface\AddOns\ClassicLeveler_Guide\Artwork\Inconsolata.ttf" text="Font Size" justifyH="LEFT" justifyV="TOP">
 					        <Anchors> 
 					          	<Anchor point="LEFT">
 					            	<Offset>
@@ -101,7 +101,7 @@
 				<FontString inherits="GameFontNormal" />
 				<Layers> 
 				    <Layer level="ARTWORK"> 
-					    <FontString name="$parentText" font="Fonts\ARIALN.ttf" text="Previous Steps Shown" justifyH="LEFT" justifyV="TOP">
+					    <FontString name="$parentText" font="Interface\AddOns\ClassicLeveler_Guide\Artwork\Inconsolata.ttf" text="Previous Steps Shown" justifyH="LEFT" justifyV="TOP">
 					        <Anchors> 
 					          	<Anchor point="LEFT">
 					            	<Offset>
@@ -135,7 +135,7 @@
 				</Anchors>
 				<Layers> 
 				    <Layer level="ARTWORK"> 
-					    <FontString name="$parentText" font="Fonts\ARIALN.ttf" text="Auto Pick Rewards" justifyH="LEFT" justifyV="TOP">
+					    <FontString name="$parentText" font="Interface\AddOns\ClassicLeveler_Guide\Artwork\Inconsolata.ttf" text="Auto Pick Rewards" justifyH="LEFT" justifyV="TOP">
 					        <Anchors> 
 					          	<Anchor point="LEFT">
 					            	<Offset>
@@ -161,7 +161,7 @@
 				</Anchors>
 				<Layers> 
 				    <Layer level="ARTWORK"> 
-					    <FontString name="$parentText" font="Fonts\ARIALN.ttf" text="Auto Vendor Grey" justifyH="LEFT" justifyV="TOP">
+					    <FontString name="$parentText" font="Interface\AddOns\ClassicLeveler_Guide\Artwork\Inconsolata.ttf" text="Auto Vendor Grey" justifyH="LEFT" justifyV="TOP">
 					        <Anchors> 
 					          	<Anchor point="LEFT">
 					            	<Offset>
@@ -187,7 +187,7 @@
 				</Anchors>
 				<Layers> 
 				    <Layer level="ARTWORK"> 
-					    <FontString name="$parentText" font="Fonts\ARIALN.ttf" text="Use Auto Vendor List" justifyH="LEFT" justifyV="TOP">
+					    <FontString name="$parentText" font="Interface\AddOns\ClassicLeveler_Guide\Artwork\Inconsolata.ttf" text="Use Auto Vendor List" justifyH="LEFT" justifyV="TOP">
 					        <Anchors> 
 					          	<Anchor point="LEFT">
 					            	<Offset>
@@ -213,7 +213,7 @@
 				</Anchors>
 				<Layers> 
 				    <Layer level="ARTWORK"> 
-					    <FontString name="$parentText" font="Fonts\ARIALN.ttf" text="Automatic Flight Paths" justifyH="LEFT" justifyV="TOP">
+					    <FontString name="$parentText" font="Interface\AddOns\ClassicLeveler_Guide\Artwork\Inconsolata.ttf" text="Automatic Flight Paths" justifyH="LEFT" justifyV="TOP">
 					        <Anchors> 
 					          	<Anchor point="LEFT">
 					            	<Offset>
@@ -245,7 +245,7 @@
 		</Frames>
 		<Layers> 
 		    <Layer level="ARTWORK"> 
-		      <FontString name="$parentTitle" font="Fonts\ARIALN.ttf" text="Config" justifyH="LEFT" justifyV="TOP">
+		      <FontString name="$parentTitle" font="Interface\AddOns\ClassicLeveler_Guide\Artwork\Inconsolata.ttf" text="Config" justifyH="LEFT" justifyV="TOP">
 		        <Anchors> 
 		          <Anchor point="TOP">
 		            <Offset>

@@ -11,7 +11,7 @@ function CreateGuideList()
 	        CLGuide_GuideListFrames[i]:SetHeight(50)
 
 	        CLGuide_GuideListFrames[i].text = CLGuide_GuideListFrames[i]:CreateFontString(nil,"ARTWORK") 
-			CLGuide_GuideListFrames[i].text:SetFont("Fonts\\ARIALN.ttf", CLGuide_Options.FontSize)
+			CLGuide_GuideListFrames[i].text:SetFont("Interface\\AddOns\\ClassicLeveler_Guide\\Artwork\\Inconsolata.ttf", CLGuide_Options.FontSize)
 			CLGuide_GuideListFrames[i].text:SetPoint("LEFT", CLGuide_GuideListFrames[i], "LEFT", 0, 8)
 
 			CLGuide_GuideListFrames[i].text:SetText(CLGuide_GuideTable[i].Title)

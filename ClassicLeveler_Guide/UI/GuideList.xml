@@ -27,7 +27,7 @@
 
 			<Layers> 
 			    <Layer level="ARTWORK"> 
-			      <FontString name="$parentTitle" font="Fonts\ARIALN.ttf" text="Guide List" justifyH="LEFT" justifyV="TOP">
+			      <FontString name="$parentTitle" font="Interface\AddOns\ClassicLeveler_Guide\Artwork\Inconsolata.ttf" text="Guide List" justifyH="LEFT" justifyV="TOP">
 			        <Anchors> 
 			          <Anchor point="TOPLEFT">
 			            <Offset>
