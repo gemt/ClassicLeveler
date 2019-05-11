@@ -77,11 +77,11 @@ CLGuide_TheramoreShimmering = {
         {Text="Accept Hemet Nesingwary",  At="Hemet Nesingwary", point={x=7779,y=7725}},
 
         {Text="Run to Tanaris", Zone="Tanaris", point={x=7434,y=9553}},
-        {Text="Get Sarah's Ring from bank.", Proximity=15, point={x=5230,y=2891}},
+        {Text="Get Sarah's Ring from bank. Also put cloth in bank", PutInBank={"Silk Cloth", "Wool Cloth", "Mageweave Cloth", "Runecloth"}, point={x=5230,y=2891}},
         {Text="Discover the FP", Proximity=20, point={x=5101,y=2935}},
         {Text="Hearthstone to Theramore", Zone="Dustwallow Marsh", UseItem="Hearthstone" },
 
-        {Text="Deliver Highperch Venom", Dt={q="Highperch Venom"}, point={x=6640,y=4562}},
+        {Text="Deliver Highperch Venom", Dt={q="Highperch Venom", Item="Windborne Belt", Use=1}, point={x=6640,y=4562}},
         {Text="Deliver Stinky's Escape just besides (if done)", Dt={q="Stinky's Escape"}, point={x=6634,y=4547}},
 
         {Text="Deliver The Orc Report (by entrace to theramore)", Dt={q="The Orc Report"}, point={x=6515,y=4719}},
