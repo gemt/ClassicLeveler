@@ -33,12 +33,12 @@ gnomeregan end of 20s?
 
 southshore
 menthil
-boat to theramore
+boat to theramore (set hs?)
 --ratchet FP (nvm probably, fly theramore and run there when needed)
 (shady rest inn quest shield etc)
 loot book at 1kn elevator
 thalanar FP
-shimmering
+shimmering (HS back to theramore?)
 
 stv
 ratchet
