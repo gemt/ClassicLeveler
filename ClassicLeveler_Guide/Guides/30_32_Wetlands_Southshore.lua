@@ -127,10 +127,11 @@ CLGuide_WetlandsSouthshore = {
         {Text="Discover FP", Proximity=20, point={x=4933,y=5226}},
 
         -- for turtle meats
-        {Text="Buy Soothing Spices x1 from Micha Yance", BuyItem={Npc="Micha Yance", Item="Soothing Spices", Count=1}, point={x=4893,y=5503}},
+        -- and 3 for dustwallow quest
+        {Text="Buy Soothing Spices x4 from Micha Yance (3 for dustwallow)", BuyItem={Npc="Micha Yance", Item="Soothing Spices", Count=4}, point={x=4893,y=5503}},
         {Text="Buy Razor Arrows (second floor)", BuyItem={Npc="Sarah Raycroft", Item="Razor Arrow", Count=2800}, point={x=4914,y=5505}},
         
-        {Text="Turn inn Foreboding Plans (town hall)", Dt={q="Foreboding Plans"}, point={x=4814,y=5911}},
+        {Text="Turn inn Foreboding Plans (town hall) (skip noble death)", Dt={q="Foreboding Plans"}, point={x=4814,y=5911}},
         
         {Text="Turn inn Syndicate Assassins (town hall)", Dt={q="Syndicate Assassins", Item="Crusader Belt", Vendor="Crusader Belt"}, point={x=4814,y=5911}},
 

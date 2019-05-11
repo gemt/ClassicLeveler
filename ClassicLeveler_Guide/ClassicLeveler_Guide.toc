@@ -21,6 +21,16 @@ Guides\26-28_Wetlands.lua
 Guides\28-30_Duskwood.lua
 Guides\30_32_Wetlands_Southshore.lua
 Guides\32_34_Theramore_ShimmeringFlats.lua
+
+Guides\34_36_Stv.lua
+Guides\36_37_desolace.lua
+Guides\37_39_Arathi_Alterac.lua
+Guides\39_41_Badlands.lua
+Guides\41_42_SwampOfSorrows.lua
+Guides\42_44_Stv.lua
+Guides\44_45_Tanaris.lua
+Guides\45_46_Feralas.lua
+
 Guides\GuideSteps.lua
 
 Triggers\AcceptQuest.lua

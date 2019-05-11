@@ -10,7 +10,15 @@ CLGuide_GuideTable = {
     CLGuide_Wetlands,
     CLGuide_Duskwood2,
     CLGuide_WetlandsSouthshore,
-    CLGuide_TheramoreShimmering
+    CLGuide_TheramoreShimmering,
+    CLGuide_Stv1,
+    CLGuide_Desolace,
+    CLGuide_Arathi_Alterac,
+    CLGuide_Badlands,
+    CLGuide_SwampOfSorrows,
+    CLGuide_Stv2,
+    CLGuide_Tanaris1,
+    CLGuide_Feralas
 }
 
 
