@@ -183,7 +183,7 @@ CLGuide_Duskwood2 = {
 
         {Text="Turn in Worgen in the Woods", Dt={q="Worgen in the Woods"}, point={x=7533,y=4796}},
         {Text="Accept Worgen in the Woods", At="Worgen in the Woods", point={x=7533,y=4796}},
-        {Text="Turn in Worgen in the Woods", Dt={q="Worgen in the Woods", Item="Cloak of the Faith", Use=1, VendorItem="Resilient Poncho"}, point={x=7532,y=4884}},
+        {Text="Turn in Worgen in the Woods", Dt={q="Worgen in the Woods", Item="Cloak of the Faith", Use=1, Vendor="Resilient Poncho"}, point={x=7532,y=4884}},
 
         {Text="Turn in Look To The Stars", Dt={q="Look To The Stars", Item="Zodiac Gloves", Use=1, Vendor="Windfelt Gloves"}, point={x=7982,y=4794}},
 
@@ -200,7 +200,8 @@ CLGuide_Duskwood2 = {
         {Text="Elling Trias, cheese vendor, first building on right side when entering SW (second floor)", Dt={q="The Missing Diplomat"}, point={x=5990,y=6414}},
         {Text="Accept The Missing Diplomat", At="The Missing Diplomat", point={x=5990,y=6414}},
 
-        {Text="Buy Razor Arrows", BuyItem={Npc="Marda Weller", Item="Razor Arrow", Count=2000}, point={x=5737,y=5679}},
+        -- wait with buying arrows to wetlands so we got an easier time switching quiver
+        --{Text="Buy Razor Arrows", BuyItem={Npc="Marda Weller", Item="Razor Arrow", Count=2000}, point={x=5737,y=5679}},
         {Text="Buy Heavy Quiver", BuyItem={Npc="Marda Weller", Item="Heavy Quiver", Count=1}, point={x=5737,y=5679}},
         
         {Text="Accept Malin's Request (outside mage tower in mage quarter)", At="Malin's Request", point={x=3977,y=8146}},
@@ -234,7 +235,8 @@ CLGuide_Duskwood2 = {
         {Text="Elling Trias, cheese vendor, Turn inn The Missing Diplomat", Dt={q="The Missing Diplomat"}, point={x=5990,y=6414}},
         {Text="Accept The Missing Diplomat", At="The Missing Diplomat", point={x=5990,y=6414}},
         
-        {Text="Fly to Wetlands", Taxi="Menethil Harbor, Wetlands", point={x=6627,y=6218}},
+        {Text="Fly to Wetlands", Taxi="Menethil Harbor, Wetlands", point={x=6627,y=6218},
+            PinAdd="Change Quiver while flying"},
     }
 }
 

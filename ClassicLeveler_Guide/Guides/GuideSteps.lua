@@ -1,6 +1,6 @@
 CLGuide_GuideTable = {
 	CLGuide_Teldrassil,
-	CLGuide_DunMorogh,
+	--CLGuide_DunMorogh,
 	CLGuide_Darkshore,
     CLGuide_Ashenvale,
     CLGuide_Stonetalon,
@@ -8,7 +8,8 @@ CLGuide_GuideTable = {
     CLGuide_Redridge,
     CLGuide_Duskwood1,
     CLGuide_Wetlands,
-    CLGuide_Duskwood2
+    CLGuide_Duskwood2,
+    CLGuide_WetlandsSouthshore
 }
 
 
@@ -24,7 +25,8 @@ CLGuide_GuideTable = {
                 [Point], 
                 [UseItem="itemname"], 
                 [PinAdd="pinboardItem1"], 
-                [PinRemove="pinboardItem1"]
+                [PinRemove="pinboardItem1"],
+                [Class="Classname"]
             }
         }
     }
@@ -55,14 +57,13 @@ TriggerItem (a step can only have ONE trigger):
 Point:
     Point={x=1,y=1}
 
-UseItem: (TODO)
+UseItem:
     When a itemname is specified here, show a clickable button for the specified item
 PinAdd/PinRemove:
     The step will Add a new item to the pinboard, or remove an existing one (removed if strings of a pinboard item matches the specified PinRemove string)
 
-Step Text: (TODO)
-    You can wrap {} around quest names. When currentStep contains one or more quests wrapped in {}, the quest tracker will be updated
-    to track those quests
+Class: (TODO)
+    The step will only be shown if you are playing the named class. 
 
 Triggers marked with * are disabled as long as SHIFT modifier is pressed
 ]]
