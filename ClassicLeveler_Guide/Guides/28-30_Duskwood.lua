@@ -203,7 +203,8 @@ CLGuide_Duskwood2 = {
         -- wait with buying arrows to wetlands so we got an easier time switching quiver
         --{Text="Buy Razor Arrows", BuyItem={Npc="Marda Weller", Item="Razor Arrow", Count=2000}, point={x=5737,y=5679}},
         {Text="Buy Heavy Quiver", BuyItem={Npc="Marda Weller", Item="Heavy Quiver", Count=1}, point={x=5737,y=5679}},
-        
+        {Text="Put cloth and Sarah's Ring in bank (Can do wool/silk delivery if not done SW yet)", PutInBank={"Silk Cloth", "Wool Cloth", "Mageweave Cloth", "Runecloth", "Sarah's Ring"}},
+
         {Text="Accept Malin's Request (outside mage tower in mage quarter)", At="Malin's Request", point={x=3977,y=8146}},
         {Text="Accept James Hyal (Connor Rivers in Inn next to Malin)", At="James Hyal", point={x=4061,y=9183}},
 

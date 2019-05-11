@@ -5,6 +5,9 @@ CLGuide_Stv1 = {
     Title="34-36 STV",
     Pinboard = {},
     Steps = {
+
+        -- arrow merchant https://vanillawowdb.com/?npc=2839
+        
         {Text="---"},
     }
 }

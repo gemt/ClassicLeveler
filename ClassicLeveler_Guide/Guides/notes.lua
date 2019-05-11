@@ -40,12 +40,13 @@ loot book at 1kn elevator
 thalanar FP
 shimmering (HS back to theramore?)
 
-stv
+~34 stv
 ratchet
-desolace (use hs 2x in desolace) (preq to SM?) (Retrieval for Mauren from SW? 26 q probably not)
+~36 desolace (use hs 2x in desolace) (preq to SM?) (Retrieval for Mauren from SW? 26 q probably not)
 fly ratchet
-dustwallow 
-arathi highlands
+~37 dustwallow  
+    (stinky's escape, Jarl Needs Eyes, Hungry!, The Deserters)
+~37 arathi highlands
     Worth It's Weight in Gold requires Malin's Request to be done (currently doing in 30-32 section)
 alterac mountains (lvl 38 here?)
     {Text="Accept Noble Deaths", At="Noble Deaths", point={x=4814,y=5911}},
