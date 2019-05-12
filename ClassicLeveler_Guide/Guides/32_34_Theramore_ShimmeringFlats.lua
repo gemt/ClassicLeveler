@@ -120,7 +120,7 @@ CLGuide_TheramoreShimmering = {
         
         -- TODO: Can we wait with accepting this until we are going back to shimmering flats, or are we not
         -- going by ratchet next time?
-        {Text="Accept Parts for Kravel", At="Parts for Kravel", point={x=6268,y=3627}},
+        --{Text="Accept Parts for Kravel", At="Parts for Kravel", point={x=6268,y=3627}},
         {Text="Take boat to Booty Bay", Zone="Stranglethorn Vale"},
     }
 }
