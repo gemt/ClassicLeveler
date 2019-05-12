@@ -2,7 +2,7 @@
 -- Create Date : 5/11/2019 12:37:17 PM
 
 -- TODO: Going to have 21 quests at some point during this section i think. Need to find something to drop.
-
+-- Edit: Should no longer have hints of a new plague in questlog
 CLGuide_Stv1 = {
     Title="34-36 STV",
     Pinboard = {"Get Sarah's Ring from bank if didnt do in STV!"},
@@ -127,7 +127,9 @@ CLGuide_Stv1 = {
         
         {Text="Deliver Investigate the Camp (third floor)", Dt={q="Investigate the Camp"}, point={x=2694,y=7721}},
         {Text="Deliver Krazek's Cookery", Dt={q="Krazek's Cookery"}, point={x=2694,y=7721}},
-        {Text="Accept Favor for Krazek", At="Favor for Krazek", point={x=2694,y=7721}},
+        
+        -- Edit: no point picking this
+        --{Text="Accept Favor for Krazek", At="Favor for Krazek", point={x=2694,y=7721}},
 
         {Text="Deliver The Stone of the Tides (at Baron)", Dt={q="The Stone of the Tides"}, point={x=2722,y=7687}},
         {Text="Accept Water Elementals", At="Water Elementals", point={x=2722,y=7687}},
