@@ -101,7 +101,8 @@ CLGuide_TheramoreShimmering = {
         {Text="Accept Daelin's Men", At="Daelin's Men", point={x=6805,y=4811}},
 
         {Text="Deliver Daelin's Men (back to previous guy)", Dt={q="Daelin's Men"}, point={x=6821,y=4862}},
-        {Text="Accept The Deserters", At="The Deserters", point={x=6821,y=4862}},
+        -- skipping the deserters until 36_37 desolace
+        --{Text="Accept The Deserters", At="The Deserters", point={x=6821,y=4862}},
 
         {Text="Across theramore, at the BS, Deliver The Black Shield", Dt={q="The Black Shield"}, point={x=6476,y=5043}},
         {Text="Accept The Black Shield", At="The Black Shield", point={x=6476,y=5043}},
