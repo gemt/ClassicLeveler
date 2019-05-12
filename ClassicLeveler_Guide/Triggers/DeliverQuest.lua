@@ -1,24 +1,28 @@
+local function OnDtCompleted(texture)
+    -- Adding CLGuide_CurrentStepTable.Dt.Vendor to CLGuide_QuestCompleteVendorCache list, if any is specified
+    if CLGuide_CurrentStepTable.Dt.Vendor ~= nil then
+        table.insert(CLGuide_QuestCompleteVendorCache,-1, CLGuide_CurrentStepTable.Dt.Vendor)
+    end
+    
+    if CLGuide_CurrentStepTable.Dt.Use and CLGuide_CurrentStepTable.Dt.Use == 1 then
+        CLGuide_SetupItemButtonNewItem(CLGuide_CurrentStepTable.Dt.Item, texture)
+    end
+	-- only go to next step if had bagspace and got item?
+    -- EDIT: sortof nvm, we now check this inside OnQuestComplete(), so it should be handled
+	CLGuide_CompleteCurrentStep()
+end
 
 local function ChooseQuestRewardAndGoNextStep(rewardIdx)
 
 	if rewardIdx == nil then
 		GetQuestReward()
+        OnDtCompleted(nil) -- todo: some annoyingly elaborate way of finding texture of CLGuide_CurrentStepTable.Dt.Item when it is not nil
 	else
-        if CLGuide_CurrentStepTable.Dt.Use and CLGuide_CurrentStepTable.Dt.Use == 1 then
-            local _,texture = GetQuestItemInfo("choice", rewardIdx)
-            CLGuide_SetupItemButtonNewItem(CLGuide_CurrentStepTable.Dt.Item, texture)
-        end
+        local _,texture = GetQuestItemInfo("choice", rewardIdx)
 		GetQuestReward(rewardIdx)
+        OnDtCompleted(texture)
 	end
 	
-    -- Adding CLGuide_CurrentStepTable.Dt.Vendor to CLGuide_QuestCompleteVendorCache list, if any is specified
-    if CLGuide_CurrentStepTable.Dt.Vendor ~= nil then
-        table.insert(CLGuide_QuestCompleteVendorCache,-1, CLGuide_CurrentStepTable.Dt.Vendor)
-    end
-
-	-- only go to next step if had bagspace and got item?
-    -- EDIT: sortof nvm, we now check this inside OnQuestComplete(), so it should be handled
-	CLGuide_CompleteCurrentStep()
 end
 
 -- returns the index of a quest reward in the currently open quest complete dialogue
@@ -174,5 +178,11 @@ function CLGuide_DeliverQuest()
 	elseif event == "QUEST_PROGRESS" then
 		-- continue button screen
 		OnQuestProgress()
-	end
+	elseif event == "CHAT_MSG_SYSTEM" then
+        -- if quest is turned inn manually, we look for the "questname Completed" system msg
+        local msglower = string.lower(arg1)
+        if string.find(msglower, "completed") ~= nil and string.find(msglower, string.lower(CLGuide_CurrentStepTable.Dt.q)) ~= nil then
+            OnDtCompleted()
+        end
+    end
 end
