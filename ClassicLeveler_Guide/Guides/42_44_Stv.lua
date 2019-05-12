@@ -10,6 +10,12 @@ CLGuide_Stv2 = {
         -- venture company mining, by innkeeper
         -- skullsplitter tusks
         -- Excelsior (LW dude)
+
+        --troll witchery from rebel camp
+
+
+        -- repick from 34_36 stv section if we are going to shimmering later
+        {Text="Accept Goblin Sponsorship", At="Goblin Sponsorship", point={x=2722,y=7687}},
         {Text="---"},
     }
 }
