@@ -80,7 +80,9 @@ CLGuide_WetlandsSouthshore = {
         {Text="Accept Down the Coast (inn)", At="Down the Coast", point={x=5146,y=5839}},
 
         -- TODO: Is it the right call to set HS here, or do we need it elsewhere? 
-        {Text="Set HS at Innkeeper Anderson", SetHs="Innkeeper Anderson", point={x=5117,y=5892}},
+        -- TODO: set/keep the HS in menethil or IF instead
+        -- TODO: As a group you may want to do Crushridge Bounty as well, so you can do the elite version at 38 section
+        --{Text="Set HS at Innkeeper Anderson", SetHs="Innkeeper Anderson", point={x=5117,y=5892}},
         {Text="Accept Hints of a New Plague? (outside Inn)", At="Hints of a New Plague?", point={x=5034,y=5905}},
         {Text="Accept Syndicate Assassins (in town hall)", At="Syndicate Assassins", point={x=4814,y=5911}},
         
@@ -112,6 +114,7 @@ CLGuide_WetlandsSouthshore = {
         {Text="Complete Syndicate Assassins and Costly Menace on the 4 different \"hills\"", 
             Mct={"Syndicate Assassins", "Costly Menace"}},
         
+        -- TODO: run instead, HS should be IF/menethil. 
         {Text="Hearthstone to Southshore", UseItem="Hearthstone", Zone="Hillsbrad Foothills"},
 
         {Text="Deliver Stormwind Ho! (Inn)", Dt={q="Stormwind Ho!"}, point={x=5146,y=5839}},
@@ -141,6 +144,10 @@ CLGuide_WetlandsSouthshore = {
 
         {Text="Complete Northfold Manor. Can also grind here until 32 if nice", Ct="Northfold Manor", point={x=3045,y=2751}},
         {Text="Deliver Northfold Manor (Refuge Pointe)", Dt={q="Northfold Manor"}, point={x=4584,y=4756}},
+
+        {Text="Deliver Hints of a New Plague?", Dt={q="Hints of a New Plague?"}, point={x=6019,y=5381}},
+        {Text="Accept Hints of a New Plague?", At="Hints of a New Plague?", point={x=6019,y=5381}},
+        {Text="Look for the forsaken courier from south of farm and on road back to Refuge Pointe. Skip if not found"},
 
         {Text="Fly to Wetlands", Taxi="Menethil Harbor, Wetlands", point={x=4576,y=4611}},
     }
