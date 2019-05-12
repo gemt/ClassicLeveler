@@ -1,6 +1,8 @@
 -- Author      : G3m7
 -- Create Date : 5/11/2019 12:37:17 PM
 
+-- TODO: Going to have 21 quests at some point during this section i think. Need to find something to drop.
+
 CLGuide_Stv1 = {
     Title="34-36 STV",
     Pinboard = {"Get Sarah's Ring from bank if didnt do in STV!"},
@@ -30,7 +32,7 @@ CLGuide_Stv1 = {
         {Text="Accept Goblin Sponsorship", At="Goblin Sponsorship", point={x=2722,y=7687}},
 
         {Text="Fly to Stormwind", Taxi="Stormwind, Elwynn", point={x=2753,y=7778}},
-
+        
         {Text="Train Hunter skills", 
             TrainSkill={
                 {n="Serpent Sting",r="Rank 5", Actionbar=1},
@@ -241,13 +243,39 @@ CLGuide_Stv1 = {
         {Text="Deliver Hostile Takeover", Dt={q="Hostile Takeover"}, point={x=2700,y=7713}},
 
         {Text="Deliver Goblin Sponsorship", Dt={q="Goblin Sponsorship"}, point={x=2722,y=7687}},
-        {Text="Accept Goblin Sponsorship", At="Goblin Sponsorship", point={x=2722,y=7687}},
+        
+        -- can we wait with picking this up until second STV run? dont think we're going to shimmering before then
+        --{Text="Accept Goblin Sponsorship", At="Goblin Sponsorship", point={x=2722,y=7687}},
 
         {Text="Deliver Water Elementals", Dt={q="Water Elementals"}, point={x=2722,y=7687}},
         {Text="Accept Magical Analysis", At="Magical Analysis", point={x=2722,y=7687}},
         
         {Text="Deliver Some Assembly Required. Skip followup (leatherwork place)", Dt={q="Some Assembly Required"}, point={x=2829,y=7759}},
         
+        
+        
+        {Text="Fly to Stormwind", Taxi="Stormwind, Elwynn", point={x=2753,y=7778}},
+        {Text="Get cloth from bank for turnins in IF", PutInBank={"Silk Cloth", "Wool Cloth", "Mageweave Cloth", "Runecloth"}, point={x=5230,y=2891}},
+        {Text="Accept Morgan Stern (Inn by mage tower)", At="Morgan Stern", point={x=4150,y=8939}},
+        {Text="Accept Brother Anton (cathedral crypts, right side of altar)", At="Brother Anton", point={x=4253,y=2444}},
+        {Text="Accept The Perenolde Tiara (Enter keep, first Right)", At="The Perenolde Tiara", point={x=7401,y=3024}},
+        {Text="Train Hunter skills", 
+            TrainSkill={
+                {n="Mend Pet",r="Rank 3", Actionbar=62},
+                {n="Raptor Strike",r="Rank 5", Actionbar=2},
+                {n="Immolation Trap",r="Rank 3", Actionbar=65},
+            }, point={x=6153,y=1650}
+        },
+        {Text="Train Pet skills", 
+            TrainSkill={
+                {n="Natural Armor",r="Rank 6"},
+            }, point={x=6157,y=1595}
+        },
+        {Text="Take the tram to IF", point={x=6286,y=956}},
+        -- fly IF
+        -- accept ...
+        -- fly menethil, boat thermaore, fly stonetalon peak
+        -- run to desolace
 
         -- train spells needed?
         -- any intro quests to desolace?
