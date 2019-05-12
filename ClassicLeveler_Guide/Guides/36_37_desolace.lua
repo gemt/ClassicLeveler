@@ -137,10 +137,43 @@ CLGuide_Desolace = {
         {Text="Accept Reagents for Reclaimers Inc.", At="Reagents for Reclaimers Inc.", point={x=6620,y=963}},
         
         {Text="Fly to Theramore, Dustwallow Marsh", Taxi="Theramore, Dustwallow Marsh", point={x=6466,y=1053}},
+        -- TODO: Test if setting HS in theramore to HS after finishing these steps works. 
+        -- Question is if it takes enough time for it to be ready
+        -- theramore quests to retake. This is continuation from end of 32_34 section
+        {Text="Accept The Deserters (the keep)", At="The Deserters", point={x=6821,y=4862}},
+        -- Requires that we did Morgan Stern 
+        {Text="Accept Mudrock Soup and Bugs (At the Inn)", At="Mudrock Soup and Bugs", point={x=6634,y=4547}},
+        {Text="Farm Turtles for Mudrock Soup up to this point", Proximity=50, point={x=6100,y=2775}},
+        -- jarl outside theramore. We already did the soothing spices part
+        {Text="Accept Jarl Needs Eyes", At="Jarl Needs Eyes", point={x=5544,y=2627}},
+        
+        -- Assuming we still have hungry from 32_34 section here
+        {Text="Finish Hungry! and Mudrock Soup", Mct={"Mudrock Soup and Bugs", "Hungry!"}, point={x=5746,y=1702}},
+        {Text="Accept Stinky's Escape", At="Stinky's Escape", point={x=4688,y=1753}},
+        {Text="Complete Stinky's Escape (finishes at point)", Ct="Stinky's Escape", point={x=4885,y=2460}},
+        {Text="Complete Jarl Needs Eyes", Ct="Jarl Needs Eyes", point={x=3460,y=2182}},
 
+        {Text="Deliver Hungry!", Dt={q="Hungry!"}, point={x=3515,y=3826}},
+
+        {Text="Deliver The Deserters", Dt={q="The Deserters"}, point={x=3609,y=5431}},
+        {Text="Accept The Deserters", At="The Deserters", point={x=3609,y=5431}},
+        
+        {Text="Deathwarp to Theramore", DeathWarp=1},
+        -- run to jarl takes aproximately 1.5min as hunter
+        {Text="Deliver Jarl Needs Eyes (skip followup)", Dt={q="Jarl Needs Eyes"}, point={x=5544,y=2627}},
+        {Text="Deathwarp or run back to Theramore", DeathWarp=1},
+
+        -- after getting back to theramore
+        {Text="Deliver Mudrock Soup and Bugs (At the Inn)", Dt={q="Mudrock Soup and Bugs"}, point={x=6634,y=4547}},
+        {Text="Accept ... and Bugs", At="... and Bugs", point={x=6634,y=4547}},
+        {Text="Deliver Stinky's Escape (same guy)", Dt={q="Stinky's Escape"}, point={x=6634,y=4547}},
+        
+        {Text="Deliver The Deserters (in the keep)", Dt={q="The Deserters"}, point={x=6821,y=4862}},
+        -- TODO: How the hell do you get Vime's report after this??
+        
+        -- boat to menethil
+        
         {Text="---"},
-        -- after finishing desolace, fly back to theramore
-        -- accept various quests
-        --{Text="Accept Morgan Stern (At the Inn)", At="Morgan Stern", point={x=6634,y=4547}},
+        
     }
 }
