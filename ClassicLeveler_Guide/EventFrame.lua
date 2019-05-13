@@ -53,16 +53,16 @@ function EventFrame.OnEvent()
 		CLGuide_StepFrameSizer()
 		CLGuide_Frame_GuideList:SetText(CLGuide_CurrentSectionTable.Title)
 
+        if CLGuide_Options["RunSetupBinds"] then
+            GuidePrint("running binds")
+            CLGuide_SetupBinds()
+            CLGuide_CreateMacros()
+        end
 	elseif event == "MERCHANT_SHOW" then
         -- AutoVendor.lua
         -- Note: We want this to run before the Step handlers below as this will clean out bags
         -- before we potentially want to buy new items in a step or similar
         CLGuide_SellItems() 
-	elseif event == "PLAYER_ENTERING_WORLD" then
-        if CLGuide_Options["RunSetupBinds"] then
-            CLGuide_SetupBinds()
-            CLGuide_CreateMacros()
-        end
     end
 
     CLGuide_AcceptQuest()
