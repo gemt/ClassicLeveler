@@ -42,7 +42,7 @@ CLGuide_Arathi_Alterac = {
         
         -- TODO: are we doing water quests or not. They are a bit SHIT
 
-        {Text="Deliver any quests you did in Refuge Pointe, then fly to Southshore"},
+        {Text="Deliver any quests you did at stormgarde in Refuge Pointe, then fly to Southshore", point={x=4618,y=4639}},
 
         -- fly southshore
         -- TODO: open question if we will still have the perenolde tiara/preserving knowledge here
@@ -77,6 +77,20 @@ CLGuide_Arathi_Alterac = {
         {Text="Deliver Noble Deaths", Dt={q="Noble Deaths"}, point={x=4814,y=5911}},
         {Text="Deliver Dark Council", Dt={q="Dark Council"}, point={x=4814,y=5911}},
 
-        {Text="---"},
+        -- HS menethil/fly IF
+        {Text="Get to IF. Either HS menethil or fly directly to IF"},
+        {Text="Fly to IF", Taxi="Ironforge, Dun Morogh"},
+
+        {Text="Deliver The Karnitol Shipwreck (Hall of Explorers)", Dt={q="The Karnitol Shipwreck", Item="Hellion Boots", Use=1}, point={x=6790,y=1754}},
+        {Text="Deliver Reagents for Reclaimers Inc.", Dt={q="Reagents for Reclaimers Inc.", Item="Auric Bracers", Vendor="Auric Bracers"}, point={x=6790,y=1754}},
+
+        {Text="Accept Ironband Wants You! (prospector stormpike in hall of explorers)", At="Ironband Wants You!", point={x=7466,y=1173}},
+        -- groups: get uldaman q too
+        -- todo: arrows?
+        -- todo: class/pet skills
+        -- todo: check AH for frost oil
+        -- todo: buy Gyrochronatom (engineer vendor) IF got frost oil
+        -- todo: healing potion & lesser invisibility potion (if got did gyrochronatom)
+        -- todo: bank cloth and/or deliver cloth donation
     }
 }
