@@ -74,6 +74,16 @@ function CLGuide_SetStep(step, wasPrevBtn)
         end
     end
 
+    if wasPrevBtn ~= 1 and CLGuide_CurrentStepTable.Dt ~= nil and CLGuide_CurrentStepTable.Dt.SkipIfNotHaveQuest ~= nil then
+        if CLGuide_HaveQuestInQuestlog(CLGuide_CurrentStepTable.Dt.q) == 0 then
+            GuideWarning(CLGuide_CurrentStepTable.Dt.q.." > not in qlog, and SkipIfNotHaveQuest flag set. Skipping step")
+            CLGuide_NextStep()
+            return
+        end
+    end
+
+    
+
 	--Set StepFrame text
 	for i = 1, CLGuide_Options.Rows do 
 		local StepOffset = step - CLGuide_Options.PreviousSteps + i - 1

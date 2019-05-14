@@ -35,7 +35,11 @@ end
 -- therefore also needs texture
 function CLGuide_SetupItemButtonNewItem(itemName, itemTexture)
     CLGuide_ItemButton_Button.itemName = itemName
+    -- Prevent the function from "crashing" if texture is nil. We probably 
+    -- want the button to show even if texture somehow is screwed?
+    -- TOOD: Does this crash if texture is nil
     CLGuide_ItemButton_ButtonIcon:SetTexture(itemTexture)
+
     --CLGuide_ItemButton_Button.CountText:SetText(tostring(count)) 
     CLGuide_ItemButton:Show()
 end

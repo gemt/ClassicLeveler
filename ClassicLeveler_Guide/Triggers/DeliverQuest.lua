@@ -139,18 +139,6 @@ local function OnQuestGreeting()
 	GuidePrint("DeliverQuest OnQuestGreeting <"..CLGuide_CurrentStepTable.Dt.q.."> not found")
 end
 
-local function HaveQuestInQuestlog(qtitle)
-	local e = GetNumQuestLogEntries()
-    local qlower = string.lower(qtitle)
-	for q=1, e do
-		if string.lower(GetQuestLogTitle(q)) == qlower then 
-			return 1
-		end
-	end
-	--QRP_Print("CL_HasQuest: <"..qtitle.."> not found")
-	return 0
-end
-
 function CLGuide_DeliverQuest()
 	if CLGuide_CurrentStepTable.Dt == nil then return end
 	if IsShiftKeyDown() then return end

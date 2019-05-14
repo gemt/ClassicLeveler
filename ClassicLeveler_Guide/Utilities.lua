@@ -71,3 +71,14 @@ function CLGuide_GetInventoryItemInfo(itemName)
 end
 
 
+function CLGuide_HaveQuestInQuestlog(qtitle)
+	local e = GetNumQuestLogEntries()
+    local qlower = string.lower(qtitle)
+	for q=1, e do
+		if string.lower(GetQuestLogTitle(q)) == qlower then 
+			return 1
+		end
+	end
+	--QRP_Print("CL_HasQuest: <"..qtitle.."> not found")
+	return 0
+end

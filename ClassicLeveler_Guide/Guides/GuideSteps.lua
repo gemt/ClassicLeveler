@@ -44,13 +44,13 @@ TriggerItem (a step can only have ONE trigger):
     *At="questname"                                     quest Accepted: system message
     *Ct="questname"                                     quest is completed in questlog
     *Ht="questname"                                     quest is in the questlog
-    *Dt={q="questname", [Item="itemname"], [Use=1],[Vendor="itemname"],[SkipIfUncomplete=1]}
+    *Dt={q="questname", [Item="itemname"], [Use=1],[Vendor="itemname"],[SkipIfUncomplete=1],[SkipIfNotHaveQuest=1]}
                                                         quest is delivered. If quest has multiple rewards to choose from, 
                                                         you can optionally specify which reward to choose.
                                                         (TODO) If use=1, the item will also be equipped after receiving it
                                                         (TODO) if Vendor is specified with an itemname, that item will be vendored after this step is complete
                                                         if SkipIfUncomplete=1 specified, step is skipped if the quest is not completed at this stage
-    
+                                                        if SkipIfNotHaveQuest=1 specified, skip step if dt quest is not in questlog
     *Mct={"quest1","quest","quest3"...}                 All mentioned quests are complete in questlog
     Lvl={lvl=1 [,xp=500]}                               goto next step when level is reached. Optionally add xp requirement as well 
     Item={Name="itemname", Count=1}                     goto next step when inventory contains >= Count of Name
