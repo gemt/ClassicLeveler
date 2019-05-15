@@ -59,6 +59,10 @@ CLGuide_Arathi_Alterac = {
         -- use a deathwarp back to southshore and hs? 
         {Text="Set HS at Innkeeper Anderson", SetHs="Innkeeper Anderson", point={x=5117,y=5892}},
 
+        --todo: forgot to bring this quest from BB on first iteration. Need to find best spot to put it:
+        {Text="Deliver Magical Analysis (by dalaran in Alterac Mountains)", Dt={q="Magical Analysis"}, point={x=1883,y=7849}},
+        {Text="Accept Ansirem's Key", At="Ansirem's Key", point={x=1883,y=7849}},
+
         {Text="Run into Alterac Mountains. Kill Ogres towards elites."},
         {Text="Get Worn Leather Book for Preserving Knowledge. Try loot through wall at point", point={x=3822,y=4632}},
         {Text="Try to find Grel'Borg (The Perenolde Tiara). Patrolls from cellar in keep and out to entrance of ogre place", 

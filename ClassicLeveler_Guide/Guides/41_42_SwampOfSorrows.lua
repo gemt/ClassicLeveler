@@ -38,7 +38,8 @@ CLGuide_SwampOfSorrows = {
         {Text="Run into Swamp of Sorrows", Zone="Swamp of Sorrows", point={x=5978,y=4105}},
 
         {Text="Accept Encroaching Wildlife", At="Encroaching Wildlife", point={x=2675,y=5983}},
-        {Text="Complete Encroaching Wildlife", Ct="Encroaching Wildlife", point={x=2675,y=5983},
+        
+        {Text="Complete Encroaching Wildlife. Can mix this up with next step", Ct="Encroaching Wildlife", point={x=2675,y=5983},
             PinAdd="Search for Noboru the Cudgel (drops queststarter)"},
 
         {Text="Grind swampwalkers etc (NW corner) for Mazen's Behest (5% droprate?)", Ct="Mazen's Behest", point={x=1662,y=4025}},
@@ -49,6 +50,8 @@ CLGuide_SwampOfSorrows = {
         {Text="Search for Noboru the Cudgel, get his wep for q", point={x=4707,y=3886}},
 
         {Text="Accept Draenethyst Crystals", At="Draenethyst Crystals", point={x=2598,y=3140}},
+        
+        {Text="Deliver Noboru the Cudgel, if you found him", UseItem="Noboru's Cudgel", Dt={q="Noboru the Cudgel"}, point={x=2599,y=3142}},
 
         {Text="Complete The Lost Caravan (loot chest at broken wagon)", Ct="The Lost Caravan", point={x=6447,y=1830},
             PinAdd="Loot Draenthyst crystals while here"},
@@ -56,13 +59,13 @@ CLGuide_SwampOfSorrows = {
         {Text="Accept Galen's Escape (if hes up in his cage). Escort him", At="Galen's Escape", point={x=6540,y=1820}},
 
         {Text="Complete Draenethyst Crystals", Ct="Draenethyst Crystals"},
-        {Text="Deliver Galen's Escape The little box by the tent", Dt={q="Galen's Escape"}, point={x=4784,y=3976}},
+        {Text="Deliver Galen's Escape The little box by the tent (if you did escort)", Dt={q="Galen's Escape"}, point={x=4784,y=3976}},
         {Text="Deliver Draenethyst Crystals", Dt={q="Draenethyst Crystals"}, point={x=2598,y=3140}},
 
         {Text="Deliver The Lost Caravan ", Dt={q="The Lost Caravan"}, point={x=2675,y=5983}},
         {Text="Accept Driftwood", At="Driftwood", point={x=2675,y=5983}},
 
-        {Text="Complete In Search of The Temple (just swim towards Sunken temple)", Ct="In Search of The Temple", point={x=5630,y=7600}},
+        {Text="Complete In Search of The Temple (just swim towards Sunken temple)", Ct="In Search of The Temple", point={x=6951,y=4699}},
 
         {Text="Complete ... and bugs, and Driftwood", Mct={"... and Bugs", "Driftwood"}, point={x=9477,y=4573}},
         

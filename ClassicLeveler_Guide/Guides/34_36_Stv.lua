@@ -226,6 +226,8 @@ CLGuide_Stv1 = {
         -- tiger 4
         {Text="Deliver Tiger Mastery pt4", Dt={q="Tiger Mastery"}, point={x=3562,y=1062}},
         
+        -- todo: will there be enough space in qlog to have panter/raptor mastery in qlog until next stv run at ~42?
+
         -- deliver kurzen 2 + tablet
         {Text="Deliver Special Forces (skip kurzen pt3)", Dt={q="Special Forces"}, point={x=3804,y=301}},
         {Text="Deliver The Spy Revealed!", Dt={q="The Spy Revealed!"}, point={x=3804,y=301}},
@@ -253,7 +255,6 @@ CLGuide_Stv1 = {
         {Text="Accept Magical Analysis", At="Magical Analysis", point={x=2722,y=7687}},
         
         {Text="Deliver Some Assembly Required. Skip followup (leatherwork place)", Dt={q="Some Assembly Required"}, point={x=2829,y=7759}},
-        
         
         
         {Text="Fly to Stormwind", Taxi="Stormwind, Elwynn", point={x=2753,y=7778}},

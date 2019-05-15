@@ -7,6 +7,8 @@ CLGuide_Badlands = {
     Steps = {
     
         {Text="Fly to Thelsamar", Taxi="Thelsamar, Loch Modan", point={x=5548,y=4777}},
+        
+        -- todo: consider stabling pet and getting a 40-41 ridge stalker (dash/prowl r2). need lvl 40
         {Text="Set HS in Thelsamar", SetHs="Innkeeper Hearthstove", point={x=3553,y=4841}},
 
         {Text="Accept Badlands Reagent Run (in thelsamar)", At="Badlands Reagent Run", point={x=3707,y=4935}},
