@@ -10,11 +10,12 @@ function CLGuide_ZoneEntered()
         and event ~= "ZONE_CHANGED_INDOORS" then 
         return 
     end
-    if event == "ZONE_CHANGED_NEW_AREA" and CLGuide_CurrentStepTable.Zone == GetRealZoneText() then
+    local zoneLower = string.lower(CLGuide_CurrentStepTable.Zone)
+    if event == "ZONE_CHANGED_NEW_AREA" and zoneLower == string.lower(GetRealZoneText()) then
 		CLGuide_CompleteCurrentStep()
-    elseif event == "ZONE_CHANGED" and CLGuide_CurrentStepTable.Zone == GetMinimapZoneText() then
+    elseif event == "ZONE_CHANGED" and zoneLower == string.lower(GetMinimapZoneText()) then
         CLGuide_CompleteCurrentStep()
-    elseif event == "ZONE_CHANGED_INDOORS" and CLGuide_CurrentStepTable.Zone == GetMinimapZoneText() then
+    elseif event == "ZONE_CHANGED_INDOORS" and zoneLower == string.lower(GetMinimapZoneText()) then
         CLGuide_CompleteCurrentStep()
     end
 end
