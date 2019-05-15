@@ -34,11 +34,11 @@ CLGuide_SwampOfSorrows = {
         {Text="Accept Supplies for Nethergarde", At="Supplies for Nethergarde", point={x=7578,y=4616},
             PinAdd="You're now on a 60 min timer!"},
 
-        {Text="Run into Deadwind Pass", Zone="Deadwind pass", point={x=9113,y=4158}},
+        {Text="Run into Deadwind Pass", Zone="Deadwind Pass", point={x=9113,y=4158}},
         {Text="Run into Swamp of Sorrows", Zone="Swamp of Sorrows", point={x=5978,y=4105}},
 
         {Text="Accept Encroaching Wildlife", At="Encroaching Wildlife", point={x=2675,y=5983}},
-        {Text="Complete Encroaching Wildlife", At="Encroaching Wildlife", point={x=2675,y=5983},
+        {Text="Complete Encroaching Wildlife", Ct="Encroaching Wildlife", point={x=2675,y=5983},
             PinAdd="Search for Noboru the Cudgel (drops queststarter)"},
 
         {Text="Grind swampwalkers etc (NW corner) for Mazen's Behest (5% droprate?)", Ct="Mazen's Behest", point={x=1662,y=4025}},
@@ -50,7 +50,7 @@ CLGuide_SwampOfSorrows = {
 
         {Text="Accept Draenethyst Crystals", At="Draenethyst Crystals", point={x=2598,y=3140}},
 
-        {Text="Complete The Lost Caravan (loot chest at broken wagon)", At="The Lost Caravan", point={x=6447,y=1830},
+        {Text="Complete The Lost Caravan (loot chest at broken wagon)", Ct="The Lost Caravan", point={x=6447,y=1830},
             PinAdd="Loot Draenthyst crystals while here"},
 
         {Text="Accept Galen's Escape (if hes up in his cage). Escort him", At="Galen's Escape", point={x=6540,y=1820}},
