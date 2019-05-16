@@ -14,6 +14,7 @@
     <Content Include="Arrow.lua">
       <SubType>Code</SubType>
     </Content>
+    <Content Include="Artwork\Inconsolata.ttf" />
     <Content Include="AutoVendor.lua">
       <SubType>Code</SubType>
     </Content>
@@ -37,7 +38,37 @@
     <Content Include="EventFrame.lua">
       <SubType>Code</SubType>
     </Content>
-    <Content Include="Guides\30_notes.lua">
+    <Content Include="Guides\30_32_Wetlands_Southshore.lua">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="Guides\34_36_Stv.lua">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="Guides\36_37_desolace.lua">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="Guides\37_39_Arathi_Alterac.lua">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="Guides\39_41_Badlands.lua">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="Guides\41_42_SwampOfSorrows.lua">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="Guides\42_44_Stv.lua">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="Guides\44_45_Tanaris.lua">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="Guides\45_46_Feralas.lua">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="Guides\notes.lua">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="Guides\32_34_Theramore_ShimmeringFlats.lua">
       <SubType>Code</SubType>
     </Content>
     <Content Include="Triggers\Banking.lua">
@@ -168,6 +199,7 @@
     <Folder Include="Buttons" />
     <Folder Include="Guides" />
     <Folder Include="images" />
+    <Folder Include="Artwork" />
     <Folder Include="UI" />
     <Folder Include="Triggers" />
   </ItemGroup>

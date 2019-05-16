@@ -1,6 +1,11 @@
 -- UI scale
 
-
+--[[
+local x = GetSpellBookItemName
+    if not x then x = GetSpellName
+    end
+local b = x(a, "BOOKTYPE_SPELL")
+]]
 function CLGuide_SetupBinds()
     SetActionBarToggles(1,1,1,1,1)
     SHOW_MULTI_ACTIONBAR_1=1
@@ -73,6 +78,7 @@ local function CLGuide_CreateMacro(name, text)
 end
 
 function CLGuide_CreateMacros()
+    GuidePrint("createmacros...")
     if GetMacroIndexByName("1PetAttack") == 0 then
         CLGuide_CreateMacro("1PetAttack", "/script PetAttack(target)")
         ClearCursor()

@@ -1,7 +1,9 @@
 local function OnDtCompleted(texture)
+    GuidePrint("OnDtCompleted ran...")
     -- Adding CLGuide_CurrentStepTable.Dt.Vendor to CLGuide_QuestCompleteVendorCache list, if any is specified
     if CLGuide_CurrentStepTable.Dt.Vendor ~= nil then
         table.insert(CLGuide_QuestCompleteVendorCache,-1, CLGuide_CurrentStepTable.Dt.Vendor)
+        GuidePrint("Placed item in vendor list too !")
     end
     
     if CLGuide_CurrentStepTable.Dt.Use and CLGuide_CurrentStepTable.Dt.Use == 1 then
@@ -13,14 +15,16 @@ local function OnDtCompleted(texture)
 end
 
 local function ChooseQuestRewardAndGoNextStep(rewardIdx)
-
+    -- Must call OnDtCompleted before actually completing the quests.
+    -- if done after, the CHAT_MSG_SYSTEM may complete the quest on turnin,
+    -- and the checks in OnDtCompleted() can fail because we already moved to next step
 	if rewardIdx == nil then
-		GetQuestReward()
         OnDtCompleted(nil) -- todo: some annoyingly elaborate way of finding texture of CLGuide_CurrentStepTable.Dt.Item when it is not nil
+		GetQuestReward()
 	else
         local _,texture = GetQuestItemInfo("choice", rewardIdx)
-		GetQuestReward(rewardIdx)
         OnDtCompleted(texture)
+		GetQuestReward(rewardIdx)
 	end
 	
 end

@@ -15,6 +15,7 @@ function CLGuide_TakeTaxi()
 	elseif event == "TAXIMAP_OPENED" then
 		for i=1, NumTaxiNodes() do
 			if string.lower(TaxiNodeName(i)) == string.lower(CLGuide_CurrentStepTable.Taxi) then
+                GuideWarning("Flying to: "..TaxiNodeName(i))
 				TakeTaxiNode(i)
 				CLGuide_CompleteCurrentStep()
 				return

@@ -5,6 +5,7 @@ CLGuide_Tanaris1 = {
     Title="44-45 Tanaris",
     Pinboard = {},
     Steps = {
+        --https://vanillawowdb.com/?quest=2769
         {Text="---"},
     }
 }
